@@ -17,3 +17,15 @@ export async function register_user(payload: RegisterPayload) {
     body: payload,
   });
 }
+
+type LoginPayload = {
+  identifier: string;
+  password: string;
+};
+
+export async function login_user(payload: LoginPayload) {
+  return api_client("/api/auth/local", {
+    method: "POST",
+    body: payload,
+  });
+}
