@@ -1,5 +1,7 @@
 "use server";
 
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { login_user as login_user_service } from "@/services/auth.service";
 
 export type LoginFormState = {
@@ -43,7 +45,14 @@ export async function login_user(
   }
 
   const data = await res.json();
-  console.log(data);
 
-  return { errors: {} };
+  const cookieStore = await cookies();
+  cookieStore.set("jwt", data.jwt, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+  });
+
+  redirect("/protected");
 }

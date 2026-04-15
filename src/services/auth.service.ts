@@ -29,3 +29,17 @@ export async function login_user(payload: LoginPayload) {
     body: payload,
   });
 }
+
+export async function verify_jwt(
+  jwt: string,
+): Promise<false | Record<string, unknown>> {
+  const res = await api_client("/api/users/me", {
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    },
+  });
+
+  if (!res.ok) return false;
+
+  return res.json();
+}
