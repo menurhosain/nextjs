@@ -1,5 +1,8 @@
 "use server";
 
+import { APPLICANT } from "@/lib/constant";
+import { register_user as register_user_service } from "@/services/auth.service";
+
 export type FormState = {
   errors: {
     username?: string;
@@ -9,6 +12,7 @@ export type FormState = {
     firstName?: string;
     phone?: string;
   };
+  serverError?: string;
 };
 
 export async function register_user(
@@ -34,8 +38,8 @@ export async function register_user(
 
   if (!username) {
     errors.username = "Username is required.";
-  } else if (username.length < 6) {
-    errors.username = "Username must be at least 6 characters.";
+  } else if (username.length < 4) {
+    errors.username = "Username must be at least 4 characters.";
   }
 
   if (!password) {
@@ -52,16 +56,25 @@ export async function register_user(
     return { errors };
   }
 
-  console.log({
-    firstName,
-    lastName: formData.get("lastName"),
+  const res = await register_user_service({
+    first_name: firstName,
+    last_name: (formData.get("lastName") as string)?.trim() || undefined,
     email,
     username,
     password,
-    confirmPassword,
     phone,
-    location: formData.get("location"),
+    location: (formData.get("location") as string)?.trim() || undefined,
+    type: APPLICANT,
   });
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    const message =
+      body?.error?.message ??
+      body?.message ??
+      "Registration failed. Please try again.";
+    return { errors: {}, serverError: message };
+  }
 
   return { errors: {} };
 }

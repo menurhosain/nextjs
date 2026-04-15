@@ -111,6 +111,10 @@ export default function RegisterForm() {
         <Input id="location" name="location" placeholder="New York, USA" />
       </div>
 
+      {state.serverError && (
+        <p className="text-sm text-red-500 text-center">{state.serverError}</p>
+      )}
+
       <Button
         type="submit"
         disabled={pending}
