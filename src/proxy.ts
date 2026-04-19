@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verify_jwt } from "@/services/auth.service";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const jwt = request.cookies.get("jwt")?.value;
 
   if (!jwt) {
@@ -18,5 +18,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/protected/:path*"],
+  matcher: ["/protected/:path*", "/apply-for-recrutement/:path*", "/apply-for-recrutement"],
 };
