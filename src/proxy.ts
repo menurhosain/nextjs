@@ -14,9 +14,18 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 
-  return NextResponse.next();
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-user", JSON.stringify(user));
+
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {
-  matcher: ["/protected/:path*", "/apply-for-recrutement/:path*", "/apply-for-recrutement"],
+  matcher: [
+    "/protected/:path*",
+    "/apply-for-recrutement/:path*",
+    "/apply-for-recrutement",
+    "/profile",
+    "/profile/:path*",
+  ],
 };
