@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+import { BASE_URL } from "@/lib/constant";
 
 export default async function ProfilePage() {
   const headersList = await headers();

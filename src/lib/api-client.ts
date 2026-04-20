@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+import { BASE_URL } from "@/lib/constant";
 
 type RequestOptions = Omit<RequestInit, "body"> & {
   body?: unknown;

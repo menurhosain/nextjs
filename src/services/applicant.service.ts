@@ -1,4 +1,5 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+import { BASE_URL } from "@/lib/constant";
+import { upload_file } from "@/services/upload.service";
 
 type ApplicantPayload = {
   firstName: string;
@@ -15,23 +16,8 @@ export async function submit_application(
   payload: ApplicantPayload,
   jwt: string,
 ) {
-  // First upload the CV file via Strapi upload endpoint
-  const fileForm = new FormData();
-  fileForm.append("files", payload.cvFile);
+  const cvFileId = await upload_file(payload.cvFile, jwt);
 
-  const uploadRes = await fetch(`${BASE_URL}/api/upload`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${jwt}` },
-    body: fileForm,
-  });
-
-  if (!uploadRes.ok) {
-    throw new Error("CV upload failed.");
-  }
-
-  const [uploadedFile] = await uploadRes.json();
-
-  // Then create the applicant record
   const res = await fetch(`${BASE_URL}/api/applicants`, {
     method: "POST",
     headers: {
@@ -44,7 +30,7 @@ export async function submit_application(
         lastName: payload.lastName,
         email: payload.email,
         phone: payload.phone ?? null,
-        cvFile: uploadedFile.id,
+        cvFile: cvFileId,
         skills: payload.skills ?? null,
         experienceYears: payload.experienceYears ?? null,
         location: payload.location ?? null,

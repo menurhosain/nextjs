@@ -4,8 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { api_client } from "@/lib/api-client";
 import { verify_jwt } from "@/services/auth.service";
-
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+import { upload_file } from "@/services/upload.service";
 
 export type UpdateProfileFormState = {
   errors: {
@@ -44,24 +43,13 @@ export async function update_profile(
 
   const userId = user.id;
 
-  // Upload profile picture if a new file was selected
   let profilePictureId: number | undefined;
   if (pictureFile && pictureFile.size > 0) {
-    const fileForm = new FormData();
-    fileForm.append("files", pictureFile);
-
-    const uploadRes = await fetch(`${BASE_URL}/api/upload`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${jwt}` },
-      body: fileForm,
-    });
-
-    if (!uploadRes.ok) {
+    try {
+      profilePictureId = await upload_file(pictureFile, jwt);
+    } catch {
       return { errors: {}, serverError: "Profile picture upload failed. Please try again." };
     }
-
-    const [uploaded] = await uploadRes.json();
-    profilePictureId = uploaded.id;
   }
 
   const body: Record<string, unknown> = {

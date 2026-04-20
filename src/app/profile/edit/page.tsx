@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import EditProfileForm from "./edit-form";
+import { BASE_URL } from "@/lib/constant";
 
 export default async function EditProfilePage() {
   const headersList = await headers();
@@ -16,7 +17,7 @@ export default async function EditProfilePage() {
   const location = String(user.location ?? "");
   const profilePicture = user.profile_picture as { url: string; formats?: { thumbnail?: { url: string } } } | null | undefined;
   const rawUrl = profilePicture?.formats?.thumbnail?.url ?? profilePicture?.url;
-  const pictureUrl = rawUrl ? `${process.env.NEXT_PUBLIC_API_URL}${rawUrl}` : null;
+  const pictureUrl = rawUrl ? `${BASE_URL}${rawUrl}` : null;
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
