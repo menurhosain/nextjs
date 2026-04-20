@@ -12,6 +12,19 @@ type ApplicantPayload = {
   location?: string;
 };
 
+export type Application = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  skills?: string;
+  experienceYears?: number;
+  location?: string;
+  label?: string;
+  appliedAt: string;
+};
+
 export async function submit_application(
   payload: ApplicantPayload,
   jwt: string,
@@ -45,4 +58,21 @@ export async function submit_application(
   }
 
   return res.json();
+}
+
+export async function get_user_applications( userId: number, jwt: string,): Promise<Application[]> {
+  const query = new URLSearchParams({ sort: "appliedAt:desc" });
+  // console.log(`${BASE_URL}/api/applicants?${query}`);
+
+  const res = await fetch(`${BASE_URL}/api/applicants?${query}`, { headers: { Authorization: `Bearer ${jwt}` } });
+
+  if (!res.ok) return [];
+
+  const json = await res.json();
+  return (json.data ?? []).map(
+    (item: { id: number; attributes?: Application } & Application) => ({
+      id: item.id,
+      ...(item.attributes ?? item),
+    }),
+  );
 }

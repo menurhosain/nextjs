@@ -27,5 +27,7 @@ export const config = {
     "/apply-for-recrutement",
     "/profile",
     "/profile/:path*",
+    "/dashboard",
+    "/dashboard/:path*",
   ],
 };
