@@ -33,7 +33,7 @@ export async function login_user(payload: LoginPayload) {
 export async function verify_jwt(
   jwt: string,
 ): Promise<false | Record<string, unknown>> {
-  const res = await api_client("/api/users/me", {
+  const res = await api_client("/api/users/me?populate=profile_picture", {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },

@@ -10,10 +10,13 @@ export default async function EditProfilePage() {
 
   const user = JSON.parse(raw) as Record<string, unknown>;
 
-  const firstName = String(user.first_name ?? user.firstName ?? "");
-  const lastName = String(user.last_name ?? user.lastName ?? "");
+  const firstName = String(user.first_name ?? "");
+  const lastName = String(user.last_name ?? "");
   const phone = String(user.phone ?? "");
   const location = String(user.location ?? "");
+  const profilePicture = user.profile_picture as { url: string; formats?: { thumbnail?: { url: string } } } | null | undefined;
+  const rawUrl = profilePicture?.formats?.thumbnail?.url ?? profilePicture?.url;
+  const pictureUrl = rawUrl ? `${process.env.NEXT_PUBLIC_API_URL}${rawUrl}` : null;
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -23,7 +26,7 @@ export default async function EditProfilePage() {
           <p className="text-sm text-gray-500 mt-1">Update your personal information.</p>
         </div>
         <EditProfileForm
-          defaultValues={{ firstName, lastName, phone, location }}
+          defaultValues={{ firstName, lastName, phone, location, pictureUrl }}
         />
       </div>
     </main>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -13,20 +13,47 @@ type Props = {
     lastName: string;
     phone: string;
     location: string;
+    pictureUrl: string | null;
   };
 };
 
 const initialState: UpdateProfileFormState = { errors: {} };
 
 export default function EditProfileForm({ defaultValues }: Props) {
-  const [state, formAction, pending] = useActionState(
-    update_profile,
-    initialState,
-  );
+  const [state, formAction, pending] = useActionState(update_profile, initialState);
+  const [preview, setPreview] = useState<string | null>(defaultValues.pictureUrl);
   const e = state.errors;
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) setPreview(URL.createObjectURL(file));
+  }
 
   return (
     <form action={formAction} className="space-y-5">
+      {/* Profile picture */}
+      <div className="space-y-2">
+        <Label htmlFor="profilePicture">Profile picture</Label>
+        <div className="flex items-center gap-4">
+          {preview ? (
+            <img src={preview} alt="Preview" className="w-16 h-16 rounded-full object-cover" />
+          ) : (
+            <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
+              No photo
+            </div>
+          )}
+          <Input
+            id="profilePicture"
+            name="profilePicture"
+            type="file"
+            accept="image/*"
+            className="cursor-pointer"
+            onChange={handleFileChange}
+          />
+        </div>
+        {e.profilePicture && <p className="text-sm text-red-500">{e.profilePicture}</p>}
+      </div>
+
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label htmlFor="firstName">
@@ -81,11 +108,7 @@ export default function EditProfileForm({ defaultValues }: Props) {
       )}
 
       <div className="flex gap-3 pt-1">
-        <Button
-          type="submit"
-          disabled={pending}
-          className="flex-1 cursor-pointer"
-        >
+        <Button type="submit" disabled={pending} className="flex-1 cursor-pointer">
           {pending ? "Saving..." : "Save changes"}
         </Button>
         <Button

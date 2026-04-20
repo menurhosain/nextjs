@@ -5,12 +5,15 @@ import { redirect } from "next/navigation";
 import { api_client } from "@/lib/api-client";
 import { verify_jwt } from "@/services/auth.service";
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export type UpdateProfileFormState = {
   errors: {
     firstName?: string;
     lastName?: string;
     phone?: string;
     location?: string;
+    profilePicture?: string;
   };
   serverError?: string;
   success?: boolean;
@@ -24,6 +27,7 @@ export async function update_profile(
   const lastName = (formData.get("lastName") as string)?.trim();
   const phone = (formData.get("phone") as string)?.trim();
   const location = (formData.get("location") as string)?.trim();
+  const pictureFile = formData.get("profilePicture") as File | null;
 
   const errors: UpdateProfileFormState["errors"] = {};
   if (!firstName) errors.firstName = "First name is required.";
@@ -33,7 +37,6 @@ export async function update_profile(
 
   const cookieStore = await cookies();
   const jwt = cookieStore.get("jwt")?.value;
-
   if (!jwt) redirect("/login");
 
   const user = await verify_jwt(jwt);
@@ -41,17 +44,45 @@ export async function update_profile(
 
   const userId = user.id;
 
+  // Upload profile picture if a new file was selected
+  let profilePictureId: number | undefined;
+  if (pictureFile && pictureFile.size > 0) {
+    const fileForm = new FormData();
+    fileForm.append("files", pictureFile);
+
+    const uploadRes = await fetch(`${BASE_URL}/api/upload`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${jwt}` },
+      body: fileForm,
+    });
+
+    if (!uploadRes.ok) {
+      return { errors: {}, serverError: "Profile picture upload failed. Please try again." };
+    }
+
+    const [uploaded] = await uploadRes.json();
+    profilePictureId = uploaded.id;
+  }
+
+  const body: Record<string, unknown> = {
+    first_name: firstName,
+    last_name: lastName,
+    phone,
+    location,
+  };
+
+  if (profilePictureId !== undefined) {
+    body.profile_picture = profilePictureId;
+  }
+
   const res = await api_client(`/api/users/${userId}`, {
     method: "PUT",
     headers: { Authorization: `Bearer ${jwt}` },
-    body: { first_name: firstName, last_name: lastName, phone, location },
+    body,
   });
 
   if (!res.ok) {
-    return {
-      errors: {},
-      serverError: "Failed to update profile. Please try again.",
-    };
+    return { errors: {}, serverError: "Failed to update profile. Please try again." };
   }
 
   redirect("/profile");
