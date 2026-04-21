@@ -1,6 +1,5 @@
 import { headers, cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { BASE_URL } from "@/lib/constant";
 import { get_user_applications } from "@/services/applicant.service";
 
 export default async function DashboardPage() {
@@ -16,9 +15,6 @@ export default async function DashboardPage() {
   const username = user.username as string | undefined;
   const email = user.email as string | undefined;
   const type = user.type as string | undefined;
-  const profilePicture = user.profile_picture as { url: string; formats?: { thumbnail?: { url: string } } } | null | undefined;
-  const rawUrl = profilePicture?.formats?.thumbnail?.url ?? profilePicture?.url;
-  const pictureUrl = rawUrl ? `${BASE_URL}${rawUrl}` : null;
   const displayName = firstName ?? username ?? "there";
 
   const cookieStore = await cookies();
@@ -28,26 +24,6 @@ export default async function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Top bar */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-gray-900">Dashboard</h1>
-        <div className="flex items-center gap-3">
-          <div className="text-right hidden sm:block">
-            <p className="text-sm font-medium text-gray-900">{displayName}</p>
-            <p className="text-xs text-gray-500">{email}</p>
-          </div>
-          <a href="/profile">
-            {pictureUrl ? (
-              <img src={pictureUrl} alt="Avatar" className="w-9 h-9 rounded-full object-cover" />
-            ) : (
-              <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-sm font-bold text-gray-500">
-                {displayName[0].toUpperCase()}
-              </div>
-            )}
-          </a>
-        </div>
-      </header>
-
       <div className="max-w-4xl mx-auto px-6 py-10 space-y-8">
         {/* Welcome */}
         <div>

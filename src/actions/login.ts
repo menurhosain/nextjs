@@ -54,5 +54,5 @@ export async function login_user(
     path: "/",
   });
 
-  redirect("/protected");
+  redirect("/dashboard");
 }

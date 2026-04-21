@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -10,10 +11,17 @@ import type { FormState } from "@/actions/register";
 const initialState: FormState = { errors: {} };
 
 export default function RegisterForm() {
+  const router = useRouter();
   const [state, formAction, pending] = useActionState(
     register_user,
     initialState,
   );
+
+  useEffect(() => {
+    if (state.success) {
+      router.push("/login");
+    }
+  }, [state.success, router]);
 
   const e = state.errors;
 

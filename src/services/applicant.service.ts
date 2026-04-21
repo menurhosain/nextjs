@@ -60,16 +60,25 @@ export async function submit_application(
   return res.json();
 }
 
-export async function get_user_applications( userId: number, jwt: string,): Promise<Application[]> {
-  const query = new URLSearchParams({ sort: "appliedAt:desc", populate:"cvFile" });
+export async function get_user_applications(
+  userId: number,
+  jwt: string,
+): Promise<Application[]> {
+  const query = new URLSearchParams({
+    sort: "appliedAt:desc",
+    populate: "cvFile",
+  });
 
-  const res = await fetch(`${BASE_URL}/api/applicants?${query}`, { headers: { Authorization: `Bearer ${jwt}` } });
+  const res = await fetch(`${BASE_URL}/api/applicants?${query}`, {
+    headers: { Authorization: `Bearer ${jwt}` },
+  });
 
   if (!res.ok) return [];
 
   const json = await res.json();
-  console.log(json);
   return (json.data ?? []).map(
-    (item: { id: number; attributes?: Application } & Application) => ({ ...(item.attributes ?? item) }),
+    (item: { id: number; attributes?: Application } & Application) => ({
+      ...(item.attributes ?? item),
+    }),
   );
 }

@@ -13,6 +13,7 @@ export type FormState = {
     phone?: string;
   };
   serverError?: string;
+  success?: boolean;
 };
 
 export async function register_user(
@@ -76,5 +77,5 @@ export async function register_user(
     return { errors: {}, serverError: message };
   }
 
-  return { errors: {} };
+  return { errors: {}, success: true };
 }
