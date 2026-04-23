@@ -1,37 +1,34 @@
 "use client";
 
-import type { FormEvent } from "react";
+import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  submit_contractor_apply,
+  type ApplyContractorFormState,
+} from "@/actions/apply-contractor";
+
+const initialState: ApplyContractorFormState = { errors: {} };
 
 export default function ApplyForm() {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const [state, formAction, pending] = useActionState(
+    submit_contractor_apply,
+    initialState,
+  );
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const documents = formData
-      .getAll("documents")
-      .filter(
-        (value): value is File => value instanceof File && value.size > 0,
-      );
+  const e = state.errors;
 
-    const values = {
-      companyName: formData.get("companyName")?.toString() ?? "",
-      email: formData.get("email")?.toString() ?? "",
-      phone: formData.get("phone")?.toString() ?? "",
-      experienceYears: formData.get("experienceYears")?.toString() ?? "",
-      location: formData.get("location")?.toString() ?? "",
-      appliedAt: new Date().toISOString(),
-      documents,
-    };
-
-    console.log("Contractor application values:", values);
+  if (state.success) {
+    return (
+      <p className="text-center text-sm text-green-600 font-medium">
+        Application submitted successfully!
+      </p>
+    );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form action={formAction} className="space-y-5">
       <div className="space-y-1.5">
         <Label htmlFor="companyName">
           Company name <span className="text-red-500">*</span>
@@ -42,6 +39,9 @@ export default function ApplyForm() {
           placeholder="Acme Contractors Ltd."
           required
         />
+        {e.companyName && (
+          <p className="text-sm text-red-500">{e.companyName}</p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -56,6 +56,7 @@ export default function ApplyForm() {
             placeholder="contact@acme.com"
             required
           />
+          {e.email && <p className="text-sm text-red-500">{e.email}</p>}
         </div>
 
         <div className="space-y-1.5">
@@ -66,6 +67,7 @@ export default function ApplyForm() {
             type="tel"
             placeholder="+1 (555) 000-0000"
           />
+          {e.phone && <p className="text-sm text-red-500">{e.phone}</p>}
         </div>
       </div>
 
@@ -80,6 +82,9 @@ export default function ApplyForm() {
             max={100}
             placeholder="5"
           />
+          {e.experienceYears && (
+            <p className="text-sm text-red-500">{e.experienceYears}</p>
+          )}
         </div>
 
         <div className="space-y-1.5">
@@ -89,6 +94,7 @@ export default function ApplyForm() {
             name="location"
             placeholder="Dhaka, Bangladesh"
           />
+          {e.location && <p className="text-sm text-red-500">{e.location}</p>}
         </div>
       </div>
 
@@ -105,14 +111,22 @@ export default function ApplyForm() {
         <p className="text-sm text-muted-foreground">
           Upload company profile, certifications, or previous work samples.
         </p>
+        {e.documents && (
+          <p className="text-sm text-red-500">{e.documents}</p>
+        )}
       </div>
+
+      {state.serverError && (
+        <p className="text-sm text-red-500 text-center">{state.serverError}</p>
+      )}
 
       <Button
         type="submit"
+        disabled={pending}
         className="w-full cursor-pointer"
         variant="secondary"
       >
-        Submit Application
+        {pending ? "Submitting..." : "Submit Application"}
       </Button>
     </form>
   );

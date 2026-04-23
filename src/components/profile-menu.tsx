@@ -24,11 +24,7 @@ export default function ProfileMenu({ displayName, pictureUrl }: ProfileMenuProp
 
   return (
     <div ref={ref} className="relative ml-2">
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        className="flex items-center gap-2 cursor-pointer"
-      >
+      <button type="button" onClick={() => setOpen((prev) => !prev)} className="flex items-center gap-2 cursor-pointer">
         {pictureUrl ? (
           <img
             src={pictureUrl}
