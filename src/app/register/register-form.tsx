@@ -113,6 +113,29 @@ export default function RegisterForm() {
         {e.phone && <p className="text-sm text-red-500">{e.phone}</p>}
       </div>
 
+      {/* Register as */}
+      <div className="space-y-1.5">
+        <Label htmlFor="register_as">
+          Register as <span className="text-red-500">*</span>
+        </Label>
+        <select
+          id="register_as"
+          name="register_as"
+          required
+          defaultValue=""
+          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
+        >
+          <option value="" disabled>
+            Select role
+          </option>
+          <option value="applicant">Applicant</option>
+          <option value="contractor">Contractor</option>
+        </select>
+        {e.register_as && (
+          <p className="text-sm text-red-500">{e.register_as}</p>
+        )}
+      </div>
+
       {/* Location */}
       <div className="space-y-1.5">
         <Label htmlFor="location">Location</Label>
