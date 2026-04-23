@@ -27,10 +27,17 @@ export default async function Navbar() {
 
   const visibleAuthLinks =
     user?.type === "contractor"
-      ? authLinks.filter((l) => l.href !== "/apply-for-recrutement")
+      ? [
+          ...authLinks.filter((l) => l.href !== "/apply-for-recrutement"),
+          { href: "/apply-for-contractor", label: "Apply for Contractor" },
+        ]
       : authLinks;
 
-  const links = isLoggedIn ? visibleAuthLinks : [...guestLinks, ...authLinks];
+  const contractorLink = { href: "/apply-for-contractor", label: "Apply for Contractor" };
+
+  const links = isLoggedIn
+    ? visibleAuthLinks
+    : [...guestLinks, ...authLinks, contractorLink];
 
   const displayName =
     (user?.first_name as string | undefined) ??

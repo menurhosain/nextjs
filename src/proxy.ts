@@ -3,6 +3,7 @@ import { verify_jwt } from "@/services/auth.service";
 
 const AUTH_ROUTES = ["/login", "/register"];
 const APPLICANT_ONLY_ROUTES = ["/apply-for-recrutement"];
+const CONTRACTOR_ONLY_ROUTES = ["/apply-for-contractor"];
 
 export async function proxy(request: NextRequest) {
   const jwt = request.cookies.get("jwt")?.value;
@@ -25,10 +26,19 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
   }
 
+  const userType = (user as Record<string, unknown>).type;
+
   const isApplicantOnly = APPLICANT_ONLY_ROUTES.some((route) =>
     pathname.startsWith(route),
   );
-  if (isApplicantOnly && (user as Record<string, unknown>).type === "contractor") {
+  if (isApplicantOnly && userType === "contractor") {
+    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+  }
+
+  const isContractorOnly = CONTRACTOR_ONLY_ROUTES.some((route) =>
+    pathname.startsWith(route),
+  );
+  if (isContractorOnly && userType !== "contractor") {
     return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
   }
 
@@ -45,6 +55,8 @@ export const config = {
     "/protected/:path*",
     "/apply-for-recrutement/:path*",
     "/apply-for-recrutement",
+    "/apply-for-contractor",
+    "/apply-for-contractor/:path*",
     "/profile",
     "/profile/:path*",
     "/dashboard",
