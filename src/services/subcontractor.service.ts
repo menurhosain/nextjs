@@ -1,6 +1,39 @@
 import { BASE_URL } from "@/lib/constant";
 import { upload_files } from "@/services/upload.service";
 
+export type Subcontractor = {
+  id: number;
+  companyName: string;
+  email: string;
+  phone?: string;
+  location?: string;
+  experienceYears?: number;
+  label?: string;
+  appliedAt: string;
+};
+
+export async function get_user_subcontractor_applications(
+  jwt: string,
+): Promise<Subcontractor[]> {
+  const query = new URLSearchParams({
+    sort: "appliedAt:desc",
+  });
+
+  const res = await fetch(`${BASE_URL}/api/subcontractors?${query}`, {
+    headers: { Authorization: `Bearer ${jwt}` },
+  });
+
+  if (!res.ok) return [];
+
+  const json = await res.json();
+  return (json.data ?? []).map(
+    (item: { id: number; attributes?: Subcontractor } & Subcontractor) => ({
+      id: item.id,
+      ...(item.attributes ?? item),
+    }),
+  );
+}
+
 type SubcontractorPayload = {
   companyName: string;
   email: string;

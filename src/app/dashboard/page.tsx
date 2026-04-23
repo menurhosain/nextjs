@@ -1,6 +1,8 @@
 import { headers, cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { get_user_applications } from "@/services/applicant.service";
+import { get_user_subcontractor_applications } from "@/services/subcontractor.service";
+import { CONTRACTOR } from "@/lib/constant";
 
 export default async function DashboardPage() {
   const headersList = await headers();
@@ -16,11 +18,21 @@ export default async function DashboardPage() {
   const email = user.email as string | undefined;
   const type = user.type as string | undefined;
   const displayName = firstName ?? username ?? "there";
+  const isContractor = type === CONTRACTOR;
 
   const cookieStore = await cookies();
   const jwt = cookieStore.get("jwt")!.value;
 
-  const applications = await get_user_applications(userId, jwt);
+  const applications = isContractor
+    ? await get_user_subcontractor_applications(jwt)
+    : await get_user_applications(userId, jwt);
+
+  const applyHref = isContractor ? "/apply-for-contractor" : "/apply-for-recrutement";
+  const applyLabel = isContractor ? "Apply as Contractor" : "Apply for a position";
+  const applyDescription = isContractor
+    ? "Submit your company details and documents"
+    : "Submit your CV and skills";
+  const sectionLabel = isContractor ? "Contractor" : "Recruitment";
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -43,12 +55,12 @@ export default async function DashboardPage() {
           </a>
 
           <a
-            href="/apply-for-recrutement"
+            href={applyHref}
             className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow"
           >
-            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Recruitment</p>
-            <p className="mt-2 text-base font-semibold text-gray-900">Apply for a position</p>
-            <p className="text-sm text-gray-500 mt-1">Submit your CV and skills</p>
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">{sectionLabel}</p>
+            <p className="mt-2 text-base font-semibold text-gray-900">{applyLabel}</p>
+            <p className="text-sm text-gray-500 mt-1">{applyDescription}</p>
           </a>
         </div>
 
@@ -81,7 +93,7 @@ export default async function DashboardPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold text-gray-700">My Applications</h3>
-            <a href="/apply-for-recrutement" className="text-xs text-gray-500 hover:text-gray-900 underline underline-offset-2">
+            <a href={applyHref} className="text-xs text-gray-500 hover:text-gray-900 underline underline-offset-2">
               + New application
             </a>
           </div>
@@ -90,7 +102,7 @@ export default async function DashboardPage() {
             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
               <p className="text-sm text-gray-500">You haven't submitted any applications yet.</p>
               <a
-                href="/apply-for-recrutement"
+                href={applyHref}
                 className="inline-block mt-3 text-sm font-medium text-gray-900 underline underline-offset-2"
               >
                 Submit your first application
@@ -98,39 +110,71 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div className="space-y-3">
-              {applications.map((app) => (
-                <div
-                  key={app.id}
-                  className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-                >
-                  <div className="space-y-1">
-                    <p className="text-sm font-semibold text-gray-900">
-                      {app.firstName} {app.lastName}
-                    </p>
-                    <p className="text-xs text-gray-500">{app.email}</p>
-                    {app.skills && (
-                      <p className="text-xs text-gray-400">Skills: {app.skills}</p>
-                    )}
-                    {app.location && (
-                      <p className="text-xs text-gray-400">Location: {app.location}</p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
-                    {app.label && (
-                      <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">
-                        {app.label}
-                      </span>
-                    )}
-                    <p className="text-xs text-gray-400">
-                      {new Date(app.appliedAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </p>
-                  </div>
-                </div>
-              ))}
+              {isContractor
+                ? (applications as Awaited<ReturnType<typeof get_user_subcontractor_applications>>).map((app) => (
+                    <div
+                      key={app.id}
+                      className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+                    >
+                      <div className="space-y-1">
+                        <p className="text-sm font-semibold text-gray-900">{app.companyName}</p>
+                        <p className="text-xs text-gray-500">{app.email}</p>
+                        {app.location && (
+                          <p className="text-xs text-gray-400">Location: {app.location}</p>
+                        )}
+                        {app.experienceYears != null && (
+                          <p className="text-xs text-gray-400">Experience: {app.experienceYears} yrs</p>
+                        )}
+                      </div>
+                      <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
+                        {app.label && (
+                          <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">
+                            {app.label}
+                          </span>
+                        )}
+                        <p className="text-xs text-gray-400">
+                          {new Date(app.appliedAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                : (applications as Awaited<ReturnType<typeof get_user_applications>>).map((app) => (
+                    <div
+                      key={app.id}
+                      className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+                    >
+                      <div className="space-y-1">
+                        <p className="text-sm font-semibold text-gray-900">
+                          {app.firstName} {app.lastName}
+                        </p>
+                        <p className="text-xs text-gray-500">{app.email}</p>
+                        {app.skills && (
+                          <p className="text-xs text-gray-400">Skills: {app.skills}</p>
+                        )}
+                        {app.location && (
+                          <p className="text-xs text-gray-400">Location: {app.location}</p>
+                        )}
+                      </div>
+                      <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
+                        {app.label && (
+                          <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">
+                            {app.label}
+                          </span>
+                        )}
+                        <p className="text-xs text-gray-400">
+                          {new Date(app.appliedAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
             </div>
           )}
         </div>
