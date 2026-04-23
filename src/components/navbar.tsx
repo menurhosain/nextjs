@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cookies, headers } from "next/headers";
 import { BASE_URL } from "@/lib/constant";
 import NavLink from "@/components/nav-link";
-import { logout } from "@/actions/logout";
+import ProfileMenu from "@/components/profile-menu";
 
 const guestLinks = [
   { href: "/login", label: "Login" },
@@ -55,32 +55,7 @@ export default async function Navbar() {
       ))}
 
       {user && (
-        <>
-          <a href="/profile" className="flex items-center gap-2 ml-2">
-            {pictureUrl ? (
-              <img
-                src={pictureUrl}
-                alt="Avatar"
-                className="w-8 h-8 rounded-full object-cover"
-              />
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-sm font-bold text-gray-500">
-                {displayName?.[0]?.toUpperCase() ?? "?"}
-              </div>
-            )}
-            {displayName && (
-              <p className="hidden sm:block text-sm font-medium text-gray-900">{displayName}</p>
-            )}
-          </a>
-          <form action={logout}>
-            <button
-              type="submit"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-            >
-              Logout
-            </button>
-          </form>
-        </>
+        <ProfileMenu displayName={displayName} pictureUrl={pictureUrl} />
       )}
     </nav>
   );
