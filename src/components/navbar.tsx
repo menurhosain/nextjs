@@ -18,14 +18,19 @@ export default async function Navbar() {
   const cookieStore = await cookies();
   const isLoggedIn = !!cookieStore.get("jwt")?.value;
 
-  const links = isLoggedIn ? authLinks : [...guestLinks, ...authLinks];
-
   let user: Record<string, unknown> | null = null;
   if (isLoggedIn) {
     const headersList = await headers();
     const raw = headersList.get("x-user");
     if (raw) user = JSON.parse(raw) as Record<string, unknown>;
   }
+
+  const visibleAuthLinks =
+    user?.type === "contractor"
+      ? authLinks.filter((l) => l.href !== "/apply-for-recrutement")
+      : authLinks;
+
+  const links = isLoggedIn ? visibleAuthLinks : [...guestLinks, ...authLinks];
 
   const displayName =
     (user?.first_name as string | undefined) ??
