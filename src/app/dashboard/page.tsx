@@ -1,5 +1,6 @@
 import { headers, cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { get_user_applications } from "@/services/applicant.service";
 import { get_user_subcontractor_applications } from "@/services/subcontractor.service";
 import { CONTRACTOR } from "@/lib/constant";
@@ -112,9 +113,10 @@ export default async function DashboardPage() {
             <div className="space-y-3">
               {isContractor
                 ? (applications as Awaited<ReturnType<typeof get_user_subcontractor_applications>>).map((app) => (
-                    <div
-                      key={app.id}
-                      className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+                    <Link
+                      key={app.documentId}
+                      href={`/applications/${app.documentId}`}
+                      className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-md transition-shadow"
                     >
                       <div className="space-y-1">
                         <p className="text-sm font-semibold text-gray-900">{app.companyName}</p>
@@ -140,12 +142,13 @@ export default async function DashboardPage() {
                           })}
                         </p>
                       </div>
-                    </div>
+                    </Link>
                   ))
                 : (applications as Awaited<ReturnType<typeof get_user_applications>>).map((app) => (
-                    <div
-                      key={app.id}
-                      className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+                    <Link
+                      key={app.documentId}
+                      href={`/applications/${app.documentId}`}
+                      className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-md transition-shadow"
                     >
                       <div className="space-y-1">
                         <p className="text-sm font-semibold text-gray-900">
@@ -173,7 +176,7 @@ export default async function DashboardPage() {
                           })}
                         </p>
                       </div>
-                    </div>
+                    </Link>
                   ))}
             </div>
           )}

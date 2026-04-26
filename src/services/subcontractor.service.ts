@@ -1,8 +1,10 @@
 import { BASE_URL } from "@/lib/constant";
+import type { StrapiFile } from "@/services/applicant.service";
 import { upload_files } from "@/services/upload.service";
 
 export type Subcontractor = {
   id: number;
+  documentId: string;
   companyName: string;
   email: string;
   phone?: string;
@@ -10,6 +12,7 @@ export type Subcontractor = {
   experienceYears?: number;
   label?: string;
   appliedAt: string;
+  documents?: StrapiFile[];
 };
 
 export async function get_user_subcontractor_applications(
@@ -27,11 +30,27 @@ export async function get_user_subcontractor_applications(
 
   const json = await res.json();
   return (json.data ?? []).map(
-    (item: { id: number; attributes?: Subcontractor } & Subcontractor) => ({
+    (item: { id: number; documentId: string; attributes?: Subcontractor } & Subcontractor) => ({
       id: item.id,
+      documentId: item.documentId,
       ...(item.attributes ?? item),
     }),
   );
+}
+
+export async function get_subcontractor_by_document_id(
+  documentId: string,
+  jwt: string,
+): Promise<Subcontractor | null> {
+  const query = new URLSearchParams({ populate: "documents" });
+  const res = await fetch(`${BASE_URL}/api/subcontractors/${documentId}?${query}`, {
+    headers: { Authorization: `Bearer ${jwt}` },
+  });
+  if (!res.ok) return null;
+  const json = await res.json();
+  const item = json.data;
+  if (!item) return null;
+  return { id: item.id, documentId: item.documentId, ...(item.attributes ?? item) };
 }
 
 type SubcontractorPayload = {

@@ -12,8 +12,17 @@ type ApplicantPayload = {
   location?: string;
 };
 
+export type StrapiFile = {
+  id: number;
+  url: string;
+  name: string;
+  size: number;
+  mime: string;
+};
+
 export type Application = {
   id: number;
+  documentId: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -23,6 +32,7 @@ export type Application = {
   location?: string;
   label?: string;
   appliedAt: string;
+  cvFile?: StrapiFile | null;
 };
 
 export async function submit_application(
@@ -61,7 +71,7 @@ export async function submit_application(
 }
 
 export async function get_user_applications(
-  userId: number,
+  _userId: number,
   jwt: string,
 ): Promise<Application[]> {
   const query = new URLSearchParams({
@@ -77,8 +87,25 @@ export async function get_user_applications(
 
   const json = await res.json();
   return (json.data ?? []).map(
-    (item: { id: number; attributes?: Application } & Application) => ({
+    (item: { id: number; documentId: string; attributes?: Application } & Application) => ({
+      id: item.id,
+      documentId: item.documentId,
       ...(item.attributes ?? item),
     }),
   );
+}
+
+export async function get_application_by_document_id(
+  documentId: string,
+  jwt: string,
+): Promise<Application | null> {
+  const query = new URLSearchParams({ populate: "cvFile" });
+  const res = await fetch(`${BASE_URL}/api/applicants/${documentId}?${query}`, {
+    headers: { Authorization: `Bearer ${jwt}` },
+  });
+  if (!res.ok) return null;
+  const json = await res.json();
+  const item = json.data;
+  if (!item) return null;
+  return { id: item.id, documentId: item.documentId, ...(item.attributes ?? item) };
 }
