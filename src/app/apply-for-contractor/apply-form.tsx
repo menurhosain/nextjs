@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,20 +13,17 @@ import {
 const initialState: ApplyContractorFormState = { errors: {} };
 
 export default function ApplyForm() {
+  const router = useRouter();
   const [state, formAction, pending] = useActionState(
     submit_contractor_apply,
     initialState,
   );
 
-  const e = state.errors;
+  useEffect(() => {
+    if (state.success) router.push("/dashboard");
+  }, [state.success, router]);
 
-  if (state.success) {
-    return (
-      <p className="text-center text-sm text-green-600 font-medium">
-        Application submitted successfully!
-      </p>
-    );
-  }
+  const e = state.errors;
 
   return (
     <form action={formAction} className="space-y-5">

@@ -50,15 +50,26 @@ export async function submit_apply(
 
   try {
     await submit_application(
-      { firstName, lastName, email, phone, cvFile: cvFile!, skills, experienceYears, location },
+      {
+        firstName,
+        lastName,
+        email,
+        phone,
+        cvFile: cvFile!,
+        skills,
+        experienceYears,
+        location,
+      },
       jwt,
     );
   } catch (err) {
     submitError =
-      err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      err instanceof Error
+        ? err.message
+        : "Something went wrong. Please try again.";
   }
 
   if (submitError) return { errors: {}, serverError: submitError };
 
-  redirect("/");
+  redirect("/dashboard");
 }
