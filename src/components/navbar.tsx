@@ -1,4 +1,4 @@
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import NavLink from "@/components/nav-link";
@@ -16,15 +16,12 @@ const authLinks = [
 ];
 
 export default async function Navbar() {
-  const cookieStore = await cookies();
-  const isLoggedIn = !!cookieStore.get("jwt")?.value;
-
-  let user: Record<string, unknown> | null = null;
-  if (isLoggedIn) {
-    const headersList = await headers();
-    const raw = headersList.get("x-user");
-    if (raw) user = JSON.parse(raw) as Record<string, unknown>;
-  }
+  const headersList = await headers();
+  const raw = headersList.get("x-user");
+  const user: Record<string, unknown> | null = raw
+    ? (JSON.parse(raw) as Record<string, unknown>)
+    : null;
+  const isLoggedIn = !!user;
 
   const visibleAuthLinks =
     user?.type === "contractor"
