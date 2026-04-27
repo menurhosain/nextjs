@@ -30,6 +30,24 @@ export async function login_user(payload: LoginPayload) {
   });
 }
 
+export async function reset_password(payload: {
+  code: string;
+  password: string;
+  passwordConfirmation: string;
+}) {
+  return api_client("/api/auth/reset-password", {
+    method: "POST",
+    body: payload,
+  });
+}
+
+export async function forgot_password(email: string) {
+  return api_client("/api/auth/forgot-password", {
+    method: "POST",
+    body: { email },
+  });
+}
+
 export async function verify_jwt(
   jwt: string,
 ): Promise<false | Record<string, unknown>> {

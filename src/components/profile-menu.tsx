@@ -57,7 +57,7 @@ export default function ProfileMenu({ displayName, pictureUrl }: ProfileMenuProp
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
             onClick={() => setOpen(false)}
           >
-            Forgot password
+            Reset password
           </a>
           <div className="my-1 border-t" />
           <form action={logout}>
