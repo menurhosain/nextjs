@@ -30,7 +30,7 @@ export function NavActions() {
   const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
 
   return (
-    <div className="w-full bg-sah-red flex items-center px-4 py-4 justify-center gap-[30px] h-[90px]">
+    <div className="w-full bg-sah-red flex items-center px-4 py-4 justify-end gap-[30px] h-[90px] pr-[130px]">
       {/* Language selector */}
       <div className="relative" ref={langRef}>
         <button

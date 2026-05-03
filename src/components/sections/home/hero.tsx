@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NavLinks, NavActions } from "@/components/new-nav";
+import { StatCounter } from "@/components/ui/stat-counter";
 
 export default function Hero() {
   return (
@@ -24,8 +25,11 @@ export default function Hero() {
           </Link>
         </div>
       </div>
-      <div className="w-[40%]">
+      <div className="w-[40%] flex flex-col justify-between">
         <NavActions />
+        <div className="flex justify-end p-8 pr-[130px]">
+          <StatCounter value={30} suffix="+" label="Leading Years in Construction" />
+        </div>
       </div>
     </div>
   );
