@@ -10,7 +10,7 @@ export default function Hero() {
     >
       <div className="w-[60%]" style={{ backgroundImage: "url('/home_hero_overlay.png')" }}>
         <NavLinks />
-        <div className="flex flex-col gap-6 px-[120px] pt-[200px]">
+        <div className="flex flex-col gap-6 px-[120px] pt-[200px] pl-[130px]">
           <h1 className="text-white leading-[90px] tracking-[-0.05em]">
             <span className="font-bold text-[100px] font-geist">Leading Design</span>
             <br />
