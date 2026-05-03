@@ -28,7 +28,20 @@ export default function Hero() {
       <div className="w-[40%] flex flex-col justify-between">
         <NavActions />
         <div className="flex justify-end p-8 pr-[130px]">
-          <StatCounter value={30} suffix="+" label="Leading Years in Construction" />
+          <div
+            className="relative w-[280px] px-[30px] py-[50px] flex flex-col gap-3 bg-cover bg-center"
+            style={{ backgroundImage: "url('/white-dots.jpg')" }}
+          >
+            <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
+            <StatCounter
+              value={30}
+              suffix="+"
+              className="text-sah-red font-bold font-geist text-[100px] leading-none"
+            />
+            <span className="text-sah-gray-2 font-geist font-semibold text-[22px] uppercase tracking-wide leading-snug">
+              Leading Years in Construction
+            </span>
+          </div>
         </div>
       </div>
     </div>

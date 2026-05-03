@@ -14,7 +14,7 @@ const navLinks = ["Our Company", "Our Services", "Our Projects", "News", "Career
 export function NavLinks() {
   return (
     <div className="flex items-center gap-6 px-4 py-4 justify-center h-[90px] border-b border-white/20">
-      <div className="text-white text-[30px] mr-[120px]">Sha</div>
+      <div className="text-white text-[30px] mr-[120px] uppercase">SHA</div>
       {navLinks.map((link) => (
         <a key={link} href="#" className="uppercase text-white text-base font-medium">
           {link}
