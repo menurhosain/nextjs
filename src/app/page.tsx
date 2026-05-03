@@ -1,6 +1,5 @@
-"use client";
-import { useState } from "react";
+import Hero from "@/components/sections/home/hero";
 
 export default function Home() {
-  return <h2>Home</h2>;
+  return <Hero />;
 }

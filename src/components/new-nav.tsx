@@ -1,23 +1,80 @@
-export default function NewNav() {
+"use client";
+
+import { useState, useCallback } from "react";
+import Link from "next/link";
+import { useOutsideClick } from "@/hook/use-outside-click";
+
+const languages = [
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "ar", label: "Arabic", flag: "🇸🇦" },
+];
+
+const navLinks = ["Our Company", "Our Services", "Our Projects", "News", "Careers"];
+
+export function NavLinks() {
   return (
-    <nav className="w-full bg-white">
-      <div className="mx-auto flex max-w-[1620px]">
-        <div className="w-3/5 bg-blue-200 flex gap-[120px]">
-          <div className="px-4 py-4">test Logo</div>
-          <div className="flex items-center gap-6 px-4 py-4">
-            {["Our Company", "Our Services", "Our Projects", "News", "Careers"].map((link) => (
-              <a
-                key={link}
-                href="#"
-                className="uppercase text-white text-base font-medium"
+    <div className="flex items-center gap-6 px-4 py-4 justify-center h-[90px] border-b border-white/20">
+      <div className="text-white text-[30px] mr-[120px]">Sha</div>
+      {navLinks.map((link) => (
+        <a key={link} href="#" className="uppercase text-white text-base font-medium">
+          {link}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+export function NavActions() {
+  const [selectedLang, setSelectedLang] = useState(languages[0]);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
+
+  return (
+    <div className="w-full bg-[var(--sah-red)] flex items-center px-4 py-4 justify-center gap-[30px] h-[90px]">
+      {/* Language selector */}
+      <div className="relative" ref={langRef}>
+        <button
+          onClick={() => setLangOpen(!langOpen)}
+          className="flex items-start w-[120px] gap-2 text-white text-sm font-medium cursor-pointer"
+        >
+          <span>{selectedLang.flag}</span>
+          <span>{selectedLang.label}</span>
+          <span className="text-xs">&#8964;</span>
+        </button>
+        {langOpen && (
+          <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-50">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => {
+                  setSelectedLang(lang);
+                  setLangOpen(false);
+                }}
+                className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-[var(--sah-black)] hover:bg-[var(--sah-light-4)] whitespace-nowrap"
               >
-                {link}
-              </a>
+                <span>{lang.flag}</span>
+                <span>{lang.label}</span>
+              </button>
             ))}
           </div>
-        </div>
-        <div className="w-2/5 bg-red-200 px-4 py-4">Right</div>
+        )}
       </div>
-    </nav>
+
+      {/* CTA button */}
+      <Link
+        href="/register"
+        className="flex items-center gap-2 bg-[#1a1a1a] text-white text-sm font-medium px-[24px] py-[12px] rounded-full"
+      >
+        Become a Subcontractor
+        <span className="text-base">&#8599;</span>
+      </Link>
+
+      {/* Hamburger */}
+      <button className="flex flex-col justify-center items-center gap-[5px] text-white">
+        <span className="block w-6 h-[2px] bg-white"></span>
+        <span className="block w-6 h-[2px] bg-white"></span>
+        <span className="block w-6 h-[2px] bg-white"></span>
+      </button>
+    </div>
   );
 }
