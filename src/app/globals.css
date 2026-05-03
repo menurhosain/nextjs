@@ -130,3 +130,37 @@
   }
 }
 
+/* Figma design colors — sah website */
+:root {
+  --sah-red: #d00435;
+  --sah-coral: #fa7575;
+
+  --sah-black: #101010;
+  --sah-dark-1: #181a1c;
+  --sah-dark-2: #191919;
+  --sah-dark-3: #1e2022;
+  --sah-dark-4: #1f2124;
+  --sah-dark-5: #27282a;
+
+  --sah-gray-1: #414141;
+  --sah-gray-2: #555555;
+  --sah-gray-3: #59585d;
+
+  --sah-light-1: #dadada;
+  --sah-light-2: #dfdfdf;
+  --sah-light-3: #e5e5e5;
+  --sah-light-4: #f5f5f5;
+  --sah-off-white: #f9fafb;
+  --sah-white: #ffffff;
+
+  --sah-overlay-dark-90: rgba(23, 23, 27, 0.9);
+  --sah-overlay-dark-50: rgba(25, 25, 25, 0.5);
+  --sah-overlay-dark-30: rgba(42, 45, 45, 0.3);
+  --sah-overlay-black-4: rgba(0, 0, 0, 0.04);
+  --sah-overlay-white-50: rgba(255, 255, 255, 0.5);
+  --sah-overlay-white-30: rgba(255, 255, 255, 0.3);
+  --sah-overlay-white-15: rgba(255, 255, 255, 0.15);
+  --sah-overlay-white-10: rgba(255, 255, 255, 0.1);
+  --sah-overlay-light-90: rgba(229, 229, 229, 0.9);
+  --sah-overlay-light-79: rgba(245, 245, 245, 0.79);
+}
