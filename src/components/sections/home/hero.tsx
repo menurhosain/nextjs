@@ -11,13 +11,13 @@ export default function Hero() {
         <NavLinks />
         <div className="flex flex-col gap-6 px-[120px] pt-[200px]">
           <h1 className="text-white leading-[90px] tracking-[-0.05em]">
-            <span className="font-bold text-[100px] font-[var(--font-geist-sans)]">Leading Design</span>
+            <span className="font-bold text-[100px] font-geist">Leading Design</span>
             <br />
-            <em className="italic text-[84px] font-normal font-[var(--font-dm-serif)]">& Build Contractor</em>
+            <em className="italic text-[84px] font-normal font-dm-serif">& Build Contractor</em>
           </h1>
           <Link
             href="/register"
-            className="inline-flex items-center gap-2 bg-[var(--sah-red)] text-white text-sm font-medium px-5 py-3 rounded-full w-fit"
+            className="inline-flex items-center gap-2 bg-sah-red text-white text-sm font-medium px-5 py-3 rounded-full w-fit"
           >
             You Like to Build?
             <span>&#8599;</span>

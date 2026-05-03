@@ -30,7 +30,7 @@ export function NavActions() {
   const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
 
   return (
-    <div className="w-full bg-[var(--sah-red)] flex items-center px-4 py-4 justify-center gap-[30px] h-[90px]">
+    <div className="w-full bg-sah-red flex items-center px-4 py-4 justify-center gap-[30px] h-[90px]">
       {/* Language selector */}
       <div className="relative" ref={langRef}>
         <button
@@ -50,7 +50,7 @@ export function NavActions() {
                   setSelectedLang(lang);
                   setLangOpen(false);
                 }}
-                className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-[var(--sah-black)] hover:bg-[var(--sah-light-4)] whitespace-nowrap"
+                className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap"
               >
                 <span>{lang.flag}</span>
                 <span>{lang.label}</span>
