@@ -1,5 +1,9 @@
+import Header from "@/components/layout/header/header";
 import Hero from "@/components/sections/home/hero";
 
 export default function Home() {
-  return <Hero />;
+    return <>
+        <Header />
+        <Hero />
+    </>
 }
