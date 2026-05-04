@@ -5,9 +5,7 @@ import Service from "@/components/sections/home/service";
 export default function Home() {
     return (
         <>
-            {
-                //<Hero />
-            }
+            <Hero />
             <Service />
         </>
     );

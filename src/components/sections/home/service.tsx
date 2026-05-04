@@ -3,7 +3,7 @@ import { ServiceCard } from "@/components/ui/service-card";
 
 export default function Service() {
     return (
-        <section className="section-padding relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
+        <section className="section-padding pt-[140px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
             <div
                 aria-hidden="true"
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"
@@ -14,13 +14,11 @@ export default function Service() {
                 </div>
 
                 <ScrollReveal toColor="var(--color-sah-dark-2)">
-                    <h2 className="text-[40px] font-bold tracking-tight text-center font-geist mb-[60px]">
+                    <h2 className="section-heading mx-auto text-center mb-[60px]">
                         <span className="text-sah-dark-2">
                             We deliver high quality construction <br /> services with innovation, precision,{" "}
                         </span>
-                        <span className="text-sah-gray-2 scroll-color font-bold">
-                            and commitment <br /> to every client project
-                        </span>
+                        <span className="text-sah-gray-2 scroll-color font-bold">and commitment to every client project</span>
                     </h2>
                 </ScrollReveal>
 

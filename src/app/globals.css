@@ -50,29 +50,16 @@
     max-width: var(--container-width);
 }
 
-.section-padding {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
+@layer components {
     .section-padding {
-        padding-left: 20px;
-        padding-right: 20px;
+        @apply px-[20px] md:px-[20px] lg:px-[40px];
     }
-}
 
-@media (min-width: 768px) {
-    .section-padding {
-        padding-left: 30px;
-        padding-right: 30px;
+    .hero-heading {
     }
-}
 
-@media (min-width: 1024px) {
-    .section-padding {
-        padding-left: 40px;
-        padding-right: 40px;
+    .section-heading {
+        @apply font-bold font-geist tracking-tight max-w-3xl text-[28px] md:text-[40px];
     }
 }
 
