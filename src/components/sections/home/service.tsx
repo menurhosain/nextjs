@@ -4,7 +4,10 @@ import { ServiceCard } from "@/components/ui/service-card";
 export default function Service() {
     return (
         <section className="relative py-20 px-[120px] bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
-            <div aria-hidden="true" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[780px] h-[400px] bg-[url('/brand_shape.png')] bg-no-repeat bg-cover bg-bottom pointer-events-none" />
+            <div
+                aria-hidden="true"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:w-[780px] lg:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-cover bg-bottom pointer-events-none"
+            />
             <div className="container mx-auto">
                 <div className="flex items-center justify-center gap-6 mb-10">
                     <span className="text-sah-black text-sm font-medium tracking-widest uppercase">[ Our Expertise ] ↓</span>
@@ -53,6 +56,24 @@ export default function Service() {
                             />
                         </svg>
                     />
+                </div>
+
+                <div className="flex justify-center mt-12 mb-[140px]">
+                    <div className="flex items-center gap-4 bg-white rounded-full px-6 py-3 shadow-sm">
+                        <span className="text-sah-dark-2 text-base font-medium">Careers</span>
+                        <a
+                            href="#"
+                            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#C8102E] text-white flex-shrink-0 hover:bg-[#a50d26] transition-colors"
+                            aria-label="Navigate"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 13L13 3M13 3H5M13 3V11" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </a>
+                        <a href="#" className="text-sah-dark-2 text-base font-medium underline underline-offset-2 decoration-sah-dark-2 hover:text-sah-red hover:decoration-sah-red transition-colors">
+                            View All Services
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
