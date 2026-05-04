@@ -5,7 +5,7 @@ import { StatCounter } from "@/components/ui/stat-counter";
 export default function Hero() {
   return (
     <div
-      className="h-screen w-full flex  bg-cover bg-end bg-no-repeat"
+      className="h-screen w-full flex  bg-cover bg-end bg-no-repeat bg-[linear-gradient(to_bottom,rgba(0,0,0,0.6),rgba(0,0,0,0.2)),url('/images/bg.jpg')]"
       style={{ backgroundImage: "url('/home-hero.jpg')" }}
     >
       <div
@@ -26,8 +26,6 @@ export default function Hero() {
             You Like to Build?
             <img src="/angle-arrow.svg" alt="" width={11} height={11} />
           </Link>
-        </div>
-        <div className="flex justify-end pr-[130px] pb-10">
           <div className="flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/20 rounded-full px-4 py-6 w-[60px]">
             <span className="text-white text-xs font-medium tracking-widest uppercase [writing-mode:vertical-rl] rotate-180">
               Scroll Now
@@ -43,6 +41,8 @@ export default function Hero() {
             </svg>
           </div>
         </div>
+
+        <div className="flex justify-end pr-[130px] pb-10"></div>
       </div>
 
       <div className="w-[40%] flex flex-col justify-between">

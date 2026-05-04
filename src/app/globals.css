@@ -41,6 +41,12 @@
   --color-sah-overlay-white-10: rgba(255, 255, 255, 0.1);
   --color-sah-overlay-light-90: rgba(229, 229, 229, 0.9);
   --color-sah-overlay-light-79: rgba(245, 245, 245, 0.79);
+
+  --container-width: 1620px;
+}
+
+.container {
+  max-width: var(--container-width);
 }
 
 @layer base {
