@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Serif_Display, Inter } from "next/font/google";
-import Navbar from "@/components/navbar";
+import Header from "@/components/layout/header/header";
 
 import "./globals.css";
 import Footer from "@/components/sections/global/footer";
@@ -39,11 +39,8 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col">
-                {
-                    //<Navbar />
-                }
+                <Header />
                 {children}
-
                 <Footer />
             </body>
         </html>

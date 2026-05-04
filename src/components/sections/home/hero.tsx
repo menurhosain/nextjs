@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { NavLinks, NavActions } from "@/components/new-nav";
 import { StatCounter } from "@/components/ui/stat-counter";
 
 export default function Hero() {
