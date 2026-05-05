@@ -12,7 +12,7 @@ export default function Projects() {
                         title=<>
                             Discover Our Completed <br /> Building Projects
                         </>
-                        class_name={{ subtitle: "sah-black text-center", title: "sah-black text-center" }}
+                        class_name={{ subtitle: "text-sah-black text-center", title: "text-sah-black text-center" }}
                     />
                 </div>
 
