@@ -4,7 +4,7 @@ import { ButtonModern } from "@/components/ui/button";
 
 export default function Projects() {
     return (
-        <section className="py-[140px] section-padding bg-sah-light-4">
+        <section className="py-[140px] section-padding bg-[linear-gradient(0deg,#f5f5f566_42.16%,#f5f5f5_204.49%),url('/project-section-bg.jpg')] bg-bottom bg-no-repeat">
             <div className="container">
                 <div className="mb-[70px]">
                     <Section_Title

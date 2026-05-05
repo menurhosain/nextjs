@@ -75,6 +75,9 @@
 .project-card-content {
     background: url(/project-card-bg.jpg);
 }
-.project-card:hover .project-card-content {
-    background: #d00435;
+
+@media (min-width: 769px) {
+    .project-card:hover .project-card-content {
+        background: #d00435;
+    }
 }

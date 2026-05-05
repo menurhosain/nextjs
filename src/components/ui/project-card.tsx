@@ -11,8 +11,8 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ category, title, description, handover, location, image }: ProjectCardProps) {
     return (
-        <div className="project-card group flex border border-sah-light-3 rounded-sm overflow-hidden bg-sah-white">
-            <div className="project-card-content flex flex-col justify-between w-[30%] p-[36px] border-r border-sah-light-3 transition-colors duration-500">
+        <div className="project-card group flex flex-col sm:flex-row border border-sah-light-3 rounded-sm overflow-hidden bg-sah-white">
+            <div className="project-card-content flex flex-col justify-between w-[100%] sm:w-[60%] lg:w-[40%] xl:w-[30%] p-[36px] border-r border-sah-light-3 transition-colors duration-500">
                 <div className="flex flex-col">
                     <span className="inline-flex w-fit mb-[24px] text-base font-medium text-sah-black border border-sah-light-1 rounded-full px-[13px] py-[5px] transition-colors duration-500 group-hover:text-sah-white group-hover:border-sah-white/30">
                         {category}
@@ -20,7 +20,7 @@ export default function ProjectCard({ category, title, description, handover, lo
                     <a href="#">
                         <h3 className="font-geist font-semibold text-sah-black text-[30px] leading-[38px] mb-[30px] transition-colors duration-500 group-hover:text-sah-white">{title}</h3>
                     </a>
-                    <p className="font-inter text-[18px] font-normal leading-[30px] text-transparent transition-opacity duration-500 opacity-0 group-hover:opacity-100 group-hover:text-sah-white">
+                    <p className="font-inter text-[18px] font-normal leading-[30px] text-sah-black mb-[40px] lg:text-transparent transition-opacity duration-500 lg:opacity-0 group-hover:opacity-100 group-hover:text-sah-white">
                         {description}
                     </p>
                 </div>
@@ -35,9 +35,10 @@ export default function ProjectCard({ category, title, description, handover, lo
                     </div>
                 </div>
             </div>
-            <div className="w-[70%] min-h-[500px] p-[36px] md:pl-[80px]">
+
+            <div className="w-[100%] sm:w-[40%] lg:w-[60%] xl:w-[70%] sm:min-h-[500px] p-[36px] md:pl-[40px] lg:pl-[80px]">
                 <div className="relative w-full h-full">
-                    <Image src={image} alt={title} fill className="object-cover" />
+                    <Image src={image} alt={title} fill className="object-cover !relative sm:absolute" />
                 </div>
             </div>
         </div>
