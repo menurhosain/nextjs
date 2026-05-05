@@ -48,6 +48,7 @@
 
 .container {
     max-width: var(--container-width);
+    @apply mx-auto;
 }
 
 @layer components {

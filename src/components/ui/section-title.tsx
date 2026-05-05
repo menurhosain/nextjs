@@ -15,13 +15,13 @@ export default function Section_Title({
     },
 }: {
     subtitle?: string;
-    title: string;
+    title: any;
     description?: string;
     class_name?: SectionTitleClassNames;
 }) {
     return (
         <>
-            {subtitle ? <span className={`text-sm font-medium tracking-widest uppercase mb-[28px] ${class_name.subtitle}`}>[ {subtitle} ] ↓</span> : null}
+            {subtitle ? <p className={`text-sm font-medium tracking-widest uppercase mb-[28px] ${class_name.subtitle}`}>[ {subtitle} ] ↓</p> : null}
             <h2 className={`font-geist mb-[40px] font-medium text-[80px] leading-[90px] ${class_name.title}`}>{title}</h2>
             <p className={`font-geist font-normal  text-base leading-[28px] ${class_name.description}`}>{description}</p>
         </>
