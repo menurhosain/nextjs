@@ -70,3 +70,11 @@
         font-size: 20px;
     }
 }
+/* group-hover:bg-[var(--sah-red)] bg-[url('/project-card-bg.jpg')] */
+/* for project card section */
+.project-card-content {
+    background: url(/project-card-bg.jpg);
+}
+.project-card:hover .project-card-content {
+    background: #d00435;
+}

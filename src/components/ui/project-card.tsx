@@ -11,8 +11,8 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ category, title, description, handover, location, image }: ProjectCardProps) {
     return (
-        <div className="group flex border border-sah-light-3 rounded-sm overflow-hidden bg-sah-white">
-            <div className="flex flex-col justify-between w-[30%] p-[36px] border-r border-sah-light-3 transition-colors duration-500 group-hover:bg-sah-red">
+        <div className="project-card group flex border border-sah-light-3 rounded-sm overflow-hidden bg-sah-white">
+            <div className="project-card-content flex flex-col justify-between w-[30%] p-[36px] border-r border-sah-light-3 transition-colors duration-500">
                 <div className="flex flex-col">
                     <span className="inline-flex w-fit mb-[24px] text-base font-medium text-sah-black border border-sah-light-1 rounded-full px-[13px] py-[5px] transition-colors duration-500 group-hover:text-sah-white group-hover:border-sah-white/30">
                         {category}
