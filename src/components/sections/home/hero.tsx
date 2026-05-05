@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { StatCounter } from "@/components/ui/stat-counter";
+import Banner from "@/components/ui/banner";
 
 export default function Hero() {
     return (
-        <div className="h-screen w-full flex  bg-cover bg-end bg-no-repeat" style={{ backgroundImage: "url('/home-hero.jpg')" }}>
-            <div className="w-[60%]" style={{ backgroundImage: "url('/home_hero_overlay.png')" }}>
+        <Banner bgImg="/home-hero.jpg">
+            <Banner.Left>
                 <div className="flex flex-col gap-6 px-[120px] pt-[200px]">
                     <h1 className="text-white leading-[90px] tracking-[-0.05em]">
                         <span className="font-bold text-[100px] font-geist">Leading Design</span>
@@ -28,9 +29,9 @@ export default function Hero() {
                         </svg>
                     </div>
                 </div>
-            </div>
+            </Banner.Left>
 
-            <div className="w-[40%] flex flex-col justify-end">
+            <Banner.Right>
                 <div className="flex justify-end p-8 pr-[130px]">
                     <div className="relative w-[280px] px-[30px] py-[50px] flex flex-col gap-3 bg-cover bg-center" style={{ backgroundImage: "url('/white-dots.jpg')" }}>
                         <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
@@ -38,7 +39,7 @@ export default function Hero() {
                         <span className="text-sah-gray-2 font-geist font-semibold text-[22px] uppercase tracking-wide leading-snug">Leading Years in Construction</span>
                     </div>
                 </div>
-            </div>
-        </div>
+            </Banner.Right>
+        </Banner>
     );
 }
