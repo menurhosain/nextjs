@@ -23,9 +23,9 @@ function Links() {
 
 function Newsletter() {
     return (
-        <div className="flex flex-col gap-2 md:flex-row items-start md:items-center gap-0">
+        <div className="flex flex-col gap-2 md:flex-row items-start md:items-center md:gap-0">
             <Input type="email" placeholder="Enter your email" className="w-56 h-11 rounded-none bg-sah-white text-sah-black placeholder:text-sah-gray-2 border-0 focus-visible:ring-0 text-sm px-4" />
-            <Button className="h-11 rounded-none bg-sah-black hover:bg-sah-dark-1 text-sah-white text-sm font-medium px-6 cursor-pointer">Subscribe</Button>
+            <Button className="h-11 border-0 rounded-none bg-sah-black hover:bg-sah-dark-1 text-sah-white text-sm font-medium px-6 cursor-pointer">Subscribe</Button>
         </div>
     );
 }

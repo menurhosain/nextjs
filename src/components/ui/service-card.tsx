@@ -9,7 +9,7 @@ interface ServiceCardProps {
 
 export function ServiceCard({ icon, title, description, href = "#" }: ServiceCardProps) {
     return (
-        <div className="relative bg-sah-white border border-sah-light-3 rounded-3xl p-10 flex flex-col gap-8">
+        <div className="relative bg-sah-white rounded-3xl p-10 flex flex-col gap-8">
             {/* Top-right corner bracket */}
             <div className="absolute top-5 right-5 w-3.5 h-3.5 border-t border-r border-sah-gray-3" />
 

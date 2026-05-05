@@ -6,7 +6,6 @@ import About from "@/components/sections/home/about";
 export default function Home() {
     return (
         <>
-            <Header />
             <Hero />
             <Service />
             <About />
