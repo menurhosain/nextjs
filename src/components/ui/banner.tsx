@@ -1,5 +1,3 @@
-import React from "react";
-
 function Banner({ bgImg, children, style }: { bgImg: string; children: React.ReactNode; style?: React.CSSProperties }) {
     return (
         <section className="h-screen w-full flex bg-cover bg-end bg-no-repeat" style={{ backgroundImage: `url('${bgImg}')`, ...style }}>
