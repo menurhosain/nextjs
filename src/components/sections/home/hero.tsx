@@ -11,6 +11,11 @@ export default function Hero() {
                         <br />
                         <em className="italic text-[84px] font-normal font-dm-serif">& Build Contractor</em>
                     </h1>
+
+                    <div className="h-[1px] w-[150px] md:w-[450px] bg-sah-white relative mb-[50px]">
+                        <span className="h-[1px] absolute w-[50px] md:w-[80px] bg-sah-red"></span>
+                    </div>
+
                     <Link href="/register" className="inline-flex items-center gap-2 bg-sah-red text-white text-sm font-medium px-5 py-3 rounded-full w-fit">
                         You Like to Build?
                         <span>&#8599;</span>
