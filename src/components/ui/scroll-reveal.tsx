@@ -33,7 +33,7 @@ export function ScrollReveal({ children, className, revealClass = "scroll-color"
                 const startColor = computed;
                 const endColor = toColor ?? toFullOpacity(computed);
 
-                const split = new SplitText(el, { type: "chars" });
+                const split = new SplitText(el, { type: "words, chars" });
                 splits.push(split);
 
                 gsap.set(split.chars, { color: startColor });
