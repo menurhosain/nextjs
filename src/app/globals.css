@@ -62,9 +62,6 @@ svg {
         @apply px-[20px] md:px-[20px] lg:px-[40px];
     }
 
-    .hero-heading {
-    }
-
     .section-heading {
         @apply font-bold font-geist tracking-tight max-w-3xl text-[28px] md:text-[40px];
     }
@@ -80,6 +77,24 @@ svg {
 /* for project card section */
 .project-card-content {
     background: url(/project-card-bg.jpg);
+}
+
+.banner-overlay {
+    position: relative;
+    z-index: 1;
+}
+
+.banner-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 60vw;
+    height: 100%;
+    background-image: url("/home_hero_overlay.png");
+    background-size: cover;
+    background-position: left bottom;
+    z-index: -1;
 }
 
 @media (min-width: 769px) {
