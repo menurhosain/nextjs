@@ -39,7 +39,30 @@ function Button({ className, variant = "default", size = "default", ...props }: 
     return <ButtonPrimitive data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props} />;
 }
 
-function ButtonModern({ link, label, variant = "outline" }: { link: string; label: string; variant?: "outline" | "solid" }) {
+function ButtonModern({ link, label, variant = "outline" }: { link: string; label: string; variant?: "outline" | "solid" | "pill" | "text" }) {
+    if (variant === "pill") {
+        return (
+            <a
+                href={link}
+                className="inline-flex items-center bg-white text-sah-dark-2 rounded-full px-[28px] py-[14px] text-base font-medium hover:bg-sah-light-4 transition-colors"
+            >
+                {label}
+            </a>
+        );
+    }
+
+    if (variant === "text") {
+        return (
+            <a
+                href={link}
+                className="inline-flex items-center gap-2 text-white text-base font-medium underline underline-offset-4 hover:text-sah-light-1 transition-colors"
+            >
+                {label}
+                <span aria-hidden="true">→</span>
+            </a>
+        );
+    }
+
     if (variant === "solid") {
         return (
             <a href={link} className="inline-flex items-center gap-2.5 bg-sah-red text-white rounded-lg px-[24px] py-[14px] text-base font-medium hover:bg-sah-red/90 transition-colors">
