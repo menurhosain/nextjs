@@ -1,7 +1,7 @@
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 export default function About() {
     return (
-        <section className="relative py-20">
+        <section className="relative py-20 bg-sah-dark-2">
             <div className="container mx-auto">
                 <div className="flex justify-space-between gap-[284px]">
                     <div className="basis-[27.4%] shrink-0">
@@ -16,10 +16,10 @@ export default function About() {
                     </div>
 
                     <div className="mb-10">
-                        <ScrollReveal toColor="var(--color-sah-dark-2)">
-                            <h2 className="text-[90px] font-bold tracking-tight font-geist">
-                                <span className="text-white">We deliver high quality construction services with innovation, precision,{" "}</span>
-                                <span className="text-sah-gray-2 scroll-color font-bold">and commitment to every client project</span>
+                        <ScrollReveal toColor="var(--color-sah-white)">
+                            <h2 className="text-[90px] leading-[90px] font-medium tracking-tight font-geist">
+                                <div className="text-white">Crafting exceptional buildings with detail,{" "}</div>
+                                <div className="text-sah-overlay-white-50 scroll-color">care, and engineering excellence</div>
                             </h2>
                         </ScrollReveal>
                     </div>
