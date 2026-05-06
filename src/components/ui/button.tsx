@@ -39,12 +39,12 @@ function Button({ className, variant = "default", size = "default", ...props }: 
     return <ButtonPrimitive data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props} />;
 }
 
-function ButtonModern({ link, label, variant = "outline" }: { link: string; label: string; variant?: "outline" | "solid" | "pill" | "text" }) {
+function ButtonModern({ link, label, variant = "outline", class_name }: { link: string; label: string; variant?: "outline" | "solid" | "pill" | "text"; class_name?: string }) {
     if (variant === "pill") {
         return (
             <a
                 href={link}
-                className="inline-flex items-center bg-white text-sah-dark-2 rounded-full px-[28px] py-[14px] text-base font-medium hover:bg-sah-light-4 transition-colors"
+                className={cn("outline-none inline-flex items-center bg-white text-sah-dark-2 rounded-full text-base font-medium hover:bg-sah-light-4 transition-colors px-[28px] py-[14px]", class_name)}
             >
                 {label}
             </a>
@@ -55,17 +55,21 @@ function ButtonModern({ link, label, variant = "outline" }: { link: string; labe
         return (
             <a
                 href={link}
-                className="inline-flex items-center gap-2 text-white text-base font-medium underline underline-offset-4 hover:text-sah-light-1 transition-colors"
+                className={cn("sah-btn-line-animation inline-flex items-center gap-2 text-white text-base font-medium hover:text-sah-light-1 transition-colors", class_name)}
             >
-                {label}
-                <span aria-hidden="true">→</span>
+                <span className="underline underline-offset-4">{label}</span>
+                <span aria-hidden="true">
+                    <svg width="13" height="12" viewBox="0 0 13 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.8 12L6.89 10.95L10.53 6.75H0V5.25H10.53L6.89 1.05L7.8 0L13 6L7.8 12Z"/>
+                    </svg>
+                </span>
             </a>
         );
     }
 
     if (variant === "solid") {
         return (
-            <a href={link} className="inline-flex items-center gap-2.5 bg-sah-red text-white rounded-lg px-[24px] py-[14px] text-base font-medium hover:bg-sah-red/90 transition-colors">
+            <a href={link} className={cn("inline-flex items-center gap-2.5 bg-sah-red text-white rounded-lg text-base font-medium hover:bg-sah-red/90 transition-colors px-[24px] py-[14px]", class_name)}>
                 {label}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 13L13 3M13 3H5M13 3V11" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -75,7 +79,7 @@ function ButtonModern({ link, label, variant = "outline" }: { link: string; labe
     }
 
     return (
-        <div className="flex items-center gap-4 bg-white rounded-full px-[24px] py-[16px] shadow-sm">
+        <div className={cn("flex items-center gap-4 bg-white rounded-full shadow-sm px-[24px] py-[16px]")}>
             <a href="#" className="text-sah-dark-2 text-base font-medium decoration-sah-dark-2 hover:text-sah-red hover:decoration-sah-red transition-colors">
                 {label}
             </a>

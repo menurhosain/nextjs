@@ -1,4 +1,5 @@
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { ButtonModern } from "@/components/ui/button";
 export default function About() {
     return (
         <section className="relative py-20 bg-sah-dark-2">
@@ -15,13 +16,27 @@ export default function About() {
                         </div>
                     </div>
 
-                    <div className="mb-10">
+                    <div>
                         <ScrollReveal toColor="var(--color-sah-white)">
                             <h2 className="text-[90px] leading-[90px] font-medium tracking-tight font-geist">
                                 <div className="text-white">Crafting exceptional buildings with detail,{" "}</div>
                                 <div className="text-sah-overlay-white-50 scroll-color">care, and engineering excellence</div>
                             </h2>
                         </ScrollReveal>
+                        <div className="flex items-center gap-[24px] mt-[46px]">
+                            <ButtonModern
+                                variant="pill"
+                                link="#"
+                                label="About Us More"
+                                class_name="py-[10px] px-[30px] text-[16px]"
+                            />
+                            <ButtonModern
+                                variant="text"
+                                link="#"
+                                label="About Us More"
+                                class_name="p-0 text-[16px]"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

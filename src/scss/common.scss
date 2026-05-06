@@ -1,0 +1,45 @@
+
+
+
+
+svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}
+
+.container {
+    max-width: var(--container-width);
+    @apply mx-auto;
+}
+
+@layer components {
+    .section-padding {
+        @apply px-[20px] md:px-[20px] lg:px-[40px];
+    }
+
+    .hero-heading {
+    }
+
+    .section-heading {
+        @apply font-bold font-geist tracking-tight max-w-3xl text-[28px] md:text-[40px];
+    }
+}
+
+@layer base {
+    html {
+        @apply font-sans;
+        font-size: 20px;
+    }
+}
+/* group-hover:bg-[var(--sah-red)] bg-[url('/project-card-bg.jpg')] */
+/* for project card section */
+.project-card-content {
+    background: url(/project-card-bg.jpg);
+}
+
+@media (min-width: 769px) {
+    .project-card:hover .project-card-content {
+        background: #d00435;
+    }
+}
