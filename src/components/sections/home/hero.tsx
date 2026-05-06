@@ -6,11 +6,11 @@ export default function Hero() {
     return (
         <Banner bgImg="/home-hero.jpg">
             <Banner.Left>
-                <div className="flex flex-col gap-6 px-[120px] pt-[200px]">
-                    <h1 className="text-white leading-[90px] tracking-[-0.05em]">
-                        <span className="font-bold text-[100px] font-geist">Leading Design</span>
+                <div className="flex flex-col gap-6">
+                    <h1 className="text-white font-medium leading-[40px] sm:leading-[60px] xl:leading-[90px] tracking-[-0.05em]">
+                        <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
                         <br />
-                        <em className="italic text-[84px] font-normal font-dm-serif">& Build Contractor</em>
+                        <em className="italic text-[36px] md:text-[50px] xl:text-[84px] font-inter">& Build Contractor</em>
                     </h1>
 
                     <div className="h-[1px] w-[150px] md:w-[450px] bg-sah-white relative mb-[50px]">
@@ -32,11 +32,11 @@ export default function Hero() {
             </Banner.Left>
 
             <Banner.Right>
-                <div className="flex justify-end p-8 pr-[130px]">
-                    <div className="relative w-[280px] px-[30px] py-[50px] flex flex-col gap-3 bg-cover bg-center" style={{ backgroundImage: "url('/white-dots.jpg')" }}>
+                <div className="flex justify-end lg:pb-[100px]">
+                    <div className="relative w-[280px] py-[20px] px-[15px] md:px-[30px] md:py-[50px] flex flex-col gap-3 bg-cover bg-center" style={{ backgroundImage: "url('/white-dots.jpg')" }}>
                         <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
-                        <StatCounter value={30} suffix="+" className="text-sah-red font-bold font-geist text-[100px] leading-none" />
-                        <span className="text-sah-gray-2 font-geist font-semibold text-[22px] uppercase tracking-wide leading-snug">Leading Years in Construction</span>
+                        <StatCounter value={30} suffix="+" className="text-sah-red font-bold font-geist text-[50px] lg:text-[100px] leading-none" />
+                        <span className="text-sah-gray-2 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">Leading Years in Construction</span>
                     </div>
                 </div>
             </Banner.Right>
