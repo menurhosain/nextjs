@@ -97,6 +97,21 @@ svg {
     z-index: -1;
 }
 
+@media (max-width: 768px) {
+    .banner-overlay::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0%;
+        width: calc(100vw - 15px);
+        height: 100%;
+        background-image: url("/home_hero_overlay.png");
+        background-size: cover;
+        background-position: left bottom;
+        z-index: -1;
+    }
+}
+
 @media (min-width: 769px) {
     .project-card:hover .project-card-content {
         background: #d00435;
