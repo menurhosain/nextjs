@@ -2,6 +2,7 @@ import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+import { AngleArrow } from "./svgs";
 
 const buttonVariants = cva(
     "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -69,28 +70,21 @@ function ButtonModern({ link, label, variant = "outline", class_name }: { link: 
 
     if (variant === "solid") {
         return (
-            <a
-                href={link}
-                className={cn("inline-flex hello items-center gap-2.5 bg-sah-red text-white rounded-lg text-base font-medium hover:bg-sah-red/90 transition-colors px-[24px] py-[14px]", class_name)}
-            >
+            <a href={link} className={cn("inline-flex items-center gap-[15px] bg-sah-red text-sah-white rounded-[8px] text-[16px] font-bold font-inter hover:bg-sah-red/90 transition-colors px-[30px] py-[20px]", class_name)}>
                 {label}
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 13L13 3M13 3H5M13 3V11" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+				<AngleArrow class_name="!w-[10px] !h-[10px] !fill-sah-white"/>
             </a>
         );
     }
 
     return (
-        <div className={cn("flex items-center gap-4 bg-white rounded-full shadow-sm px-[24px] py-[16px]")}>
-            <a href="#" className="text-sah-dark-2 text-base font-medium decoration-sah-dark-2 hover:text-sah-red hover:decoration-sah-red transition-colors">
+        <div className={cn("flex items-center gap-[10px] bg-sah-white rounded-full shadow-sm pl-[24px] pr-[10px] py-[8px]")}>
+            <a href="#" className="text-sah-dark-2 text-[16px] font-medium font-inter decoration-sah-dark-2 hover:text-sah-red hover:decoration-sah-red transition-colors">
                 {label}
             </a>
 
-            <a href={link} className="flex items-center justify-center w-[28px] h-[28px] rounded-full bg-sah-red text-white flex-shrink-0 hover:bg-sah-red transition-colors" aria-label="Navigate">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 13L13 3M13 3H5M13 3V11" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+            <a href={link} className="flex items-center justify-center w-[28px] h-[28px] rounded-full bg-sah-red flex-shrink-0 transition-colors" aria-label="Navigate">
+				<AngleArrow class_name="!w-[8px] !h-[8px] !fill-sah-white"/>
             </a>
         </div>
     );
