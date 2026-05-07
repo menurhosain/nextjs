@@ -16,7 +16,7 @@ function Left({ children, style, class_name }: { children: React.ReactNode; styl
     return (
         <div className={cn("w-[100%] md:w-[60%]  pt-[100px] flex items-center", class_name)} style={{ ...style }}>
             {children}
-            <BrandShape class_name="absolute bottom-0 !fill-transparent !w-[50%] !h-[30%] z-[-1]" />
+            <BrandShape class_name="absolute bottom-0 !fill-transparent !w-[100%] md:!w-[50%] !h-[30%] z-[-1]" />
         </div>
     );
 }

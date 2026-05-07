@@ -23,7 +23,7 @@ export default function Hero() {
                         <AngleArrow class_name="!w-[10px] !h-[10px]" />
                     </Link>
 
-                    <div className="hidden sm:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/20 rounded-full px-4 py-6 w-[60px]">
+                    <div className="hidden md:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/20 rounded-full px-4 py-6 w-[60px]">
                         <span className="text-white text-xs font-medium tracking-widest uppercase [writing-mode:vertical-rl] rotate-180">Scroll Now</span>
                         <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 1L7 17M7 17L1 11M7 17L13 11" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

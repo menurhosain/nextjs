@@ -38,53 +38,82 @@ export function NavLinks() {
 export function NavActions() {
     const [selectedLang, setSelectedLang] = useState(languages[0]);
     const [langOpen, setLangOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
 
     return (
-        <div className="w-full bg-sah-red flex items-center px-4 py-4 justify-center gap-[15px] md:gap-[30px] h-[90px] 2xl:pr-[130px]">
-            {/* Logo           */}
-            <a href="/" className="text-white flex-1 text-[36px] font-bold uppercase xl:hidden">
-                SHA
-            </a>
+        <>
+            <div className="w-full bg-sah-red flex items-center px-4 py-4 justify-center gap-[15px] md:gap-[30px] h-[90px] 2xl:pr-[130px]">
+                {/* Logo */}
+                <a href="/" className="text-white flex-1 text-[36px] font-bold uppercase xl:hidden">
+                    SHA
+                </a>
 
-            {/* Language selector */}
-            <div className="relative" ref={langRef}>
-                <button onClick={() => setLangOpen(!langOpen)} className="flex items-center w-[120px] gap-[8px] text-sah-white cursor-pointer">
-				    <img className="w-[20px] h-[20px]" src={selectedLang.flag} alt={selectedLang.label} />
-                    <span className="font-inter text-[16px] font-semibold leading-[28px]">{selectedLang.label}</span>
-					<DownArrow class_name="!w-[12px] !h-[12px]"/>
+                {/* Language selector */}
+                <div className="relative" ref={langRef}>
+                    <button onClick={() => setLangOpen(!langOpen)} className="flex items-center w-[120px] gap-[8px] text-sah-white cursor-pointer">
+                        <img className="w-[20px] h-[20px]" src={selectedLang.flag} alt={selectedLang.label} />
+                        <span className="font-inter text-[16px] font-semibold leading-[28px]">{selectedLang.label}</span>
+                        <DownArrow class_name="!w-[12px] !h-[12px]"/>
+                    </button>
+                    {langOpen && (
+                        <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-50">
+                            {languages.map((lang) => (
+                                <button
+                                    key={lang.code}
+                                    onClick={() => {
+                                        setSelectedLang(lang);
+                                        setLangOpen(false);
+                                    }}
+                                    className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap"
+                                >
+                                    <img className="w-[20px] h-[20px]" src={lang.flag} alt={lang.label} />
+                                    <span>{lang.label}</span>
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                {/* CTA button */}
+                <Link href="/register" className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]">
+                    Become a Subcontractor
+                    <AngleArrow class_name="!w-[10px] !h-[10px]"/>
+                </Link>
+
+                {/* Hamburger */}
+                <button
+                    onClick={() => setMenuOpen(true)}
+                    className="flex flex-col justify-center items-center gap-[5px] text-white cursor-pointer"
+                    aria-label="Open menu"
+                >
+                    <span className="block w-6 h-[2px] bg-white" />
+                    <span className="block w-6 h-[2px] bg-white" />
+                    <span className="block w-6 h-[2px] bg-white" />
                 </button>
-                {langOpen && (
-                    <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-50">
-                        {languages.map((lang) => (
-                            <button
-                                key={lang.code}
-                                onClick={() => {
-                                    setSelectedLang(lang);
-                                    setLangOpen(false);
-                                }}
-                                className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap"
-                            >
-				                <img className="w-[20px] h-[20px]" src={lang.flag} alt={lang.label} />
-                                <span>{lang.label}</span>
-                            </button>
-                        ))}
-                    </div>
-                )}
             </div>
 
-            {/* CTA button */}
-            <Link href="/register" className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]">
-                Become a Subcontractor
-			    <AngleArrow class_name="!w-[10px] !h-[10px]"/>
-            </Link>
+            {/* Backdrop */}
+            <div
+                onClick={() => setMenuOpen(false)}
+                className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+            />
 
-            {/* Hamburger */}
-            <button className="flex flex-col justify-center items-center gap-[5px] text-white">
-                <span className="block w-6 h-[2px] bg-white"></span>
-                <span className="block w-6 h-[2px] bg-white"></span>
-                <span className="block w-6 h-[2px] bg-white"></span>
-            </button>
-        </div>
+            {/* Drawer */}
+            <div
+                className={`fixed top-0 right-0 z-50 h-full w-1/2 bg-sah-red transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+            >
+                {/* Close button */}
+                <button
+                    onClick={() => setMenuOpen(false)}
+                    aria-label="Close menu"
+                    className="absolute top-6 right-6 text-white cursor-pointer"
+                >
+                    <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-white stroke-2">
+                        <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                </button>
+            </div>
+        </>
     );
 }
