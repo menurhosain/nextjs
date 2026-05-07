@@ -101,7 +101,7 @@ export function NavActions() {
 
             {/* Drawer */}
             <div
-                className={`fixed top-0 right-0 z-50 h-full w-1/2 bg-sah-red transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+                className={`fixed top-0 right-0 z-50 h-full w-[400px] bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
             >
                 {/* Close button */}
                 <button
@@ -109,10 +109,14 @@ export function NavActions() {
                     aria-label="Close menu"
                     className="absolute top-6 right-6 text-white cursor-pointer"
                 >
-                    <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-white stroke-2">
+                    <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-black stroke-2">
                         <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
                     </svg>
                 </button>
+
+				<div className="mt-[200px]">
+					<p className="text-sah-black text-center">No content for now</p>
+				</div>
             </div>
         </>
     );
