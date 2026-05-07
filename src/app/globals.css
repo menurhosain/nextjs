@@ -46,6 +46,11 @@
     --container-width: 1620px;
 }
 
+
+.sah-transition {
+    transition: all linear .4s;
+}
+
 svg {
     width: 1em;
     height: 1em;
