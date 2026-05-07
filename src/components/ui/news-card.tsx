@@ -12,33 +12,43 @@ type NewsCardProps = {
 
 export default function NewsCard({ image, title, href = "#", author, category, alt }: NewsCardProps) {
     return (
-        <article className="w-full max-w-[490px] rounded-[30px] p-[10px] sm:p-[15px]">
-            <Link href={href} className="group block">
-                <div className="relative mb-[36px] aspect-[1.18/1] overflow-hidden rounded-[12px]">
-                    <Image src={image} alt={alt ?? title} fill className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+        <article className="relative w-full h-full overflow-hidden rounded-2xl">
+            <Link href={href} className="group block w-full h-full">
+                <Image
+                    src={image}
+                    alt={alt ?? title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 lg:p-8">
+                    {(author || category) && (
+                        <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1">
+                            {author && (
+                                <div className="flex items-center gap-2">
+                                    <span className="h-[6px] w-[6px] shrink-0 rounded-full bg-white" aria-hidden="true" />
+                                    <span className="text-[16px] font-semibold capitalize  text-sah-white">{author}</span>
+                                </div>
+                            )}
+                            {category && (
+                                <div className="flex items-center gap-2">
+                                    <span className="h-[6px] w-[6px] shrink-0 rounded-full bg-white" aria-hidden="true" />
+                                    <span className="text-[16px] font-semibold capitalize text-sah-white">{category}</span>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    <h3 className="mb-5 font-geist text-[30px] font-semibold leading-[38px] text-sah-white">
+                        {title}
+                    </h3>
+
+                    <span className="text-[16px] font-normal uppercase text-sah-white underline underline-offset-4">
+                        Explore More
+                    </span>
                 </div>
-
-                {(author || category) && (
-                    <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-semibold text-base md:leading-[30px] xl:leading-[40px] text-sah-gray-2">
-                        {author && (
-                            <div className="grid grid-cols-[1fr_max-content] items-center gap-[10px]">
-                                <span className="h-[10px] w-[10px] rounded-full bg-sah-gray-2" aria-hidden="true" />
-                                <span className="mr-[30px]">{author}</span>
-                            </div>
-                        )}
-
-                        {category && (
-                            <div className="grid grid-cols-[1fr_max-content] items-center gap-[10px]">
-                                <span className="h-[10px] w-[10px] rounded-full bg-sah-gray-2" aria-hidden="true" />
-                                <span>{category}</span>
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                <h3 className="max-w-[90%] font-geist md:text-[24px] xl:text-[30px] md:leading-[36px] xl:leading-[46px] font-semibold text-sah-black transition-colors duration-300 group-hover:text-sah-red">
-                    {title}
-                </h3>
             </Link>
         </article>
     );

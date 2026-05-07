@@ -6,25 +6,23 @@ export default function News() {
     return (
         <section className="section-padding py-[50px] lg:py-[140px] bg-[linear-gradient(180deg,#F5F5F5_10.56%,rgba(245,245,245,0.785561)_60.83%,rgba(245,245,245,0)_158.97%),url('/news-section-bg.jpg')] bg-contain bg-bottom bg-no-repeat">
             <div className="container mx-auto">
-                <div className="flex flex-col lg:flex-row md:gap-[40px] xl:gap-[80px]">
-                    <div className="w-[100%] lg:w-[40%] mb-[60px] ">
+                <div className="flex flex-col">
+                    <div className="mb-[60px] flex flex-col items-center ">
                         <Section_Title
                             subtitle="Blog & News"
                             title=<> Our Latest News </>
-                            description="Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based in the Sultanate of Oman. With a rich legacy spanning several decades."
+                            description="Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based."
                             class_name={{ subtitle: "text-sah-black", title: "text-sah-black", description: "text-sah-gray-1" }}
                         />
-                        <div className="mt-[50px] w-max">
-                            <ButtonModern link="#" label="View All News" />
-                        </div>
                     </div>
-                    <div className="w-[100%] lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-[10px]">
-                        <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
-                        <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
-                        <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
-                        <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
-                        <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
-                        <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
+
+                    <div className="grid grid-cols-5 gap-[30px]">
+                        <div className="col-span-2">
+                            <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
+                        </div>
+                        <div className="col-span-3">
+                            <NewsCard image="/news-post-2.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects Solutions for Building Projects" />
+                        </div>
                     </div>
                 </div>
             </div>
