@@ -5,7 +5,7 @@ import { AngleArrow } from "@/components/ui/svgs";
 
 export default function Hero() {
     return (
-        <Banner bgImg="/home-hero.jpg">
+        <Banner bg="/home-hero.mp4">
             <Banner.Left class_name="">
                 <div className="flex flex-col gap-[40px]">
                     <h1 className="text-white font-medium leading-[40px] sm:leading-[60px] xl:leading-[90px] tracking-[-0.05em]">
@@ -20,7 +20,7 @@ export default function Hero() {
 
                     <Link href="/register" className="inline-flex items-center gap-[10px] bg-sah-red text-white text-[16px] font-bold px-[30px] py-[20px] rounded-[8px] w-fit">
                         You Like to Build?
-						<AngleArrow class_name="!w-[10px] !h-[10px]"/>
+                        <AngleArrow class_name="!w-[10px] !h-[10px]" />
                     </Link>
 
                     <div className="hidden sm:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/20 rounded-full px-4 py-6 w-[60px]">
