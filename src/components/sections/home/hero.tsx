@@ -5,7 +5,7 @@ import Banner from "@/components/ui/banner";
 export default function Hero() {
     return (
         <Banner bgImg="/home-hero.jpg">
-            <Banner.Left>
+            <Banner.Left class_name="">
                 <div className="flex flex-col gap-6">
                     <h1 className="text-white font-medium leading-[40px] sm:leading-[60px] xl:leading-[90px] tracking-[-0.05em]">
                         <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
