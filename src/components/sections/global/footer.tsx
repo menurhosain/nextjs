@@ -23,8 +23,12 @@ function Links() {
 
 function Newsletter() {
     return (
-        <div className="flex flex-col gap-2 md:flex-row items-start md:items-center md:gap-0">
-            <Input type="email" placeholder="Enter your email" className="w-56 h-11 rounded-none bg-sah-white text-sah-black placeholder:text-sah-gray-2 border-0 focus-visible:ring-0 text-sm px-4" />
+        <div className="flex  flex-col gap-2 md:flex-row items-start md:items-center md:gap-0">
+            <Input
+                type="email"
+                placeholder="Enter your email"
+                className=" w-[100%] sm:w-56 h-11 rounded-none bg-sah-white text-sah-black placeholder:text-sah-gray-2 border-0 focus-visible:ring-0 text-sm px-4"
+            />
             <Button className="h-11 border-0 rounded-none bg-sah-black hover:bg-sah-dark-1 text-sah-white text-sm font-medium px-6 cursor-pointer">Subscribe</Button>
         </div>
     );
@@ -73,16 +77,16 @@ function Copyright() {
 
 export default function Footer() {
     return (
-        <footer className="bg-sah-red text-sah-white">
+        <footer className="bg-sah-red text-sah-white section-padding">
             <div className="container mx-auto border-x border-sah-overlay-white-15">
                 {/* Row 1: logo + nav | newsletter */}
-                <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6 px-8 py-10 border-b border-sah-overlay-white-15">
+                <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6 py-10 px-[10px] border-b border-sah-overlay-white-15">
                     <Links />
                     <Newsletter />
                 </div>
 
                 {/* Row 2: tagline | social */}
-                <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 px-8 py-8 border-b border-sah-overlay-white-15">
+                <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 px-[10px] py-8 border-b border-sah-overlay-white-15">
                     <p className="text-sm text-sah-white max-w-md leading-relaxed">
                         We are a forward-thinking consulting firm dedicated to helping businesses grow through strategic insights, innovative solutions, and measurable results.
                     </p>
@@ -90,7 +94,7 @@ export default function Footer() {
                 </div>
 
                 {/* Row 3: copyright */}
-                <div className="px-8">
+                <div className="px-[10px]">
                     <Copyright />
                 </div>
             </div>

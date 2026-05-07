@@ -97,7 +97,7 @@ svg {
     z-index: -1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
     .banner-overlay::before {
         content: "";
         position: absolute;
