@@ -41,7 +41,7 @@ export default function NewsCard({ image, title, href = "#", author, category, a
                         </div>
                     )}
 
-                    <h3 className="mb-5 font-geist text-[30px] font-semibold leading-[38px] text-sah-white">
+                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white">
                         {title}
                     </h3>
 
