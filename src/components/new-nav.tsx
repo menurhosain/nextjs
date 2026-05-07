@@ -3,23 +3,32 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import { useOutsideClick } from "@/hook/use-outside-click";
+import { AngleArrow, DownArrow } from "./ui/svgs";
 
 const languages = [
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "ar", label: "Arabic", flag: "🇸🇦" },
+    { code: "en", label: "English", flag: "/uk-flag.png"},
+    { code: "ar", label: "Arabic", flag: "/katar-flag.png" },
 ];
 
-const navLinks = ["Our Company", "Our Services", "Our Projects", "News", "Careers"];
+//const navLinks = ["Our Company", "Our Services", "Our Projects", "News", "Careers"];
+const navLinks = [
+    { label: "Our Company", parent: true },
+    { label: "Our Services", parent: true },
+    { label: "Our Projects", parent: true },
+    { label: "News", parent: false },
+    { label: "Careers", parent: false },
+];
 
 export function NavLinks() {
     return (
         <div className="xl:flex items-center gap-4 2xl:gap-6 px-4 py-4 justify-start h-[90px] border-b border-white/20 hidden">
-            <a href="/" className="text-white text-[36px] font-bold mr-[80px] uppercase">
+            <a href="/" className="text-white font-geist text-[36px] font-bold mr-[80px] uppercase">
                 SHA
             </a>
             {navLinks.map((link) => (
-                <a key={link} href="#" className="uppercase text-white text-[15px] text-[16px] font-medium">
-                    {link}
+                <a key={link.label} href="#" className="uppercase flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter">
+                    {link.label}
+                    {link.parent ? ( <DownArrow class_name="!w-[10.5px] !h-[6px]"/> ) : null}
                 </a>
             ))}
         </div>
@@ -34,15 +43,16 @@ export function NavActions() {
     return (
         <div className="w-full bg-sah-red flex items-center px-4 py-4 justify-center gap-[15px] md:gap-[30px] h-[90px] 2xl:pr-[130px]">
             {/* Logo           */}
-            <a href="/" className="text-white flex-1 text-[36px] font-bold uppercase">
+            <a href="/" className="text-white flex-1 text-[36px] font-bold uppercase xl:hidden">
                 SHA
             </a>
+
             {/* Language selector */}
             <div className="relative" ref={langRef}>
-                <button onClick={() => setLangOpen(!langOpen)} className="flex items-start w-[120px] gap-2 text-white text-sm font-medium cursor-pointer">
-                    <span>{selectedLang.flag}</span>
-                    <span>{selectedLang.label}</span>
-                    <span className="text-xs">&#8964;</span>
+                <button onClick={() => setLangOpen(!langOpen)} className="flex items-center w-[120px] gap-[8px] text-sah-white cursor-pointer">
+				    <img className="w-[20px] h-[20px]" src={selectedLang.flag} alt={selectedLang.label} />
+                    <span className="font-inter text-[16px] font-semibold leading-[28px]">{selectedLang.label}</span>
+					<DownArrow class_name="!w-[12px] !h-[12px]"/>
                 </button>
                 {langOpen && (
                     <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-50">
@@ -55,7 +65,7 @@ export function NavActions() {
                                 }}
                                 className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap"
                             >
-                                <span>{lang.flag}</span>
+				                <img className="w-[20px] h-[20px]" src={lang.flag} alt={lang.label} />
                                 <span>{lang.label}</span>
                             </button>
                         ))}
@@ -64,9 +74,9 @@ export function NavActions() {
             </div>
 
             {/* CTA button */}
-            <Link href="/register" className="flex hidden sm:block items-center gap-2 bg-[#1a1a1a] text-white text-[15px] xl:text-[16px] font-medium px-[24px] py-[12px] rounded-full">
+            <Link href="/register" className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]">
                 Become a Subcontractor
-                <span className="text-base">&#8599;</span>
+			    <AngleArrow class_name="!w-[10px] !h-[10px]"/>
             </Link>
 
             {/* Hamburger */}
