@@ -45,7 +45,7 @@ export default function NewsCard({ image, title, href = "#", author, category, a
                         {title}
                     </h3>
 
-                    <span className="text-[16px] font-normal uppercase text-sah-white underline underline-offset-4">
+                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4">
                         Explore More
                     </span>
                 </div>
