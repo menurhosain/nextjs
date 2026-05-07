@@ -56,8 +56,8 @@ function ButtonModern({ link, label, variant = "outline", class_name }: { link: 
 
     if (variant === "text") {
         return (
-            <a href={link} className={cn("sah-btn-line-animation inline-flex items-center gap-2 text-white text-base font-medium hover:text-sah-light-1 transition-colors", class_name)}>
-                <span className="underline underline-offset-4">{label}</span>
+            <a href={link} className={cn("sah-btn-underline inline-flex items-center gap-2 text-white text-base font-medium hover:text-sah-light-1 transition-colors", class_name)}>
+                <span>{label}</span>
                 <span aria-hidden="true">
                     <svg width="13" height="12" viewBox="0 0 13 12" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.8 12L6.89 10.95L10.53 6.75H0V5.25H10.53L6.89 1.05L7.8 0L13 6L7.8 12Z" />
