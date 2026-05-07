@@ -28,7 +28,7 @@ export default function About() {
                                 variant="pill"
                                 link="#"
                                 label="About Us More"
-                                class_name="py-[10px] px-[30px] text-[16px]"
+                                class_name="py-[10px] px-[30px] text-[16px] sah-transition hover:bg-sah-red hover:text-white"
                             />
                             <ButtonModern
                                 variant="text"
