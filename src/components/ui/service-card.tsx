@@ -14,7 +14,7 @@ export function ServiceCard({ icon, title, description, href = "#" }: ServiceCar
             <div className="absolute top-5 right-5 w-3.5 h-3.5 border-t border-r border-sah-gray-3" />
 
             {/* Icon box — 60×60, user drops SVG inside */}
-            <div className="w-[60px] h-[60px] flex items-center justify-center shrink-0">{icon}</div>
+            <div className="text-[56px] flex items-center justify-center shrink-0 text-sah-gray-2">{icon}</div>
 
             {/* Title */}
             <h3 className="text-sah-black font-bold font-geist text-[22px] leading-[1.3]">{title}</h3>
