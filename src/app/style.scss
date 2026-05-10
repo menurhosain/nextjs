@@ -1,3 +1,15 @@
+// Header
+.sah-header {
+    &:after {
+        content: "";
+        background: var(--color-sah-red);
+        position: absolute;
+        inset-block: 0;
+        width: 40%;
+        inset-inline-end: 0;
+        pointer-events: none;
+    }
+}
 
 //Button Css
 .sah-btn-underline {

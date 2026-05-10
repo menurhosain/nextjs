@@ -1,32 +1,66 @@
+"use client";
+
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ServiceCard } from "@/components/ui/service-card";
 import { AngleArrow, DownLongArrow } from "@/components/ui/svgs";
 
+gsap.registerPlugin(ScrollTrigger);
+
+
 export default function Service() {
+    const sectionTitleRef = useRef<HTMLDivElement>(null);
+    const endTriggerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.to(
+                sectionTitleRef.current, 
+                {
+                    scrollTrigger: {
+                        trigger: sectionTitleRef.current,
+                        start: "top top",
+                        end: "top top+=380", 
+                        pin: true,
+                        pinSpacing: false,
+                        markers: true,
+                        endTrigger: endTriggerRef.current
+                    },
+                }
+            );
+        });
+
+        return () => ctx.revert(); // cleanup on unmount
+    }, [])
+
+
     return (
-        <section className="section-padding pt-[140px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
+        <section className="section-padding value-pin-area pt-[140px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
             <div
                 aria-hidden="true"
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"
             />
             <div className="container mx-auto">
-                <div className="flex items-center justify-center gap-6 mb-[38px]">
-                    <span className="text-sah-black flex items-center gap-[6px] text-[16px] font-medium tracking-widest uppercase font-inter">
-                        [ Our Expertise ]
-                        <DownLongArrow class_name="!w-[14px] !h-[14px]" />
-                    </span>
+                <div ref={sectionTitleRef}>
+                    <div className="flex items-center justify-center gap-6 mb-[38px]">
+                        <span className="text-sah-black flex items-center gap-[6px] text-[16px] font-medium tracking-widest uppercase font-inter">
+                            [ Our Expertise ]
+                            <DownLongArrow class_name="!w-[14px] !h-[14px]" />
+                        </span>
+                    </div>
+                    <ScrollReveal toColor="var(--color-sah-dark-2)">
+                        <h2 className="section-heading mx-auto text-center leading-[48px] mb-[60px]">
+                            <span className="text-sah-dark-2">
+                                We deliver high quality construction services <br /> with innovation, precision,{" "}
+                            </span>
+                            <span className="text-sah-dark-2/50 scroll-color font-bold">and commitment to every client project</span>
+                        </h2>
+                    </ScrollReveal>
                 </div>
 
-                <ScrollReveal toColor="var(--color-sah-dark-2)">
-                    <h2 className="section-heading mx-auto text-center leading-[48px] mb-[60px]">
-                        <span className="text-sah-dark-2">
-                            We deliver high quality construction services <br /> with innovation, precision,{" "}
-                        </span>
-                        <span className="text-sah-dark-2/50 scroll-color font-bold">and commitment to every client project</span>
-                    </h2>
-                </ScrollReveal>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <ServiceCard
                         title=<>
                             Construction <br /> & Engineering
@@ -46,6 +80,8 @@ export default function Service() {
                         </svg>
                     />
                     <ServiceCard
+                        ref={endTriggerRef}
+                        class_name="values-pin-end"
                         title=<>
                             Infrastructure <br /> Works
                         </>
