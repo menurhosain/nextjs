@@ -15,6 +15,14 @@ export function DownLongArrow({ class_name }: { class_name?: string }) {
     );
 }
 
+export function DownCurveArrow({ class_name }: { class_name?: string }) {
+    return (
+        <svg width="16" viewBox="0 0 16 20" className={cn("!fill-sah-white", class_name)}>
+            <path d="M0 12.8787V11.6863C4.30889 11.458 6.5689 14.0517 7.22967 15.3623V0H8.55093V15.3623C10.3231 12.2169 13.754 11.4417 15.8392 11.6879V12.8687C10.6965 12.3579 8.5575 17.617 8.55093 19.8664H7.24194C6.46904 13.3406 1.64322 12.6195 0 12.8787Z" />
+        </svg>
+    );
+}
+
 export function AngleArrow({ class_name }: { class_name?: string }) {
     return (
         <svg viewBox="0 0 11 11" className={cn("!fill-white", class_name)}>
