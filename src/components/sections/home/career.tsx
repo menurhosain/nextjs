@@ -3,7 +3,7 @@ import { ButtonModern } from "@/components/ui/button";
 
 export default function Career() {
     return (
-        <section className="section-padding h-[80vh] md:h-screen bg-[url('/career-section-bg.jpg')] bg-cover bg-bottom bg-no-repeat">
+        <section className="section-padding h-[80vh] md:h-screen bg-[url('/career-section-bg.jpg')] bg-cover bg-bottom bg-no-repeat wax-w-[900px]">
             <div className="container h-full flex items-end">
                 <div className="md:w-[80%] lg:w-[60%] p-[30px] md:p-[50px] xl:p-[100px] bg-[url('/career-content-bg.jpg')] bg-cover bg-top bg-no-repeat">
                     <Section_Title
