@@ -36,8 +36,8 @@ export default function NewsCard({ image, title, href = "#", author, category, a
                         </div>
                     )}
 
-                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white max-w-[75%]">{title}</h3>
-                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4 max-w-[75%]">Explore More</span>
+                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white max-w-[80%]">{title}</h3>
+                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4 max-w-[80%]">Explore More</span>
                 </div>
             </Link>
         </article>

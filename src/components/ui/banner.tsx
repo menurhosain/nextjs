@@ -22,7 +22,7 @@ function Left({ children, style, class_name }: { children: React.ReactNode; styl
 }
 
 function Right({ children, className }: { children: React.ReactNode; className?: string }) {
-    return <div className={`w-[100%] md:w-[38%] flex flex-col justify-end ${className}`}>{children}</div>;
+    return <div className={`w-[100%] md:w-[38%] flex flex-col items-end justify-end ${className}`}>{children}</div>;
 }
 
 Banner.Left = Left;

@@ -30,8 +30,11 @@ export default function Hero() {
             </Banner.Left>
 
             <Banner.Right>
-                <div className="flex justify-start pt-[40px] sm:justify-end sm:pb-[100px]">
-                    <div className="relative w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] flex flex-col gap-3 bg-cover bg-center" style={{ backgroundImage: "url('/white-dots.jpg')" }}>
+                <div className="flex justify-start pt-[40px] sm:justify-end sm:pb-[100px] h-[100%] w-[max-content] border-x border-sah-white/20">
+                    <div
+                        className="relative w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] h-[max-content] flex flex-col gap-3 bg-cover bg-center mt-auto"
+                        style={{ backgroundImage: "url('/white-dots.jpg')" }}
+                    >
                         <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
                         <StatCounter value={30} suffix="+" className="text-sah-red font-semibold font-geist text-[50px] lg:text-[100px] leading-none" />
                         <span className="text-sah-gray-1 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">Leading Years in Construction</span>
