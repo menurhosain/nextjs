@@ -10,6 +10,7 @@ export default function Hero() {
                 <div className="flex flex-col gap-[40px]">
                     <h1 className="text-white font-medium leading-[40px] sm:leading-[60px] xl:leading-[90px] tracking-[-0.05em]">
                         <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
+                        <br />
                         <em className="italic text-[36px] md:text-[50px] xl:text-[84px] font-inter">& Build Contractor</em>
                     </h1>
 
