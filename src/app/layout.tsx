@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Serif_Display, Inter } from "next/font/google";
 import Header from "@/components/layout/header/header";
+import GsapInit from "@/components/gsap-init";
 import "./style.scss";
 
 import "./globals.css";
@@ -49,6 +50,7 @@ export default function RootLayout({
                 <script src="./js/splitText.min.js"></script>
                 <script src="./js/tween-max.min.js"></script>
                 <script src="./js/gsap-init.js"></script>
+                <GsapInit />
             </body>
         </html>
     );
