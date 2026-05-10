@@ -43,6 +43,7 @@ export default function RootLayout({
                 <Header />
                 {children}
                 <Footer />
+                <script src="./gsap-init.js"></script>
             </body>
         </html>
     );
