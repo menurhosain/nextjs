@@ -26,7 +26,7 @@ export default function Service() {
                     </h2>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <ServiceCard
                         title=<>
                             Construction <br /> & Engineering
@@ -74,4 +74,3 @@ export default function Service() {
         </section>
     );
 }
-
