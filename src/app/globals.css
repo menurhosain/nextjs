@@ -98,7 +98,7 @@ svg {
     background-image: url("/home_hero_overlay.png");
     background-size: cover;
     background-position: left bottom;
-    z-index: 1;
+    z-index: 3;
 }
 
 .banner-overlay::after {
@@ -108,9 +108,8 @@ svg {
     left: 0%;
     width: 100vw;
     height: 100%;
-    background: linear-gradient(226deg, #0000 0%, #000000e6 100%);
-    /* background-size: cover; */
-    /* background-position: left bottom; */
+    background: linear-gradient(131.74deg, rgba(23, 23, 27, 0) 29.5%, rgba(23, 23, 27, 0.9) 60.61%);
+    transform: matrix(-1, 0, 0, 1, 0, 0);
     z-index: 2;
 }
 
