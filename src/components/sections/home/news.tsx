@@ -4,8 +4,8 @@ import { ButtonModern } from "@/components/ui/button";
 
 export default function News() {
     return (
-        <section className="section-padding py-[50px] lg:py-[140px] bg-[linear-gradient(180deg,#F5F5F5_10.56%,rgba(245,245,245,0.785561)_60.83%,rgba(245,245,245,0)_158.97%),url('/news-section-bg.jpg')] bg-contain bg-bottom bg-no-repeat">
-            <div className="container mx-auto">
+        <section className="section-padding  bg-[linear-gradient(180deg,#F5F5F5_10.56%,rgba(245,245,245,0.785561)_60.83%,rgba(245,245,245,0)_158.97%),url('/news-section-bg.jpg')] bg-contain bg-bottom bg-no-repeat">
+            <div className="container mx-auto py-[50px] lg:py-[140px] border-x border-sah-light-3">
                 <div className="flex flex-col">
                     <div className="mb-[40px] flex flex-col items-center ">
                         <Section_Title

@@ -88,9 +88,9 @@ export async function get_user_applications(
   const json = await res.json();
   return (json.data ?? []).map(
     (item: { id: number; documentId: string; attributes?: Application } & Application) => ({
+      ...(item.attributes ?? item),
       id: item.id,
       documentId: item.documentId,
-      ...(item.attributes ?? item),
     }),
   );
 }
