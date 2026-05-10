@@ -17,32 +17,30 @@ export default function Projects() {
                     />
                 </div>
 
-                <StackCards className="mb-[60px]">
-                    <ProjectCard
-                        category="Architecture"
-                        title="Police College Package C SQAPS Nizwa"
-                        description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
-                        handover="2021"
-                        location="Nizwa, Oman"
-                        image="/project-1.jpg"
-                    />
-                    <ProjectCard
-                        category="Architecture"
-                        title="Special Task Force Complex – Al Khabourah"
-                        description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
-                        handover="2021"
-                        location="Nizwa, Oman"
-                        image="/project-2.jpg"
-                    />
-                    <ProjectCard
-                        category="Construction"
-                        title="Jabal Akhdar Police Station Complex"
-                        description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
-                        handover="2021"
-                        location="Nizwa, Oman"
-                        image="/project-3.jpg"
-                    />
-                </StackCards>
+                <ProjectCard
+                    category="Architecture"
+                    title="Police College Package C SQAPS Nizwa"
+                    description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
+                    handover="2021"
+                    location="Nizwa, Oman"
+                    image="/project-1.jpg"
+                />
+                <ProjectCard
+                    category="Architecture"
+                    title="Special Task Force Complex – Al Khabourah"
+                    description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
+                    handover="2021"
+                    location="Nizwa, Oman"
+                    image="/project-2.jpg"
+                />
+                <ProjectCard
+                    category="Construction"
+                    title="Jabal Akhdar Police Station Complex"
+                    description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
+                    handover="2021"
+                    location="Nizwa, Oman"
+                    image="/project-3.jpg"
+                />
 
                 <div className="flex items-center justify-center">
                     <ButtonModern link="#" label="View All Projects" />
