@@ -1,15 +1,21 @@
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface ServiceCardProps {
     icon?: React.ReactNode;
     title: any;
     description: string;
     href?: string;
+    class_name?: string;
+    [key: string]: any;
 }
 
-export function ServiceCard({ icon, title, description, href = "#" }: ServiceCardProps) {
+export function ServiceCard({ icon, class_name, title, description, href = "#", ...rest }: ServiceCardProps) {
     return (
-        <div className="relative bg-sah-white rounded-[12px] p-[40px] flex flex-col gap-[30px] group">
+        <div className={cn(
+            "relative bg-sah-white rounded-[12px] p-[40px] flex flex-col gap-[30px] group",
+            class_name
+        )} {...rest}>
             {/* Top-right corner bracket */}
             <div className="absolute top-5 right-5 w-3.5 h-3.5 transition-all duration-500 border-t border-r border-sah-gray-3 group-hover:border-sah-red group-hover:w-6.5 group-hover:h-6.5" />
 

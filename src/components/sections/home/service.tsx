@@ -56,7 +56,6 @@ export default function Service() {
                     />
                 </div>
 
-<<<<<<< HEAD
                 <div className="flex justify-center mt-12 mb-[140px]">
                     <div className="inline-flex shadow-sm md:px-[30px] md:py-[8px] bg-sah-white rounded-full gap-[20px]">
                         <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[10px] font-inter font-medium ">
@@ -74,24 +73,8 @@ export default function Service() {
                             </span>
                         </a>
                     </div>
-=======
-                <div className="flex justify-center mt-12 pb-[140px]">
-                    <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[20px] bg-sah-white font-inter font-medium rounded-full px-[30px] py-[8px] shadow-sm">
-                        <span className="text-sah-dark-2">Careers</span>
-                        <span
-                            className="flex items-center justify-center w-[30px] h-[30px] sm:w-[28px] sm:h-[28px] rounded-full bg-sah-red text-sah-white flex-shrink-0 group-hover:bg-sah-red/80 transition-colors"
-                            aria-label="Navigate"
-                        >
-                            <AngleArrow class_name="!w-[8px] !h-[8px]" />
-                        </span>
-                        <span className="text-sah-dark-2 underline underline-offset-2 decoration-sah-dark-2 group-hover:text-sah-red group-hover:decoration-sah-red transition-colors">
-                            View All Services
-                        </span>
-                    </a>
->>>>>>> 85045eb423a70ff74ef11a09298baf8654ad1829
                 </div>
             </div>
         </section>
     );
 }
-

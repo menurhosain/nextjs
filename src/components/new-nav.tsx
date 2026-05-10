@@ -21,7 +21,7 @@ const navLinks = [
 
 export function NavLinks() {
     return (
-        <div className="xl:flex items-center gap-4 2xl:gap-6 px-4 py-4 justify-start h-[90px] border-b border-white/20 hidden">
+        <div className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
             <a href="/" className="text-white font-geist text-[36px] font-bold mr-[80px] uppercase">
                 SHA
             </a>
@@ -43,7 +43,7 @@ export function NavActions() {
 
     return (
         <>
-            <div className="w-full bg-sah-red flex items-center px-4 py-4 justify-center gap-[15px] md:gap-[30px] h-[90px] 2xl:pr-[130px]">
+            <div className="w-full flex items-center py-4 justify-end gap-[15px] md:gap-[30px] h-[90px] z-10 relative">
                 {/* Logo */}
                 <a href="/" className="text-white flex-1 text-[36px] font-bold uppercase xl:hidden">
                     SHA
