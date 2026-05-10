@@ -11,10 +11,10 @@ export function ServiceCard({ icon, title, description, href = "#" }: ServiceCar
     return (
         <div className="relative bg-sah-white rounded-[12px] p-[40px] flex flex-col gap-[30px] group">
             {/* Top-right corner bracket */}
-            <div className="absolute top-5 right-5 w-3.5 h-3.5 transition-all duration-500 border-t border-r border-sah-gray-3 group-hover:border-sah-red group-hover:scale-125" />
+            <div className="absolute top-5 right-5 w-3.5 h-3.5 transition-all duration-500 border-t border-r border-sah-gray-3 group-hover:border-sah-red group-hover:w-6.5 group-hover:h-6.5" />
 
             {/* Icon box — 60×60, user drops SVG inside */}
-            <Link href={href} className="text-[56px] flex items-start justify-start shrink-0 text-sah-gray-2 transition-transform duration-500 group-hover:scale-110 w-fit">{icon}</Link>
+            <Link href={href} className="text-[56px] flex items-start justify-start shrink-0 text-sah-gray-2 transition-transform duration-500 group-hover:scale-80 w-fit">{icon}</Link>
 
             {/* Title */}
             <Link href={href} className="text-sah-black font-semibold font-geist text-[30px] mb-[40px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit">{title}</Link>

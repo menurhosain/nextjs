@@ -6,10 +6,10 @@ export default function About() {
             <div className="container mx-auto">
                 <div className="lg:flex justify-space-between 2xl:gap-[284px] xl:gap-[100px] gap-[50px]">
                     <div className="lg:basis-[432px] shrink-0 inline-block">
-                        <div className="text-white text-sm font-medium tracking-widest uppercase mb-9">[ About SAH ] ↓</div>
+                        <div className="text-white text-sm tracking-normal font-medium uppercase mb-9">[ About SAH ] ↓</div>
                         <div className="relative rounded-[12px] overflow-hidden">
                             <img src="/about/intro-desk.jpg" alt="About" />
-                            <div className="absolute bottom-7 left-7 w-[242px] rounded-[9px] p-2.5 text-[24px] bg-sah-dark-1 text-sah-overlay-white-50">
+                            <div className="absolute bottom-[12px] left-[12px] w-[242px] rounded-[9px] p-2.5 text-[24px] bg-sah-dark-1 text-sah-overlay-white-50">
                                 From <span className="text-white">1994-2026 </span>
                                 we’re growing fast
                             </div>

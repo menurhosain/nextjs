@@ -7,7 +7,7 @@ export default function News() {
         <section className="section-padding py-[50px] lg:py-[140px] bg-[linear-gradient(180deg,#F5F5F5_10.56%,rgba(245,245,245,0.785561)_60.83%,rgba(245,245,245,0)_158.97%),url('/news-section-bg.jpg')] bg-contain bg-bottom bg-no-repeat">
             <div className="container mx-auto">
                 <div className="flex flex-col">
-                    <div className="mb-[60px] flex flex-col items-center ">
+                    <div className="mb-[40px] flex flex-col items-center ">
                         <Section_Title
                             subtitle="Blog & News"
                             title=<> Our Latest News </>
@@ -15,8 +15,10 @@ export default function News() {
                             class_name={{ subtitle: "text-sah-black", title: "text-sah-black", description: "text-sah-gray-1" }}
                         />
                     </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-[400px_400px] md:grid-rows-[600px] gap-[20px] md:gap-[30px]">
+                    <div className="flex items-center justify-center mb-[70px]">
+                        <ButtonModern link="#" label="View All News" />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-[400px_400px] md:grid-rows-[630px] gap-[20px] md:gap-[30px]">
                         <div className="md:col-span-2">
                             <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
                         </div>
