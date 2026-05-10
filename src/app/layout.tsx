@@ -10,11 +10,13 @@ import Footer from "@/components/sections/global/footer";
 const inter = Inter({
     variable: "--font-inter",
     subsets: ["latin"],
+    style: ["normal", "italic"],
 });
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
+    style: ["normal"],
 });
 
 const geistMono = Geist_Mono({
@@ -26,6 +28,7 @@ const dmSerifDisplay = DM_Serif_Display({
     variable: "--font-dm-serif",
     subsets: ["latin"],
     weight: "400",
+    style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {

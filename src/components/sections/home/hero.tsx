@@ -7,14 +7,13 @@ export default function Hero() {
     return (
         <Banner bg="/home-hero.mp4">
             <Banner.Left class_name="">
-                <div className="flex flex-col gap-[40px]">
-                    <h1 className="text-white font-medium leading-[40px] sm:leading-[60px] xl:leading-[90px] tracking-[-0.05em]">
+                <div className="flex flex-col">
+                    <h1 className="text-white  font-medium leading-[40px] sm:leading-[60px] xl:leading-[80px] tracking-[-0.05em] flex flex-col gap-[30px] mb-[40px]">
                         <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
-                        <br />
-                        <em className="italic text-[36px] md:text-[50px] xl:text-[84px] font-inter">& Build Contractor</em>
+                        <em className="italic text-[36px] md:text-[50px] xl:text-[84px] font-dm-serif">& Build Contractor</em>
                     </h1>
 
-                    <div className="h-[1px] w-[150px] md:w-[450px] bg-sah-white relative mb-[10px] mt-[-18px] sm:mb-[30px]">
+                    <div className="h-[1px] w-[150px] md:w-[450px] bg-sah-white relative mb-[10px] sm:mb-[56px]">
                         <span className="h-[1px] absolute w-[50px] md:w-[80px] bg-sah-red"></span>
                     </div>
 
