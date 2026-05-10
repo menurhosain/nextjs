@@ -9,7 +9,7 @@ export default function Service() {
                 aria-hidden="true"
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"
             />
-            <div className="container mx-auto pt-[140px] border-x border-sah-light-3">
+            <div className="container mx-auto pt-[140px] ">
                 <div className="flex items-center justify-center gap-6 mb-[38px]">
                     <span className="text-sah-black flex items-center gap-[6px] text-[16px] font-medium tracking-widest uppercase font-inter">
                         [ Our Expertise ]

@@ -31,9 +31,9 @@ export async function get_user_subcontractor_applications(
   const json = await res.json();
   return (json.data ?? []).map(
     (item: { id: number; documentId: string; attributes?: Subcontractor } & Subcontractor) => ({
+      ...(item.attributes ?? item),
       id: item.id,
       documentId: item.documentId,
-      ...(item.attributes ?? item),
     }),
   );
 }
