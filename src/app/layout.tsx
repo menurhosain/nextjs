@@ -43,12 +43,12 @@ export default function RootLayout({
                 <Header />
                 {children}
                 <Footer />
-                {/* <script src="./js/jquery.min.js"></script>
+                <script src="./js/jquery.min.js"></script>
                 <script src="./js/gsap.min.js"></script>
                 <script src="./js/scroll-trigger.min.js"></script>
                 <script src="./js/splitText.min.js"></script>
                 <script src="./js/tween-max.min.js"></script>
-                <script src="./js/gsap-init.js"></script> */}
+                <script src="./js/gsap-init.js"></script>
             </body>
         </html>
     );
