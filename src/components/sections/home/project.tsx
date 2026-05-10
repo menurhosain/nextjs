@@ -31,7 +31,7 @@ export default function Projects() {
                         description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
                         handover="2021"
                         location="Nizwa, Oman"
-                        image="/project-1.jpg"
+                        image="/project-2.jpg"
                     />
                     <ProjectCard
                         category="Construction"
@@ -39,7 +39,7 @@ export default function Projects() {
                         description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
                         handover="2021"
                         location="Nizwa, Oman"
-                        image="/project-1.jpg"
+                        image="/project-3.jpg"
                     />
                 </div>
 
