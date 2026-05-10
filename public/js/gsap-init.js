@@ -1,6 +1,6 @@
 ;(function ($) {
     "use strict";
-    
+
     // Initialize All Animations
     $(function () {
         init_all_animations();
@@ -19,6 +19,87 @@
         gsap_fixed_elements();
         gsap_cursor_attached_label();
         gsap_sticky_ripple_effect();
+        initHeadingAnimations();
+    }
+
+    // Heading Split Text & Color Fill Animation
+    function initHeadingAnimations() {
+
+        $('.rs-heading .title').each(function () {
+            var $el       = $(this);
+            var el        = this;
+            var animation = $el.data('animation');
+            if (!animation) return;
+
+            var splitTarget = $el.data('split-target') || 'chars';
+            var split       = new SplitText(el, { type: splitTarget });
+
+            var targets;
+            if (splitTarget === 'lines')      targets = split.lines;
+            else if (splitTarget === 'words') targets = split.words;
+            else                              targets = split.chars;
+
+            // split_text
+            if (animation === 'split_text') {
+                var animationName = $el.data('animation-name') || 'split-in-fade';
+                var duration      = parseFloat($el.data('duration'))     || 0.8;
+                var delay         = parseFloat($el.data('delay'))        || 0.02;
+                var useMask       = $el.data('mask') === true;
+                var travel        = parseFloat($el.data('travel'))       || 20;
+                var baseOpacity   = parseFloat($el.data('base-opacity')) || 0;
+
+                gsap.set(el, { perspective: 400 });
+
+                if (useMask) {
+                    targets.forEach(function (target) {
+                        var mask = document.createElement('div');
+                        mask.classList.add('rs-mask');
+                        mask.style.cssText = 'display:inline-block; overflow:hidden; vertical-align:top;';
+                        target.parentNode.insertBefore(mask, target);
+                        mask.appendChild(target);
+                    });
+                }
+
+                if      (animationName === 'split-in-right')  gsap.set(targets, { opacity: baseOpacity, x: travel });
+                else if (animationName === 'split-in-left')   gsap.set(targets, { opacity: baseOpacity, x: -travel });
+                else if (animationName === 'split-in-up')     gsap.set(targets, { opacity: baseOpacity, y: travel });
+                else if (animationName === 'split-in-down')   gsap.set(targets, { opacity: baseOpacity, y: -travel });
+                else if (animationName === 'split-in-rotate') gsap.set(targets, { opacity: baseOpacity, rotateX: travel });
+                else if (animationName === 'split-in-scale')  gsap.set(targets, { opacity: baseOpacity, scale: 0.5 });
+                else                                          gsap.set(targets, { opacity: baseOpacity });
+
+                gsap.to(targets, {
+                    x: 0, y: 0, rotateX: 0, scale: 1, opacity: 1,
+                    duration: duration,
+                    stagger: delay,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 90%',
+                        toggleActions: 'restart pause resume reverse',
+                    },
+                });
+            }
+
+            // color_fill
+            if (animation === 'color_fill') {
+                var color      = $el.data('color')       || '#c7c7c7';
+                var startPoint = parseFloat($el.data('color-start')) || 90;
+                var endPoint   = parseFloat($el.data('color-end'))   || 10;
+                var pin        = $el.data('pin') === true;
+
+                var tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: $el.parent()[0],
+                        start: 'top +=' + startPoint + '%',
+                        end: 'bottom +=' + endPoint + '%',
+                        pin: pin,
+                        scrub: 0.1,
+                    },
+                });
+
+                tl.to(targets, { color: color, stagger: 1 });
+            }
+        });
     }
 
     // Marquee Slider
