@@ -58,7 +58,7 @@ svg {
 
 .container {
     max-width: var(--container-width);
-    @apply mx-auto;
+    @apply mx-auto px-[50px];
 }
 
 @layer components {

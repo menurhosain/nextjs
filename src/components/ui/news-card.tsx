@@ -14,12 +14,7 @@ export default function NewsCard({ image, title, href = "#", author, category, a
     return (
         <article className="relative w-full h-full overflow-hidden rounded-2xl">
             <Link href={href} className="group block w-full h-full">
-                <Image
-                    src={image}
-                    alt={alt ?? title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
+                <Image src={image} alt={alt ?? title} fill className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
 
@@ -41,13 +36,8 @@ export default function NewsCard({ image, title, href = "#", author, category, a
                         </div>
                     )}
 
-                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white">
-                        {title}
-                    </h3>
-
-                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4">
-                        Explore More
-                    </span>
+                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white max-w-[75%]">{title}</h3>
+                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4 max-w-[75%]">Explore More</span>
                 </div>
             </Link>
         </article>
