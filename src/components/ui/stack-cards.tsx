@@ -10,21 +10,21 @@ interface StackCardsProps {
     children: React.ReactNode;
     className?: string;
     sectionRef?: React.RefObject<HTMLElement | null>;
+    gsap_conf?: object;
 }
 
-export function StackCards({ children, className = "", sectionRef }: StackCardsProps) {
+export function StackCards({ children, className = "", sectionRef, gsap_conf = {} }: StackCardsProps) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const container = containerRef.current;
+        const container = sectionRef?.current ?? containerRef.current;
         if (!container) return;
 
         const cards = Array.from(container.children) as HTMLElement[];
         if (cards.length < 2) return;
 
-        const cardH = cards[0].offsetHeight;
+        const cardH = cards[0].offsetHeight + 100;
         const totalScroll = cards.slice(1).reduce((sum, card) => sum + card.offsetHeight, 0);
-        const section = sectionRef?.current ?? container.closest("section");
 
         gsap.set(container, { position: "relative", height: cardH, overflow: "hidden" });
         gsap.set(cards, { position: "absolute", top: 0, left: 0, right: 0, width: "100%" });
@@ -41,6 +41,7 @@ export function StackCards({ children, className = "", sectionRef }: StackCardsP
                 scrub: 1,
                 start: "top-=100px top",
                 end: `+=${totalScroll}`,
+                ...gsap_conf,
             },
         });
 
