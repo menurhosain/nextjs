@@ -64,7 +64,7 @@ export function NavLinks() {
                     {link.parent && (
                         <div className="absolute top-full left-0  bg-white rounded-md shadow-lg overflow-hidden z-50 min-w-[160px] transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
                             {link.submenus?.map((sub) => (
-                                <a key={sub.label} href={sub.href} className="block px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap font-inter">
+                                <a key={sub.label} href={sub.href} className="block px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 hover:text-sah-red whitespace-nowrap font-inter">
                                     {sub.label}
                                 </a>
                             ))}
@@ -162,7 +162,7 @@ export function NavActions() {
                                     <>
                                         <button
                                             onClick={() => setOpenMenu(openMenu === link.label ? null : link.label)}
-                                            className="w-full flex items-center justify-between py-4 text-sah-black font-inter font-semibold uppercase cursor-pointer"
+                                            className="w-full flex text-[18px] items-center justify-between py-4 text-sah-black font-inter font-semibold uppercase cursor-pointer"
                                         >
                                             {link.label}
                                             <DownArrow class_name={`!w-[10px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenu === link.label ? "rotate-180" : ""}`} />
@@ -176,7 +176,7 @@ export function NavActions() {
                                         </div>
                                     </>
                                 ) : (
-                                    <a href={link.href} className="flex items-center py-4 text-sah-black font-inter font-semibold uppercase">
+                                    <a href={link.href} className="flex text-[18px] items-center py-4 text-sah-black font-inter font-semibold uppercase">
                                         {link.label}
                                     </a>
                                 )}
