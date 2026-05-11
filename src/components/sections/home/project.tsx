@@ -1,9 +1,47 @@
+"use client";
+
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import Section_Title from "@/components/ui/section-title";
 import ProjectCard from "@/components/ui/project-card";
 import { ButtonModern } from "@/components/ui/button";
-import { StackCards } from "@/components/ui/stack-cards";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
+    
+    const ref = useRef<HTMLDivElement | null>(null);
+    const endRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!ref.current || !endRef.current) return;
+        
+        const cards = Array.from(ref.current.children);
+        if (cards.length < 2) return;
+
+        const ctx = gsap.context(() => {
+
+            cards.forEach((card, index) => {
+
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: `top top+=${80 + (index * 80)}`,
+                    endTrigger: endRef.current,
+                    end: "bottom bottom-=40",
+                    pin: true,
+                    pinSpacing: false,
+                    markers: false,
+                });
+
+            });
+
+        }, ref);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
         <section className="section-padding bg-[linear-gradient(0deg,#f5f5f566_42.16%,#f5f5f5_204.49%),url('/project-section-bg.jpg')] bg-bottom bg-no-repeat">
             <div className="container py-[140px] mx-auto border-x border-sah-light-3">
@@ -17,7 +55,7 @@ export default function Projects() {
                     />
                 </div>
 
-                <StackCards>
+                <div ref={ref}>
                     <ProjectCard
                         category="Architecture"
                         title="Police College Package C SQAPS Nizwa"
@@ -42,9 +80,9 @@ export default function Projects() {
                         location="Nizwa, Oman"
                         image="/project-3.jpg"
                     />
-                </StackCards>
+                </div>
 
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center mt-[50px]" ref={endRef}>
                     <ButtonModern link="#" label="View All Projects" />
                 </div>
             </div>
