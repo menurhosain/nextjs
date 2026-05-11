@@ -1,6 +1,7 @@
 import Banner from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import About from "@/components/sections/about/about";
+import Career from "@/components/sections/home/career";
 
 
 export default function AboutUsPage() {
@@ -24,6 +25,7 @@ export default function AboutUsPage() {
             </Banner>
 
             <About/>
+            <Career />
         </>
     );
 }

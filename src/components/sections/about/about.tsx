@@ -1,6 +1,7 @@
 "use client"
 import Section_Title from "@/components/ui/section-title";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 interface StatCardProps {
   label: string;
@@ -97,8 +98,15 @@ export default function About() {
                         <StatCard key={stat.label} {...stat} />
                         ))}
                     </div>
-                    <div className="h-[540px] bg-[url('/about/about-bg.jpg')] bg-cover bg-center rounded-[12px] mt-[60px]">
-                        <div className="bg-sah-white rounded-[8px]"></div>
+                    <div className="h-[540px] bg-[url('/about/about-bg.jpg')] bg-cover bg-center rounded-[12px] mt-[60px] relative">
+                        <div className="bg-sah-white rounded-[8px] px-[40px] py-[40px] absolute right-[16px] bottom-[16px] group w-[355px]">
+                            <div className="relative w-full">
+                                <Image src="/about/about-award.png" alt="" fill className="transition-transform duration-500 group-hover:scale-105 !relative !h-auto !w-auto" />
+                                <h3 className="font-geist !text-[28px] font-medium mt-[16px] leading-[34px]">Construction Project of the Year</h3>
+                                <p className="text-[16px] text-sah-gray-2 mt-[16px]">Best Builder Award</p>
+                                <span className="absolute right-[16px] top-[16px] text-[18px] text-sah-gray-3">2024</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
