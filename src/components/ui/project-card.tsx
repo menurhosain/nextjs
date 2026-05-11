@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 type ProjectCardProps = {
@@ -7,11 +8,15 @@ type ProjectCardProps = {
     handover: string;
     location: string;
     image: string;
+    class_name?: string;
 };
 
-export default function ProjectCard({ category, title, description, handover, location, image }: ProjectCardProps) {
+export default function ProjectCard({ category, title, description, handover, location, image, class_name }: ProjectCardProps) {
     return (
-        <div className="project-card group flex flex-col sm:flex-row border border-sah-light-3 rounded-sm overflow-hidden bg-sah-white">
+        <div className={cn(
+            "project-card group flex flex-col sm:flex-row border border-sah-light-3 rounded-sm overflow-hidden bg-sah-white",
+            class_name
+        )}>
             <div className="project-card-content flex flex-col justify-between w-[100%] sm:w-[60%] lg:w-[40%] xl:w-[30%] p-[36px] border-r border-sah-light-3 transition-colors duration-500">
                 <div className="flex flex-col">
                     <span className="inline-flex w-fit mb-[24px] text-base font-medium text-sah-black border border-sah-light-1 rounded-full px-[13px] py-[5px] transition-colors duration-500 group-hover:text-sah-white group-hover:border-sah-white/30">
