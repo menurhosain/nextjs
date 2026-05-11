@@ -6,7 +6,7 @@ import { FbIcon, InstaIcon, LinkedinIcon, XIcon } from "@/components/ui/icons";
 
 function Links() {
     return (
-        <div className="flex flex-col md:flex-row items-start xl:items-end gap-10 md:items-center">
+        <div className="flex flex-col md:flex-row items-start xl:items-end gap-15 md:items-center">
             <Link href="/">
                 <Image src="/logo-white.png" alt="SAH" width={80} height={80} />
             </Link>
@@ -23,7 +23,7 @@ function Links() {
 
 function Newsletter() {
     return (
-        <div className="flex  flex-col gap-2 md:flex-row items-start md:items-center md:gap-0">
+        <div className="flex  flex-col  gap-2 md:flex-row items-start md:items-center">
             <Input
                 type="email"
                 placeholder="Enter your email"
@@ -78,23 +78,23 @@ function Copyright() {
 export default function Footer() {
     return (
         <footer className="bg-sah-red text-sah-white section-padding">
-            <div className="container mx-auto border-x border-sah-overlay-white-15">
+            <div className="container mx-auto !px-0 border-x border-sah-overlay-white-15">
                 {/* Row 1: logo + nav | newsletter */}
-                <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6 py-10 px-[10px] border-b border-sah-overlay-white-15">
+                <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6 py-10 px-[40px] border-b border-sah-overlay-white-15">
                     <Links />
                     <Newsletter />
                 </div>
 
                 {/* Row 2: tagline | social */}
-                <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 px-[10px] py-8 border-b border-sah-overlay-white-15">
-                    <p className="text-sm text-sah-white max-w-md leading-relaxed">
+                <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 px-[40px] py-8 border-b border-sah-overlay-white-15">
+                    <p className="text-sm text-sah-white max-w-[670px] leading-relaxed">
                         We are a forward-thinking consulting firm dedicated to helping businesses grow through strategic insights, innovative solutions, and measurable results.
                     </p>
                     <Social />
                 </div>
 
                 {/* Row 3: copyright */}
-                <div className="px-[10px]">
+                <div className="px-[40px]">
                     <Copyright />
                 </div>
             </div>

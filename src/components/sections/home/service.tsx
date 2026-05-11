@@ -4,14 +4,14 @@ import { AngleArrow, DownLongArrow } from "@/components/ui/svgs";
 
 export default function Service() {
     return (
-        <section className="section-padding  relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
+        <section id="services" className="section-padding  relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
             <div
                 aria-hidden="true"
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"
             />
             <div className="container mx-auto pt-[140px] ">
-                <div className="flex items-center justify-center gap-6 mb-[38px]">
-                    <span className="text-sah-black flex items-center gap-[6px] text-[16px] font-medium tracking-widest uppercase font-inter">
+                <div className="flex items-center justify-center gap-6 mb-[20px]">
+                    <span className="text-sah-black flex items-center gap-[6px] text-[16px] font-medium uppercase font-inter">
                         [ Our Expertise ]
                         <DownLongArrow class_name="!w-[14px] !h-[14px]" />
                     </span>
@@ -78,3 +78,4 @@ export default function Service() {
         </section>
     );
 }
+

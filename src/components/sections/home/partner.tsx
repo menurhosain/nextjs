@@ -25,7 +25,6 @@ export default function Partner() {
                     pagination={true} modules={[Autoplay]}
                     loop={true}
                     speed={2000}
-                    autoplay={{ delay: 2000, disableOnInteraction: false }}
                     className="partner-swiper"
                     breakpoints={{
                         0:    { slidesPerView: 2, spaceBetween: 12 },
@@ -37,8 +36,8 @@ export default function Partner() {
                 >
                     {partners.map((partner) => (
                         <SwiperSlide>
-                            <div className="px-5 py-10 rounded-[20px] hover:rounded-[100px] flex justify-center bg-sah-dark-5 sah-transition">
-                                <img src={partner.image} alt="logo" />
+                            <div className="px-5 py-10 rounded-[20px] hover:rounded-[100px] flex justify-center bg-sah-dark-5 hover:bg-sah-white sah-transition-all duration-600 group">
+                                <img src={partner.image} className="group-hover:brightness-90 group-hover:invert sah-transition-all duration-600" alt="logo" />
                             </div>
                         </SwiperSlide>
                     ))}

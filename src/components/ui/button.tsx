@@ -70,9 +70,9 @@ function ButtonModern({ link, label, variant = "outline", class_name }: { link: 
 
     if (variant === "solid") {
         return (
-            <a href={link} className={cn("inline-flex items-center gap-[15px] bg-sah-red text-sah-white rounded-[8px] text-[16px] font-bold font-inter hover:bg-sah-red/90 transition-colors px-[30px] py-[20px]", class_name)}>
+            <a href={link} className={cn("inline-flex items-center gap-[10px] group bg-sah-red hover:bg-sah-black text-white hover:text-sah-white   text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit transition duration-300", class_name)}>
                 {label}
-				<AngleArrow class_name="!w-[10px] !h-[10px] !fill-sah-white"/>
+				<AngleArrow class_name="!w-[12px] !h-[12px] !fill-white group-hover:!fill-sah-white transition duration-300"/>
             </a>
         );
     }

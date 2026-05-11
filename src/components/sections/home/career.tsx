@@ -10,9 +10,9 @@ export default function Career() {
                         subtitle="Life at Sah"
                         title="Career with SAH"
                         description="Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based in the Sultanate of Oman. With a rich legacy spanning several decades, SAH has established itself as a trusted name in the construction industry, delivering exceptional projects"
-                        class_name={{ subtitle: "text-sah-black", title: "text-sah-black", description: "text-sah-gray-1" }}
+                        class_name={{ subtitle: "text-sah-black !mb-[15px]", title: "text-sah-black !mb-[25px]", description: "text-sah-gray-1" }}
                     />
-                    <div className="mt-[50px] w-max">
+                    <div className="mt-[40px] w-max">
                         <ButtonModern variant="solid" link="#" label="You Like to Build?" />
                     </div>
                 </div>

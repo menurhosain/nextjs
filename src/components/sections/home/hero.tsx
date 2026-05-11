@@ -19,16 +19,16 @@ export default function Hero() {
 
                     <Link
                         href="/register"
-                        className="inline-flex items-center gap-[10px] group bg-sah-red hover:bg-sah-white text-white hover:text-sah-red   text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit transition"
+                        className="inline-flex items-center gap-[10px] group bg-sah-red hover:bg-sah-white text-white hover:text-sah-red   text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit transition duration-300"
                     >
                         You Like to Build?
-                        <AngleArrow class_name="!w-[12px] !h-[12px] !fill-white group-hover:!fill-sah-red transition" />
+                        <AngleArrow class_name="!w-[12px] !h-[12px] !fill-white group-hover:!fill-sah-red transition duration-300" />
                     </Link>
 
-                    <div className="hidden md:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/30 rounded-full px-[12px] py-[16px] mt-[80px] w-[max-content]">
+                    <Link href="#services" className="hidden md:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/30 rounded-full px-[12px] py-[16px] mt-[80px] w-[max-content]">
                         <span className="text-white text-[16px] font-normal capitalcase [writing-mode:vertical-rl] rotate-180">Scroll Now</span>
                         <DownCurveArrow class_name="!fill-sah-white !h-[20px] !w-[15px]" />
-                    </div>
+                    </Link>
                 </div>
             </Banner.Left>
 
