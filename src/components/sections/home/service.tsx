@@ -1,6 +1,14 @@
+"use client";
+
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ServiceCard } from "@/components/ui/service-card";
 import { AngleArrow, DownLongArrow } from "@/components/ui/svgs";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Service() {
     const sectionTitleRef = useRef<HTMLDivElement>(null);
