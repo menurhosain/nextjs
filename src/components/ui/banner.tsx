@@ -12,11 +12,11 @@ function Banner({ bg, children, style }: { bg: string; children: React.ReactNode
     );
 }
 
-function Left({ children, style, class_name }: { children: React.ReactNode; style?: React.CSSProperties; class_name?: string }) {
+function Left({ children, style, class_name, has_brand_shape = false }: { children: React.ReactNode; style?: React.CSSProperties; class_name?: string; has_brand_shape?: Boolean }) {
     return (
         <div className={cn("w-[100%] md:w-[60%]  pt-[100px] flex items-center", class_name)} style={{ ...style }}>
             {children}
-            <BrandShape class_name="absolute bottom-0 !fill-transparent !w-[100%] md:!w-[70%] !h-[400px] z-[-1]" />
+            {has_brand_shape && <BrandShape class_name="absolute bottom-0 !fill-transparent !w-[100%] md:!w-[70%] !h-[400px] z-[-1]" />}
         </div>
     );
 }

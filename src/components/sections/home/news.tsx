@@ -12,10 +12,10 @@ export default function News() {
                             subtitle="Blog & News"
                             title=<> Our Latest News </>
                             description="Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based."
-                            class_name={{ subtitle: "text-sah-black", title: "text-sah-black", description: "text-sah-gray-1" }}
+                            class_name={{ subtitle: "text-sah-black !mb-[15px]", title: "text-sah-black !mb-[10px]", description: "text-sah-gray-1 " }}
                         />
                     </div>
-                    <div className="flex items-center justify-center mb-[70px]">
+                    <div className="flex items-center justify-center mb-[70px]"> 
                         <ButtonModern link="#" label="View All News" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-[400px_400px] md:grid-rows-[630px] gap-[20px] md:gap-[30px]">

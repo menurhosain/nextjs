@@ -13,7 +13,7 @@ type NewsCardProps = {
 export default function NewsCard({ image, title, href = "#", author, category, alt }: NewsCardProps) {
     return (
         <article className="relative w-full h-full overflow-hidden rounded-2xl">
-            <Link href={href} className="group block w-full h-full">
+            <Link href={href} className="group block w-full h-full group">
                 <Image src={image} alt={alt ?? title} fill className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
@@ -36,9 +36,13 @@ export default function NewsCard({ image, title, href = "#", author, category, a
                         </div>
                     )}
 
-                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white pr-[100px]">{title}</h3>
+                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white pr-[100px] group-hover:text-sah-red transition duration-300">
+                        {title}
+                    </h3>
 
-                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4">Explore More</span>
+                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4 hover:text-sah-red transition duration-300">
+                        Explore More
+                    </span>
                 </div>
             </Link>
         </article>

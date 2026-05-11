@@ -18,63 +18,50 @@ export default function Service() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.to(
-                sectionTitleRef.current,
-                {
-                    scrollTrigger: {
-                        trigger: sectionTitleRef.current,
-                        start: "top top+=110",
-                        end: "top top+=410",
-                        pin: true,
-                        pinSpacing: false,
-                        endTrigger: cardThreeRef.current,
-                    },
-                }
-            );
-            gsap.to(
-                cardOneRef.current,
-                {
-                    scrollTrigger: {
-                        trigger: cardOneRef.current,
-                        start: "top top+=360",
-                        end: "top top+=360",
-                        pin: true,
-                        pinSpacing: false,
-                        endTrigger: cardThreeRef.current,
-                    },
-                }
-            );
-            gsap.to(
-                cardTwoRef.current,
-                {
-                    scrollTrigger: {
-                        trigger: cardTwoRef.current,
-                        start: "top top+=360",
-                        end: "top top+=360",
-                        pin: true,
-                        pinSpacing: false,
-                        endTrigger: cardThreeRef.current,
-                    },
-                }
-            );
-            gsap.to(
-                cardThreeRef.current,
-                {
-                    scrollTrigger: {
-                        trigger: cardThreeRef.current,
-                        start: "top top+=360",
-                        end: "top top+=360",
-                        pin: true,
-                        pinSpacing: false,
-                        endTrigger: cardThreeRef.current,
-                    },
-                }
-            );
+            gsap.to(sectionTitleRef.current, {
+                scrollTrigger: {
+                    trigger: sectionTitleRef.current,
+                    start: "top top+=110",
+                    end: "top top+=410",
+                    pin: true,
+                    pinSpacing: false,
+                    endTrigger: cardThreeRef.current,
+                },
+            });
+            gsap.to(cardOneRef.current, {
+                scrollTrigger: {
+                    trigger: cardOneRef.current,
+                    start: "top top+=360",
+                    end: "top top+=360",
+                    pin: true,
+                    pinSpacing: false,
+                    endTrigger: cardThreeRef.current,
+                },
+            });
+            gsap.to(cardTwoRef.current, {
+                scrollTrigger: {
+                    trigger: cardTwoRef.current,
+                    start: "top top+=360",
+                    end: "top top+=360",
+                    pin: true,
+                    pinSpacing: false,
+                    endTrigger: cardThreeRef.current,
+                },
+            });
+            gsap.to(cardThreeRef.current, {
+                scrollTrigger: {
+                    trigger: cardThreeRef.current,
+                    start: "top top+=360",
+                    end: "top top+=360",
+                    pin: true,
+                    pinSpacing: false,
+                    endTrigger: cardThreeRef.current,
+                },
+            });
         });
 
         return () => ctx.revert();
-    }, [])
-
+    }, []);
 
     return (
         <section className="section-padding value-pin-area pt-[140px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
@@ -123,7 +110,7 @@ export default function Service() {
                         </svg>
                     />
                     <ServiceCard
-                    class_name="mt-[900]"
+                        class_name="mt-[900]"
                         ref={cardThreeRef}
                         title=<>
                             Infrastructure <br /> Works

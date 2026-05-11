@@ -16,62 +16,55 @@ const navLinks = [
         label: "Our Company",
         parent: true,
         submenus: [
-            { label: "About Us", href: "#" },
-            { label: "Partner", href: "#" },
-            { label: "Leadership", href: "#" },
-            { label: "Contact", href: "#" },
+            { label: "About Us", href: "/about-us" },
+            { label: "Partner", href: "/partner" },
+            { label: "Leadership", href: "/leadership" },
+            { label: "Contact", href: "/contact" },
         ],
     },
     {
         label: "Our Services",
         parent: true,
         submenus: [
-            { label: "Services", href: "#" },
-            { label: "Services Details", href: "#" },
+            { label: "Services", href: "/services" },
+            { label: "Services Details", href: "/services-details" },
         ],
     },
     {
         label: "Our Projects",
         parent: true,
         submenus: [
-            { label: "Projects", href: "#" },
-            { label: "Project Details", href: "#" },
+            { label: "Projects", href: "/projects" },
+            { label: "Project Details", href: "/project-details" },
         ],
     },
-    { label: "News", parent: false },
-    { label: "Careers", parent: false },
+    { label: "News", parent: false, href: "/news" },
+    { label: "Careers", parent: false, href: "/careers" },
 ];
 
 export function NavLinks() {
-    const [openMenu, setOpenMenu] = useState<string | null>(null);
-    const navRef = useOutsideClick<HTMLDivElement>(useCallback(() => setOpenMenu(null), []));
-
     return (
-        <div ref={navRef} className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
+        <div className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
             <a href="/" className="text-white font-geist text-[36px] font-bold mr-[80px] uppercase">
                 SHA
             </a>
             {navLinks.map((link) => (
-                <div key={link.label} className="relative">
-                    <button
-                        onClick={() => setOpenMenu(openMenu === link.label ? null : link.label)}
-                        className="uppercase flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter cursor-pointer"
-                    >
-                        {link.label}
-                        {link.parent && <DownArrow class_name={`!w-[10.5px] !h-[6px] transition-transform duration-200 ${openMenu === link.label ? "rotate-180" : ""}`} />}
-                    </button>
+                <div key={link.label} className="relative group">
+                    {link.parent ? (
+                        <button className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter cursor-pointer">
+                            {link.label}
+                            <DownArrow class_name="!w-[10.5px] !h-[6px] transition-transform duration-200 group-hover:rotate-180" />
+                        </button>
+                    ) : (
+                        <a href={link.href} className="uppercase flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter">
+                            {link.label}
+                        </a>
+                    )}
 
                     {link.parent && (
-                        <div
-                            className={`absolute top-full left-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-50 min-w-[160px] transition-all duration-200 ease-out ${openMenu === link.label ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"}`}
-                        >
+                        <div className="absolute top-full left-0  bg-white rounded-md shadow-lg overflow-hidden z-50 min-w-[160px] transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
                             {link.submenus?.map((sub) => (
-                                <a
-                                    key={sub.label}
-                                    href={sub.href}
-                                    onClick={() => setOpenMenu(null)}
-                                    className="block px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap font-inter"
-                                >
+                                <a key={sub.label} href={sub.href} className="block px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap font-inter">
                                     {sub.label}
                                 </a>
                             ))}
@@ -125,7 +118,7 @@ export function NavActions() {
 
                 {/* CTA button */}
                 <Link
-                    href="/register"
+                    href="/become-a-subcontractor"
                     className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
                 >
                     Become a Subcontractor
