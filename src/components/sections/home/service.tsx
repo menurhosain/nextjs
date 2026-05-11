@@ -12,21 +12,61 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Service() {
     const sectionTitleRef = useRef<HTMLDivElement>(null);
-    const endTriggerRef = useRef<HTMLDivElement>(null);
+    const cardOneRef = useRef<HTMLDivElement>(null);
+    const cardTwoRef = useRef<HTMLDivElement>(null);
+    const cardThreeRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
             gsap.to(
-                sectionTitleRef.current, 
+                sectionTitleRef.current,
                 {
                     scrollTrigger: {
                         trigger: sectionTitleRef.current,
-                        start: "top top",
-                        end: "top top+=380", 
+                        start: "top top+=110",
+                        end: "top top+=410",
                         pin: true,
                         pinSpacing: false,
-                        markers: true,
-                        endTrigger: endTriggerRef.current
+                        endTrigger: cardThreeRef.current,
+                    },
+                }
+            );
+            gsap.to(
+                cardOneRef.current,
+                {
+                    scrollTrigger: {
+                        trigger: cardOneRef.current,
+                        start: "top top+=360",
+                        end: "top top+=360",
+                        pin: true,
+                        pinSpacing: false,
+                        endTrigger: cardThreeRef.current,
+                    },
+                }
+            );
+            gsap.to(
+                cardTwoRef.current,
+                {
+                    scrollTrigger: {
+                        trigger: cardTwoRef.current,
+                        start: "top top+=360",
+                        end: "top top+=360",
+                        pin: true,
+                        pinSpacing: false,
+                        endTrigger: cardThreeRef.current,
+                    },
+                }
+            );
+            gsap.to(
+                cardThreeRef.current,
+                {
+                    scrollTrigger: {
+                        trigger: cardThreeRef.current,
+                        start: "top top+=360",
+                        end: "top top+=360",
+                        pin: true,
+                        pinSpacing: false,
+                        endTrigger: cardThreeRef.current,
                     },
                 }
             );
@@ -43,7 +83,7 @@ export default function Service() {
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"
             />
             <div className="container mx-auto">
-                <div ref={sectionTitleRef}>
+                <div className="mb-[23px]" ref={sectionTitleRef}>
                     <div className="flex items-center justify-center gap-6 mb-[38px]">
                         <span className="text-sah-black flex items-center gap-[6px] text-[16px] font-medium tracking-widest uppercase font-inter">
                             [ Our Expertise ]
@@ -60,17 +100,9 @@ export default function Service() {
                     </ScrollReveal>
                 </div>
 
-                <ScrollReveal toColor="var(--color-sah-dark-2)">
-                    <h2 className="section-heading mx-auto text-center leading-[48px] mb-[60px]">
-                        <span className="text-sah-dark-2">
-                            We deliver high quality construction services <br /> with innovation, precision,{" "}
-                        </span>
-                        <span className="text-sah-dark-2/50 scroll-color font-bold">and commitment to every client project</span>
-                    </h2>
-                </ScrollReveal>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element items-start">
                     <ServiceCard
+                        ref={cardOneRef}
                         title=<>
                             Construction <br /> & Engineering
                         </>
@@ -80,6 +112,8 @@ export default function Service() {
                         </svg>
                     />
                     <ServiceCard
+                        class_name="mt-[400]"
+                        ref={cardTwoRef}
                         title=<>
                             MEP & Building <br /> Systems{" "}
                         </>
@@ -89,6 +123,8 @@ export default function Service() {
                         </svg>
                     />
                     <ServiceCard
+                    class_name="mt-[900]"
+                        ref={cardThreeRef}
                         title=<>
                             Infrastructure <br /> Works
                         </>
