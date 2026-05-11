@@ -80,6 +80,7 @@ export function NavActions() {
     const [selectedLang, setSelectedLang] = useState(languages[0]);
     const [langOpen, setLangOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [openMenu, setOpenMenu] = useState<string | null>(null);
     const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
 
     return (
@@ -126,10 +127,10 @@ export function NavActions() {
                 </Link>
 
                 {/* Hamburger */}
-                <button onClick={() => setMenuOpen(true)} className="flex flex-col justify-center items-center gap-[5px] text-white cursor-pointer" aria-label="Open menu">
-                    <span className="block w-6 h-[2px] bg-white" />
-                    <span className="block w-6 h-[2px] bg-white" />
-                    <span className="block w-6 h-[2px] bg-white" />
+                <button onClick={() => setMenuOpen(true)} className="group flex flex-col justify-center items-center gap-[5px] text-white cursor-pointer" aria-label="Open menu">
+                    <span className="block w-6 h-[2px] bg-sah-white origin-right transition-transform duration-300 group-hover:scale-x-[0.7]" />
+                    <span className="block w-6 h-[2px] bg-sah-white origin-right transition-transform duration-300 group-hover:scale-x-[0.8]" />
+                    <span className="block w-6 h-[2px] bg-sah-white" />
                 </button>
             </div>
 
@@ -140,16 +141,58 @@ export function NavActions() {
             />
 
             {/* Drawer */}
-            <div className={`fixed top-0 right-0 z-50 h-full w-[400px] bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
-                {/* Close button */}
-                <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="absolute top-6 right-6 text-white cursor-pointer">
-                    <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-black stroke-2">
-                        <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
-                    </svg>
-                </button>
+            <div className={`fixed top-0 right-0 z-50 h-full pb-10 w-[400px] bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
+                {/* Drawer header */}
+                <div className="flex items-center justify-between px-8 h-16 border-b border-sah-light-3">
+                    <div className="flex items-center gap-2">
+                        <img src="/logo-red-2.png" alt="SAH logo" className="w-8 h-8 object-contain" />
+                    </div>
+                    <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="cursor-pointer">
+                        <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-black stroke-2">
+                            <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
+                        </svg>
+                    </button>
+                </div>
 
-                <div className="mt-[200px]">
-                    <p className="text-sah-black text-center">No content for now</p>
+                <div className="mt-5 px-8 flex flex-col justify-between h-[calc(100%-64px)]">
+                    <div className="flex flex-col">
+                        {navLinks.map((link) => (
+                            <div key={link.label} className="border-b border-sah-light-3">
+                                {link.parent ? (
+                                    <>
+                                        <button
+                                            onClick={() => setOpenMenu(openMenu === link.label ? null : link.label)}
+                                            className="w-full flex items-center justify-between py-4 text-sah-black font-inter font-semibold uppercase cursor-pointer"
+                                        >
+                                            {link.label}
+                                            <DownArrow class_name={`!w-[10px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenu === link.label ? "rotate-180" : ""}`} />
+                                        </button>
+                                        <div className={`flex flex-col overflow-hidden transition-all duration-300 ${openMenu === link.label ? "max-h-[400px] pb-3" : "max-h-0"}`}>
+                                            {link.submenus?.map((sub) => (
+                                                <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-sm hover:text-sah-red">
+                                                    {sub.label}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </>
+                                ) : (
+                                    <a href={link.href} className="flex items-center py-4 text-sah-black font-inter font-semibold uppercase">
+                                        {link.label}
+                                    </a>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="py-8">
+                        <Link
+                            href="/become-a-subcontractor"
+                            className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px]"
+                        >
+                            Become a Subcontractor
+                            <AngleArrow class_name="!w-[10px] !h-[10px]" />
+                        </Link>
+                    </div>
                 </div>
             </div>
         </>
