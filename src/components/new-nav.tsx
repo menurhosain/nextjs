@@ -162,7 +162,7 @@ export function NavActions() {
                                     <>
                                         <button
                                             onClick={() => setOpenMenu(openMenu === link.label ? null : link.label)}
-                                            className="w-full flex items-center justify-between py-4 text-sah-black font-inter font-semibold uppercase cursor-pointer"
+                                            className="w-full flex text-[18px] items-center justify-between py-4 text-sah-black font-inter font-semibold uppercase cursor-pointer"
                                         >
                                             {link.label}
                                             <DownArrow class_name={`!w-[10px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenu === link.label ? "rotate-180" : ""}`} />
@@ -176,7 +176,7 @@ export function NavActions() {
                                         </div>
                                     </>
                                 ) : (
-                                    <a href={link.href} className="flex items-center py-4 text-sah-black font-inter font-semibold uppercase">
+                                    <a href={link.href} className="flex text-[18px] items-center py-4 text-sah-black font-inter font-semibold uppercase">
                                         {link.label}
                                     </a>
                                 )}
