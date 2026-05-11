@@ -44,7 +44,7 @@ export default function RootLayout({
         <html lang="en" className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col overflow-x-hidden">
                 <Header />
-                {children}
+                <main>{children}</main>
                 <Footer />
             </body>
         </html>
