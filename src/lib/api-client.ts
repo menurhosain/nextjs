@@ -18,7 +18,7 @@ export async function api_client(path: string, options: RequestOptions = {}): Pr
         });
 
         return res;
-    } catch (error) {
-        return {};
+    } catch {
+        return new Response(null, { status: 503 });
     }
 }

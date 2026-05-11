@@ -32,7 +32,7 @@ export default function Service() {
             );
         });
 
-        return () => ctx.revert(); // cleanup on unmount
+        return () => ctx.revert();
     }, [])
 
 
@@ -92,7 +92,7 @@ export default function Service() {
                     />
                 </div>
 
-                <div className="flex justify-center mt-12 mb-[140px]">
+                <div className="flex justify-center mt-12 pb-[140px]">
                     <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[20px] bg-sah-white font-inter font-medium rounded-full px-[30px] py-[8px] shadow-sm">
                         <span className="text-sah-dark-2">Careers</span>
                         <span
@@ -110,3 +110,4 @@ export default function Service() {
         </section>
     );
 }
+
