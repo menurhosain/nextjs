@@ -17,7 +17,7 @@ export default function Projects() {
                     />
                 </div>
 
-                <div className="flex flex-col gap-[30px] mb-[60px]">
+                <StackCards>
                     <ProjectCard
                         category="Architecture"
                         title="Police College Package C SQAPS Nizwa"
@@ -42,7 +42,7 @@ export default function Projects() {
                         location="Nizwa, Oman"
                         image="/project-3.jpg"
                     />
-                </div>
+                </StackCards>
 
                 <div className="flex items-center justify-center">
                     <ButtonModern link="#" label="View All Projects" />

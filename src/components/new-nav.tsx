@@ -6,17 +6,40 @@ import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow } from "./ui/svgs";
 
 const languages = [
-    { code: "en", label: "English", flag: "/uk-flag.png"},
+    { code: "en", label: "English", flag: "/uk-flag.png" },
     { code: "ar", label: "Arabic", flag: "/katar-flag.png" },
 ];
 
 //const navLinks = ["Our Company", "Our Services", "Our Projects", "News", "Careers"];
 const navLinks = [
-    { label: "Our Company", parent: true },
-    { label: "Our Services", parent: true },
-    { label: "Our Projects", parent: true },
-    { label: "News", parent: false },
-    { label: "Careers", parent: false },
+    {
+        label: "Our Company",
+        parent: true,
+        submenus: [
+            { label: "About Us", href: "/about-us" },
+            { label: "Partner", href: "/partner" },
+            { label: "Leadership", href: "/leadership" },
+            { label: "Contact", href: "/contact" },
+        ],
+    },
+    {
+        label: "Our Services",
+        parent: true,
+        submenus: [
+            { label: "Services", href: "/services" },
+            { label: "Services Details", href: "/services-details" },
+        ],
+    },
+    {
+        label: "Our Projects",
+        parent: true,
+        submenus: [
+            { label: "Projects", href: "/projects" },
+            { label: "Project Details", href: "/project-details" },
+        ],
+    },
+    { label: "News", parent: false, href: "/news" },
+    { label: "Careers", parent: false, href: "/careers" },
 ];
 
 export function NavLinks() {
@@ -26,10 +49,28 @@ export function NavLinks() {
                 SHA
             </a>
             {navLinks.map((link) => (
-                <a key={link.label} href="#" className="uppercase flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter">
-                    {link.label}
-                    {link.parent ? ( <DownArrow class_name="!w-[10.5px] !h-[6px]"/> ) : null}
-                </a>
+                <div key={link.label} className="relative group">
+                    {link.parent ? (
+                        <button className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter cursor-pointer">
+                            {link.label}
+                            <DownArrow class_name="!w-[10.5px] !h-[6px] transition-transform duration-200 group-hover:rotate-180" />
+                        </button>
+                    ) : (
+                        <a href={link.href} className="uppercase flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter">
+                            {link.label}
+                        </a>
+                    )}
+
+                    {link.parent && (
+                        <div className="absolute top-full left-0  bg-white rounded-md shadow-lg overflow-hidden z-50 min-w-[160px] transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+                            {link.submenus?.map((sub) => (
+                                <a key={sub.label} href={sub.href} className="block px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap font-inter">
+                                    {sub.label}
+                                </a>
+                            ))}
+                        </div>
+                    )}
+                </div>
             ))}
         </div>
     );
@@ -54,7 +95,7 @@ export function NavActions() {
                     <button onClick={() => setLangOpen(!langOpen)} className="flex items-center w-[120px] gap-[8px] text-sah-white cursor-pointer">
                         <img className="w-[20px] h-[20px]" src={selectedLang.flag} alt={selectedLang.label} />
                         <span className="font-inter text-[16px] font-semibold leading-[28px]">{selectedLang.label}</span>
-                        <DownArrow class_name="!w-[12px] !h-[12px]"/>
+                        <DownArrow class_name="!w-[12px] !h-[12px]" />
                     </button>
                     {langOpen && (
                         <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-50">
@@ -76,17 +117,16 @@ export function NavActions() {
                 </div>
 
                 {/* CTA button */}
-                <Link href="/register" className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]">
+                <Link
+                    href="/register"
+                    className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
+                >
                     Become a Subcontractor
-                    <AngleArrow class_name="!w-[10px] !h-[10px]"/>
+                    <AngleArrow class_name="!w-[10px] !h-[10px]" />
                 </Link>
 
                 {/* Hamburger */}
-                <button
-                    onClick={() => setMenuOpen(true)}
-                    className="flex flex-col justify-center items-center gap-[5px] text-white cursor-pointer"
-                    aria-label="Open menu"
-                >
+                <button onClick={() => setMenuOpen(true)} className="flex flex-col justify-center items-center gap-[5px] text-white cursor-pointer" aria-label="Open menu">
                     <span className="block w-6 h-[2px] bg-white" />
                     <span className="block w-6 h-[2px] bg-white" />
                     <span className="block w-6 h-[2px] bg-white" />
@@ -100,23 +140,17 @@ export function NavActions() {
             />
 
             {/* Drawer */}
-            <div
-                className={`fixed top-0 right-0 z-50 h-full w-[400px] bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
-            >
+            <div className={`fixed top-0 right-0 z-50 h-full w-[400px] bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
                 {/* Close button */}
-                <button
-                    onClick={() => setMenuOpen(false)}
-                    aria-label="Close menu"
-                    className="absolute top-6 right-6 text-white cursor-pointer"
-                >
+                <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="absolute top-6 right-6 text-white cursor-pointer">
                     <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-black stroke-2">
                         <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
                     </svg>
                 </button>
 
-				<div className="mt-[200px]">
-					<p className="text-sah-black text-center">No content for now</p>
-				</div>
+                <div className="mt-[200px]">
+                    <p className="text-sah-black text-center">No content for now</p>
+                </div>
             </div>
         </>
     );
