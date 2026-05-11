@@ -1,6 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Banner from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
-import { SearchIcon, SettingIcon } from "@/components/ui/svgs";
+import { Cross, DownArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
 import { ProjectCardSmall } from "@/components/ui/project-card-small";
 
 const projects = [
@@ -11,8 +14,48 @@ const projects = [
     { tag: "Residential", title: "Al Mouj Marina District Housing Complex", image: "/project-3.jpg", year: "2021", location: "Muscat, Oman", link: "#" },
     { tag: "Architecture", title: "Salalah Airport Terminal Expansion Housing", image: "/project-2.jpg", year: "2022", location: "Salalah, Oman", link: "#" },
 ];
+const tags = [
+    {
+        key: "location",
+        label: "BY LOCATION",
+        options: ["Nizwa", "Muscat", "Sohar", "Salalah", "Duqm", "Ibri"],
+    },
+    {
+        key: "scope",
+        label: "BY SCOPE OF WORK",
+        options: ["Architecture", "Infrastructure", "Civil Engineering", "Commercial", "Residential"],
+    },
+    {
+        key: "industry",
+        label: "BY INDUSTRY",
+        options: ["Government", "Healthcare", "Transportation", "Industrial", "Hospitality"],
+    },
+];
 
 export default function ProjectsPage() {
+    const [query, setQuery] = useState({ s: "", location: [], industry: [] });
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({});
+    const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
+
+    function toggleAccordion(key: string) {
+        setOpenAccordions((prev) => ({ ...prev, [key]: !prev[key] }));
+    }
+
+    function toggleFilterOption(key: string, option: string) {
+        setSelectedFilters((prev) => {
+            const current = prev[key] ?? [];
+            return {
+                ...prev,
+                [key]: current.includes(option) ? current.filter((o) => o !== option) : [...current, option],
+            };
+        });
+    }
+
+    function handleSearch() {
+        console.log(query);
+    }
+
     return (
         <>
             <Banner bg="/home-hero.mp4">
@@ -22,25 +65,30 @@ export default function ProjectsPage() {
                     </div>
                     <div className="flex gap-4 self-start w-[90%] py-[70px] relative  mt-auto">
                         <div className="absolute bg-sah-white/20 top-0 h-[1px] w-[120vw] ml-[calc(50%-50vw)]"></div>
+
                         {/* Search */}
-                        <div className="flex-1 flex items-center gap-[20px] justify-between bg-sah-gray-5 px-6 cursor-pointer transition-colors duration-200 pr-[14px]">
+                        <div className="flex-1 flex items-center gap-[20px] justify-between bg-sah-gray-5 px-6 transition-colors duration-200 pr-[14px]">
                             <input
                                 type="text"
-                                className="text-sah-white h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white"
+                                value={query.s}
+                                onChange={(e) => setQuery({ ...query, s: e.target.value })}
+                                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                                className="text-sah-white h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white bg-transparent"
                                 placeholder="Find a project"
                             />
-                            <div className="size-[40px] flex items-center justify-center">
+                            <button type="button" onClick={handleSearch} className="size-[40px] flex items-center justify-center cursor-pointer">
                                 <SearchIcon class_name="!size-[18px]" />
-                            </div>
+                            </button>
                         </div>
 
                         {/* Filter */}
-                        <div className="flex-1 flex items-center gap-[20px] justify-between bg-sah-gray-5 px-6 cursor-pointer transition-colors duration-200 pr-[14px]">
-                            <input
-                                type="text"
-                                className="text-sah-white h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white"
-                                placeholder="Refined Your Search"
-                            />
+                        <div
+                            onClick={() => setDrawerOpen(true)}
+                            className="flex-1 flex items-center gap-[20px] justify-between bg-sah-gray-5 px-6 cursor-pointer transition-colors duration-200 pr-[14px]"
+                        >
+                            <span className="text-sah-white flex items-center h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white">
+                                Refined Your Search
+                            </span>
                             <div className="size-[40px] flex items-center justify-center">
                                 <SettingIcon class_name="!size-[18px]" />
                             </div>
@@ -52,6 +100,64 @@ export default function ProjectsPage() {
                     <div>Hello</div>
                 </Banner.Right>
             </Banner>
+
+            {/* Drawer overlay */}
+            <div className={`fixed inset-0 z-[9999] flex justify-end transition-all duration-300 ${drawerOpen ? "pointer-events-auto" : "pointer-events-none"}`}>
+                <div onClick={() => setDrawerOpen(false)} className={`flex-1 bg-black/40 transition-opacity duration-300 ${drawerOpen ? "opacity-100" : "opacity-0"}`} />
+                <div className={`w-[350px] h-full bg-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}>
+                    {/* Search row */}
+                    <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-200">
+                        <SearchIcon class_name="!size-[18px] shrink-0 text-sah-dark" />
+                        <input type="text" placeholder="Find A Project" className="flex-1 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
+                        <button type="button" onClick={() => setDrawerOpen(false)} className="shrink-0 size-7 flex items-center justify-center hover:opacity-60 transition-opacity">
+                            <Cross class_name="cursor-pointer !size-[14px]" />
+                        </button>
+                    </div>
+
+                    {/* Clear filters */}
+                    <div className="flex justify-end px-6 py-3 border-b border-gray-200">
+                        <button type="button" className="font-inter text-[13px] text-sah-dark underline underline-offset-2">
+                            Clear All Filters
+                        </button>
+                    </div>
+
+                    {/* Accordions */}
+                    {tags.map(({ key, label, options }) => (
+                        <div key={key} className="border-b border-gray-200">
+                            <button type="button" onClick={() => toggleAccordion(key)} className="w-full flex items-center justify-between px-6 py-5 cursor-pointer">
+                                <span className="font-inter text-[13px] font-medium tracking-widest text-sah-dark">{label}</span>
+                                <DownArrow class_name={`transition-transform duration-200 !fill-sah-red !size-[14px] ${openAccordions[key] ? "rotate-180" : ""}`} />
+                            </button>
+                            <div className={`grid transition-all duration-300 ease-in-out ${openAccordions[key] ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                                <div className="overflow-hidden">
+                                <div className="px-6 pb-5 flex flex-wrap gap-2">
+                                    {options.map((option) => {
+                                        const selected = selectedFilters[key]?.includes(option);
+                                        return (
+                                            <button
+                                                key={option}
+                                                type="button"
+                                                onClick={() => toggleFilterOption(key, option)}
+                                                className={`px-4 py-2 rounded-full border font-inter text-[13px] transition-colors duration-150 cursor-pointer select-none ${selected ? "bg-sah-red text-sah-white border-sah-red" : "bg-white text-sah-dark border-gray-300 hover:border-sah-dark"}`}
+                                            >
+                                                {option}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+
+                    {/* Apply filters */}
+                    <div className="mt-auto px-6 py-5 border-t border-gray-200">
+                        <button type="button" className="w-full bg-sah-red text-sah-white font-inter text-[14px] font-semibold py-4 cursor-pointer hover:opacity-90 transition-opacity">
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <section className="section-padding bg-sah-light-4">
                 <div className="container py-[140px] border-x border-sah-light-3">
