@@ -46,7 +46,7 @@ export function NavLinks() {
     return (
         <div className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
             <a href="/" className="text-white font-geist text-[36px] font-bold mr-[80px] uppercase">
-                SHA
+                SAH
             </a>
             {navLinks.map((link) => (
                 <div key={link.label} className="group">
@@ -92,7 +92,7 @@ export function NavActions() {
             <div className="w-full flex items-center py-4 justify-end gap-[15px] md:gap-[30px] h-[90px] z-10 relative">
                 {/* Logo */}
                 <a href="/" className="text-white flex-1 text-[36px] font-bold uppercase xl:hidden">
-                    SHA
+                    SAH
                 </a>
 
                 {/* Language selector */}
