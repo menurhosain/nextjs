@@ -49,7 +49,7 @@ export function NavLinks() {
                 SHA
             </a>
             {navLinks.map((link) => (
-                <div key={link.label} className="relative group">
+                <div key={link.label} className="group">
                     {link.parent ? (
                         <button className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter cursor-pointer">
                             {link.label}
@@ -62,12 +62,16 @@ export function NavLinks() {
                     )}
 
                     {link.parent && (
-                        <div className="absolute top-full left-0  bg-white rounded-md shadow-lg overflow-hidden z-50 min-w-[160px] transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
-                            {link.submenus?.map((sub) => (
-                                <a key={sub.label} href={sub.href} className="block px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 hover:text-sah-red whitespace-nowrap font-inter">
-                                    {sub.label}
-                                </a>
-                            ))}
+                        <div className="absolute top-full left-1/2 min-h-[300px] -translate-x-1/2 w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+                            <div className="container">
+                                <div className="py-6 flex gap-8">
+                                    {link.submenus?.map((sub) => (
+                                        <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
+                                            {sub.label}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>
