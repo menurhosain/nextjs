@@ -122,19 +122,19 @@ export default function RegisterForm() {
         <Label htmlFor="register_as" className="font-normal text-sah-gray-1 mb-[12px]">
           Register as <span className="text-red-500">*</span>
         </Label>
+        <div className="register-select position-relative">
         <select
           id="register_as"
           name="register_as"
           required
           defaultValue=""
-          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none !rounded-[6px] h-[56px] border-sah-gray-4 !shadow-none focus-visible:border-sah-red focus:outline-none !focus-visible:ring-0 text-sah-gray-2"
+          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none !rounded-[6px] h-[56px] border-sah-gray-4 !shadow-none focus-visible:border-sah-red focus:outline-none !focus-visible:ring-0 text-sah-gray-2 appearance-none"
         >
-          <option value="" disabled>
-            Select role
-          </option>
+          <option value="" disabled>Select role</option>
           <option value="applicant">Applicant</option>
           <option value="contractor">Contractor</option>
         </select>
+        </div>
         {e.register_as && (
           <p className="text-sm text-red-500">{e.register_as}</p>
         )}
