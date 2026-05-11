@@ -118,7 +118,7 @@ export function NavActions() {
 
                 {/* CTA button */}
                 <Link
-                    href="/register"
+                    href="/become-a-subcontractor"
                     className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
                 >
                     Become a Subcontractor
