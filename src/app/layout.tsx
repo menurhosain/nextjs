@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Serif_Display, Inter } from "next/font/google";
 import Header from "@/components/layout/header/header";
+import { LenisProvider } from "@/components/layout/lenis-provider";
 import "./style.scss";
 
 import "./globals.css";
@@ -43,9 +44,11 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col overflow-x-hidden">
-                <Header />
-                <main>{children}</main>
-                <Footer />
+                <LenisProvider>
+                    <Header />
+                    <main>{children}</main>
+                    <Footer />
+                </LenisProvider>
             </body>
         </html>
     );
