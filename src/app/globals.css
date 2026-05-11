@@ -24,7 +24,8 @@
     --color-sah-gray-1: #414141;
     --color-sah-gray-2: #555555;
     --color-sah-gray-3: #59585d;
-    --color-sah-gray-4: #DBDEE1;
+    --color-sah-gray-4: #dbdee1;
+    --color-sah-gray-5: #404040;
 
     --color-sah-light-1: #dadada;
     --color-sah-light-2: #dfdfdf;
@@ -135,18 +136,17 @@ svg {
     }
 }
 
-
-.register-box .register-select{
+.register-box .register-select {
     position: relative;
 }
-.register-box .register-select::after{
+.register-box .register-select::after {
     content: "";
     position: absolute;
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid #333;
