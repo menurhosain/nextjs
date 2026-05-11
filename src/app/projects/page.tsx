@@ -105,13 +105,17 @@ export default function ProjectsPage() {
             <div className={`fixed inset-0 z-[9999] flex justify-end transition-all duration-300 ${drawerOpen ? "pointer-events-auto" : "pointer-events-none"}`}>
                 <div onClick={() => setDrawerOpen(false)} className={`flex-1 bg-black/40 transition-opacity duration-300 ${drawerOpen ? "opacity-100" : "opacity-0"}`} />
                 <div className={`w-[350px] h-full bg-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}>
-                    {/* Search row */}
-                    <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-200">
-                        <SearchIcon class_name="!size-[18px] shrink-0 text-sah-dark" />
-                        <input type="text" placeholder="Find A Project" className="flex-1 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
-                        <button type="button" onClick={() => setDrawerOpen(false)} className="shrink-0 size-7 flex items-center justify-center hover:opacity-60 transition-opacity">
-                            <Cross class_name="cursor-pointer !size-[14px]" />
+                    {/* Close button row */}
+                    <div className="flex justify-end px-6 py-4">
+                        <button type="button" onClick={() => setDrawerOpen(false)} className="size-7 flex items-center justify-center hover:opacity-60 transition-opacity">
+                            <Cross class_name="cursor-pointer !size-[24px]" />
                         </button>
+                    </div>
+
+                    {/* Search bar */}
+                    <div className="flex items-center gap-3 px-6 py-3 border-b border-gray-200">
+                        <SearchIcon class_name="!size-[18px] shrink-0 text-sah-dark !fill-sah-red" />
+                        <input type="text" placeholder="Find A Project" className="flex-1 min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
                     </div>
 
                     {/* Clear filters */}
@@ -130,21 +134,21 @@ export default function ProjectsPage() {
                             </button>
                             <div className={`grid transition-all duration-300 ease-in-out ${openAccordions[key] ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
                                 <div className="overflow-hidden">
-                                <div className="px-6 pb-5 flex flex-wrap gap-2">
-                                    {options.map((option) => {
-                                        const selected = selectedFilters[key]?.includes(option);
-                                        return (
-                                            <button
-                                                key={option}
-                                                type="button"
-                                                onClick={() => toggleFilterOption(key, option)}
-                                                className={`px-4 py-2 rounded-full border font-inter text-[13px] transition-colors duration-150 cursor-pointer select-none ${selected ? "bg-sah-red text-sah-white border-sah-red" : "bg-white text-sah-dark border-gray-300 hover:border-sah-dark"}`}
-                                            >
-                                                {option}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
+                                    <div className="px-6 pb-5 flex flex-wrap gap-2">
+                                        {options.map((option) => {
+                                            const selected = selectedFilters[key]?.includes(option);
+                                            return (
+                                                <button
+                                                    key={option}
+                                                    type="button"
+                                                    onClick={() => toggleFilterOption(key, option)}
+                                                    className={`px-4 py-2 rounded-full border font-inter text-[13px] transition-colors duration-150 cursor-pointer select-none ${selected ? "bg-sah-red text-sah-white border-sah-red" : "bg-white text-sah-dark border-gray-300 hover:border-sah-dark"}`}
+                                                >
+                                                    {option}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         </div>
