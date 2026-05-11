@@ -6,7 +6,7 @@ import { AngleArrow, DownCurveArrow } from "@/components/ui/svgs";
 export default function Hero() {
     return (
         <Banner bg="/home-hero.mp4">
-            <Banner.Left class_name="">
+            <Banner.Left has_brand_shape={true}>
                 <div className="flex flex-col">
                     <h1 className="text-white  font-medium leading-[70px] sm:leading-[60px] xl:leading-[70px] tracking-[-0.05em] flex flex-col gap-[30px] mb-[35px]">
                         <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
@@ -25,7 +25,10 @@ export default function Hero() {
                         <AngleArrow class_name="!w-[12px] !h-[12px] !fill-white group-hover:!fill-sah-red transition duration-300" />
                     </Link>
 
-                    <Link href="#services" className="hidden md:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/30 rounded-full px-[12px] py-[16px] mt-[80px] w-[max-content]">
+                    <Link
+                        href="#services"
+                        className="hidden md:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/30 rounded-full px-[12px] py-[16px] mt-[80px] w-[max-content]"
+                    >
                         <span className="text-white text-[16px] font-normal capitalcase [writing-mode:vertical-rl] rotate-180">Scroll Now</span>
                         <DownCurveArrow class_name="!fill-sah-white !h-[20px] !w-[15px]" />
                     </Link>
