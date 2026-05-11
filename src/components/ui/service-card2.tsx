@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 interface ServiceCardTwoProps {
     icon?: React.ReactNode;
-    title: string;
+    title: any;
     description: string;
     image: string;
     href?: string;
@@ -19,7 +19,9 @@ export function ServiceCardTwo({ icon, title, description, image, href = "#", cl
                 <div className="flex items-start gap-4">
                     {icon && <div className="shrink-0 text-[48px] leading-none">{icon}</div>}
 
-                    <Link href={href} className="text-sah-black font-semibold font-geist text-[30px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit">{title}</Link>
+                    <Link href={href} className="text-sah-black font-semibold font-geist text-[30px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit">
+                        {title}
+                    </Link>
                 </div>
 
                 <hr className="border-gray-200" />
@@ -28,18 +30,14 @@ export function ServiceCardTwo({ icon, title, description, image, href = "#", cl
             </div>
 
             <div className="relative rounded-[12px] overflow-hidden">
-                <img
-                    src={image}
-                    alt={title}
-                    className="w-full h-auto"
-                />
+                <img src={image} alt={title} className="w-full h-auto" />
                 <div className="group">
                     <Link
                         href={href}
                         className="absolute bottom-3 text-[11px] right-3 w-9 h-9 rounded-full bg-white hover:bg-sah-red hover:text-white flex items-center justify-center shadow sah-transition group-hover:rotate-45"
                     >
                         <svg viewBox="0 0 12 12">
-                            <path d="M0 10.0576L8.36252 1.69511H2.90993L2.89581 0.0141261L11.2442 0V8.36252L9.56322 8.34839V2.8958L1.2007 11.2583L0 10.0576Z"/>
+                            <path d="M0 10.0576L8.36252 1.69511H2.90993L2.89581 0.0141261L11.2442 0V8.36252L9.56322 8.34839V2.8958L1.2007 11.2583L0 10.0576Z" />
                         </svg>
                     </Link>
                 </div>
