@@ -1,5 +1,7 @@
 import Banner from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
+import About from "@/components/sections/about/about";
+
 
 export default function AboutUsPage() {
     return (
@@ -20,6 +22,8 @@ export default function AboutUsPage() {
                     <div></div>
                 </Banner.Right>
             </Banner>
+
+            <About/>
         </>
     );
 }
