@@ -27,7 +27,7 @@ export default function Projects() {
 
                 ScrollTrigger.create({
                     trigger: card,
-                    start: `top top+=${80 + (index * 80)}`,
+                    start: `top top+=${80 + (index * 100)}`,
                     endTrigger: endRef.current,
                     end: "bottom bottom-=40",
                     pin: true,
