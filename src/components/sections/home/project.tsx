@@ -1,6 +1,7 @@
 import Section_Title from "@/components/ui/section-title";
 import ProjectCard from "@/components/ui/project-card";
 import { ButtonModern } from "@/components/ui/button";
+import { StackCards } from "@/components/ui/stack-cards";
 
 export default function Projects() {
     return (
@@ -16,7 +17,7 @@ export default function Projects() {
                     />
                 </div>
 
-                <div className="flex flex-col gap-[40px] mb-[60px]">
+                <div className="flex flex-col gap-[30px] mb-[60px]">
                     <ProjectCard
                         category="Architecture"
                         title="Police College Package C SQAPS Nizwa"
@@ -31,7 +32,7 @@ export default function Projects() {
                         description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
                         handover="2021"
                         location="Nizwa, Oman"
-                        image="/project-1.jpg"
+                        image="/project-2.jpg"
                     />
                     <ProjectCard
                         category="Construction"
@@ -39,7 +40,7 @@ export default function Projects() {
                         description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
                         handover="2021"
                         location="Nizwa, Oman"
-                        image="/project-1.jpg"
+                        image="/project-3.jpg"
                     />
                 </div>
 

@@ -1,14 +1,6 @@
-"use client";
-
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ServiceCard } from "@/components/ui/service-card";
 import { AngleArrow, DownLongArrow } from "@/components/ui/svgs";
-
-gsap.registerPlugin(ScrollTrigger);
-
 
 export default function Service() {
     const sectionTitleRef = useRef<HTMLDivElement>(null);
@@ -60,7 +52,16 @@ export default function Service() {
                     </ScrollReveal>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <ScrollReveal toColor="var(--color-sah-dark-2)">
+                    <h2 className="section-heading mx-auto text-center leading-[48px] mb-[60px]">
+                        <span className="text-sah-dark-2">
+                            We deliver high quality construction services <br /> with innovation, precision,{" "}
+                        </span>
+                        <span className="text-sah-dark-2/50 scroll-color font-bold">and commitment to every client project</span>
+                    </h2>
+                </ScrollReveal>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element">
                     <ServiceCard
                         title=<>
                             Construction <br /> & Engineering
@@ -80,8 +81,6 @@ export default function Service() {
                         </svg>
                     />
                     <ServiceCard
-                        ref={endTriggerRef}
-                        class_name="values-pin-end"
                         title=<>
                             Infrastructure <br /> Works
                         </>
@@ -92,22 +91,25 @@ export default function Service() {
                     />
                 </div>
 
-                <div className="flex justify-center mt-12 pb-[140px]">
-                    <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[20px] bg-sah-white font-inter font-medium rounded-full px-[30px] py-[8px] shadow-sm">
-                        <span className="text-sah-dark-2">Careers</span>
-                        <span
-                            className="flex items-center justify-center w-[30px] h-[30px] sm:w-[28px] sm:h-[28px] rounded-full bg-sah-red text-sah-white flex-shrink-0 group-hover:bg-sah-red/80 transition-colors"
-                            aria-label="Navigate"
-                        >
-                            <AngleArrow class_name="!w-[8px] !h-[8px]" />
-                        </span>
-                        <span className="text-sah-dark-2 underline underline-offset-2 decoration-sah-dark-2 group-hover:text-sah-red group-hover:decoration-sah-red transition-colors">
-                            View All Services
-                        </span>
-                    </a>
+                <div className="flex justify-center mt-12 mb-[140px]">
+                    <div className="inline-flex shadow-sm md:px-[30px] md:py-[8px] bg-sah-white rounded-full gap-[20px]">
+                        <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[10px] font-inter font-medium ">
+                            <span className="text-sah-dark-2 group-hover:text-sah-red">Careers</span>
+                            <span
+                                className="flex items-center justify-center w-[30px] h-[30px] sm:w-[28px] sm:h-[28px] rounded-full bg-sah-red text-sah-white flex-shrink-0 group-hover:bg-sah-red/80 transition-colors"
+                                aria-label="Navigate"
+                            >
+                                <AngleArrow class_name="!w-[8px] !h-[8px]" />
+                            </span>
+                        </a>
+                        <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[20px] font-inter font-medium">
+                            <span className="text-sah-dark-2 underline underline-offset-2 decoration-sah-dark-2 group-hover:text-sah-red group-hover:decoration-sah-red transition-colors">
+                                View All Services
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
     );
 }
-

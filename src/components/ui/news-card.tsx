@@ -22,22 +22,23 @@ export default function NewsCard({ image, title, href = "#", author, category, a
                     {(author || category) && (
                         <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1">
                             {author && (
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 opacity-90">
                                     <span className="h-[6px] w-[6px] shrink-0 rounded-full bg-white" aria-hidden="true" />
-                                    <span className="text-[16px] font-semibold capitalize  text-sah-white">{author}</span>
+                                    <span className="text-[16px] font-medium capitalize  text-sah-white font-inter">{author}</span>
                                 </div>
                             )}
                             {category && (
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 opacity-90">
                                     <span className="h-[6px] w-[6px] shrink-0 rounded-full bg-white" aria-hidden="true" />
-                                    <span className="text-[16px] font-semibold capitalize text-sah-white">{category}</span>
+                                    <span className="text-[16px] font-medium capitalize text-sah-white font-inter">{category}</span>
                                 </div>
                             )}
                         </div>
                     )}
 
-                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white max-w-[75%]">{title}</h3>
-                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4 max-w-[75%]">Explore More</span>
+                    <h3 className="mb-5 font-geist text-[22px] leading-[30px] md:text-[30px] font-semibold md:leading-[38px] text-sah-white pr-[100px]">{title}</h3>
+
+                    <span className="text-[16px] font-medium capitalize text-sah-white underline underline-offset-4">Explore More</span>
                 </div>
             </Link>
         </article>

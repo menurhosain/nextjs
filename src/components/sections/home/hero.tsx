@@ -8,7 +8,7 @@ export default function Hero() {
         <Banner bg="/home-hero.mp4">
             <Banner.Left class_name="">
                 <div className="flex flex-col">
-                    <h1 className="text-white  font-medium leading-[40px] sm:leading-[60px] xl:leading-[80px] tracking-[-0.05em] flex flex-col gap-[30px] mb-[35px]">
+                    <h1 className="text-white  font-medium leading-[70px] sm:leading-[60px] xl:leading-[70px] tracking-[-0.05em] flex flex-col gap-[30px] mb-[35px]">
                         <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
                         <em className="italic text-[36px] md:text-[50px] xl:text-[84px] font-dm-serif">& Build Contractor</em>
                     </h1>
@@ -17,12 +17,15 @@ export default function Hero() {
                         <span className="h-[1px] absolute w-[50px] md:w-[80px] bg-sah-red"></span>
                     </div>
 
-                    <Link href="/register" className="inline-flex items-center gap-[10px] bg-sah-red text-white text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit">
+                    <Link
+                        href="/register"
+                        className="inline-flex items-center gap-[10px] group bg-sah-red hover:bg-sah-white text-white hover:text-sah-red   text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit transition"
+                    >
                         You Like to Build?
-                        <AngleArrow class_name="!w-[12px] !h-[12px]" />
+                        <AngleArrow class_name="!w-[12px] !h-[12px] !fill-white group-hover:!fill-sah-red transition" />
                     </Link>
 
-                    <div className="hidden md:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/30 rounded-full px-[12px] py-[16px] mt-[60px] w-[max-content]">
+                    <div className="hidden md:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/30 rounded-full px-[12px] py-[16px] mt-[80px] w-[max-content]">
                         <span className="text-white text-[16px] font-normal capitalcase [writing-mode:vertical-rl] rotate-180">Scroll Now</span>
                         <DownCurveArrow class_name="!fill-sah-white !h-[20px] !w-[15px]" />
                     </div>
@@ -30,8 +33,11 @@ export default function Hero() {
             </Banner.Left>
 
             <Banner.Right>
-                <div className="flex justify-start pt-[40px] sm:justify-end sm:pb-[100px]">
-                    <div className="relative w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] flex flex-col gap-3 bg-cover bg-center" style={{ backgroundImage: "url('/white-dots.jpg')" }}>
+                <div className="flex justify-start pt-[40px] sm:justify-end sm:pb-[100px] h-[100%] w-[max-content] border-x border-sah-white/20">
+                    <div
+                        className="relative w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] h-[max-content] flex flex-col gap-3 bg-cover bg-center mt-auto"
+                        style={{ backgroundImage: "url('/white-dots.jpg')" }}
+                    >
                         <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
                         <StatCounter value={30} suffix="+" className="text-sah-red font-semibold font-geist text-[50px] lg:text-[100px] leading-none" />
                         <span className="text-sah-gray-1 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">Leading Years in Construction</span>
