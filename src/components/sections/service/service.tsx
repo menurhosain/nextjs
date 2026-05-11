@@ -1,5 +1,6 @@
 import { ServiceCardTwo } from "@/components/ui/service-card2";
 import Section_Title from "@/components/ui/section-title";
+import { FaqAccordion } from "@/components/ui/faq-accordion";
 
 const cardIcon1 = (
     <svg viewBox="0 0 60 60" className="!w-[60px] !h-[60px] !fill-[#555555]">
@@ -17,57 +18,78 @@ const cardIcon3 = (
     </svg>
 );
 
+const accordion = [
+    {
+        question: "What services do you offer?",
+        answer: "We offer construction, MEP, infrastructure works, and project management."
+    },
+    {
+        question: "How long does a typical project take?",
+        answer: "Timelines vary by scope, but most projects range from 6 to 24 months."
+    }
+];
+
 export default function Service() {
     return (
-        <section className="section-padding relative pt-27 lg:pb-[140px] pb-[80px] bg-[var(--color-sah-light-4)] bg-[url('/page_service_bg.jpg')] bg-contain bg-bottom bg-no-repeat">
-            <div className="container">
-                <div className="grid grid-cols-7 gap-10 items-start">
-                    <div className="col-span-3 sticky top-[30px] left-0">
-                        <Section_Title
-                            subtitle="Our Culture"
-                            title=<> What we offer </>
-                            description="Offsite, part of the SAH group, is reshaping construction through innovative and scalable offsite manufacturing methods. Backed by more than two decades of experience, we enable clients to achieve faster timelines, improved safety, and smarter building practices. Our goal is to transform how projects."
-                            class_name={
-                                {
-                                    subtitle: "text-sah-black !mb-[15px]",
-                                    title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] max-w-[870px] text-[70px] ",
-                                    description: "text-sah-gray-1 max-w-[870px]"
+        <>
+            <section className="section-padding relative pt-27 lg:pb-[140px] pb-[80px] bg-[var(--color-sah-light-4)] bg-[url('/page_service_bg.jpg')] bg-contain bg-bottom bg-no-repeat">
+                <div className="container">
+                    <div className="grid grid-cols-7 gap-10 items-start">
+                        <div className="col-span-3 sticky top-[30px] left-0">
+                            <Section_Title
+                                subtitle="Our Culture"
+                                title=<> What we offer </>
+                                description="Offsite, part of the SAH group, is reshaping construction through innovative and scalable offsite manufacturing methods. Backed by more than two decades of experience, we enable clients to achieve faster timelines, improved safety, and smarter building practices. Our goal is to transform how projects."
+                                class_name={
+                                    {
+                                        subtitle: "text-sah-black !mb-[15px]",
+                                        title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] max-w-[870px] text-[70px] ",
+                                        description: "text-sah-gray-1 max-w-[870px]"
+                                    }
                                 }
-                            }
-                        />
-                    </div>
-                    <div className="col-span-4 grid grid-cols-2 gap-[30px]">
-                        <ServiceCardTwo
-                            icon={cardIcon1}
-                            title=<>Construction <br /> & Engineering</>
-                            description="We oversee every construction stage carefully, coordinating teams and ensuring smooth execution from start to finish."
-                            image="/service-card/1.jpg"
-                            href="#"
-                        />
-                        <ServiceCardTwo
-                            icon={cardIcon2}
-                            title=<>MEP & Building <br /> Systems</>
-                            description="From concept to completion, we approach every project with a focus on innovation, sustainability, and efficiency."
-                            image="/service-card/2.jpg"
-                            href="#"
-                        />
-                        <ServiceCardTwo
-                            icon={cardIcon3}
-                            title=<>Infrastructure <br /> Works</>
-                            description="Expertly crafting the custom homes duplexes apartments, and residential complexes with precision and care."
-                            image="/service-card/3.jpg"
-                            href="#"
-                        />
-                        <ServiceCardTwo
-                            icon={cardIcon1}
-                            title=<>Project <br /> Management</>
-                            description="Expertise in designing and analyzing structural systems to ensure safety, stability, longevity of buildings and infrastructure."
-                            image="/service-card/4.jpg"
-                            href="#"
-                        />
+                            />
+                        </div>
+                        <div className="col-span-4 grid grid-cols-2 gap-[30px]">
+                            <ServiceCardTwo
+                                icon={cardIcon1}
+                                title=<>Construction <br /> & Engineering</>
+                                description="We oversee every construction stage carefully, coordinating teams and ensuring smooth execution from start to finish."
+                                image="/service-card/1.jpg"
+                                href="#"
+                            />
+                            <ServiceCardTwo
+                                icon={cardIcon2}
+                                title=<>MEP & Building <br /> Systems</>
+                                description="From concept to completion, we approach every project with a focus on innovation, sustainability, and efficiency."
+                                image="/service-card/2.jpg"
+                                href="#"
+                            />
+                            <ServiceCardTwo
+                                icon={cardIcon3}
+                                title=<>Infrastructure <br /> Works</>
+                                description="Expertly crafting the custom homes duplexes apartments, and residential complexes with precision and care."
+                                image="/service-card/3.jpg"
+                                href="#"
+                            />
+                            <ServiceCardTwo
+                                icon={cardIcon1}
+                                title=<>Project <br /> Management</>
+                                description="Expertise in designing and analyzing structural systems to ensure safety, stability, longevity of buildings and infrastructure."
+                                image="/service-card/4.jpg"
+                                href="#"
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <section className="section-padding lg:py-[140px] py-[80px]">
+                <div className="container">
+                    {accordion.map((item, i) => (
+                        <FaqAccordion key={i} items={[item]} />
+                    ))}
+                </div>
+            </section>
+        </>
     );
 }

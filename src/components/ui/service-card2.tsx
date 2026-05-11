@@ -33,14 +33,16 @@ export function ServiceCardTwo({ icon, title, description, image, href = "#", cl
                     alt={title}
                     className="w-full h-auto"
                 />
-                <Link
-                    href={href}
-                    className="absolute bottom-3 text-[15px] right-3 w-9 h-9 rounded-full bg-white hover:bg-sah-red hover:text-white flex items-center justify-center shadow sah-transition"
-                >
-                    <svg viewBox="0 0 12 12">
-                        <path d="M0 10.0576L8.36252 1.69511H2.90993L2.89581 0.0141261L11.2442 0V8.36252L9.56322 8.34839V2.8958L1.2007 11.2583L0 10.0576Z"/>
-                    </svg>
-                </Link>
+                <div className="group">
+                    <Link
+                        href={href}
+                        className="absolute bottom-3 text-[11px] right-3 w-9 h-9 rounded-full bg-white hover:bg-sah-red hover:text-white flex items-center justify-center shadow sah-transition group-hover:rotate-45"
+                    >
+                        <svg viewBox="0 0 12 12">
+                            <path d="M0 10.0576L8.36252 1.69511H2.90993L2.89581 0.0141261L11.2442 0V8.36252L9.56322 8.34839V2.8958L1.2007 11.2583L0 10.0576Z"/>
+                        </svg>
+                    </Link>
+                </div>
             </div>
         </div>
     );
