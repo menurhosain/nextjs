@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Banner from "@/components/ui/banner";
+import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { Cross, DownArrow, DownLongArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
 import Link from "next/link";
@@ -105,7 +105,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     return (
         <>
             <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection}>
-                <Banner.Left class_name="flex flex-col justify-center">
+                <Left class_name="flex flex-col justify-center">
                     <div className="flex flex-col justify-center mt-[188px]">
                         <Banner_Title subtitle="Explore Our Recent Projects" title=<>Showcasing our latest construction projects and achievements</> />
                     </div>
@@ -140,9 +140,9 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                             </div>
                         </div>
                     </div>
-                </Banner.Left>
+                </Left>
 
-                <Banner.Right>
+                <Right>
                     <div className="pl-[20px] flex gap-[30px] w-full pb-10">
                         <div className="flex items-center flex-col gap-[40px]">
                             <button
@@ -179,7 +179,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                             </div>
                         </div>
                     </div>
-                </Banner.Right>
+                </Right>
             </Banner>
 
             {/* Drawer overlay */}

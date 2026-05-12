@@ -58,7 +58,4 @@ function Right({ children, className }: { children: React.ReactNode; className?:
     return <div className={`w-[100%] md:w-[38%] flex flex-col items-end justify-end ${className}`}>{children}</div>;
 }
 
-Banner.Left = Left;
-Banner.Right = Right;
-
-export default Banner;
+export { Banner, Left, Right };
