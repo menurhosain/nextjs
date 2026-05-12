@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 type SectionTitleClassNames = {
     subtitle?: string;
     title?: string;
@@ -21,9 +23,9 @@ export default function Section_Title({
 }) {
     return (
         <>
-            {subtitle ? <p className={`text-[16px] font-medium tracking-widest uppercase mb-[28px] font-inter ${class_name.subtitle}`}>[ {subtitle} ] ↓</p> : null}
-            {title ? <h2 className={`font-geist mb-[40px] font-medium text-[30px] sm:text-[40px] lg:text-[50px] xl:text-[90px] lg:leading-[60px] xl:leading-[90px] ${class_name.title}`}>{title}</h2> : null}
-            {description ? <p className={`font-geist font-normal  text-[16px] leading-[28px] max-w-[95%] ${class_name.description}`}>{description}</p> : null}
+            {subtitle ? <p className={cn("text-[16px] font-medium tracking-widest uppercase mb-[28px] font-inter", class_name.subtitle)}>[ {subtitle} ] ↓</p> : null}
+            {title ? <h2 className={cn("font-geist mb-[40px] font-medium text-[30px] sm:text-[40px] lg:text-[50px] xl:text-[90px] lg:leading-[60px] xl:leading-[90px]", class_name.title)}>{title}</h2> : null}
+            {description ? <p className={cn("font-geist font-normal  text-[16px] leading-[28px] max-w-[95%]", class_name.description)}>{description}</p> : null}
         </>
     );
 }
