@@ -36,7 +36,7 @@ export default function Careers() {
                             <div className="">
                                 <Image src="/careers-thumb-1.jpg" alt="" fill className="!h-auto !w-auto !relative rounded-[6px]" />
                             </div>
-                            <div className="w-full relative bg-sah-white rounded-[6px] px-[30px] pb-[40px]">
+                            <div className="w-full relative bg-sah-white rounded-[6px] px-[30px] pb-[25px]">
                                 {/* Legend */}
                                 <div className="mt-[55px] mr-[50px] flex flex-col items-start gap-[12px] pl-[120px] relative z-[5]">
                                     <div className="flex items-start gap-2 max-w-[220px]">
