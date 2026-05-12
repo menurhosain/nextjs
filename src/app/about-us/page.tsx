@@ -2,7 +2,7 @@ import Banner from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import About from "@/components/sections/about/about";
 import WhyChoose from "@/components/sections/about/whychoose";
-import Service from "@/components/sections/home/service";
+import Service from "@/components/sections/about/service";
 import Career from "@/components/sections/home/career";
 
 

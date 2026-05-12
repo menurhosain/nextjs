@@ -87,7 +87,7 @@ export default function WhyChoose() {
                             subtitle="Why Choose us"
                             title=<> What makes us different </>
                             description="It’s not just about creating something good; it’s about designing, innovating, and collaborating to forge remarkable and unparalleled experiences."
-                            class_name={{ subtitle: "text-sah-black !mb-[15px] text-left text-sah-white", title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[870px] text-[70px] text-left text-sah-white", description: "text-sah-gray-1 text-center max-w-[870px] text-left text-sah-white" }}
+                            class_name={{ subtitle: "text-sah-black !mb-[15px] text-left text-sah-white !tracking-normal", title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[870px] text-[70px] text-left text-sah-white", description: "text-sah-gray-1 text-center max-w-[870px] text-left text-sah-white" }}
                         />
                     </div>
                 </div>

@@ -90,7 +90,7 @@ export default function About() {
                             subtitle="About SAH"
                             title=<> SAH building company overview profile </>
                             description="Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based in the Sultanate of Oman. With a rich legacy spanning several decades, SAH has established itself as a trusted name in the construction industry, delivering exceptional projects of the highest quality."
-                            class_name={{ subtitle: "text-sah-black !mb-[15px]", title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[870px] text-[70px] ", description: "text-sah-gray-1 text-center max-w-[870px]" }}
+                            class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal", title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[870px] text-[70px] ", description: "text-sah-gray-1 text-center max-w-[870px]" }}
                         />
                     </div>
                     <div className="flex flex-col sm:flex-row gap-[30px] px-[125px]">
