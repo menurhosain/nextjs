@@ -79,7 +79,7 @@ export function FaqAccordion({
                 </div>
             )}
 
-            <div className="flex flex-col gap-[10px]">
+            <div className="flex flex-col gap-[12px]">
                 {items.map((item, index) => {
                     const open = isOpen(index);
                     const panelId = `faq-panel-${index}`;
