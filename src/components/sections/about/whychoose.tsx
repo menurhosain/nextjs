@@ -61,7 +61,7 @@ function FeatureCard({
                 >
                     {icon}
                 </div>
-                <h3 className="text-white font-medium text-[30px] leading-[38px] mb-0 mr-10">{title}</h3>
+                <h3 className="text-white font-medium text-[30px] leading-[38px] mb-0 mr-11">{title}</h3>
             </div>
 
             <div>
