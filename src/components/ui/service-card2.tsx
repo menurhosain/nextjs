@@ -14,7 +14,7 @@ interface ServiceCardTwoProps {
 
 export function ServiceCardTwo({ icon, title, description, image, href = "#", className }: ServiceCardTwoProps) {
     return (
-        <div className={cn("bg-white rounded-[12px] overflow-hidden flex flex-col p-[20px] pt-[50px] gap-[40px]", className)}>
+        <div className={cn("bg-white rounded-[12px] overflow-hidden flex flex-col p-[20px] pt-[50px] gap-[40px] sah-transition", className)}>
             <div className="px-[10px] flex flex-col gap-[33px]">
                 <div className="flex items-start gap-4">
                     {icon && <div className="shrink-0 text-[48px] leading-none">{icon}</div>}
@@ -30,7 +30,7 @@ export function ServiceCardTwo({ icon, title, description, image, href = "#", cl
             </div>
 
             <div className="relative rounded-[12px] overflow-hidden">
-                <img src={image} alt={title} className="w-full h-auto" />
+                <img src={image} alt="Service" className="w-full h-auto" />
                 <div className="group">
                     <Link
                         href={href}

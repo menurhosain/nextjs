@@ -20,12 +20,20 @@ const cardIcon3 = (
 
 const accordion = [
     {
-        question: "What services do you offer?",
-        answer: "We offer construction, MEP, infrastructure works, and project management."
+        question: "What the first step of the home buying process?",
+        answer: "We focus on providing a high standard of quality in each project. Our game studio carefully selects the right technology to meet any project requirement. We create engaging games and catchy art for various platforms."
     },
     {
-        question: "How long does a typical project take?",
-        answer: "Timelines vary by scope, but most projects range from 6 to 24 months."
+        question: "How long does it take to buy a home?",
+        answer: "We focus on providing a high standard of quality in each project. Our game studio carefully selects the right technology to meet any project requirement. We create engaging games and catchy art for various platforms."
+    },
+    {
+        question: "How much do I need for a down payment?",
+        answer: "We focus on providing a high standard of quality in each project. Our game studio carefully selects the right technology to meet any project requirement. We create engaging games and catchy art for various platforms."
+    },
+    {
+        question: "What is earnest money?",
+        answer: "We focus on providing a high standard of quality in each project. Our game studio carefully selects the right technology to meet any project requirement. We create engaging games and catchy art for various platforms."
     }
 ];
 
@@ -38,7 +46,7 @@ export default function Service() {
                         <div className="col-span-3 sticky top-[30px] left-0">
                             <Section_Title
                                 subtitle="Our Culture"
-                                title=<> What we offer </>
+                                title="What we offer"
                                 description="Offsite, part of the SAH group, is reshaping construction through innovative and scalable offsite manufacturing methods. Backed by more than two decades of experience, we enable clients to achieve faster timelines, improved safety, and smarter building practices. Our goal is to transform how projects."
                                 class_name={
                                     {
@@ -52,42 +60,68 @@ export default function Service() {
                         <div className="col-span-4 grid grid-cols-2 gap-[30px]">
                             <ServiceCardTwo
                                 icon={cardIcon1}
-                                title=<>Construction <br /> & Engineering</>
+                                title={<>Construction <br /> & Engineering</>}
                                 description="We oversee every construction stage carefully, coordinating teams and ensuring smooth execution from start to finish."
                                 image="/service-card/1.jpg"
                                 href="#"
+                                className="hover:translate-y-[-5px]"
                             />
                             <ServiceCardTwo
                                 icon={cardIcon2}
-                                title=<>MEP & Building <br /> Systems</>
+                                title={<>MEP & Building <br /> Systems</>}
                                 description="From concept to completion, we approach every project with a focus on innovation, sustainability, and efficiency."
                                 image="/service-card/2.jpg"
                                 href="#"
+                                className="hover:translate-y-[-5px]"
                             />
                             <ServiceCardTwo
                                 icon={cardIcon3}
-                                title=<>Infrastructure <br /> Works</>
+                                title={<>Infrastructure <br /> Works</>}
                                 description="Expertly crafting the custom homes duplexes apartments, and residential complexes with precision and care."
                                 image="/service-card/3.jpg"
                                 href="#"
+                                className="hover:translate-y-[-5px]"
                             />
                             <ServiceCardTwo
                                 icon={cardIcon1}
-                                title=<>Project <br /> Management</>
+                                title={<>Project <br /> Management</>}
                                 description="Expertise in designing and analyzing structural systems to ensure safety, stability, longevity of buildings and infrastructure."
                                 image="/service-card/4.jpg"
                                 href="#"
+                                className="hover:translate-y-[-5px]"
                             />
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section className="section-padding lg:py-[140px] py-[80px]">
+            <section className="section-padding lg:py-[140px] py-[80px] bg-[url('/faq_sec_bg.jpg')] bg-cover bg-bottom bg-no-repeat">
                 <div className="container">
-                    {accordion.map((item, i) => (
-                        <FaqAccordion key={i} items={[item]} />
-                    ))}
+                    <div className="grid grid-cols-8 gap-10 items-start">
+                        <div className="col-span-4">
+                            <Section_Title
+                                subtitle="Life at SAH"
+                                title="Frequently Asked Questions"
+                                description="Real stories from homeowners and investors who trusted us to guide their real estate journey."
+                                class_name={
+                                    {
+                                        subtitle: "text-sah-black !mb-[15px]",
+                                        title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[60px] text-[70px] ",
+                                        description: "text-sah-gray-1 max-w-[453px]"
+                                    }
+                                }
+                            />
+                        </div>
+                        <div className="col-span-4">
+                            <FaqAccordion
+                                items={accordion}
+                                mode="exclusive"
+                                showControls={false}
+                                defaultOpen={0}
+                                descClass="pr-[60px]"
+                            />
+                        </div>
+                    </div>
                 </div>
             </section>
         </>
