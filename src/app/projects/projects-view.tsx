@@ -13,9 +13,18 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({});
     const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
+    const [currentPage, setCurrentPage] = useState(1);
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    useEffect(() => () => { if (debounceRef.current) clearTimeout(debounceRef.current); }, []);
+    useEffect(
+        () => () => {
+            if (debounceRef.current) clearTimeout(debounceRef.current);
+        },
+        [],
+    );
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [query, selectedFilters]);
 
     function toggleAccordion(key: string) {
         setOpenAccordions((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -58,6 +67,17 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                 return options.some((o) => value.includes(o));
             });
         });
+
+    const ITEMS_PER_PAGE = 8;
+    const totalPages = Math.max(1, Math.ceil(filteredProjects.length / ITEMS_PER_PAGE));
+    const pagedProjects = filteredProjects.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+
+    function getVisiblePages(): (number | "...")[] {
+        if (totalPages <= 3) return Array.from({ length: totalPages }, (_, i) => i + 1);
+        if (currentPage <= 2) return [1, 2, 3, "..."];
+        if (currentPage >= totalPages - 1) return ["...", totalPages - 2, totalPages - 1, totalPages];
+        return ["...", currentPage - 1, currentPage, currentPage + 1, "..."];
+    }
 
     return (
         <>
@@ -168,7 +188,10 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                     {/* Apply filters */}
                     <div className="mt-auto px-6 py-5 border-t border-gray-200">
                         <button
-                            onClick={() => { submitSearch(); setDrawerOpen(false); }}
+                            onClick={() => {
+                                submitSearch();
+                                setDrawerOpen(false);
+                            }}
                             type="button"
                             className="w-full bg-sah-red text-sah-white font-inter text-[14px] font-semibold py-4 cursor-pointer hover:opacity-90 transition-opacity"
                         >
@@ -181,9 +204,46 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
             <section className="section-padding bg-sah-light-4">
                 <div className="container py-[140px] border-x border-sah-light-3">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {filteredProjects.map((project) => (
+                        {pagedProjects.map((project) => (
                             <ProjectCardSmall key={project.title} {...project} />
                         ))}
+                    </div>
+
+                    <div className="flex items-center justify-center gap-2 mt-[60px]">
+                        <button
+                            type="button"
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage((p) => p - 1)}
+                            className="px-5 py-2 rounded-[8px] border border-sah-light-2 font-inter text-[14px] font-medium text-sah-dark hover:border-sah-dark transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                            Previous
+                        </button>
+
+                        {getVisiblePages().map((page, i) =>
+                            page === "..." ? (
+                                <span key={`ellipsis-${i}`} className="px-1 font-inter text-[14px] text-sah-dark">
+                                    ...
+                                </span>
+                            ) : (
+                                <button
+                                    key={page}
+                                    type="button"
+                                    onClick={() => setCurrentPage(page)}
+                                    className={`size-[38px] rounded-[8px] font-inter text-[14px] font-medium transition-colors cursor-pointer ${currentPage === page ? "border border-sah-red text-sah-red" : "text-sah-dark hover:text-sah-red"}`}
+                                >
+                                    {page}
+                                </button>
+                            ),
+                        )}
+
+                        <button
+                            type="button"
+                            disabled={currentPage === totalPages}
+                            onClick={() => setCurrentPage((p) => p + 1)}
+                            className="px-5 py-2 rounded-[8px] bg-sah-red font-inter text-[14px] font-medium text-sah-white hover:bg-sah-red/90 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                            Next
+                        </button>
                     </div>
                 </div>
             </section>
