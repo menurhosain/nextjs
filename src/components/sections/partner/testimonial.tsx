@@ -27,14 +27,14 @@ const testimonials = [
   {
     id: 3,
     quote:
-      "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum blandit.",
+      "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum blandit augue laoreet rutrum faucibus dolor.",
     name: "Mr. Daniel Osei",
     role: "Design, Director",
   },
   {
     id: 4,
     quote:
-      "Fusce dapibus tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean lacinia bibendum nulla sed consectetur ornare.",
+      "Fusce dapibus tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean lacinia bibendum nulla sed consectetur ornare augue laoreet rutrum faucibus dolor.",
     name: "Ms. Amara Nwosu",
     role: "Engineering, Lead",
   },
@@ -63,21 +63,21 @@ export default function Testimonial() {
                                 {testimonials.map((t) => (
                                     <SwiperSlide key={t.id}>
                                         <div className="bg-white overflow-hidden mr-[10px] mb-[10px] shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)]">
-                                            <div className="px-8 pt-7 pb-6 relative">   
-                                                <p className="relative z-10 text-[24px] font-regular leading-[36px] text-gray-600 mb-7 min-h-[108px]">
+                                            <div className="px-[50px] pt-[51px] pb-[55px] relative">   
+                                                <p className="relative z-10 text-[24px] font-regular leading-[36px] text-sah-dark-2 mb-6 min-h-[108px]">
                                                     {t.quote}
                                                 </p>
-                                                <div className="h-px bg-gray-100 mb-5" />
+                                                <div className="h-px bg-sah-light-3 mb-7" />
                                                 <div className="flex items-center justify-between">
-                                                    <div className="flex items-start flex-col gap-3">
-                                                        <p className="text-[0.95rem] font-semibold text-gray-900 leading-snug">
+                                                    <div className="flex items-start flex-col gap-0">
+                                                        <p className="text-[24px] font-bold text-sah-dark-2 leading-snug pb-[5px]">
                                                             {t.name}
                                                         </p>
-                                                        <p className="text-[0.73rem] text-gray-400 tracking-wide mt-[2px]">
+                                                        <p className="text-[16px] font-medium text-sah-gray-1">
                                                             {t.role}
                                                         </p>
                                                     </div>
-                                                    <div className="flex gap-[3px] items-end opacity-75">
+                                                    <div className="flex gap-[3px] items-end opacity-75 ">
                                                         <svg width="44" height="33" viewBox="0 0 44 33" fill="var(--color-sah-red)" xmlns="http://www.w3.org/2000/svg" className="!w-[44px] !h-[44px]">
                                                             <path d="M0 0V33L16.5 16.5V0H0ZM27.5 0V33L44 16.5V0H27.5Z" fill="var(--color-sah-red)"/>
                                                         </svg>
