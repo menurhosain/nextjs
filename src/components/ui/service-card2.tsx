@@ -43,6 +43,8 @@ export function ServiceCardTwo({ icon, title, description, image, href = "#", cl
         </div>
     );
 }
+
+// TODO:: Have to remove
 export function ServiceCardTwoBackup({ icon, title, description, image, href = "#", className }: ServiceCardTwoProps) {
     return (
         <div className={cn("bg-white rounded-[12px] overflow-hidden flex flex-col p-[20px] pt-[50px] gap-[40px] sah-transition", className)}>
