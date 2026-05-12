@@ -3,7 +3,7 @@ import { BrandShape } from "./svgs";
 
 function Banner({ bg, children, style }: { bg: string; children: React.ReactNode; style?: React.CSSProperties }) {
     return (
-        <section className={`h-[85vh] sm:h-screen relative w-full flex banner-overlay section-padding overflow-hidden`} style={{ ...style }}>
+        <section className={`h-[85vh] sm:min-h-[950px] relative w-full flex banner-overlay section-padding overflow-hidden`} style={{ ...style }}>
             <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover z-[-1]">
                 <source src={bg} type="video/mp4" />
             </video>

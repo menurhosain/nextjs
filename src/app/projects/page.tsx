@@ -33,7 +33,7 @@ const tags = [
 ];
 
 export default function ProjectsPage() {
-    const [query, setQuery] = useState({ s: "", location: [], industry: [] });
+    const [query, setQuery] = useState("");
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({});
     const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
@@ -53,7 +53,12 @@ export default function ProjectsPage() {
     }
 
     function handleSearch() {
-        console.log(query);
+        console.log(query, selectedFilters);
+    }
+
+    function clear_filters() {
+        setQuery("");
+        setSelectedFilters({});
     }
 
     return (
@@ -70,8 +75,8 @@ export default function ProjectsPage() {
                         <div className="flex-1 flex items-center gap-[20px] justify-between bg-sah-gray-5 px-6 transition-colors duration-200 pr-[14px]">
                             <input
                                 type="text"
-                                value={query.s}
-                                onChange={(e) => setQuery({ ...query, s: e.target.value })}
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                                 className="text-sah-white h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white bg-transparent"
                                 placeholder="Find a project"
@@ -106,8 +111,9 @@ export default function ProjectsPage() {
                 <div onClick={() => setDrawerOpen(false)} className={`flex-1 bg-black/40 transition-opacity duration-300 ${drawerOpen ? "opacity-100" : "opacity-0"}`} />
                 <div className={`w-[350px] h-full bg-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}>
                     {/* Close button row */}
-                    <div className="flex justify-end px-6 py-4">
-                        <button type="button" onClick={() => setDrawerOpen(false)} className="size-7 flex items-center justify-center hover:opacity-60 transition-opacity">
+                    <div className="flex justify-between items-center px-6 py-4 border-b border-sah-light-3">
+                        <span className="text-[16px] font-inter font-medium">Refine your search</span>
+                        <button type="button" onClick={() => setDrawerOpen(false)} className="size-7 flex items-center justify-end hover:opacity-60 transition-opacity">
                             <Cross class_name="cursor-pointer !size-[24px]" />
                         </button>
                     </div>
@@ -115,12 +121,19 @@ export default function ProjectsPage() {
                     {/* Search bar */}
                     <div className="flex items-center gap-3 px-6 py-3 border-b border-gray-200">
                         <SearchIcon class_name="!size-[18px] shrink-0 text-sah-dark !fill-sah-red" />
-                        <input type="text" placeholder="Find A Project" className="flex-1 min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
+                        <input
+                            type="text"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                            placeholder="Find A Project"
+                            className="flex-1 min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50"
+                        />
                     </div>
 
                     {/* Clear filters */}
-                    <div className="flex justify-end px-6 py-3 border-b border-gray-200">
-                        <button type="button" className="font-inter text-[13px] text-sah-dark underline underline-offset-2">
+                    <div className="flex justify-end px-6 py-3 border-b border-gray-200 ">
+                        <button onClick={clear_filters} type="button" className="font-inter cursor-pointer text-[13px] text-sah-dark underline underline-offset-2">
                             Clear All Filters
                         </button>
                     </div>
@@ -156,7 +169,11 @@ export default function ProjectsPage() {
 
                     {/* Apply filters */}
                     <div className="mt-auto px-6 py-5 border-t border-gray-200">
-                        <button type="button" className="w-full bg-sah-red text-sah-white font-inter text-[14px] font-semibold py-4 cursor-pointer hover:opacity-90 transition-opacity">
+                        <button
+                            onClick={handleSearch}
+                            type="button"
+                            className="w-full bg-sah-red text-sah-white font-inter text-[14px] font-semibold py-4 cursor-pointer hover:opacity-90 transition-opacity"
+                        >
                             Apply Filters
                         </button>
                     </div>
