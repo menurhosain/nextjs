@@ -17,6 +17,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     const [scrollTrigger, setScrollTrigger] = useState(0);
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const sectionRef = useRef<HTMLElement>(null);
+    const isMounted = useRef(false);
 
     useEffect(
         () => () => {
@@ -26,6 +27,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     );
 
     useEffect(() => {
+        if (!isMounted.current) { isMounted.current = true; return; }
         setCurrentPage(1);
         setScrollTrigger((n) => n + 1);
     }, [query, selectedFilters]);
