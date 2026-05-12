@@ -57,6 +57,93 @@ export default function Service() {
                                 }
                             />
                         </div>
+                        <div className="col-span-4 flex flex-col gap-[30px]">
+                            <ServiceCardTwo
+                                icon={cardIcon1}
+                                title={<>Construction <br /> & Engineering</>}
+                                description="We oversee every construction stage carefully, coordinating teams and ensuring smooth execution from start to finish."
+                                image="/service-card/1.jpg"
+                                href="#"
+                            />
+                            <ServiceCardTwo
+                                icon={cardIcon2}
+                                title={<>MEP & Building <br /> Systems</>}
+                                description="From concept to completion, we approach every project with a focus on innovation, sustainability, and efficiency."
+                                image="/service-card/2.jpg"
+                                href="#"
+                            />
+                            <ServiceCardTwo
+                                icon={cardIcon3}
+                                title={<>Infrastructure <br /> Works</>}
+                                description="Expertly crafting the custom homes duplexes apartments, and residential complexes with precision and care."
+                                image="/service-card/3.jpg"
+                                href="#"
+                            />
+                            <ServiceCardTwo
+                                icon={cardIcon1}
+                                title={<>Project <br /> Management</>}
+                                description="Expertise in designing and analyzing structural systems to ensure safety, stability, longevity of buildings and infrastructure."
+                                image="/service-card/4.jpg"
+                                href="#"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="section-padding lg:py-[140px] py-[80px] bg-[url('/faq_sec_bg.jpg')] bg-cover bg-bottom bg-no-repeat">
+                <div className="container">
+                    <div className="grid grid-cols-8 gap-10 items-start">
+                        <div className="col-span-4">
+                            <Section_Title
+                                subtitle="Life at SAH"
+                                title="Frequently Asked Questions"
+                                description="Real stories from homeowners and investors who trusted us to guide their real estate journey."
+                                class_name={
+                                    {
+                                        subtitle: "text-sah-black !mb-[15px]",
+                                        title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[60px] text-[70px] ",
+                                        description: "text-sah-gray-1 max-w-[453px]"
+                                    }
+                                }
+                            />
+                        </div>
+                        <div className="col-span-4">
+                            <FaqAccordion
+                                items={accordion}
+                                mode="exclusive"
+                                showControls={false}
+                                defaultOpen={0}
+                                descClass="pr-[60px]"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </>
+    );
+}
+
+export function ServiceBackup() {
+    return (
+        <>
+            <section className="section-padding relative pt-27 lg:pb-[140px] pb-[80px] bg-[var(--color-sah-light-4)] bg-[url('/page_service_bg.jpg')] bg-contain bg-bottom bg-no-repeat">
+                <div className="container">
+                    <div className="grid grid-cols-7 gap-10 items-start">
+                        <div className="col-span-3 sticky top-[30px] left-0">
+                            <Section_Title
+                                subtitle="Our Culture"
+                                title="What we offer"
+                                description="Offsite, part of the SAH group, is reshaping construction through innovative and scalable offsite manufacturing methods. Backed by more than two decades of experience, we enable clients to achieve faster timelines, improved safety, and smarter building practices. Our goal is to transform how projects."
+                                class_name={
+                                    {
+                                        subtitle: "text-sah-black !mb-[15px]",
+                                        title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] max-w-[870px] text-[70px] ",
+                                        description: "text-sah-gray-1 max-w-[870px]"
+                                    }
+                                }
+                            />
+                        </div>
                         <div className="col-span-4 grid grid-cols-2 gap-[30px]">
                             <ServiceCardTwo
                                 icon={cardIcon1}

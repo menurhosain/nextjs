@@ -10,7 +10,7 @@ export default function ServicesPage() {
                     <div className="flex flex-col justify-center">
                         <Banner_Title
                             subtitle="Explore Our Core Services"
-                            title=<> Delivering Reliable And Efficient Construction Services Today </>
+                            title={<> Delivering Reliable And Efficient Construction Services Today </>}
                         />
                     </div>
                 </Banner.Left>
