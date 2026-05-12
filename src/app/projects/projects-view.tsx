@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Banner from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { Cross, DownArrow, DownLongArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
+import Link from "next/link";
 import { ProjectCardSmall } from "@/components/ui/project-card-small";
 import type { Project, ProjectTag } from "@/services/project.service";
 
@@ -15,6 +16,9 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
     const [currentPage, setCurrentPage] = useState(1);
     const [scrollTrigger, setScrollTrigger] = useState(0);
+    const [sliderIndex, setSliderIndex] = useState(0);
+    const [sliderDirection, setSliderDirection] = useState<"left" | "right">("right");
+    const [sliderAnimKey, setSliderAnimKey] = useState(0);
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const sectionRef = useRef<HTMLElement>(null);
     const isMounted = useRef(false);
@@ -100,7 +104,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
 
     return (
         <>
-            <Banner bg="/home-hero.mp4">
+            <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection}>
                 <Banner.Left class_name="flex flex-col justify-center">
                     <div className="flex flex-col justify-center mt-[188px]">
                         <Banner_Title subtitle="Explore Our Recent Projects" title=<>Showcasing our latest construction projects and achievements</> />
@@ -141,14 +145,38 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                 <Banner.Right>
                     <div className="pl-[20px] flex gap-[30px] w-full pb-10">
                         <div className="flex items-center flex-col gap-[40px]">
-                            <DownLongArrow class_name="!fill-sah-white w-4 h-4 -rotate-90" />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setSliderDirection("left");
+                                    setSliderAnimKey((k) => k + 1);
+                                    setSliderIndex((i) => (i - 1 + projects.length) % projects.length);
+                                }}
+                                className="cursor-pointer"
+                            >
+                                <DownLongArrow class_name="!fill-sah-white w-4 h-4 -rotate-90" />
+                            </button>
                             <div className="w-8 h-[1px] bg-sah-white/20" />
-                            <DownLongArrow class_name="!fill-sah-white w-4 h-4 rotate-90" />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setSliderDirection("right");
+                                    setSliderAnimKey((k) => k + 1);
+                                    setSliderIndex((i) => (i + 1) % projects.length);
+                                }}
+                                className="cursor-pointer"
+                            >
+                                <DownLongArrow class_name="!fill-sah-white w-4 h-4 rotate-90" />
+                            </button>
                         </div>
 
-                        <div>
-                            <span className="mb-[24px] block text-sah-white font-bold text-[16px] leading-[20px] uppercase tracking-wider">Architecture</span>
-                            <h2 className="font-geist font-normal text-[30px] leading-[38px] text-sah-white underline">Police College Package C SQAPS Nizwa</h2>
+                        <div className="overflow-hidden">
+                            <div key={sliderAnimKey} className={sliderDirection === "right" ? "slider-slide-right" : "slider-slide-left"}>
+                                <span className="mb-[24px] block text-sah-white font-bold text-[16px] leading-[20px] uppercase tracking-wider">{projects[sliderIndex]?.scope}</span>
+                                <Link href={projects[sliderIndex]?.link ?? "#"} className="font-geist font-normal text-[30px] leading-[38px] text-sah-white underline">
+                                    {projects[sliderIndex]?.title}
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </Banner.Right>

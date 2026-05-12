@@ -136,6 +136,57 @@ svg {
     }
 }
 
+@keyframes bg-slide-from-right {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+}
+@keyframes bg-slide-from-left {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
+}
+@keyframes bg-slide-out-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+}
+@keyframes bg-slide-out-right {
+    from { transform: translateX(0); }
+    to   { transform: translateX(100%); }
+}
+
+.bg-slide-right     { animation: bg-slide-from-right 0.5s ease-out forwards; }
+.bg-slide-left      { animation: bg-slide-from-left  0.5s ease-out forwards; }
+.bg-slide-out-left  { animation: bg-slide-out-left   0.5s ease-out forwards; }
+.bg-slide-out-right { animation: bg-slide-out-right  0.5s ease-out forwards; }
+
+@keyframes slide-from-right {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-from-left {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slider-slide-right {
+    animation: slide-from-right 0.35s ease-out forwards;
+}
+.slider-slide-left {
+    animation: slide-from-left 0.35s ease-out forwards;
+}
+
 .register-box .register-select {
     position: relative;
 }
