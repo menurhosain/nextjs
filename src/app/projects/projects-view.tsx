@@ -239,7 +239,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                     setCurrentPage((p) => p - 1);
                                     setScrollTrigger((n) => n + 1);
                                 }}
-                                className="px-5 py-2 rounded-[8px] border border-sah-light-2 font-inter text-[14px] font-medium text-sah-dark hover:border-sah-dark transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                                className="px-5 py-2 rounded-[8px] border border-sah-light-2 font-inter text-[14px] font-bold text-sah-dark hover:border-sah-dark transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                             >
                                 Previous
                             </button>
@@ -257,7 +257,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                             setCurrentPage(page);
                                             setScrollTrigger((n) => n + 1);
                                         }}
-                                        className={`size-[38px] rounded-[8px] font-inter text-[14px] font-medium transition-colors cursor-pointer ${currentPage === page ? "border border-sah-red text-sah-red" : "text-sah-dark hover:text-sah-red"}`}
+                                        className={`size-[38px] rounded-[8px] font-inter text-[12px] font-bold transition-colors cursor-pointer ${currentPage === page ? "border border-sah-red text-sah-red" : "text-sah-dark hover:text-sah-red"}`}
                                     >
                                         {page}
                                     </button>
@@ -271,7 +271,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                     setCurrentPage((p) => p + 1);
                                     setScrollTrigger((n) => n + 1);
                                 }}
-                                className="px-5 py-2 rounded-[8px] bg-sah-red font-inter text-[14px] font-medium text-sah-white hover:bg-sah-red/90 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                                className="px-5 py-2 rounded-[8px] bg-sah-red font-inter text-[14px] font-bold text-sah-white hover:bg-sah-red/90 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                             >
                                 Next
                             </button>

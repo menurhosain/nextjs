@@ -36,7 +36,7 @@ export default function Hero() {
             </Banner.Left>
 
             <Banner.Right>
-                <div className="flex justify-start pt-[40px] sm:justify-end sm:pb-[100px] h-[100%] w-[max-content] border-x border-sah-white/20">
+                <div className="flex radius-[10px] justify-start pt-[40px] sm:justify-end sm:pb-[100px] h-[100%] w-[max-content] border-x border-sah-white/20">
                     <div
                         className="relative w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] h-[max-content] flex flex-col gap-3 bg-cover bg-center mt-auto"
                         style={{ backgroundImage: "url('/white-dots.jpg')" }}
