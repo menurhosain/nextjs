@@ -14,7 +14,9 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({});
     const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
     const [currentPage, setCurrentPage] = useState(1);
+    const [scrollTrigger, setScrollTrigger] = useState(0);
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(
         () => () => {
@@ -22,9 +24,21 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
         },
         [],
     );
+
     useEffect(() => {
         setCurrentPage(1);
+        setScrollTrigger((n) => n + 1);
     }, [query, selectedFilters]);
+
+    useEffect(() => {
+        if (scrollTrigger === 0) return;
+        const id = setTimeout(() => {
+            if (sectionRef.current) {
+                window.scrollTo({ top: sectionRef.current.offsetTop - 200, behavior: "smooth" });
+            }
+        }, 50);
+        return () => clearTimeout(id);
+    }, [scrollTrigger]);
 
     function toggleAccordion(key: string) {
         setOpenAccordions((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -201,50 +215,68 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                 </div>
             </div>
 
-            <section className="section-padding bg-sah-light-4">
+            <section ref={sectionRef} className="section-padding bg-sah-light-4">
                 <div className="container py-[140px] border-x border-sah-light-3">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {pagedProjects.map((project) => (
-                            <ProjectCardSmall key={project.title} {...project} />
-                        ))}
-                    </div>
+                    {filteredProjects.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center py-[80px] gap-4">
+                            <p className="font-geist text-[32px] font-medium text-sah-dark">No projects found.</p>
+                            <p className="font-inter text-[16px] text-sah-dark/50">Try narrowing your search or adjusting the filters.</p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {pagedProjects.map((project) => (
+                                <ProjectCardSmall key={project.title} {...project} />
+                            ))}
+                        </div>
+                    )}
 
-                    <div className="flex items-center justify-center gap-2 mt-[60px]">
-                        <button
-                            type="button"
-                            disabled={currentPage === 1}
-                            onClick={() => setCurrentPage((p) => p - 1)}
-                            className="px-5 py-2 rounded-[8px] border border-sah-light-2 font-inter text-[14px] font-medium text-sah-dark hover:border-sah-dark transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                        >
-                            Previous
-                        </button>
+                    {filteredProjects.length > 0 && (
+                        <div className="flex items-center justify-center gap-2 mt-[60px]">
+                            <button
+                                type="button"
+                                disabled={currentPage === 1}
+                                onClick={() => {
+                                    setCurrentPage((p) => p - 1);
+                                    setScrollTrigger((n) => n + 1);
+                                }}
+                                className="px-5 py-2 rounded-[8px] border border-sah-light-2 font-inter text-[14px] font-medium text-sah-dark hover:border-sah-dark transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                            >
+                                Previous
+                            </button>
 
-                        {getVisiblePages().map((page, i) =>
-                            page === "..." ? (
-                                <span key={`ellipsis-${i}`} className="px-1 font-inter text-[14px] text-sah-dark">
-                                    ...
-                                </span>
-                            ) : (
-                                <button
-                                    key={page}
-                                    type="button"
-                                    onClick={() => setCurrentPage(page)}
-                                    className={`size-[38px] rounded-[8px] font-inter text-[14px] font-medium transition-colors cursor-pointer ${currentPage === page ? "border border-sah-red text-sah-red" : "text-sah-dark hover:text-sah-red"}`}
-                                >
-                                    {page}
-                                </button>
-                            ),
-                        )}
+                            {getVisiblePages().map((page, i) =>
+                                page === "..." ? (
+                                    <span key={`ellipsis-${i}`} className="px-1 font-inter text-[14px] text-sah-dark">
+                                        ...
+                                    </span>
+                                ) : (
+                                    <button
+                                        key={page}
+                                        type="button"
+                                        onClick={() => {
+                                            setCurrentPage(page);
+                                            setScrollTrigger((n) => n + 1);
+                                        }}
+                                        className={`size-[38px] rounded-[8px] font-inter text-[14px] font-medium transition-colors cursor-pointer ${currentPage === page ? "border border-sah-red text-sah-red" : "text-sah-dark hover:text-sah-red"}`}
+                                    >
+                                        {page}
+                                    </button>
+                                ),
+                            )}
 
-                        <button
-                            type="button"
-                            disabled={currentPage === totalPages}
-                            onClick={() => setCurrentPage((p) => p + 1)}
-                            className="px-5 py-2 rounded-[8px] bg-sah-red font-inter text-[14px] font-medium text-sah-white hover:bg-sah-red/90 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                        >
-                            Next
-                        </button>
-                    </div>
+                            <button
+                                type="button"
+                                disabled={currentPage === totalPages}
+                                onClick={() => {
+                                    setCurrentPage((p) => p + 1);
+                                    setScrollTrigger((n) => n + 1);
+                                }}
+                                className="px-5 py-2 rounded-[8px] bg-sah-red font-inter text-[14px] font-medium text-sah-white hover:bg-sah-red/90 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
         </>
