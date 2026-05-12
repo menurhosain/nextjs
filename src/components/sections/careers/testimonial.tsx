@@ -1,8 +1,8 @@
 export default function Testimonial() {
     return (
         <>
-            <section className="px-[30px] bg-sah-light-4">
-                <div className="section-padding mt-[-270px] !px-[0] flex items-center bg-[url('/testimonial-bg.jpg')] h-[615px] bg-cover bg-center relative z-[6]">
+            <section className="bg-sah-light-4">
+                <div className="section-padding !px-[0] flex items-center bg-[url('/testimonial-bg.jpg')] h-[615px] bg-cover bg-center">
                     <div className="container mx-auto">
                         <div className="flex flex-col items-end">
                             <div className="relative px-6 max-w-[900px]">         

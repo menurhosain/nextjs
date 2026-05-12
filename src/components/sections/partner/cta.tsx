@@ -53,7 +53,8 @@ export default function Cta() {
  
           {/* CTA Button */}
           <div>
-            <button
+            <a 
+              href="#"
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(false)}
               className={`
@@ -69,7 +70,7 @@ export default function Cta() {
                     <path d="M8.35083 2.845L1.17833 10.0175L0 8.83917L7.17167 1.66667H0.850834V0H10.0175V9.16667H8.35083V2.845Z" fill="white"/>
                 </svg>
 
-            </button>
+            </a>
           </div>
         </div>
  
