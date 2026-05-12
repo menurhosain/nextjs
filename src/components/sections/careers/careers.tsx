@@ -53,8 +53,8 @@ export default function Careers() {
                                     </div>
                                 </div>
                                 {/* Map */}
-                                <div className="w-full max-w-full mx-auto drop-shadow-lg mt-[-45px] relative z-[3]">
-                                    <Image src="/cta-map.png" alt="" fill className="!h-auto !w-auto !relative" />
+                                <div className="w-full max-w-full mx-auto drop-shadow-lg mt-[-20px] relative z-[3]">
+                                    <Image src="/careers-map-2.png" alt="" fill className="!h-auto !w-auto !relative" />
                                 </div>
                             </div>
                             <div className="">
