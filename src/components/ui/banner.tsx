@@ -1,13 +1,46 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { BrandShape } from "./svgs";
 
-function Banner({ bg, children, style }: { bg: string; children: React.ReactNode; style?: React.CSSProperties }) {
+const IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg"];
+
+function Banner({ bg, children, style, bgDirection = "right" }: { bg: string; children: React.ReactNode; style?: React.CSSProperties; bgDirection?: "left" | "right" }) {
+    const isImage = IMAGE_EXTS.some((ext) => bg.toLowerCase().endsWith(ext));
+
+    const [displayBg, setDisplayBg] = useState(bg);
+    const [outgoingBg, setOutgoingBg] = useState<string | null>(null);
+    const [animKey, setAnimKey] = useState(0);
+    const displayBgRef = useRef(bg);
+
+    useEffect(() => {
+        if (!isImage || bg === displayBgRef.current) return;
+        const old = displayBgRef.current;
+        displayBgRef.current = bg;
+        setOutgoingBg(old);
+        setDisplayBg(bg);
+        setAnimKey((k) => k + 1);
+        const timer = setTimeout(() => setOutgoingBg(null), 500);
+        return () => clearTimeout(timer);
+    }, [bg, isImage]);
+
+    const inClass = bgDirection === "right" ? "bg-slide-right" : "bg-slide-left";
+    const outClass = bgDirection === "right" ? "bg-slide-out-left" : "bg-slide-out-right";
+
     return (
-        <section className={`h-[85vh] sm:min-h-[950px] relative w-full flex banner-overlay section-padding overflow-hidden`} style={{ ...style }}>
-            <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover z-[-1]">
-                <source src={bg} type="video/mp4" />
-            </video>
-            <div className="container relative z-3  flex flex-col justify-center md:flex-row gap-[2%]">{children}</div>
+        <section className="h-[85vh] sm:min-h-[950px] relative w-full flex banner-overlay section-padding overflow-hidden" style={{ ...style }}>
+            {isImage ? (
+                <>
+                    {outgoingBg && <img key={`out-${animKey}`} src={outgoingBg} alt="" className={`absolute inset-0 h-full w-full object-cover z-[-2] ${outClass}`} />}
+                    <img key={`in-${animKey}`} src={displayBg} alt="" className={`absolute inset-0 h-full w-full object-cover z-[-1] ${animKey > 0 ? inClass : ""}`} />
+                </>
+            ) : (
+                <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover z-[-1]">
+                    <source src={bg} type="video/mp4" />
+                </video>
+            )}
+            <div className="container relative z-3 flex flex-col justify-center md:flex-row gap-[2%]">{children}</div>
         </section>
     );
 }
@@ -25,7 +58,4 @@ function Right({ children, className }: { children: React.ReactNode; className?:
     return <div className={`w-[100%] md:w-[38%] flex flex-col items-end justify-end ${className}`}>{children}</div>;
 }
 
-Banner.Left = Left;
-Banner.Right = Right;
-
-export default Banner;
+export { Banner, Left, Right };

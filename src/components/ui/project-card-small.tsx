@@ -15,8 +15,8 @@ export function ProjectCardSmall({ scope, title, image, year, location, link }: 
             <div className="bg-white group rounded-2xl p-5 flex flex-col gap-5 shadow-sm">
                 {/* Tag + Title */}
                 <div className="flex items-start gap-5 min-h-[76px]">
-                    <h3 className="font-geist text-[30px] group-hover:text-sah-red transition-colors duration-500 font-medium leading-[38px] text-sah-black">{title}</h3>
                     <span className="flex-shrink-0 border border-sah-light-2 rounded-full px-[14px] py-[5px] font-inter text-[16px] font-medium text-[#111111] whitespace-nowrap">{scope}</span>
+                    <h3 className="font-geist text-[30px] group-hover:text-sah-red transition-colors duration-500 font-medium leading-[38px] text-sah-black">{title}</h3>
                 </div>
 
                 {/* Image with info overlay */}
