@@ -25,7 +25,7 @@ const partners = [
 export default function Partner() {
 
     return (
-        <section className="section-padding !px-[0]  bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center">
+        <section className="section-padding !px-[0]  bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center  relative z-[5]">
             <div className="container !max-w-[1720px] !px-[150px] pt-[50px] lg:pt-[140px] pb-[250px] lg:pb-[410px] border-x border-sah-light-3">
                 <div className="flex flex-col">
                     <div className="mb-[23px]" >
