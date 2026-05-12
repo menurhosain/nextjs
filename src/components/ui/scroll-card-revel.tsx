@@ -15,14 +15,7 @@ type ScrollCardRevelProps = {
     end?: string;
 };
 
-export function ScrollCardRevel({
-    children,
-    className,
-    pin = true,
-    pinSpacing = false,
-    start = "top top+=360",
-    end = "top top+=360",
-}: ScrollCardRevelProps) {
+export function ScrollCardRevel({ children, className, pin = true, pinSpacing = false, start = "top top+=350", end = "top top+=360" }: ScrollCardRevelProps) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

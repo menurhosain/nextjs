@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Banner from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { Cross, DownArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
@@ -8,10 +8,14 @@ import { ProjectCardSmall } from "@/components/ui/project-card-small";
 import type { Project, ProjectTag } from "@/services/project.service";
 
 export default function ProjectsView({ projects, tags }: { projects: Project[]; tags: ProjectTag[] }) {
+    const [inputValue, setInputValue] = useState("");
     const [query, setQuery] = useState("");
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({});
     const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
+    const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    useEffect(() => () => { if (debounceRef.current) clearTimeout(debounceRef.current); }, []);
 
     function toggleAccordion(key: string) {
         setOpenAccordions((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -27,14 +31,33 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
         });
     }
 
-    function handleSearch() {
-        console.log(query, selectedFilters);
+    function handleSearch(value: string) {
+        setInputValue(value);
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        debounceRef.current = setTimeout(() => setQuery(value), 300);
+    }
+
+    function submitSearch() {
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        setQuery(inputValue);
     }
 
     function clear_filters() {
+        setInputValue("");
         setQuery("");
         setSelectedFilters({});
     }
+
+    const filteredProjects = projects
+        .filter((p) => !query.trim() || p.title.toLowerCase().includes(query.trim().toLowerCase()))
+        .filter((p) => {
+            const fieldMap: Record<string, string> = { scope: p.scope, industry: p.industry, location: p.location };
+            return Object.entries(selectedFilters).every(([key, options]) => {
+                if (options.length === 0) return true;
+                const value = fieldMap[key] ?? "";
+                return options.some((o) => value.includes(o));
+            });
+        });
 
     return (
         <>
@@ -50,13 +73,13 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                         <div className="flex-1 flex items-center gap-[20px] justify-between bg-sah-gray-5 px-6 transition-colors duration-200 pr-[14px]">
                             <input
                                 type="text"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                                value={inputValue}
+                                onChange={(e) => handleSearch(e.target.value)}
+                                onKeyDown={(e) => e.key === "Enter" && submitSearch()}
                                 className="text-sah-white h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white bg-transparent"
                                 placeholder="Find a project"
                             />
-                            <button type="button" onClick={handleSearch} className="size-[40px] flex items-center justify-center cursor-pointer">
+                            <button type="button" onClick={submitSearch} className="size-[40px] flex items-center justify-center cursor-pointer">
                                 <SearchIcon class_name="!size-[18px]" />
                             </button>
                         </div>
@@ -98,9 +121,9 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                         <SearchIcon class_name="!size-[18px] shrink-0 text-sah-dark !fill-sah-red" />
                         <input
                             type="text"
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                            value={inputValue}
+                            onChange={(e) => handleSearch(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && submitSearch()}
                             placeholder="Find A Project"
                             className="flex-1 min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50"
                         />
@@ -145,7 +168,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                     {/* Apply filters */}
                     <div className="mt-auto px-6 py-5 border-t border-gray-200">
                         <button
-                            onClick={handleSearch}
+                            onClick={() => { submitSearch(); setDrawerOpen(false); }}
                             type="button"
                             className="w-full bg-sah-red text-sah-white font-inter text-[14px] font-semibold py-4 cursor-pointer hover:opacity-90 transition-opacity"
                         >
@@ -158,7 +181,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
             <section className="section-padding bg-sah-light-4">
                 <div className="container py-[140px] border-x border-sah-light-3">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {projects.map((project) => (
+                        {filteredProjects.map((project) => (
                             <ProjectCardSmall key={project.title} {...project} />
                         ))}
                     </div>

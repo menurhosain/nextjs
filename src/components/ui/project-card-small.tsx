@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 type ProjectCardSmallProps = {
-    tag: string;
+    scope: string;
     title: string;
     image: string;
     year: string;
@@ -9,13 +9,13 @@ type ProjectCardSmallProps = {
     link: string;
 };
 
-export function ProjectCardSmall({ tag, title, image, year, location, link }: ProjectCardSmallProps) {
+export function ProjectCardSmall({ scope, title, image, year, location, link }: ProjectCardSmallProps) {
     return (
         <Link href={link}>
             <div className="bg-white group rounded-2xl p-5 flex flex-col gap-5 shadow-sm">
                 {/* Tag + Title */}
                 <div className="flex items-start gap-5 :">
-                    <span className="flex-shrink-0 border border-sah-light-2 rounded-full px-[14px] py-[5px] font-inter text-[16px] font-medium text-[#111111] whitespace-nowrap">{tag}</span>
+                    <span className="flex-shrink-0 border border-sah-light-2 rounded-full px-[14px] py-[5px] font-inter text-[16px] font-medium text-[#111111] whitespace-nowrap">{scope}</span>
                     <h3 className="font-geist text-[30px] group-hover:text-sah-red transition-colors duration-500 font-medium leading-[38px] text-sah-black">{title}</h3>
                 </div>
 

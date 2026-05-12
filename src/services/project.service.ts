@@ -1,5 +1,6 @@
 export type Project = {
-    tag: string;
+    scope: string;
+    industry: string;
     title: string;
     image: string;
     year: string;
@@ -15,12 +16,12 @@ export type ProjectTag = {
 
 export async function get_projects(): Promise<Project[]> {
     return [
-        { tag: "Architecture", title: "Police College Package C SQAPS Nizwa", image: "/project-1.jpg", year: "2021", location: "Nizwa, Oman", link: "#" },
-        { tag: "Infrastructure", title: "Al Amerat Highway Development Phase 2", image: "/project-2.jpg", year: "2022", location: "Muscat, Oman", link: "#" },
-        { tag: "Civil Engineering", title: "Royal Hospital Extension Block D", image: "/project-3.jpg", year: "2020", location: "Muscat, Oman", link: "#" },
-        { tag: "Commercial", title: "Sohar Industrial Port Facility Upgrade", image: "/project-1.jpg", year: "2023", location: "Sohar, Oman", link: "#" },
-        { tag: "Residential", title: "Al Mouj Marina District Housing Complex", image: "/project-3.jpg", year: "2021", location: "Muscat, Oman", link: "#" },
-        { tag: "Architecture", title: "Salalah Airport Terminal Expansion Housing", image: "/project-2.jpg", year: "2022", location: "Salalah, Oman", link: "#" },
+        { scope: "Architecture", industry: "Government", title: "Police College Package C SQAPS Nizwa", image: "/project-1.jpg", year: "2021", location: "Nizwa, Oman", link: "#" },
+        { scope: "Infrastructure", industry: "Transportation", title: "Al Amerat Highway Development Phase 2", image: "/project-2.jpg", year: "2022", location: "Muscat, Oman", link: "#" },
+        { scope: "Civil Engineering", industry: "Healthcare", title: "Royal Hospital Extension Block D", image: "/project-3.jpg", year: "2020", location: "Muscat, Oman", link: "#" },
+        { scope: "Commercial", industry: "Industrial", title: "Sohar Industrial Port Facility Upgrade", image: "/project-1.jpg", year: "2023", location: "Sohar, Oman", link: "#" },
+        { scope: "Residential", industry: "Hospitality", title: "Al Mouj Marina District Housing Complex", image: "/project-3.jpg", year: "2021", location: "Muscat, Oman", link: "#" },
+        { scope: "Architecture", industry: "Hospitality", title: "Salalah Airport Terminal Expansion Housing", image: "/project-2.jpg", year: "2022", location: "Salalah, Oman", link: "#" },
     ];
 }
 
