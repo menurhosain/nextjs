@@ -1,4 +1,4 @@
-import Banner from "@/components/ui/banner";
+import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Partner from "@/components/sections/partner/partner";
 import Testimonial from "@/components/sections/partner/testimonial";
@@ -10,7 +10,7 @@ export default function PartnerPage() {
     return (
         <>
             <Banner bg="/home-hero.mp4">
-                <Banner.Left class_name="">
+                <Left class_name="">
                     <div className="flex flex-col justify-center">
                         <Banner_Title
                             subtitle="Reliable Business Partners"
@@ -19,11 +19,11 @@ export default function PartnerPage() {
                             </>
                         />
                     </div>
-                </Banner.Left>
+                </Left>
 
-                <Banner.Right>
+                <Right>
                     <div></div>
-                </Banner.Right>
+                </Right>
             </Banner>
 
             <Partner />

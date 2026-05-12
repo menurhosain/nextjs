@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { StatCounter } from "@/components/ui/stat-counter";
-import Banner from "@/components/ui/banner";
+import { Banner, Left, Right } from "@/components/ui/banner";
 import { AngleArrow, DownCurveArrow } from "@/components/ui/svgs";
 
 export default function Hero() {
     return (
         <Banner bg="/home-hero.mp4">
-            <Banner.Left has_brand_shape={true}>
+            <Left has_brand_shape={true}>
                 <div className="flex flex-col">
                     <h1 className="text-white  font-medium leading-[70px] sm:leading-[60px] xl:leading-[70px] tracking-[-0.05em] flex flex-col gap-[30px] mb-[35px]">
                         <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
@@ -33,12 +33,12 @@ export default function Hero() {
                         <DownCurveArrow class_name="!fill-sah-white !h-[20px] !w-[15px]" />
                     </Link>
                 </div>
-            </Banner.Left>
+            </Left>
 
-            <Banner.Right>
-                <div className="flex justify-start pt-[40px] sm:justify-end sm:pb-[100px] h-[100%] w-[max-content] border-x border-sah-white/20">
+            <Right>
+                <div className="flex  justify-start pt-[40px] sm:justify-end sm:pb-[100px] h-[100%] w-[max-content] border-x border-sah-white/20">
                     <div
-                        className="relative w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] h-[max-content] flex flex-col gap-3 bg-cover bg-center mt-auto"
+                        className="relative rounded-[10px] w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] h-[max-content] flex flex-col gap-3 bg-cover bg-center mt-auto"
                         style={{ backgroundImage: "url('/white-dots.jpg')" }}
                     >
                         <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
@@ -46,7 +46,7 @@ export default function Hero() {
                         <span className="text-sah-gray-1 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">Leading Years in Construction</span>
                     </div>
                 </div>
-            </Banner.Right>
+            </Right>
         </Banner>
     );
 }
