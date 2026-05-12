@@ -48,6 +48,25 @@
     --container-width: 1620px;
 }
 
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.fade-in {
+    animation: fade-in 0.4s ease-in-out;
+}
+
+.no-scrollbar {
+    scrollbar-width: thin;
+}
+.no-scrollbar::-webkit-scrollbar {
+    width: 3px;
+}
+
 .sah-transition {
     transition: all 0.3s ease-in-out;
 }
@@ -137,26 +156,50 @@ svg {
 }
 
 @keyframes bg-slide-from-right {
-    from { transform: translateX(100%); }
-    to   { transform: translateX(0); }
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 @keyframes bg-slide-from-left {
-    from { transform: translateX(-100%); }
-    to   { transform: translateX(0); }
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 @keyframes bg-slide-out-left {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-100%); }
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
 @keyframes bg-slide-out-right {
-    from { transform: translateX(0); }
-    to   { transform: translateX(100%); }
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
 }
 
-.bg-slide-right     { animation: bg-slide-from-right 0.5s ease-out forwards; }
-.bg-slide-left      { animation: bg-slide-from-left  0.5s ease-out forwards; }
-.bg-slide-out-left  { animation: bg-slide-out-left   0.5s ease-out forwards; }
-.bg-slide-out-right { animation: bg-slide-out-right  0.5s ease-out forwards; }
+.bg-slide-right {
+    animation: bg-slide-from-right 0.5s ease-out forwards;
+}
+.bg-slide-left {
+    animation: bg-slide-from-left 0.5s ease-out forwards;
+}
+.bg-slide-out-left {
+    animation: bg-slide-out-left 0.5s ease-out forwards;
+}
+.bg-slide-out-right {
+    animation: bg-slide-out-right 0.5s ease-out forwards;
+}
 
 @keyframes slide-from-right {
     from {
