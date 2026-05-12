@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Banner from "@/components/ui/banner";
+import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
-import { Cross, DownArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
+import { Cross, DownArrow, DownLongArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
+import Link from "next/link";
 import { ProjectCardSmall } from "@/components/ui/project-card-small";
 import type { Project, ProjectTag } from "@/services/project.service";
 
@@ -15,8 +16,12 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
     const [currentPage, setCurrentPage] = useState(1);
     const [scrollTrigger, setScrollTrigger] = useState(0);
+    const [sliderIndex, setSliderIndex] = useState(0);
+    const [sliderDirection, setSliderDirection] = useState<"left" | "right">("right");
+    const [sliderAnimKey, setSliderAnimKey] = useState(0);
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const sectionRef = useRef<HTMLElement>(null);
+    const isMounted = useRef(false);
 
     useEffect(
         () => () => {
@@ -26,6 +31,10 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     );
 
     useEffect(() => {
+        if (!isMounted.current) {
+            isMounted.current = true;
+            return;
+        }
         setCurrentPage(1);
         setScrollTrigger((n) => n + 1);
     }, [query, selectedFilters]);
@@ -95,8 +104,8 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
 
     return (
         <>
-            <Banner bg="/home-hero.mp4">
-                <Banner.Left class_name="flex flex-col justify-center">
+            <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection}>
+                <Left class_name="flex flex-col justify-center">
                     <div className="flex flex-col justify-center mt-[188px]">
                         <Banner_Title subtitle="Explore Our Recent Projects" title=<>Showcasing our latest construction projects and achievements</> />
                     </div>
@@ -131,11 +140,46 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                             </div>
                         </div>
                     </div>
-                </Banner.Left>
+                </Left>
 
-                <Banner.Right>
-                    <div>Hello</div>
-                </Banner.Right>
+                <Right>
+                    <div className="pl-[20px] flex gap-[30px] w-full pb-10">
+                        <div className="flex items-center flex-col gap-[40px]">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setSliderDirection("left");
+                                    setSliderAnimKey((k) => k + 1);
+                                    setSliderIndex((i) => (i - 1 + projects.length) % projects.length);
+                                }}
+                                className="cursor-pointer"
+                            >
+                                <DownLongArrow class_name="!fill-sah-white w-4 h-4 -rotate-90" />
+                            </button>
+                            <div className="w-8 h-[1px] bg-sah-white/20" />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setSliderDirection("right");
+                                    setSliderAnimKey((k) => k + 1);
+                                    setSliderIndex((i) => (i + 1) % projects.length);
+                                }}
+                                className="cursor-pointer"
+                            >
+                                <DownLongArrow class_name="!fill-sah-white w-4 h-4 rotate-90" />
+                            </button>
+                        </div>
+
+                        <div className="overflow-hidden">
+                            <div key={sliderAnimKey} className={sliderDirection === "right" ? "slider-slide-right" : "slider-slide-left"}>
+                                <span className="mb-[24px] block text-sah-white font-bold text-[16px] leading-[20px] uppercase tracking-wider">{projects[sliderIndex]?.scope}</span>
+                                <Link href={projects[sliderIndex]?.link ?? "#"} className="font-geist font-normal text-[30px] leading-[38px] text-sah-white underline">
+                                    {projects[sliderIndex]?.title}
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </Right>
             </Banner>
 
             {/* Drawer overlay */}
@@ -239,7 +283,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                     setCurrentPage((p) => p - 1);
                                     setScrollTrigger((n) => n + 1);
                                 }}
-                                className="px-5 py-2 rounded-[8px] border border-sah-light-2 font-inter text-[14px] font-medium text-sah-dark hover:border-sah-dark transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                                className="px-5 py-2 rounded-[8px] border border-sah-light-2 font-inter text-[14px] font-bold text-sah-dark hover:border-sah-dark transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                             >
                                 Previous
                             </button>
@@ -257,7 +301,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                             setCurrentPage(page);
                                             setScrollTrigger((n) => n + 1);
                                         }}
-                                        className={`size-[38px] rounded-[8px] font-inter text-[14px] font-medium transition-colors cursor-pointer ${currentPage === page ? "border border-sah-red text-sah-red" : "text-sah-dark hover:text-sah-red"}`}
+                                        className={`size-[38px] rounded-[8px] font-inter text-[12px] font-bold transition-colors cursor-pointer ${currentPage === page ? "border border-sah-red text-sah-red" : "text-sah-dark hover:text-sah-red"}`}
                                     >
                                         {page}
                                     </button>
@@ -271,7 +315,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                     setCurrentPage((p) => p + 1);
                                     setScrollTrigger((n) => n + 1);
                                 }}
-                                className="px-5 py-2 rounded-[8px] bg-sah-red font-inter text-[14px] font-medium text-sah-white hover:bg-sah-red/90 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                                className="px-5 py-2 rounded-[8px] bg-sah-red font-inter text-[14px] font-bold text-sah-white hover:bg-sah-red/90 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                             >
                                 Next
                             </button>

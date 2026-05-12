@@ -1,4 +1,4 @@
-import Banner from "@/components/ui/banner";
+import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import About from "@/components/sections/about/about";
 import WhyChoose from "@/components/sections/about/whychoose";
@@ -10,7 +10,7 @@ export default function AboutUsPage() {
     return (
         <>
             <Banner bg="/home-hero.mp4">
-                <Banner.Left class_name="">
+                <Left class_name="">
                     <div className="flex flex-col justify-center">
                         <Banner_Title
                             subtitle="Building Trust And Excellence"
@@ -19,11 +19,11 @@ export default function AboutUsPage() {
                             </>
                         />
                     </div>
-                </Banner.Left>
+                </Left>
 
-                <Banner.Right>
+                <Right>
                     <div></div>
-                </Banner.Right>
+                </Right>
             </Banner>
 
             <About/>
