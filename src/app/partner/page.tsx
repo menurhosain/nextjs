@@ -1,6 +1,7 @@
 import Banner from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Partner from "@/components/sections/partner/partner";
+import Testimonial from "@/components/sections/partner/testimonial";
 
 
 
@@ -25,6 +26,7 @@ export default function PartnerPage() {
             </Banner>
 
             <Partner />
+            <Testimonial />
         </>
     );
 }
