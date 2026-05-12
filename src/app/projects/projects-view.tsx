@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Banner from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
-import { Cross, DownArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
+import { Cross, DownArrow, DownLongArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
 import { ProjectCardSmall } from "@/components/ui/project-card-small";
 import type { Project, ProjectTag } from "@/services/project.service";
 
@@ -27,7 +27,10 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     );
 
     useEffect(() => {
-        if (!isMounted.current) { isMounted.current = true; return; }
+        if (!isMounted.current) {
+            isMounted.current = true;
+            return;
+        }
         setCurrentPage(1);
         setScrollTrigger((n) => n + 1);
     }, [query, selectedFilters]);
@@ -136,7 +139,18 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                 </Banner.Left>
 
                 <Banner.Right>
-                    <div>Hello</div>
+                    <div className="pl-[20px] flex gap-[30px] w-full pb-10">
+                        <div className="flex items-center flex-col gap-[40px]">
+                            <DownLongArrow class_name="!fill-sah-white w-4 h-4 -rotate-90" />
+                            <div className="w-8 h-[1px] bg-sah-white/20" />
+                            <DownLongArrow class_name="!fill-sah-white w-4 h-4 rotate-90" />
+                        </div>
+
+                        <div>
+                            <span className="mb-[24px] block text-sah-white font-bold text-[16px] leading-[20px] uppercase tracking-wider">Architecture</span>
+                            <h2 className="font-geist font-normal text-[30px] leading-[38px] text-sah-white underline">Police College Package C SQAPS Nizwa</h2>
+                        </div>
+                    </div>
                 </Banner.Right>
             </Banner>
 
