@@ -84,7 +84,7 @@ export function NavActions() {
     const [selectedLang, setSelectedLang] = useState(languages[0]);
     const [langOpen, setLangOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [openMenu, setOpenMenu] = useState<string | null>(null);
+    const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
     const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
 
     return (
@@ -146,19 +146,21 @@ export function NavActions() {
 
             {/* Drawer */}
             <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
-                <div className="flex flex-1 h-full overflow-hidden px-[60px] relative">
+                <div className="flex flex-1 h-full overflow-hidden relative">
                     <div className="absolute top-[100px] h-[1px] left-0 right-0 bg-sah-light-3" />
                     {/* Column 1 — 20% */}
-                    <div className="w-[20%] h-full">
-                        <div className="flex items-center h-[100px]">
+                    <div className="w-[20%] h-full bg-sah-red">
+                        <div className="flex items-center h-[100px] pl-[60px]">
                             <div className="flex items-center gap-2">
-                                <img src="/logo-red-2.png" alt="SAH logo" className="w-8 h-8 object-contain" />
+                                <a href="/">
+                                    <img src="/logo-white.png" alt="SAH logo" className="size-[70px] object-contain" />
+                                </a>
                             </div>
                         </div>
                     </div>
 
                     {/* Column 2 — 60% (main content) */}
-                    <div className="w-[60%] h-full flex flex flex-col overflow-y-auto border-x border-sah-light-3">
+                    <div className="w-[60%] h-full flex flex flex-col border-x border-sah-light-3">
                         <div className="flex items-center justify-between h-[100px]">
                             {/* Search bar */}
                             <div className="flex items-center gap-3 px-6 py-3 group">
@@ -174,20 +176,26 @@ export function NavActions() {
                             </button>
                         </div>
 
-                        <div className="pt-5 flex-col justify-between">
+                        <div className="pt-5 flex-col justify-between overflow-y-scroll no-scrollbar flex-1" data-lenis-prevent>
                             <div className="flex flex-col px-[60px] ">
                                 {navLinks.map((link) => (
                                     <div key={link.label} className="border-b border-sah-light-3">
                                         {link.parent ? (
                                             <>
                                                 <button
-                                                    onClick={() => setOpenMenu(openMenu === link.label ? null : link.label)}
+                                                    onClick={() =>
+                                                        setOpenMenus((prev) => {
+                                                            const next = new Set(prev);
+                                                            next.has(link.label) ? next.delete(link.label) : next.add(link.label);
+                                                            return next;
+                                                        })
+                                                    }
                                                     className="w-full flex text-[40px] items-center justify-between py-4 text-sah-black font-inter font-normal capitalize cursor-pointer transition-colors duration-500 hover:text-sah-red"
                                                 >
                                                     {link.label}
-                                                    <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-red ${openMenu === link.label ? "rotate-180" : ""}`} />
+                                                    <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-red ${openMenus.has(link.label) ? "rotate-180" : ""}`} />
                                                 </button>
-                                                <div className={`flex flex-col overflow-hidden transition-all duration-300 ${openMenu === link.label ? "max-h-[400px] pb-3" : "max-h-0"}`}>
+                                                <div className={`flex flex-col overflow-hidden transition-all duration-300 ${openMenus.has(link.label) ? "max-h-[400px] pb-3" : "max-h-0"}`}>
                                                     {link.submenus?.map((sub) => (
                                                         <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-sm hover:text-sah-red">
                                                             {sub.label}
@@ -217,7 +225,7 @@ export function NavActions() {
                     </div>
 
                     {/* Column 3 — 20% */}
-                    <div className="w-[20%] h-full">
+                    <div className="w-[20%] h-full pr-[60px] ">
                         <div className="flex items-center justify-end h-[100px] pl-[20px]">
                             <a href="" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
                                 Contact Us
