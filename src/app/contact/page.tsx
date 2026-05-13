@@ -1,5 +1,6 @@
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
+import Contact from "@/components/sections//contact/contact";
 
 export default function ContactPage() {
     return (
@@ -21,6 +22,7 @@ export default function ContactPage() {
                     <div></div>
                 </Right>
             </Banner>
+            <Contact/>
         </>
     );
 }
