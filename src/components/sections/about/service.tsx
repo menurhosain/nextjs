@@ -6,10 +6,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { ServiceCard } from "@/components/ui/service-card";
 import Section_Title from "@/components/ui/section-title";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Service() {
+interface serviceProps {
+    className?: string;
+    containerClass?: string;
+    bgShape?: boolean;
+}
+export default function Service({className, containerClass, bgShape = true}: serviceProps) {
     const sectionTitleRef = useRef<HTMLDivElement>(null);
     const cardOneRef = useRef<HTMLDivElement>(null);
     const cardTwoRef = useRef<HTMLDivElement>(null);
@@ -63,17 +69,19 @@ export default function Service() {
     }, []);
 
     return (
-        <section className="section-padding value-pin-area pt-[140px] pb-[150px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
-            <div
+        <section className={cn("section-padding value-pin-area pt-[140px] pb-[150px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden", className)}>
+            {bgShape &&
+                <div
                 aria-hidden="true"
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"
-            />
-            <div className="container mx-auto">
+                />
+            }
+            <div className={cn("container mx-auto", containerClass)}>
                 <div className="mb-[50px] flex flex-col items-center " ref={sectionTitleRef}>
                     <Section_Title
                         subtitle="our expertise"
                         title={<> Our service offerings </>}
-                        class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal", title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[870px] text-[70px] ", description: "text-sah-gray-1 text-center max-w-[870px]" }}
+                        class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal", title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[870px] text-[70px]", description: "text-sah-gray-1 text-center max-w-[870px]" }}
                     />
                 </div>
 

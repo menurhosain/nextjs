@@ -5,6 +5,8 @@ import OurValue from "@/components/sections/service-details/our-value";
 import TeamSection from "@/components/sections/service-details/team";
 import Cta from "@/components/sections/partner/cta";
 import FaqSection from "@/components/sections/service/faq";
+import Service from "@/components/sections/about/service";
+import FeatureSection from "@/components/sections/service-details/features";
 
 export default function ServicesDetailsPage() {
     return (
@@ -29,9 +31,13 @@ export default function ServicesDetailsPage() {
 
             <Cta title="Available Nationwide" />
 
-            {/* Service Section Start */}
+            <FeatureSection />
 
-            {/* Service Section End */}
+            <Service
+                className="bg-none bg-sah-light-4 py-0"
+                containerClass="border-x border-sah-light-3 pt-[140px] pb-[150px]"
+                bgShape={false}
+            />
 
             <FaqSection />
         </>
