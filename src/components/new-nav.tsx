@@ -91,13 +91,13 @@ export function NavLinks() {
                     )}
 
                     {link.parent && (
-                        <div className="absolute top-full left-0 h-[400px] w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+                        <div className="absolute top-full left-0 h-[350px] w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
                             <div className="container h-full relative">
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
                                 <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }}/>
 
                                 <div className="flex h-full relative">
-                                    <div className="w-[30%] flex flex-col justify-between px-10 py-6 z-10">
+                                    <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
                                         <div className="flex flex-col gap-4">
                                             <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
                                             <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
