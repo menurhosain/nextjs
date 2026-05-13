@@ -14,6 +14,11 @@ const navLinks = [
     {
         label: "Our Company",
         parent: true,
+        card: {
+            title: "About Us",
+            description: "SAH is a Qatar-based, international construction services company and is a leading builder in diverse market segments.",
+            cta: { label: "GET TO KNOW US", href: "/about-us" },
+        },
         submenus: [
             { label: "About Us", href: "/about-us" },
             { label: "Partner", href: "/partner" },
@@ -24,6 +29,11 @@ const navLinks = [
     {
         label: "Our Services",
         parent: true,
+        card: {
+            title: "Our Services",
+            description: "We deliver end-to-end construction and engineering solutions across a wide range of industries and sectors.",
+            cta: { label: "EXPLORE SERVICES", href: "/services" },
+        },
         submenus: [
             { label: "Services", href: "/services" },
             { label: "Services Details", href: "/services-details" },
@@ -32,6 +42,11 @@ const navLinks = [
     {
         label: "Our Projects",
         parent: true,
+        card: {
+            title: "Our Projects",
+            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
+            cta: { label: "VIEW ALL PROJECTS", href: "/projects" },
+        },
         submenus: [
             { label: "Projects", href: "/projects" },
             { label: "Project Details", href: "/project-details" },
@@ -61,14 +76,32 @@ export function NavLinks() {
                     )}
 
                     {link.parent && (
-                        <div className="absolute top-full left-1/2 min-h-[300px] -translate-x-1/2 w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
-                            <div className="container">
-                                <div className="py-6 flex gap-8">
-                                    {link.submenus?.map((sub) => (
-                                        <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
-                                            {sub.label}
+                        <div className="absolute top-full left-0 h-[300px] w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+                            <div className="container h-full relative">
+                                {/* Red bg bleeds from screen left edge to end of 30% column */}
+                                <div
+                                    className="absolute inset-y-0 bg-sah-red"
+                                    style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }}
+                                />
+                                <div className="flex h-full relative">
+                                    <div className="w-[30%] flex flex-col justify-between p-10 z-10">
+                                        <div className="flex flex-col gap-4">
+                                            <h3 className="text-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
+                                            <p className="text-white/80 font-inter text-[14px] leading-[1.6]">{link.card?.description}</p>
+                                        </div>
+                                        <a href={link.card?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
+                                            {link.card?.cta.label}
+                                            <AngleArrow class_name="!w-[14px] !h-[14px]" />
                                         </a>
-                                    ))}
+                                    </div>
+                                    <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10">
+                                        {link.submenus?.map((sub) => (
+                                            <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
+                                                {sub.label}
+                                            </a>
+                                        ))}
+                                    </div>
+                                    <div className="w-[30%] border-l border-sah-light-3 z-10" />
                                 </div>
                             </div>
                         </div>

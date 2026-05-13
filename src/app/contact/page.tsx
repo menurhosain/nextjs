@@ -1,6 +1,7 @@
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Contact from "@/components/sections//contact/contact";
+import Map from "@/components/sections//contact/map";
 
 export default function ContactPage() {
     return (
@@ -23,6 +24,7 @@ export default function ContactPage() {
                 </Right>
             </Banner>
             <Contact/>
+            <Map/>
         </>
     );
 }
