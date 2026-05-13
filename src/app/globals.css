@@ -71,6 +71,19 @@
     transition: all 0.3s ease-in-out;
 }
 
+@keyframes scrollUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+.nav-scroll-up {
+    animation: scrollUp 14s linear infinite;
+}
+
 svg {
     width: 1em;
     height: 1em;
