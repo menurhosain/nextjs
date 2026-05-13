@@ -1,6 +1,10 @@
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import ServiceDetails from "@/components/sections/service-details/service-details";
+import OurValue from "@/components/sections/service-details/our-value";
+import TeamSection from "@/components/sections/service-details/team";
+import Cta from "@/components/sections/partner/cta";
+import FaqSection from "@/components/sections/service/faq";
 
 export default function ServicesDetailsPage() {
     return (
@@ -18,6 +22,18 @@ export default function ServicesDetailsPage() {
             </Banner>
 
             <ServiceDetails />
+
+            <TeamSection />
+
+            <OurValue />
+
+            <Cta title="Available Nationwide" />
+
+            {/* Service Section Start */}
+
+            {/* Service Section End */}
+
+            <FaqSection />
         </>
     );
 }
