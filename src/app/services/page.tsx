@@ -1,6 +1,7 @@
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Service from "@/components/sections/service/service";
+import FaqSection from "@/components/sections/service/faq";
 
 export default function ServicesPage() {
     return (
@@ -21,6 +22,8 @@ export default function ServicesPage() {
             </Banner>
 
             <Service />
+
+            <FaqSection />
         </>
     );
 }
