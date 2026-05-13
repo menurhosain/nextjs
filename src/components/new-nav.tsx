@@ -94,7 +94,7 @@ export function NavLinks() {
                         <div className="absolute top-full left-0 h-[350px] w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
                             <div className="container h-full relative">
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
-                                <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }}/>
+                                <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }} />
 
                                 <div className="flex h-full relative">
                                     <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
@@ -117,18 +117,17 @@ export function NavLinks() {
                                     </div>
 
                                     <div className="w-[30%] border-l border-sah-light-3 z-10  px-10 py-6">
-										<a href={link.promo?.cta.href} className="flex flex-col gap-[20px]">
-											<div className="flex flex-col gap-4">
-												<p className="font-inter text-[16px] font-semibold text-sah-black">{link.promo?.title}</p>
-												<img src={link.promo?.image} alt={link.promo?.title} className="w-[220px] h-[200px] object-cover rounded-xl" />
-											</div>
-											<p className="flex items-center gap-3 font-inter text-[18px] font-semibold tracking-widest uppercase text-sah-black">
-												{link.promo?.cta.label}
-												<AngleArrow class_name="!w-[12px] !h-[12px] !fill-sah-black" />
-											</p>
-										</a>
+                                        <a href={link.promo?.cta.href} className="flex flex-col gap-[20px]">
+                                            <div className="flex flex-col gap-4">
+                                                <p className="font-inter text-[16px] font-semibold text-sah-black">{link.promo?.title}</p>
+                                                <img src={link.promo?.image} alt={link.promo?.title} className="w-[220px] h-[200px] object-cover rounded-xl" />
+                                            </div>
+                                            <p className="flex items-center gap-3 font-inter text-[18px] font-semibold tracking-widest uppercase text-sah-black">
+                                                {link.promo?.cta.label}
+                                                <AngleArrow class_name="!w-[12px] !h-[12px] !fill-sah-black" />
+                                            </p>
+                                        </a>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -338,7 +337,7 @@ export function NavActions() {
                 {/* Footer — absolute bottom, same 3-col layout */}
                 <div className="absolute bottom-0 left-0 right-0 flex h-[80px] border-t border-sah-light-3">
                     <div className="w-[20%] flex items-center pl-[60px]">
-                        <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                        <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300">
                             info@example.com
                         </a>
                     </div>
