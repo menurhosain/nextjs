@@ -13,7 +13,7 @@ export default function JobCareers() {
   const [hoveredId, setHoveredId] = useState(null);
  
   return (
-    <div className="bg-sah-light-4 bg-[url('/careers-bg.png')] bg-cover bg-bottom bg-no-repeat">
+    <div className=" bg-[url('/careers-bg-pattern.png')]  bg-bottom bg-no-repeat">
       <div className="container !max-w-[1720px] !px-[50px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
         <div className="max-w-full">
           <div className="flex flex-col lg:flex-row justify-between items-start mb-[50px] gap-8">
