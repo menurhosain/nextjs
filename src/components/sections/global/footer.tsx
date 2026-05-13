@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { FbIcon, InstaIcon, LinkedinIcon, XIcon } from "@/components/ui/icons";
 
 const links = [
-                    { label: "Our Company", href: "/about-us" },
-                    { label: "Our Services", href: "/services" },
-                    { label: "Our Projects", href: "/projects" },
-                    { label: "News", href: "/news" },
-                    { label: "Careers", href: "/careers" },
-                    { label: "Contact", href: "/contact" },
-]
+    { label: "Our Company", href: "/about-us" },
+    { label: "Our Services", href: "/services" },
+    { label: "Our Projects", href: "/projects" },
+    { label: "News", href: "/news" },
+    { label: "Careers", href: "/careers" },
+    { label: "Contact", href: "/contact" },
+];
 
 function Links() {
     return (
@@ -21,9 +21,9 @@ function Links() {
             </Link>
             <nav className="flex flex-col md:flex-row items-start xl:items-center gap-4 xl:gap-8">
                 {links.map(({ label, href }) => (
-                    <Link key={label} href={href} className="text-sm font-medium hover:opacity-80 transition-opacity whitespace-nowrap">
+                    <a key={label} href={href} className="text-sm font-medium hover:opacity-80 transition-opacity whitespace-nowrap">
                         {label}
-                    </Link>
+                    </a>
                 ))}
             </nav>
         </div>

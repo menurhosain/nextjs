@@ -14,7 +14,7 @@ export default function Cta({ title, description }: CtaProps) {
  
   return (
     <section className="bg-sah-light-4 relative">
-    <div className="container !max-w-[1720px] !px-[50px] pt-[140px] pb-[150px]  border-x border-sah-light-3 ">
+    <div className="container pt-[140px] pb-[150px] border-x border-sah-light-3">
       <div className="w-full flex flex-col md:flex-row items-start gap-[20px]">
  
         {/* LEFT: Map + Legend */}
