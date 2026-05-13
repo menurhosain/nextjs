@@ -21,7 +21,7 @@ const navLinks = [
         },
         promo: {
             title: "Become a Subcontractor",
-            image: "/project-1.jpg",
+            image: "/careers-thumb-1.jpg",
             cta: { label: "Learn How", href: "/become-a-subcontractor" },
         },
         submenus: [
@@ -41,7 +41,7 @@ const navLinks = [
         },
         promo: {
             title: "Our Market Value",
-            image: "/project-1.jpg",
+            image: "/careers-thumb-2.jpg",
             cta: { label: "Learn How", href: "/services-details" },
         },
         submenus: [
@@ -59,7 +59,7 @@ const navLinks = [
         },
         promo: {
             title: "Our Wordclass projects",
-            image: "/project-1.jpg",
+            image: "/careers-thumb-1.jpg",
             cta: { label: "All Projects", href: "/projects" },
         },
         submenus: [
@@ -120,7 +120,7 @@ export function NavLinks() {
 										<a href={link.promo?.cta.href} className="flex flex-col gap-[20px]">
 											<div className="flex flex-col gap-4">
 												<p className="font-inter text-[16px] font-semibold text-sah-black">{link.promo?.title}</p>
-												<img src={link.promo?.image} alt={link.promo?.title} className="w-[300px] h-[200px] object-cover rounded-xl" />
+												<img src={link.promo?.image} alt={link.promo?.title} className="w-[220px] h-[200px] object-cover rounded-xl" />
 											</div>
 											<p className="flex items-center gap-3 font-inter text-[18px] font-semibold tracking-widest uppercase text-sah-black">
 												{link.promo?.cta.label}
