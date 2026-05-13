@@ -104,7 +104,7 @@ export default function Contact() {
 
                     {/* Info Card */}
                     <div className="absolute bottom-5 right-5 grid grid-cols-1 rounded-[6px] overflow-hidden">
-                        <div className="backdrop-blur-sm bg-[radial-gradient(152.51%_133.12%_at_50%_39.93%,_#8F8F8F_0%,_rgba(0,0,0,0)_100%)] flex w-[545px] px-[45px] pt-[30px] pb-[30px] gap-[40px] rounded-tr-[6px] rounded-tl-[6px]">
+                        <div className="backdrop-blur-[21px] bg-[radial-gradient(152.51%_133.12%_at_50%_39.93%,_#656161_0%,_rgba(0,0,0,0)_100%)] flex w-[545px] px-[45px] pt-[30px] pb-[30px] gap-[40px] rounded-tr-[6px] rounded-tl-[6px]">
                             {/* Office Address */}
                             <div className="flex flex-col gap-3 w-1/2">
                                 <div className="text-sah-white mt-0.5 shrink-0">
@@ -116,7 +116,7 @@ export default function Contact() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-[14px] font-medium text-sah-white uppercase tracking-wide mb-0.5">Office Address:</p>
+                                    <p className="text-[16px] font-medium text-sah-white mb-0.5">Office Address:</p>
                                     <p className="text-[14px] text-sah-white leading-[28px]">
                                         P.O. Box 1850, P.C, 112, Ruwi,
                                         <br />
@@ -143,7 +143,7 @@ export default function Contact() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-[14px] font-medium text-sah-white uppercase tracking-wide mb-0.5">Email Address:</p>
+                                    <p className="text-[16px] font-medium text-sah-white mb-0.5">Email Address:</p>
                                     <p className="text-[14px] text-sah-white leading-[28px]">Enquiries@Sah.Om</p>
                                 </div>
                             </div>
@@ -161,8 +161,8 @@ export default function Contact() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-800 uppercase tracking-wide mb-0.5">Phone Number:</p>
-                                    <p className="text-xs text-gray-600">+968 24 70 32 66</p>
+                                    <p className="text-[16px] font-medium text-sah-dark-2 mb-0.5">Phone Number:</p>
+                                    <p className="text-[14px] text-sah-dark-2">+968 24 70 32 66</p>
                                 </div>
                             </div>
 
@@ -177,8 +177,8 @@ export default function Contact() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-800 uppercase tracking-wide mb-0.5">Working Hours:</p>
-                                    <p className="text-xs text-gray-600">Mon – Fri: 9AM – 8PM</p>
+                                    <p className="text-[16px] font-medium text-sah-dark-2 mb-0.5">Working Hours:</p>
+                                    <p className="text-[14px] text-sah-dark-2">Mon – Fri: 9AM – 8PM</p>
                                 </div>
                             </div>
                         </div>
