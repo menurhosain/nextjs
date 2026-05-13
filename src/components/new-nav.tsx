@@ -239,11 +239,38 @@ export function NavActions() {
                     </div>
 
                     {/* Column 3 — 20% */}
-                    <div className="w-[20%] h-full pr-[60px] ">
-                        <div className="flex items-center justify-end h-[100px] pl-[20px]">
-                            <a href="" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
+                    <div className="w-[20%] h-full flex flex-col overflow-hidden">
+                        {/* Header row — matches other columns */}
+                        <div className="flex items-center justify-end h-[100px] pr-[60px] shrink-0">
+                            <a href="/contact" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
                                 Contact Us
                             </a>
+                        </div>
+
+                        {/* Featured project */}
+                        <div className="flex-1 overflow-y-auto px-6 py-8">
+                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Featured Project</p>
+                            <Link href="#">
+                                <div className="bg-white group rounded-2xl p-5 flex flex-col gap-4 shadow-sm">
+                                    <span className="self-start border border-sah-light-2 rounded-full px-[12px] py-[4px] font-inter text-[13px] font-medium text-[#111111] whitespace-nowrap">
+                                        Infrastructure
+                                    </span>
+                                    <h3 className="font-geist text-[18px] group-hover:text-sah-red transition-colors duration-500 font-medium leading-[24px] text-sah-black">Lusail Iconic Stadium</h3>
+                                    <div className="relative rounded-xl overflow-hidden">
+                                        <img src="/project-1.jpg" alt="Lusail Iconic Stadium" className="w-full h-[200px] object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <div className="absolute bottom-3 right-3 bg-white rounded-xl px-[14px] py-[10px] grid grid-cols-[max-content_max-content] gap-x-[16px]">
+                                            <div className="flex flex-col">
+                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#555555]">Year</span>
+                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#111111]">2022</span>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#555555]">Location</span>
+                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#111111]">Lusail, Qatar</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
