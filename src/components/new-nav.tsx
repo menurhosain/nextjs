@@ -19,6 +19,11 @@ const navLinks = [
             description: "SAH is a Qatar-based, international construction services company and is a leading builder in diverse market segments.",
             cta: { label: "GET TO KNOW US", href: "/about-us" },
         },
+        promo: {
+            title: "Become a Subcontractor",
+            image: "/project-1.jpg",
+            cta: { label: "Learn How", href: "/become-a-subcontractor" },
+        },
         submenus: [
             { label: "About Us", href: "/about-us" },
             { label: "Partner", href: "/partner" },
@@ -34,6 +39,11 @@ const navLinks = [
             description: "We deliver end-to-end construction and engineering solutions across a wide range of industries and sectors.",
             cta: { label: "EXPLORE SERVICES", href: "/services" },
         },
+        promo: {
+            title: "Our Market Value",
+            image: "/project-1.jpg",
+            cta: { label: "Learn How", href: "/services-details" },
+        },
         submenus: [
             { label: "Services", href: "/services" },
             { label: "Services Details", href: "/services-details" },
@@ -46,6 +56,11 @@ const navLinks = [
             title: "Our Projects",
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
             cta: { label: "VIEW ALL PROJECTS", href: "/projects" },
+        },
+        promo: {
+            title: "Our Wordclass projects",
+            image: "/project-1.jpg",
+            cta: { label: "All Projects", href: "/projects" },
         },
         submenus: [
             { label: "Projects", href: "/projects" },
@@ -76,24 +91,23 @@ export function NavLinks() {
                     )}
 
                     {link.parent && (
-                        <div className="absolute top-full left-0 h-[300px] w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+                        <div className="absolute top-full left-0 h-[400px] w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
                             <div className="container h-full relative">
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
-                                <div
-                                    className="absolute inset-y-0 bg-sah-red"
-                                    style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }}
-                                />
+                                <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }}/>
+
                                 <div className="flex h-full relative">
-                                    <div className="w-[30%] flex flex-col justify-between p-10 z-10">
+                                    <div className="w-[30%] flex flex-col justify-between px-10 py-6 z-10">
                                         <div className="flex flex-col gap-4">
-                                            <h3 className="text-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
-                                            <p className="text-white/80 font-inter text-[14px] leading-[1.6]">{link.card?.description}</p>
+                                            <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
+                                            <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
                                         </div>
                                         <a href={link.card?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
                                             {link.card?.cta.label}
                                             <AngleArrow class_name="!w-[14px] !h-[14px]" />
                                         </a>
                                     </div>
+
                                     <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10">
                                         {link.submenus?.map((sub) => (
                                             <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
@@ -101,7 +115,20 @@ export function NavLinks() {
                                             </a>
                                         ))}
                                     </div>
-                                    <div className="w-[30%] border-l border-sah-light-3 z-10" />
+
+                                    <div className="w-[30%] border-l border-sah-light-3 z-10  px-10 py-6">
+										<a href={link.promo?.cta.href} className="flex flex-col gap-[20px]">
+											<div className="flex flex-col gap-4">
+												<p className="font-inter text-[16px] font-semibold text-sah-black">{link.promo?.title}</p>
+												<img src={link.promo?.image} alt={link.promo?.title} className="w-[300px] h-[200px] object-cover rounded-xl" />
+											</div>
+											<p className="flex items-center gap-3 font-inter text-[18px] font-semibold tracking-widest uppercase text-sah-black">
+												{link.promo?.cta.label}
+												<AngleArrow class_name="!w-[12px] !h-[12px] !fill-sah-black" />
+											</p>
+										</a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
