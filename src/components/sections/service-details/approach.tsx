@@ -21,7 +21,7 @@ export default function Approach() {
     return (
         <section className="bg-sah-light-4">
             <div className="container border-x border-sah-light-3">
-                <div className="grid grid-cols-12 gap-8.5 bg-sah-dark-3 p-[40px] rounded-[6px] items-center z-1 relative mb-[-265px]">
+                <div className="grid grid-cols-12 gap-8.5 bg-sah-dark-3 p-[40px] pl-[70px] rounded-[6px] items-center z-1 relative mb-[-265px]">
                     <div className="col-span-7">
                         <Section_Title
                             subtitle="Our Approach"
