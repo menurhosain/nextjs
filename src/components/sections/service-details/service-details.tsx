@@ -1,8 +1,4 @@
 import Section_Title from "@/components/ui/section-title";
-import Cta from "@/components/sections/partner/cta";
-import OurValue from "@/components/sections/service-details/our-value";
-import FaqSection from "@/components/sections/service/faq";
-import TeamSection from "@/components/sections/service-details/team";
 
 const benefits = [
     { code: "001", label: "Structural steel (300 tons or less)" },
@@ -16,8 +12,7 @@ const benefits = [
 export default function ServiceDetails() {
 
     return (
-        <>
-            <section className="relative w-full">
+        <section className="relative w-full">
                 <div className="container border-x border-sah-light-3 pt-27 lg:pb-[140px] pb-[80px]">
                     <div className="grid grid-cols-7 gap-5 items-start">
                         <div className="col-span-3 sticky top-[30px] left-0">
@@ -58,24 +53,5 @@ export default function ServiceDetails() {
                     </div>
                 </div>
             </section>
-
-            {/* Team Section Start */}
-            <TeamSection />
-            {/* Team Section Start */}
-
-            {/* Our Value Section Start */}
-            <OurValue />
-            {/* Our Value Section End */}
-
-            {/* Cta Section Start */}
-            <Cta
-                title="Available Nationwide"
-            />
-            {/* Cta Section End */}
-
-            {/* Faq Section Start */}
-            <FaqSection />
-            {/* Faq Section End */}
-        </>
     );
 }
