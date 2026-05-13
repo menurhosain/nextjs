@@ -34,8 +34,8 @@ export default function Partner() {
                         1280: { slidesPerView: 6, spaceBetween: 16 },
                     }}
                 >
-                    {partners.map((partner) => (
-                        <SwiperSlide>
+                    {partners.map((partner, index) => (
+                        <SwiperSlide key={index}>
                             <div className="px-5 py-10 rounded-[20px] hover:rounded-[100px] flex justify-center bg-sah-dark-5 hover:bg-sah-white sah-transition-all duration-600 group">
                                 <img src={partner.image} className="group-hover:brightness-90 group-hover:invert sah-transition-all duration-600" alt="logo" />
                             </div>
