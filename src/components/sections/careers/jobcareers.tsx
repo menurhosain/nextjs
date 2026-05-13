@@ -13,7 +13,7 @@ export default function JobCareers() {
   const [hoveredId, setHoveredId] = useState(null);
  
   return (
-    <div className="bg-sah-light-4">
+    <div className="bg-sah-light-4 bg-[url('/careers-bg.png')] bg-cover bg-bottom bg-no-repeat">
       <div className="container !max-w-[1720px] !px-[50px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
         <div className="max-w-full">
           <div className="flex flex-col lg:flex-row justify-between items-start mb-[50px] gap-8">
@@ -74,7 +74,7 @@ export default function JobCareers() {
                   {/* CTA Button */}
                   <div className="flex items-center gap-[10px] ml-4 shrink-0">
                     <button
-                      className={`flex items-center gap-2 text-[16px] font-medium text-sah-dark-2 px-4 py-2 rounded-full transition-all duration-300
+                      className={`flex items-center gap-2 text-[16px] font-medium text-sah-dark-2 pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300
                         ${hoveredId === job.id
                           ? "bg-sah-dark-2 text-white scale-105"
                           : "bg-white text-gray-700"
