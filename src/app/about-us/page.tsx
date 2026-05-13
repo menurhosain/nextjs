@@ -14,9 +14,9 @@ export default function AboutUsPage() {
                     <div className="flex flex-col justify-center">
                         <Banner_Title
                             subtitle="Building Trust And Excellence"
-                            title=<>
+                            title={<>
                                 Building Trust Through <br /> Quality Construction <br /> Trust Through
-                            </>
+                            </>}
                         />
                     </div>
                 </Left>

@@ -1,12 +1,15 @@
 "use client";
  
-import { useState } from "react";
+import { JSX, useState } from "react";
 import Image from "next/image";
- 
 
+type CtaProps = {
+  title?: string;
+  description?: string;
+};
 
  
-export default function Cta() {
+export default function Cta({ title, description }: CtaProps) {
   const [hovered, setHovered] = useState(false);
  
   return (
@@ -40,15 +43,10 @@ export default function Cta() {
         {/* RIGHT: Content Card */}
         <div className="flex-1 rounded-[16px] border border-sah-light-3 px-[60px] pb-[60px] pt-[55px] flex flex-col justify-center">
           <h2 className="text-[80px] font-medium text-sah-dark-2 leading-tight mb-[10px] tracking-tight">
-            We build with oman
+            {title ? title : "We build with oman"}
           </h2>
           <p className="text-sah-gray-2 text-[16px] font-medium font-inter leading-[28px] mb-8">
-            Offsite operates a 200,000-square-foot manufacturing facility in central Alabama, designed
-            to support high-efficiency production and precision engineering. The facility integrates
-            advanced technologies, including Lincoln Python systems for streamlined steel processing,
-            ABB robotics for accurate beam assembly, and a TopStation to optimize fabrication workflows.
-            This modern setup ensures consistent quality, reduced material waste, faster turnaround
-            times, and reliable output to meet the demands of complex construction and industrial projects.
+            {description ? description : "Offsite operates a 200,000-square-foot manufacturing facility in central Alabama, designed to support high-efficiency production and precision engineering. The facility integrates advanced technologies, including Lincoln Python systems for streamlined steel processing, ABB robotics for accurate beam assembly, and a TopStation to optimize fabrication workflows. This modern setup ensures consistent quality, reduced material waste, faster turnaround times, and reliable output to meet the demands of complex construction and industrial projects."}
           </p>
  
           {/* CTA Button */}
