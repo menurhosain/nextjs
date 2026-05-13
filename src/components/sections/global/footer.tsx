@@ -4,6 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FbIcon, InstaIcon, LinkedinIcon, XIcon } from "@/components/ui/icons";
 
+const links = [
+    { label: "Our Company", href: "/about-us" },
+    { label: "Our Services", href: "/services" },
+    { label: "Our Projects", href: "/projects" },
+    { label: "News", href: "/news" },
+    { label: "Careers", href: "/careers" },
+    { label: "Contact", href: "/contact" },
+];
+
 function Links() {
     return (
         <div className="flex flex-col md:flex-row items-start xl:items-end gap-15 md:items-center">
@@ -11,10 +20,10 @@ function Links() {
                 <Image src="/logo-white.png" alt="SAH" width={80} height={80} />
             </Link>
             <nav className="flex flex-col md:flex-row items-start xl:items-center gap-4 xl:gap-8">
-                {["Our Company", "Our Services", "Our Projects", "News", "Careers", "Contact"].map((item) => (
-                    <Link key={item} href="#" className="text-sm font-medium hover:opacity-80 transition-opacity whitespace-nowrap">
-                        {item}
-                    </Link>
+                {links.map(({ label, href }) => (
+                    <a key={label} href={href} className="text-sm font-medium hover:opacity-80 transition-opacity whitespace-nowrap">
+                        {label}
+                    </a>
                 ))}
             </nav>
         </div>
