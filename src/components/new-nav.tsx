@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import { useOutsideClick } from "@/hook/use-outside-click";
-import { AngleArrow, DownArrow } from "./ui/svgs";
+import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.png" },
@@ -146,7 +146,8 @@ export function NavActions() {
 
             {/* Drawer */}
             <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
-                <div className="flex flex-1 h-full overflow-hidden px-[60px] ">
+                <div className="flex flex-1 h-full overflow-hidden px-[60px] relative">
+                    <div className="absolute top-[100px] h-[1px] left-0 right-0 bg-sah-light-3" />
                     {/* Column 1 — 20% */}
                     <div className="w-[20%] h-full">
                         <div className="flex items-center h-[100px]">
@@ -160,13 +161,11 @@ export function NavActions() {
                     <div className="w-[60%] h-full flex flex flex-col overflow-y-auto border-x border-sah-light-3">
                         <div className="flex items-center justify-between h-[100px]">
                             {/* Search bar */}
-                            <div className="ml-[40px] flex items-center gap-2 rounded-[8px] px-4 py-2 w-[70%]">
-                                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-sah-black stroke-2 shrink-0">
-                                    <circle cx="11" cy="11" r="7" />
-                                    <path strokeLinecap="round" d="M16.5 16.5l4 4" />
-                                </svg>
-                                <input type="text" placeholder="Search..." className="w-full bg-transparent text-sah-black font-inter text-[14px] outline-none placeholder:text-sah-light-3" />
+                            <div className="flex items-center gap-3 px-6 py-3 group">
+                                <SearchIcon class_name="!size-[24px] shrink-0 text-sah-dark !fill-sah-black group-hover:rotate-90 transition-rotate duration-500" />
+                                <input type="text" placeholder="Search your query" className="flex-1 min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
                             </div>
+
                             {/* Close button */}
                             <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="cursor-pointer h-full w-[100px] flex items-center justify-center border-l border-sah-light-3">
                                 <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-black stroke-2">
@@ -175,7 +174,7 @@ export function NavActions() {
                             </button>
                         </div>
 
-                        <div className="pt-5 flex-col justify-between h-full">
+                        <div className="pt-5 flex-col justify-between">
                             <div className="flex flex-col px-[60px] ">
                                 {navLinks.map((link) => (
                                     <div key={link.label} className="border-b border-sah-light-3">
@@ -183,10 +182,10 @@ export function NavActions() {
                                             <>
                                                 <button
                                                     onClick={() => setOpenMenu(openMenu === link.label ? null : link.label)}
-                                                    className="w-full flex text-[18px] items-center justify-between py-4 text-sah-black font-inter font-semibold uppercase cursor-pointer"
+                                                    className="w-full flex text-[40px] items-center justify-between py-4 text-sah-black font-inter font-normal capitalize cursor-pointer transition-colors duration-500 hover:text-sah-red"
                                                 >
                                                     {link.label}
-                                                    <DownArrow class_name={`!w-[10px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenu === link.label ? "rotate-180" : ""}`} />
+                                                    <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-red ${openMenu === link.label ? "rotate-180" : ""}`} />
                                                 </button>
                                                 <div className={`flex flex-col overflow-hidden transition-all duration-300 ${openMenu === link.label ? "max-h-[400px] pb-3" : "max-h-0"}`}>
                                                     {link.submenus?.map((sub) => (
@@ -197,7 +196,7 @@ export function NavActions() {
                                                 </div>
                                             </>
                                         ) : (
-                                            <a href={link.href} className="flex text-[18px] items-center py-4 text-sah-black font-inter font-semibold uppercase">
+                                            <a href={link.href} className="flex text-[40px] items-center py-4 text-sah-black font-inter font-normal capitalize">
                                                 {link.label}
                                             </a>
                                         )}
@@ -219,7 +218,11 @@ export function NavActions() {
 
                     {/* Column 3 — 20% */}
                     <div className="w-[20%] h-full">
-                        <div className="flex items-center h-[100px]"> three </div>
+                        <div className="flex items-center justify-end h-[100px] pl-[20px]">
+                            <a href="" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
+                                Contact Us
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
