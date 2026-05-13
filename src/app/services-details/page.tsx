@@ -7,6 +7,7 @@ import Cta from "@/components/sections/partner/cta";
 import FaqSection from "@/components/sections/service/faq";
 import Service from "@/components/sections/about/service";
 import FeatureSection from "@/components/sections/service-details/features";
+import Approach from "@/components/sections/service-details/approach";
 
 export default function ServicesDetailsPage() {
     return (
@@ -30,6 +31,8 @@ export default function ServicesDetailsPage() {
             <OurValue />
 
             <Cta title="Available Nationwide" />
+
+            <Approach />
 
             <FeatureSection />
 
