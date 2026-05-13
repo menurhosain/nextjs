@@ -10,7 +10,6 @@ const languages = [
     { code: "ar", label: "Arabic", flag: "/katar-flag.png" },
 ];
 
-//const navLinks = ["Our Company", "Our Services", "Our Projects", "News", "Careers"];
 const navLinks = [
     {
         label: "Our Company",
@@ -147,15 +146,27 @@ export function NavActions() {
             {/* Drawer */}
             <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
                 <div className="flex flex-1 h-full overflow-hidden relative">
-                    <div className="absolute top-[100px] h-[1px] left-0 right-0 bg-sah-light-3" />
+                    <div className="absolute top-[100px] h-[1px] left-0 right-0 bg-sah-light-3 z-10" />
                     {/* Column 1 — 20% */}
-                    <div className="w-[20%] h-full bg-sah-red">
-                        <div className="flex items-center h-[100px] pl-[60px]">
-                            <div className="flex items-center gap-2">
-                                <a href="/">
-                                    <img src="/logo-white.png" alt="SAH logo" className="size-[70px] object-contain" />
-                                </a>
+                    <div className="w-[20%] h-full bg-sah-red relative overflow-hidden">
+                        {/* Scrolling text — spans full column height including behind logo */}
+                        <div className="absolute inset-0 overflow-hidden flex justify-center">
+                            <div className="nav-scroll-up flex flex-col items-center">
+                                {[...Array(2)].map((_, copy) =>
+                                    [...Array(8)].map((_, i) => (
+                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10" style={{ fontSize: "250px", writingMode: "vertical-rl", opacity: 0.2 }}>
+                                            SAH
+                                        </span>
+                                    )),
+                                )}
                             </div>
+                        </div>
+
+                        {/* Logo — sits on top of scrolling text */}
+                        <div className="relative z-10 flex items-center h-[100px] pl-[60px]">
+                            <a href="/">
+                                <img src="/logo-white.png" alt="SAH logo" className="size-[70px] object-contain" />
+                            </a>
                         </div>
                     </div>
 
@@ -204,7 +215,10 @@ export function NavActions() {
                                                 </div>
                                             </>
                                         ) : (
-                                            <a href={link.href} className="flex text-[40px] items-center py-4 text-sah-black font-inter font-normal capitalize">
+                                            <a
+                                                href={link.href}
+                                                className="flex text-[40px] items-center py-4 text-sah-black font-inter font-normal capitalize transition-colors duration-500 hover:text-sah-red"
+                                            >
                                                 {link.label}
                                             </a>
                                         )}
