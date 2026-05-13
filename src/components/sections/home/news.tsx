@@ -10,7 +10,7 @@ export default function News() {
                     <div className="mb-[40px] flex flex-col items-center ">
                         <Section_Title
                             subtitle="Blog & News"
-                            title=<> Our Latest News </>
+                            title={<> Our Latest News </>}
                             description="Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based."
                             class_name={{ subtitle: "text-sah-black !mb-[15px]", title: "text-sah-black !mb-[10px]", description: "text-sah-gray-1 " }}
                         />

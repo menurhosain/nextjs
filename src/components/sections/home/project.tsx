@@ -48,9 +48,9 @@ export default function Projects() {
                 <div className="mb-[70px]">
                     <Section_Title
                         subtitle="Latest Projects"
-                        title=<>
+                        title={<>
                             Discover our completed <br /> building projects
-                        </>
+                        </>}
                         class_name={{ subtitle: "text-sah-black text-center ", title: "text-sah-black text-center " }}
                     />
                 </div>

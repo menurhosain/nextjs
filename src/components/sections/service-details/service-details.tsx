@@ -117,8 +117,8 @@ export default function ServiceDetails() {
                                 </div>
 
                                 <div className="flex flex-col divide-y divide-[rgba(229,_229,_229,_0.89))] border-b border-b-[rgba(229,_229,_229,_0.89))]">
-                                    {benefits.map((item) => (
-                                        <div key={item.code} className="flex items-center gap-[150px] py-5">
+                                    {benefits.map((item, index) => (
+                                        <div key={index} className="flex items-center gap-[150px] py-5">
                                             <span className="w-[160px] shrink-0 text-[16px] text-sah-black font-medium">
                                                 ({item.code})
                                             </span>
