@@ -187,7 +187,7 @@ export function NavActions() {
                             </button>
                         </div>
 
-                        <div className="pt-5 flex-col justify-between overflow-y-scroll no-scrollbar flex-1" data-lenis-prevent>
+                        <div className="pt-5 pb-[90px] flex-col justify-between overflow-y-scroll no-scrollbar flex-1" data-lenis-prevent>
                             <div className="flex flex-col px-[60px] ">
                                 {navLinks.map((link) => (
                                     <div key={link.label} className="border-b border-sah-light-3">
@@ -272,6 +272,34 @@ export function NavActions() {
                                 </div>
                             </Link>
                         </div>
+                    </div>
+                </div>
+
+                {/* Footer — absolute bottom, same 3-col layout */}
+                <div className="absolute bottom-0 left-0 right-0 flex h-[80px] border-t border-sah-light-3">
+                    <div className="w-[20%] flex items-center pl-[60px]">
+                        <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                            info@example.com
+                        </a>
+                    </div>
+                    <div className="w-[60%] bg-sah-white flex items-center gap-8 px-[60px] border-x border-sah-light-3">
+                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                            Facebook
+                        </a>
+                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                            Instagram
+                        </a>
+                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                            LinkedIn
+                        </a>
+                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                            YouTube
+                        </a>
+                    </div>
+                    <div className="w-[20%] flex items-center justify-start px-[60px]">
+                        <a href="/projects" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                            View all projects
+                        </a>
                     </div>
                 </div>
             </div>
