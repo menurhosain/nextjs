@@ -45,8 +45,8 @@ export default function Partner() {
                         </ScrollReveal>
                     </div>
                     <div className="grid grid-cols-6 gap-3">
-                    {partners.map((partner) => (
-                        <div className="px-5 py-10 rounded-[20px] hover:rounded-[100px] flex justify-center bg-sah-white hover:bg-sah-red sah-transition-all duration-600 group">
+                    {partners.map((partner, index) => (
+                        <div key={index} className="px-5 py-10 rounded-[20px] hover:rounded-[100px] flex justify-center bg-sah-white hover:bg-sah-red sah-transition-all duration-600 group">
                             <img src={partner.image} className="brightness-90 invert group-hover:brightness-0 sah-transition-all duration-600" alt="logo" />
                         </div>
                     ))}
