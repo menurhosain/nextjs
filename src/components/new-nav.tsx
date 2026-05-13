@@ -145,57 +145,81 @@ export function NavActions() {
             />
 
             {/* Drawer */}
-            <div className={`fixed top-0 right-0 z-50 h-full pb-10 w-[400px] bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
-                {/* Drawer header */}
-                <div className="flex items-center justify-between px-8 h-16 border-b border-sah-light-3">
-                    <div className="flex items-center gap-2">
-                        <img src="/logo-red-2.png" alt="SAH logo" className="w-8 h-8 object-contain" />
-                    </div>
-                    <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="cursor-pointer">
-                        <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-black stroke-2">
-                            <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div className="mt-5 px-8 flex flex-col justify-between h-[calc(100%-64px)]">
-                    <div className="flex flex-col">
-                        {navLinks.map((link) => (
-                            <div key={link.label} className="border-b border-sah-light-3">
-                                {link.parent ? (
-                                    <>
-                                        <button
-                                            onClick={() => setOpenMenu(openMenu === link.label ? null : link.label)}
-                                            className="w-full flex text-[18px] items-center justify-between py-4 text-sah-black font-inter font-semibold uppercase cursor-pointer"
-                                        >
-                                            {link.label}
-                                            <DownArrow class_name={`!w-[10px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenu === link.label ? "rotate-180" : ""}`} />
-                                        </button>
-                                        <div className={`flex flex-col overflow-hidden transition-all duration-300 ${openMenu === link.label ? "max-h-[400px] pb-3" : "max-h-0"}`}>
-                                            {link.submenus?.map((sub) => (
-                                                <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-sm hover:text-sah-red">
-                                                    {sub.label}
-                                                </a>
-                                            ))}
-                                        </div>
-                                    </>
-                                ) : (
-                                    <a href={link.href} className="flex text-[18px] items-center py-4 text-sah-black font-inter font-semibold uppercase">
-                                        {link.label}
-                                    </a>
-                                )}
+            <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
+                <div className="flex flex-1 h-full overflow-hidden px-[60px] ">
+                    {/* Column 1 — 20% */}
+                    <div className="w-[20%] h-full">
+                        <div className="flex items-center h-[100px]">
+                            <div className="flex items-center gap-2">
+                                <img src="/logo-red-2.png" alt="SAH logo" className="w-8 h-8 object-contain" />
                             </div>
-                        ))}
+                        </div>
                     </div>
 
-                    <div className="py-8">
-                        <Link
-                            href="/become-a-subcontractor"
-                            className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px]"
-                        >
-                            Become a Subcontractor
-                            <AngleArrow class_name="!w-[10px] !h-[10px]" />
-                        </Link>
+                    {/* Column 2 — 60% (main content) */}
+                    <div className="w-[60%] h-full flex flex flex-col overflow-y-auto border-x border-sah-light-3">
+                        <div className="flex items-center justify-between h-[100px]">
+                            {/* Search bar */}
+                            <div className="ml-[40px] flex items-center gap-2 rounded-[8px] px-4 py-2 w-[70%]">
+                                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-sah-black stroke-2 shrink-0">
+                                    <circle cx="11" cy="11" r="7" />
+                                    <path strokeLinecap="round" d="M16.5 16.5l4 4" />
+                                </svg>
+                                <input type="text" placeholder="Search..." className="w-full bg-transparent text-sah-black font-inter text-[14px] outline-none placeholder:text-sah-light-3" />
+                            </div>
+                            {/* Close button */}
+                            <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="cursor-pointer h-full w-[100px] flex items-center justify-center border-l border-sah-light-3">
+                                <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-black stroke-2">
+                                    <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div className="pt-5 flex-col justify-between h-full">
+                            <div className="flex flex-col px-[60px] ">
+                                {navLinks.map((link) => (
+                                    <div key={link.label} className="border-b border-sah-light-3">
+                                        {link.parent ? (
+                                            <>
+                                                <button
+                                                    onClick={() => setOpenMenu(openMenu === link.label ? null : link.label)}
+                                                    className="w-full flex text-[18px] items-center justify-between py-4 text-sah-black font-inter font-semibold uppercase cursor-pointer"
+                                                >
+                                                    {link.label}
+                                                    <DownArrow class_name={`!w-[10px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenu === link.label ? "rotate-180" : ""}`} />
+                                                </button>
+                                                <div className={`flex flex-col overflow-hidden transition-all duration-300 ${openMenu === link.label ? "max-h-[400px] pb-3" : "max-h-0"}`}>
+                                                    {link.submenus?.map((sub) => (
+                                                        <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-sm hover:text-sah-red">
+                                                            {sub.label}
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <a href={link.href} className="flex text-[18px] items-center py-4 text-sah-black font-inter font-semibold uppercase">
+                                                {link.label}
+                                            </a>
+                                        )}
+                                    </div>
+                                ))}
+
+                                <div className="py-8">
+                                    <Link
+                                        href="/become-a-subcontractor"
+                                        className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px]"
+                                    >
+                                        Become a Subcontractor
+                                        <AngleArrow class_name="!w-[10px] !h-[10px]" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Column 3 — 20% */}
+                    <div className="w-[20%] h-full">
+                        <div className="flex items-center h-[100px]"> three </div>
                     </div>
                 </div>
             </div>
