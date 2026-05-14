@@ -1,6 +1,7 @@
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Subcontractor from "@/components/sections/become-a-subcontractor/subcontractor";
+import Cta from "@/components/sections/become-a-subcontractor/cta";
 
 export default function BecomeASubcontrctorPage() {
     return (
@@ -23,6 +24,7 @@ export default function BecomeASubcontrctorPage() {
                 </Right>
             </Banner>
             <Subcontractor/>
+            <Cta/>
         </>
     );
 }
