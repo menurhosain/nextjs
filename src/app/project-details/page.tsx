@@ -8,7 +8,15 @@ import { useState, useEffect, useCallback } from "react";
 
 const projectImages = ["/project-1.jpg", "/project-2.jpg", "/project-3.jpg", "/project-1.jpg", "/project-1.jpg"];
 
-const images = [
+type GalleryImage = {
+  id: number;
+  src: string;
+  thumb: string;
+  title: string;
+  category: string;
+};
+
+const images: GalleryImage[] = [
   {
     id: 1,
     src: "/project-4.jpg",
@@ -34,10 +42,10 @@ const images = [
 
 export default function ProjectDetailsPage() {
 
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState<GalleryImage | null>(null);
     const [isVisible, setIsVisible] = useState(false);
     
-    const openImage = (img) => {
+    const openImage = (img: GalleryImage) => {
         setSelected(img);
         setIsVisible(true);
         document.body.style.overflow = "hidden";
@@ -52,7 +60,7 @@ export default function ProjectDetailsPage() {
     }, []);
     
     const navigate = useCallback(
-        (dir) => {
+        (dir: number) => {
         if (!selected) return;
         const idx = images.findIndex((img) => img.id === selected.id);
         const next = (idx + dir + images.length) % images.length;
@@ -62,7 +70,7 @@ export default function ProjectDetailsPage() {
     );
     
     useEffect(() => {
-        const handleKey = (e) => {
+        const handleKey = (e: KeyboardEvent) => {
         if (!selected) return;
         if (e.key === "Escape") closeImage();
         if (e.key === "ArrowRight") navigate(1);
@@ -77,7 +85,7 @@ export default function ProjectDetailsPage() {
             <Banner bg="/home-hero.mp4">
                 <Left class_name="">
                     <div className="flex flex-col justify-center">
-                        <Banner_Title subtitle="Insights Into Project Work" title=<>Complete Insights Into Project Design And Delivery</> />
+                        <Banner_Title subtitle="Insights Into Project Work" title={<>Complete Insights Into Project Design And Delivery</>} />
                     </div>
                 </Left>
 
