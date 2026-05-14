@@ -82,7 +82,7 @@ const navLinks = [
             cta: { href: "/projects", label: "Explore our ideas" },
         },
         latest_news: [
-            { title: "Cost Effective Solutions", href: "#", image: "/menu/2.jpg" },
+            { title: "Cost Effective Solutions for your dream", href: "#", image: "/menu/2.jpg" },
             { title: "Solutions for Building Projects", href: "#", image: "/menu/1.jpg" },
             { title: "Medical Pavilion at Institute Square", href: "#", image: "/menu/3.jpg" },
         ],
@@ -150,7 +150,7 @@ export function NavLinks() {
                                                         key={i}
                                                         href={item.href}
                                                         imageParam={{ src: item.image, className: "w-full" }}
-                                                        titleParam={{ title: item.title, className: "!text-[18px] !leading-[24px] !mb-3 !pr-0" }}
+                                                        titleParam={{ title: item.title, className: "md:text-[22px] leading-[28px] mb-3 pr-0 font-medium" }}
                                                     />
                                                 ))}
                                             {link.id === "career" &&
@@ -159,7 +159,7 @@ export function NavLinks() {
                                                         key={i}
                                                         href={item.href}
                                                         imageParam={{ src: item.image, className: "w-full" }}
-                                                        titleParam={{ title: item.title, className: "!text-[18px] !leading-[24px] !mb-3 !pr-0" }}
+                                                        titleParam={{ title: item.title, className: "md:text-[25px] leading-[24px] mb-3 pr-0 font-medium" }}
                                                     />
                                                 ))}
                                         </div>
@@ -329,7 +329,7 @@ export function NavActions() {
                             <div className="flex flex-col px-[60px] ">
                                 {navLinks.map((link) => (
                                     <div key={link.label} className="border-b border-sah-light-3">
-                                        {link.parent ? (
+                                        {link.parent && link.id !== "news" && link.id !== "career" ? (
                                             <>
                                                 <button
                                                     onClick={() =>
