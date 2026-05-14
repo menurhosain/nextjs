@@ -81,43 +81,47 @@ export default function NewsList({ posts, categories }: NewsListProps) {
 
     return (
         <>
-            {categories.length > 0 && (
-                <div className="container flex gap-3 flex-wrap">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            type="button"
-                            onClick={() => toggleCategory(category)}
-                            className={`px-4 py-2 rounded-full border text-[14px] transition-colors ${
-                                activeCategories.includes(category)
-                                    ? "bg-sah-red border-sah-red text-white"
-                                    : "border-sah-light-3 text-sah-dark"
-                            }`}
-                        >
-                            {category}
-                        </button>
-                    ))}
-                </div>
-            )}
 
-            <div className="container mt-6">
-                <input
-                    type="text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search by title..."
-                    className="w-full border border-sah-light-3 rounded-lg px-4 py-2 text-sah-dark text-[14px] outline-none"
-                />
-            </div>
 
             <div ref={sectionRef} className="container pt-[140px] pb-[140px] border-x border-sah-light-3">
+                <div className="flex mb-[60px] gap-[50px]">
+                    <div className="w-[500px] shrink-0 border-r border-sah-gray-4 pr-[50px] ">
+                        <input
+                            type="text"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            placeholder="Search by title..."
+                            className="w-full border border-sah-light-3 rounded-[50px] px-4 py-2 text-sah-dark text-[14px] outline-none"
+                        />
+                    </div>
+
+                    {categories.length > 0 && (
+                        <div className="flex gap-3 flex-wrap">
+                            {categories.map((category) => (
+                                <button
+                                    key={category}
+                                    type="button"
+                                    onClick={() => toggleCategory(category)}
+                                    className={`px-4 py-2 rounded-full border text-[14px] cursor-pointer hover:bg-sah-red hover:text-white hover:border-sah-red sah-transition ${
+                                        activeCategories.includes(category)
+                                            ? "bg-sah-red border-sah-red text-white"
+                                            : "border-sah-light-3 text-sah-dark"
+                                    }`}
+                                >
+                                    {category}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
                 {filteredPosts.length === 0 ? (
-                    <div className="flex items-center justify-center mt-[50px] mb-[140px]">
+                    <div className="flex items-center justify-center">
                         <p className="text-sah-dark text-[18px]">No news posts found.</p>
                     </div>
                 ) : (
                     <>
-                        <div className="grid grid-cols-3 gap-[30px] mt-[50px] mb-[80px]">
+                        <div className="grid grid-cols-3 gap-[30px]">
                             {pagedPosts.map((post, index) => (
                                 <NewsCard
                                     key={index}
