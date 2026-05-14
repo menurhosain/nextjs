@@ -1,14 +1,31 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface TeamCardProps {
+    className?: string;
+    titleClass?: string;
+    roleClass?: string;
     image?: string;
     name?: string;
     role?: string;
-    className?: string;
+    showContact? : boolean;
+    email?: string;
+    phone?: string;
 }
 
-export default function TeamCard({ image, name, role, className }: TeamCardProps) {
+export default function TeamCard(
+    {
+        className,
+        titleClass,
+        roleClass,
+        image,
+        name,
+        role,
+        showContact = false,
+        email,
+        phone,
+    }: TeamCardProps) {
+
     return (
         <div className={cn(
             "bg-sah-dark-3 rounded-[12px] p-[12px] pb-[20px] group",
@@ -20,8 +37,14 @@ export default function TeamCard({ image, name, role, className }: TeamCardProps
             </div>
             )}
             <div className="flex flex-col gap-1 px-[10px]">
-                <span className="text-white font-semibold text-[24px] leading-[30px]">{name}</span>
-                <span className="text-white text-[16px] font-normal">{role}</span>
+                <h4 className={cn("text-white font-geist font-semibold text-[24px] leading-[30px]", titleClass)}>{name}</h4>
+                <span className={cn("text-white text-[16px] font-normal", roleClass)}>{role}</span>
+                {showContact &&
+                    <div className="flex items-center gap-[30px] mt-[20px]">
+                        <Link href={`mailto:${email}`} className="text-[17px] leading-[28px] font-normal sah-transition text-sah-gray-1 hover:text-sah-red">{email}</Link>
+                        <Link href={`tel:${phone}`} className="text-[17px] leading-[28px] font-normal sah-transition text-sah-gray-1 hover:text-sah-red">{phone}</Link>
+                    </div>
+                }
             </div>
         </div>
     );
