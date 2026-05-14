@@ -6,8 +6,8 @@ import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
 
 const languages = [
-    { code: "en", label: "English", flag: "/uk-flag.png" },
-    { code: "ar", label: "Arabic", flag: "/katar-flag.png" },
+    { code: "en", label: "English", flag: "/uk-flag.svg" },
+    { code: "ar", label: "Arabic", flag: "/oman-flag.svg" },
 ];
 
 const navLinks = [
