@@ -79,7 +79,7 @@ const navLinks = [
         card: {
             title: "Our Latest News",
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { href: "/projects", label: "Explore our ideas" },
+            cta: { href: "/news", label: "Explore our ideas" },
         },
         latest_news: [
             { title: "Cost Effective Solutions for your dream", href: "#", image: "/menu/2.jpg" },
@@ -95,7 +95,7 @@ const navLinks = [
         card: {
             title: "Careers With Us",
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/projects" },
+            cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/careers" },
         },
         latest_pages: [
             { title: "Your Career Starts Here", href: "#", image: "/team/1.jpg" },

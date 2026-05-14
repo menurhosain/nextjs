@@ -7,7 +7,7 @@ export default async function News() {
     if (!posts) {
         return (
             <section className="section-padding bg-sah-light-4">
-                <div className="container flex items-center justify-center pt-[140px] pb-[140px]">
+                <div className="container flex items-center justify-center pt-[140px]">
                     <p className="text-sah-dark text-[18px]">Failed to load news. Please try again later.</p>
                 </div>
             </section>
