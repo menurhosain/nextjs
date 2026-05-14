@@ -21,7 +21,7 @@ const navLinks = [
         },
         promo: {
             title: "Become a Subcontractor",
-            image: "/careers-thumb-1.jpg",
+            image: "/menu/1.jpg",
             cta: { label: "Learn How", href: "/become-a-subcontractor" },
         },
         submenus: [
@@ -41,7 +41,7 @@ const navLinks = [
         },
         promo: {
             title: "Our Market Value",
-            image: "/careers-thumb-2.jpg",
+            image: "/menu/2.jpg",
             cta: { label: "Learn How", href: "/services-details" },
         },
         submenus: [
@@ -59,7 +59,7 @@ const navLinks = [
         },
         promo: {
             title: "Our Wordclass projects",
-            image: "/careers-thumb-1.jpg",
+            image: "/menu/3.jpg",
             cta: { label: "All Projects", href: "/projects" },
         },
         submenus: [
