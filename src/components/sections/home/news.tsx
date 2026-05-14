@@ -20,10 +20,32 @@ export default function News() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-[400px_400px] md:grid-rows-[630px] gap-[20px] md:gap-[30px]">
                         <div className="md:col-span-2">
-                            <NewsCard image="/news-post-1.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects" />
+                            <NewsCard
+                                imageParam={{
+                                    src: "/news-post-1.jpg"
+                                }}
+                                metaParam={{
+                                    author: "Wade Warren",
+                                    category: "Architecture"
+                                }}
+                                titleParam={{
+                                    title: "Cost Effective Solutions for Building Projects"
+                                }}
+                            />
                         </div>
                         <div className="md:col-span-3">
-                            <NewsCard image="/news-post-2.jpg" author="Wade Warren" category="Architecture" title="Cost Effective Solutions for Building Projects Solutions for Building Projects" />
+                            <NewsCard
+                                imageParam={{
+                                    src: "/news-post-2.jpg"
+                                }}
+                                metaParam={{
+                                    author: "Wade Warren",
+                                    category: "Architecture"
+                                }}
+                                titleParam={{
+                                    title: "Cost Effective Solutions for Building Projects Solutions for Building Projects"
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
