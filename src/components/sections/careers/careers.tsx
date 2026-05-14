@@ -17,7 +17,7 @@ export default function Careers() {
                             description="With us, your career is always moving forward. You’ll grow through continuous learning, guided by mentorship at every stage, while collaborating with diverse teams to broaden your skills, knowledge, and experience.Our leadership is rooted in strong values. Our culture reflects principles such as trust, openness, accountability, entrepreneurial spirit, integrity, and mutual respect—creating an environment where individuals and teams can truly thrive."
                             class_name={{ title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[950px] text-[70px] ", description: "text-sah-gray-1 text-center max-w-[875px] mb-[38px]" }}
                         />
-                        <a  href="#" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+                        <a  href="#jobboard" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
                         className={`
                             inline-flex items-center gap-[10px] px-6 py-[9px] rounded-[8px] font-medium text-[16px] transition-all duration-300 ease-in-out bg-sah-dark-2
                             ${hovered
