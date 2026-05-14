@@ -15,7 +15,7 @@ const policies = [
 export default function Subcontractor() {
 
   return (
-    <section className="bg-sah-light-4">
+    <section className="bg-sah-light-4 bg-[url('/careers-bg-pattern.png')] bg-bottom bg-no-repeat">
       <div className="container !max-w-[1720px] !px-[50px] pt-[50px] lg:pt-[140px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
         {/* ── Hero / Intro ── */}
         <div className="pb-[20px] flex gap-12 items-start justify-between flex-wrap">

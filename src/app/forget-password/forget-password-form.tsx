@@ -32,13 +32,14 @@ export default function ForgetPasswordForm() {
       </p>
 
       <div className="space-y-1.5">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email" className="font-normal text-sah-gray-1 mb-[12px]">Email</Label>
         <Input
           id="email"
           name="email"
           type="email"
           placeholder="john@example.com"
           required
+          className="h-[56px] rounded-[6px] border-sah-gray-4 text-sah-gray-1  focus-visible:border-sah-red focus:outline-none focus-visible:ring-0"
         />
         {state.errors.email && (
           <p className="text-sm text-red-500">{state.errors.email}</p>
@@ -52,7 +53,7 @@ export default function ForgetPasswordForm() {
       <Button
         type="submit"
         disabled={pending}
-        className="w-full mt-2 cursor-pointer"
+        className="w-full mt-2 cursor-pointer bg-sah-black text-sah-white py-5 rounded-[6px] hover:bg-sah-red"
         variant="secondary"
       >
         {pending ? "Sending..." : "Send reset link"}
