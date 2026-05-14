@@ -1,6 +1,7 @@
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import LeadershipSection from "@/components/sections/leadership/leadership";
+import Career from "@/components/sections/home/career";
 
 export default function LeadershipPage() {
     return (
@@ -18,6 +19,8 @@ export default function LeadershipPage() {
             </Banner>
 
             <LeadershipSection />
+
+            <Career />
         </>
     );
 }
