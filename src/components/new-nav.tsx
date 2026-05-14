@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import Link from "next/link";
 import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
+import NewsCard from "./ui/news-card";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
@@ -73,7 +74,7 @@ const navLinks = [
     {
         label: "News",
         parent: true,
-        link: "#",
+        link: "/news",
         id: "news",
         card: {
             title: "Our Latest News",
@@ -81,23 +82,24 @@ const navLinks = [
             cta: { href: "/projects", label: "Explore our ideas" },
         },
         latest_news: [
-            { title: "Cost Effective Solutions for Building Projects", href: "#", image: "/menu/2.jpg" },
-            { title: "Cost Effective Solutions for Building Projects", href: "#", image: "/menu/2.jpg" },
+            { title: "Cost Effective Solutions", href: "#", image: "/menu/2.jpg" },
+            { title: "Solutions for Building Projects", href: "#", image: "/menu/1.jpg" },
+            { title: "Medical Pavilion at Institute Square", href: "#", image: "/menu/3.jpg" },
         ],
     },
     {
         label: "Careers",
         parent: true,
         id: "career",
-        link: "#",
+        link: "/careers",
         card: {
             title: "Careers With Us",
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
             cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/projects" },
         },
         latest_pages: [
-            { title: "Your Career Starts Here", href: "#", image: "/menu/2.jpg" },
-            { title: "Your next Level Awaits", href: "#", image: "/menu/2.jpg" },
+            { title: "Your Career Starts Here", href: "#", image: "/team/1.jpg" },
+            { title: "Your next Level Awaits", href: "#", image: "/team/2.jpg" },
         ],
     },
 ];
@@ -111,12 +113,12 @@ export function NavLinks() {
             {navLinks.map((link) => (
                 <div key={link.label} className="group">
                     {link.parent ? (
-                        <button className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter cursor-pointer">
+                        <a href={link.link} className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter cursor-pointer">
                             {link.label}
                             <DownArrow class_name="!w-[10.5px] !h-[6px] transition-transform duration-200 group-hover:rotate-180" />
-                        </button>
+                        </a>
                     ) : (
-                        <a href={link.href} className="uppercase flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter">
+                        <a href={link.link} className="uppercase flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter">
                             {link.label}
                         </a>
                     )}
@@ -127,45 +129,85 @@ export function NavLinks() {
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
                                 <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }} />
 
-                                {/* Image bg bleeds from right column to right screen edge */}
-                                <div
-                                    className="absolute inset-y-0 bg-cover bg-top"
-                                    style={{ right: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)", backgroundImage: `url(${link.promo?.image})` }}
-                                >
-                                    <div className="absolute bottom-0 left-0 right-0 h-[90%] bg-gradient-to-t from-black to-transparent" />
-                                </div>
-
-                                <div className="flex h-full relative">
-                                    <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
-                                        <div className="flex flex-col gap-4">
-                                            <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
-                                            <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
-                                        </div>
-                                        <a href={link.card?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
-                                            {link.card?.cta.label}
-                                            <AngleArrow class_name="!w-[14px] !h-[14px]" />
-                                        </a>
-                                    </div>
-
-                                    <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10">
-                                        {link.submenus?.map((sub) => (
-                                            <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
-                                                {sub.label}
+                                {link.id === "news" || link.id === "career" ? (
+                                    /* 2-column layout for news & career */
+                                    <div className="flex h-full relative">
+                                        <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
+                                            <div className="flex flex-col gap-4">
+                                                <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
+                                                <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
+                                            </div>
+                                            <a href={link.card?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
+                                                {link.card?.cta.label}
+                                                <AngleArrow class_name="!w-[14px] !h-[14px]" />
                                             </a>
-                                        ))}
-                                    </div>
+                                        </div>
 
-                                    <div className="w-[30%] z-10 px-10 pb-6 flex flex-col justify-end">
-                                        <a href={link.promo?.cta.href}>
-                                            <p className="font-inter text-[26px] font-semibold mb-[20px] text-white">{link.promo?.title}</p>
-                                        </a>
-                                        <p className="font-inter mb-[20px] text-[14px] font-normal text-white">{link.promo?.excerpt}</p>
-                                        <a href={link.promo?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
-                                            {link.promo?.cta.label}
-                                            <AngleArrow class_name="!w-[14px] !h-[14px]" />
-                                        </a>
+                                        <div className={`w-[70%] grid gap-4 py-[20px] ${link.id === "career" ? "grid-cols-2" : "grid-cols-3"}`}>
+                                            {link.id === "news" &&
+                                                link.latest_news?.map((item, i) => (
+                                                    <NewsCard
+                                                        key={i}
+                                                        href={item.href}
+                                                        imageParam={{ src: item.image, className: "w-full" }}
+                                                        titleParam={{ title: item.title, className: "!text-[18px] !leading-[24px] !mb-3 !pr-0" }}
+                                                    />
+                                                ))}
+                                            {link.id === "career" &&
+                                                link.latest_pages?.map((item, i) => (
+                                                    <NewsCard
+                                                        key={i}
+                                                        href={item.href}
+                                                        imageParam={{ src: item.image, className: "w-full" }}
+                                                        titleParam={{ title: item.title, className: "!text-[18px] !leading-[24px] !mb-3 !pr-0" }}
+                                                    />
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
+                                ) : (
+                                    /* 3-column layout for standard menus */
+                                    <>
+                                        {/* Image bg bleeds from right column to right screen edge */}
+                                        <div
+                                            className="absolute inset-y-0 bg-cover bg-top"
+                                            style={{ right: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)", backgroundImage: `url(${link.promo?.image})` }}
+                                        >
+                                            <div className="absolute bottom-0 left-0 right-0 h-[90%] bg-gradient-to-t from-black to-transparent" />
+                                        </div>
+
+                                        <div className="flex h-full relative">
+                                            <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
+                                                <div className="flex flex-col gap-4">
+                                                    <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
+                                                    <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
+                                                </div>
+                                                <a href={link.card?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
+                                                    {link.card?.cta.label}
+                                                    <AngleArrow class_name="!w-[14px] !h-[14px]" />
+                                                </a>
+                                            </div>
+
+                                            <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10">
+                                                {link.submenus?.map((sub) => (
+                                                    <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
+                                                        {sub.label}
+                                                    </a>
+                                                ))}
+                                            </div>
+
+                                            <div className="w-[30%] z-10 px-10 pb-6 flex flex-col justify-end">
+                                                <a href={link.promo?.cta.href}>
+                                                    <p className="font-inter text-[26px] font-semibold mb-[20px] text-white">{link.promo?.title}</p>
+                                                </a>
+                                                <p className="font-inter mb-[20px] text-[14px] font-normal text-white">{link.promo?.excerpt}</p>
+                                                <a href={link.promo?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
+                                                    {link.promo?.cta.label}
+                                                    <AngleArrow class_name="!w-[14px] !h-[14px]" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                     )}
@@ -312,7 +354,7 @@ export function NavActions() {
                                             </>
                                         ) : (
                                             <a
-                                                href={link.href}
+                                                href={link.link}
                                                 className="flex text-[40px] items-center py-4 text-sah-black font-inter font-normal capitalize transition-colors duration-500 hover:text-sah-red"
                                             >
                                                 {link.label}
