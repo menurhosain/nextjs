@@ -6,7 +6,6 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 const policies = [
   {
     id: 1,
-    title: "Code of Conduct",
     description:
       "At tempus aenean sapien torquent sed diam class efficitur mus morbi eros dictum quam augue ac laor eet ligula libero mi commodo nibh hac fermentum orci ad pharetra consequat justo pellentesque vulputate malesuada dictumst fames interdum.",
     link: "#",
@@ -18,7 +17,7 @@ export default function Subcontractor() {
 
   return (
     <section className="bg-sah-light-4">
-      <div className="container !max-w-[1720px] !px-[50px] pt-[50px] lg:pt-[140px] pb-[50px] lg:pb-[142px] border-x border-sah-light-3">
+      <div className="container !max-w-[1720px] !px-[50px] pt-[50px] lg:pt-[140px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
         {/* ── Hero / Intro ── */}
         <div className="pb-[20px] flex gap-12 items-start justify-between flex-wrap">
           <div className="w-[47%]">
@@ -42,7 +41,7 @@ export default function Subcontractor() {
         </div>
 
         {/* ── Hero Image + Helpful Links Banner ── */}
-        <div className="relative w-full mb-16">
+        <div className="relative w-full mb-10">
           <div className="relative rounded-xl overflow-hidden">
             {/* Team photo placeholder */}
             <div className="w-full h-[560px] md:h-[560px] bg-[url('/subcontractor-img-1.jpg')] bg-cover bg-center bg-no-repeat flex items-end relative">
@@ -59,31 +58,46 @@ export default function Subcontractor() {
             </div>
           </div>
         </div>
-        <div className="relative z-10 flex gap-2 p-4 justify-center">
+        <div className="relative z-10 flex gap-5 justify-center">
             <a
-            href="#"
-              className="px-5 py-2.5 text-[16px] font-medium  tracking-wide rounded transition-all duration-200 bg-sah-white"
+            href="register"
+              className="px-4 h-[130px] w-[168px] text-center flex flex-col gap-[8px] items-center justify-center rounded-[10px] text-[18px] font-medium  tracking-wide rounded transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white"
             >
+              <div className="">
+                <svg xmlns="http://www.w3.org/2000/svg" className=""><g><path d="M11.894 24a.5.5 0 0 1-.491-.597l.707-3.535a.49.49 0 0 1 .137-.256l7.778-7.778a1.503 1.503 0 0 1 2.121 0l1.414 1.414a1.501 1.501 0 0 1 0 2.121l-7.778 7.778a.497.497 0 0 1-.256.137l-3.535.707a.53.53 0 0 1-.097.009zm1.168-3.789-.53 2.651 2.651-.53 7.671-7.671a.5.5 0 0 0 0-.707L21.44 12.54a.5.5 0 0 0-.707 0zm2.367 2.582h.01zM9.5 21h-7A2.502 2.502 0 0 1 0 18.5v-13C0 4.121 1.121 3 2.5 3h2a.5.5 0 0 1 0 1h-2C1.673 4 1 4.673 1 5.5v13c0 .827.673 1.5 1.5 1.5h7a.5.5 0 0 1 0 1zM16.5 12a.5.5 0 0 1-.5-.5v-6c0-.827-.673-1.5-1.5-1.5h-2a.5.5 0 0 1 0-1h2C15.879 3 17 4.121 17 5.5v6a.5.5 0 0 1-.5.5z" opacity="1" data-original="#000000" className=""></path><path d="M11.5 6h-6C4.673 6 4 5.327 4 4.5v-2a.5.5 0 0 1 .5-.5h1.55C6.282.86 7.293 0 8.5 0s2.218.86 2.45 2h1.55a.5.5 0 0 1 .5.5v2c0 .827-.673 1.5-1.5 1.5zM5 3v1.5c0 .275.225.5.5.5h6c.275 0 .5-.225.5-.5V3h-1.5a.5.5 0 0 1-.5-.5C10 1.673 9.327 1 8.5 1S7 1.673 7 2.5a.5.5 0 0 1-.5.5zM13.5 9h-10a.5.5 0 0 1 0-1h10a.5.5 0 0 1 0 1zM13.5 12h-10a.5.5 0 0 1 0-1h10a.5.5 0 0 1 0 1zM13.5 15h-10a.5.5 0 0 1 0-1h10a.5.5 0 0 1 0 1z" opacity="1" data-original="#000000" className=""></path></g></svg>
+              </div>
               New User Registration
             </a>
             <a
-            href="#"
-              className="px-5 py-2.5 text-[16px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white"
+            href="login"
+              className="px-4 h-[90px] w-[150px] text-center flex items-center rounded-[10px] text-[18px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white "
             >
               Returning Users
             </a>
             <a
             href="#"
-              className="px-5 py-2.5 text-[16px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white"
+              className="px-4 h-[90px] w-[230px] text-center flex items-center rounded-[10px] text-[18px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white"
             >
               Subcontractor Quick Start Guide
             </a>
+            <a
+            href="#"
+              className="px-4 h-[90px] w-[230px] text-center flex items-center rounded-[10px] text-[18px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white"
+            >
+              Subcontractor Navigation Guide
+            </a>
+            <a
+            href="contact"
+              className="px-4 h-[90px]  w-[160px] text-center flex items-center rounded-[10px] text-[18px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white"
+            >
+              Email Help Desk
+            </a>
         </div>
         {/* ── Important Policies ── */}
-        <div className="max-w-6xl mx-auto px-6 pb-20">
+        <div className="pt-[135px]">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Important Policies</h2>
-            <p className="text-sm text-gray-500 max-w-xl mx-auto leading-relaxed">
+            <h2 className="text-[40px] md:text-[40px] font-bold text-sah-dark-2 mb-4">Important Policies</h2>
+            <p className="text-[16px] text-sah-gray-1 max-w-[730px] mx-auto leading-relaxed">
               Please take a moment to review these two important policies carefully. They outline the
               key guidelines, responsibilities, and expected conduct required for all our projects to
               ensure smooth collaboration and successful project delivery.
@@ -94,26 +108,23 @@ export default function Subcontractor() {
             {policies.map((policy) => (
               <div
                 key={policy.id}
-                className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row"
+                className="flex flex-col md:flex-row gap-4"
               >
                 {/* Left image block */}
-                <div className="md:w-80 w-full h-48 md:h-auto bg-gradient-to-br from-gray-700 to-gray-900 flex-shrink-0 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=')] opacity-50" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-white/30 text-6xl font-black">0{policy.id}</span>
-                  </div>
+                <div className="md:w-140 w-full h-48 md:h-auto bg-gradient-to-br from-gray-700 to-gray-900 flex-shrink-0 relative overflow-hidden rounded-[8px]">
+                  <div className="absolute inset-0 bg-[url('/subcontractor-img-2.jpg')] bg-cover bg-center bg-no-repeat" />
+                  
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 p-8 flex flex-col justify-between">
+                <div className="flex-1 p-10 flex flex-col justify-between bg-white rounded-[8px]">
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-3">{policy.title}</h3>
-                    <p className="text-sm text-gray-500 leading-relaxed">{policy.description}</p>
+                    <p className="text-[24px] text-sah-dark-2 leading-[36px]">{policy.description}</p>
                   </div>
-
-                  <div className="flex flex-wrap gap-3 mt-6">
-                    <PolicyButton label={policy.label} />
-                    {policy.id === 1 && <PolicyButton label="BIAS AND HARASSMENT POLICY" secondary />}
+                  <div className="w-full h-[1px] bg-sah-light-3 mt-[40px]"/>
+                  <div className="flex flex-wrap gap-[47px] mt-[50px]">
+                      <PolicyButton label={policy.label} />
+                      {policy.id === 1 && <PolicyButton label="BIAS AND HARASSMENT POLICY" secondary />}
                   </div>
                 </div>
               </div>
@@ -130,27 +141,28 @@ export default function Subcontractor() {
 function PolicyButton({ label, secondary = false }: { label: string; secondary?: boolean }) {
   return (
     <button
-      className={`
-        group relative inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-widest
-        border rounded overflow-hidden transition-all duration-300
+      className={`group flex items-center gap-2 text-[16px] font-medium bg-sah-light-4 text-sah-dark-2 pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300 hover:bg-sah-red hover:text-white scale-105
         ${secondary
-          ? "border-gray-800 text-gray-800 hover:text-white"
+          ? "bg-sah-light-4 border-gray-800 text-gray-800 hover:text-white"
           : "border-[#c0392b] text-[#c0392b] hover:text-white"
         }
       `}
     >
-      {/* Sliding fill */}
-      <span
-        className={`
-          absolute inset-0 translate-x-[-101%] group-hover:translate-x-0
-          transition-transform duration-300 ease-out
-          ${secondary ? "bg-gray-800" : "bg-[#c0392b]"}
-        `}
-      />
-      <span className="relative z-10">{label}</span>
-      <span className="relative z-10 w-5 h-5 rounded-full border border-current flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-        ↗
-      </span>
+      {label}
+        <span
+            className={`flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-300 bg-sah-red text-sah-white group-hover:bg-sah-white group-hover:text-sah-dark-2
+              ${secondary
+                ? "bg-sah-dark-2 border-gray-800 text-gray-800 hover:text-white"
+                : "border-[#c0392b] text-[#c0392b] hover:text-white"
+              }
+              `}
+        >
+            <svg width="11" height="11" viewBox="0 0 11 11" xmlns="http://www.w3.org/2000/svg" className="!w-[9px] h-[9px]">
+                <path d="M8.35083 2.845L1.17833 10.0175L0 8.83917L7.17167 1.66667H0.850834V0H10.0175V9.16667H8.35083V2.845Z"/>
+            </svg>
+        </span>
     </button>
+
+
   );
 }
