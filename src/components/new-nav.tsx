@@ -16,7 +16,7 @@ const navLinks = [
         parent: true,
         card: {
             title: "About Us",
-            description: "SAH is a Qatar-based, international construction services company and is a leading builder in diverse market segments.",
+            description: "SAH is a Oman-based, international construction services company and is a leading builder in diverse market segments.",
             cta: { label: "GET TO KNOW US", href: "/about-us" },
         },
         promo: {
@@ -96,6 +96,14 @@ export function NavLinks() {
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
                                 <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }} />
 
+                                {/* Image bg bleeds from right column to right screen edge */}
+                                <div
+                                    className="absolute inset-y-0 bg-cover bg-top"
+                                    style={{ right: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)", backgroundImage: `url(${link.promo?.image})` }}
+                                >
+                                    <div className="absolute bottom-0 left-0 right-0 h-[50%] bg-gradient-to-t from-black to-transparent" />
+                                </div>
+
                                 <div className="flex h-full relative">
                                     <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
                                         <div className="flex flex-col gap-4">
@@ -116,16 +124,9 @@ export function NavLinks() {
                                         ))}
                                     </div>
 
-                                    <div className="w-[30%] border-l border-sah-light-3 z-10  px-10 py-6">
-                                        <a href={link.promo?.cta.href} className="flex flex-col gap-[20px]">
-                                            <div className="flex flex-col gap-4">
-                                                <p className="font-inter text-[16px] font-semibold text-sah-black">{link.promo?.title}</p>
-                                                <img src={link.promo?.image} alt={link.promo?.title} className="w-[220px] h-[200px] object-cover rounded-xl" />
-                                            </div>
-                                            <p className="flex items-center gap-3 font-inter text-[18px] font-semibold tracking-widest uppercase text-sah-black">
-                                                {link.promo?.cta.label}
-                                                <AngleArrow class_name="!w-[12px] !h-[12px] !fill-sah-black" />
-                                            </p>
+                                    <div className="w-[30%] z-10 px-10 pb-6 flex flex-col justify-end">
+                                        <a href={link.promo?.cta.href}>
+                                            <p className="font-inter text-[26px] font-semibold text-white">{link.promo?.title}</p>
                                         </a>
                                     </div>
                                 </div>
