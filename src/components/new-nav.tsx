@@ -21,6 +21,7 @@ const navLinks = [
         },
         promo: {
             title: "Become a Subcontractor",
+            excerpt: "With expertise spanning planning, execution, and project delivery, we provide market needs.",
             image: "/menu/1.jpg",
             cta: { label: "Learn How", href: "/become-a-subcontractor" },
         },
@@ -41,8 +42,9 @@ const navLinks = [
         },
         promo: {
             title: "Our Market Value",
+            excerpt: "We provide comprehensive construction and engineering solutions for your need.",
             image: "/menu/2.jpg",
-            cta: { label: "Learn How", href: "/services-details" },
+            cta: { href: "/services-details", label: "Join us" },
         },
         submenus: [
             { label: "Services", href: "/services" },
@@ -58,17 +60,46 @@ const navLinks = [
             cta: { label: "VIEW ALL PROJECTS", href: "/projects" },
         },
         promo: {
-            title: "Our Wordclass projects",
-            image: "/menu/3.jpg",
-            cta: { label: "All Projects", href: "/projects" },
+            title: "Police College Package C SQAPS Nizwa",
+            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
+            image: "/project-1-small.jpg",
+            cta: { label: "View Project", href: "/projects" },
         },
         submenus: [
             { label: "Projects", href: "/projects" },
             { label: "Project Details", href: "/project-details" },
         ],
     },
-    { label: "News", parent: false, href: "/news" },
-    { label: "Careers", parent: false, href: "/careers" },
+    {
+        label: "News",
+        parent: true,
+        link: "#",
+        id: "news",
+        card: {
+            title: "Our Latest News",
+            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
+            cta: { href: "/projects", label: "Explore our ideas" },
+        },
+        latest_news: [
+            { title: "Cost Effective Solutions for Building Projects", href: "#", image: "/menu/2.jpg" },
+            { title: "Cost Effective Solutions for Building Projects", href: "#", image: "/menu/2.jpg" },
+        ],
+    },
+    {
+        label: "Careers",
+        parent: true,
+        id: "career",
+        link: "#",
+        card: {
+            title: "Careers With Us",
+            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
+            cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/projects" },
+        },
+        latest_pages: [
+            { title: "Your Career Starts Here", href: "#", image: "/menu/2.jpg" },
+            { title: "Your next Level Awaits", href: "#", image: "/menu/2.jpg" },
+        ],
+    },
 ];
 
 export function NavLinks() {
@@ -101,7 +132,7 @@ export function NavLinks() {
                                     className="absolute inset-y-0 bg-cover bg-top"
                                     style={{ right: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)", backgroundImage: `url(${link.promo?.image})` }}
                                 >
-                                    <div className="absolute bottom-0 left-0 right-0 h-[50%] bg-gradient-to-t from-black to-transparent" />
+                                    <div className="absolute bottom-0 left-0 right-0 h-[90%] bg-gradient-to-t from-black to-transparent" />
                                 </div>
 
                                 <div className="flex h-full relative">
@@ -126,7 +157,12 @@ export function NavLinks() {
 
                                     <div className="w-[30%] z-10 px-10 pb-6 flex flex-col justify-end">
                                         <a href={link.promo?.cta.href}>
-                                            <p className="font-inter text-[26px] font-semibold text-white">{link.promo?.title}</p>
+                                            <p className="font-inter text-[26px] font-semibold mb-[20px] text-white">{link.promo?.title}</p>
+                                        </a>
+                                        <p className="font-inter mb-[20px] text-[14px] font-normal text-white">{link.promo?.excerpt}</p>
+                                        <a href={link.promo?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
+                                            {link.promo?.cta.label}
+                                            <AngleArrow class_name="!w-[14px] !h-[14px]" />
                                         </a>
                                     </div>
                                 </div>
