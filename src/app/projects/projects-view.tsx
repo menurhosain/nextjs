@@ -83,11 +83,11 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
     const filteredProjects = projects
         .filter((p) => !query.trim() || p.title.toLowerCase().includes(query.trim().toLowerCase()))
         .filter((p) => {
-            const fieldMap: Record<string, string> = { scope: p.scope, industry: p.industry, location: p.location };
+            const fieldMap: Record<string, string[]> = { scope: p.scope, industry: p.industry, location: p.location };
             return Object.entries(selectedFilters).every(([key, options]) => {
                 if (options.length === 0) return true;
-                const value = fieldMap[key] ?? "";
-                return options.some((o) => value.includes(o));
+                const values = fieldMap[key] ?? [];
+                return options.some((o) => values.includes(o));
             });
         });
 
@@ -172,7 +172,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
 
                         <div className="overflow-hidden">
                             <div key={sliderAnimKey} className={sliderDirection === "right" ? "slider-slide-right" : "slider-slide-left"}>
-                                <span className="mb-[24px] block text-sah-white font-bold text-[16px] leading-[20px] uppercase tracking-wider">{projects[sliderIndex]?.scope}</span>
+                                <span className="mb-[24px] block text-sah-white font-bold text-[16px] leading-[20px] uppercase tracking-wider">{projects[sliderIndex]?.scope[0]}</span>
                                 <Link href={projects[sliderIndex]?.link ?? "#"} className="font-geist font-normal text-[30px] leading-[38px] text-sah-white underline">
                                     {projects[sliderIndex]?.title}
                                 </Link>

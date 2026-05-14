@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 type ProjectCardSmallProps = {
-    scope: string;
+    scope: string[];
     title: string;
     image: string;
     year: string;
-    location: string;
+    location: string[];
     link: string;
 };
 
@@ -17,7 +17,7 @@ export function ProjectCardSmall({ scope, title, image, year, location, link }: 
                 <div className="min-h-[80px] relative">
                     <h3 className="font-geist text-[30px] group-hover:text-sah-red transition-colors duration-500 font-medium leading-[38px] text-sah-black">{title}</h3>
                     <span className="border absolute right-0 bottom-0 border-sah-light-2 rounded-full px-[14px] py-[5px] font-inter text-[16px] font-medium text-[#111111] whitespace-nowrap">
-                        {scope}
+                        {scope[0]}
                     </span>
                 </div>
 
@@ -31,7 +31,7 @@ export function ProjectCardSmall({ scope, title, image, year, location, link }: 
                         </div>
                         <div className="flex flex-col">
                             <span className="font-inter text-[16px] font-medium leading-[24px] text-[#555555]">Location</span>
-                            <span className="font-inter text-[16px] font-medium leading-[24px] text-[#111111]">{location}</span>
+                            <span className="font-inter text-[16px] font-medium leading-[24px] text-[#111111]">{location[0]}</span>
                         </div>
                     </div>
                 </div>
