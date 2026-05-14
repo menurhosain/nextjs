@@ -6,20 +6,21 @@ import { BrandShape } from "./svgs";
 
 const IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg"];
 
-function Banner({ bg, children, style, bgDirection = "right" }: { bg: string; children: React.ReactNode; style?: React.CSSProperties; bgDirection?: "left" | "right" }) {
-    const isImage = IMAGE_EXTS.some((ext) => bg.toLowerCase().endsWith(ext));
+function Banner({ bg, children, style, bgDirection = "right" }: { bg?: string; children: React.ReactNode; style?: React.CSSProperties; bgDirection?: "left" | "right" }) {
+    const isImage = !!bg && IMAGE_EXTS.some((ext) => bg.toLowerCase().endsWith(ext));
+    const isVideo = !!bg && !isImage;
 
-    const [displayBg, setDisplayBg] = useState(bg);
+    const [displayBg, setDisplayBg] = useState(bg ?? "");
     const [outgoingBg, setOutgoingBg] = useState<string | null>(null);
     const [animKey, setAnimKey] = useState(0);
-    const displayBgRef = useRef(bg);
+    const displayBgRef = useRef(bg ?? "");
 
     useEffect(() => {
         if (!isImage || bg === displayBgRef.current) return;
         const old = displayBgRef.current;
-        displayBgRef.current = bg;
+        displayBgRef.current = bg!;
         setOutgoingBg(old);
-        setDisplayBg(bg);
+        setDisplayBg(bg!);
         setAnimKey((k) => k + 1);
         const timer = setTimeout(() => setOutgoingBg(null), 500);
         return () => clearTimeout(timer);
@@ -35,11 +36,11 @@ function Banner({ bg, children, style, bgDirection = "right" }: { bg: string; ch
                     {outgoingBg && <img key={`out-${animKey}`} src={outgoingBg} alt="" className={`absolute inset-0 h-full w-full object-cover z-[-2] ${outClass}`} />}
                     <img key={`in-${animKey}`} src={displayBg} alt="" className={`absolute inset-0 h-full w-full object-cover z-[-1] ${animKey > 0 ? inClass : ""}`} />
                 </>
-            ) : (
+            ) : isVideo ? (
                 <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover z-[-1]">
                     <source src={bg} type="video/mp4" />
                 </video>
-            )}
+            ) : null}
             <div className="container relative z-3 flex flex-col justify-center md:flex-row gap-[2%]">{children}</div>
         </section>
     );
