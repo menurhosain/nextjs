@@ -18,9 +18,9 @@ export default function Subcontractor() {
 
   return (
     <section className="bg-sah-light-4">
-      <div className="container !max-w-[1720px] !px-[50px] pt-[50px] lg:pt-[135px] pb-[50px] lg:pb-[142px] border-x border-sah-light-3">
+      <div className="container !max-w-[1720px] !px-[50px] pt-[50px] lg:pt-[140px] pb-[50px] lg:pb-[142px] border-x border-sah-light-3">
         {/* ── Hero / Intro ── */}
-        <div className=" py-16 flex gap-12 items-start justify-between flex-wrap">
+        <div className="pb-[20px] flex gap-12 items-start justify-between flex-wrap">
           <div className="w-[47%]">
             <ScrollReveal toColor="var(--color-sah-dark-2)">
               <h2 className="section-heading mx-auto text-left leading-[48px] mb-[30px]">
@@ -62,22 +62,19 @@ export default function Subcontractor() {
         <div className="relative z-10 flex gap-2 p-4 justify-center">
             <a
             href="#"
-              className={`
-              px-5 py-2.5 text-xs font-semibold tracking-wide rounded transition-all duration-200`}
+              className="px-5 py-2.5 text-[16px] font-medium  tracking-wide rounded transition-all duration-200 bg-sah-white"
             >
               New User Registration
             </a>
             <a
             href="#"
-              className={`
-              px-5 py-2.5 text-xs font-semibold tracking-wide rounded transition-all duration-200`}
+              className="px-5 py-2.5 text-[16px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white"
             >
               Returning Users
             </a>
             <a
             href="#"
-              className={`
-              px-5 py-2.5 text-xs font-semibold tracking-wide rounded transition-all duration-200`}
+              className="px-5 py-2.5 text-[16px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white"
             >
               Subcontractor Quick Start Guide
             </a>
