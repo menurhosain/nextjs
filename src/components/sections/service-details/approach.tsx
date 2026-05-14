@@ -30,7 +30,7 @@ export default function Approach() {
                             class_name={
                                 {
                                     subtitle: "text-sah-black !mb-[15px] text-white",
-                                    title: "text-sah-black !mb-[25px] xl:text-[70px] lg:leading-[1.2em] text-white",
+                                    title: "text-sah-black !mb-[25px] xl:text-[70px] lg:leading-[1.1em] text-white",
                                     description: "text-sah-gray-1 text-white"
                                 }
                             }
