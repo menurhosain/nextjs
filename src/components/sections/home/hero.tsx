@@ -3,14 +3,25 @@ import { StatCounter } from "@/components/ui/stat-counter";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import { AngleArrow, DownCurveArrow } from "@/components/ui/svgs";
 
-export default function Hero() {
+interface BannerProps {
+    background?: string;
+    titleNormal?: string;
+    titleFancy?: string;
+    scrollLabel?: string;
+    counterLabel?: string;
+    counterNumber?: number;
+    buttonLabel?: string;
+    buttonLink?: string;
+}
+
+export default function Hero({background, titleNormal, titleFancy, scrollLabel, counterLabel, counterNumber, buttonLabel, buttonLink}: BannerProps) {
     return (
-        <Banner bg="/home-hero.mp4">
+        <Banner bg={background ?? "/home-hero.mp4" }>
             <Left has_brand_shape={true}>
                 <div className="flex flex-col">
                     <h1 className="text-white  font-medium leading-[70px] sm:leading-[60px] xl:leading-[70px] tracking-[-0.05em] flex flex-col gap-[30px] mb-[35px]">
-                        <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
-                        <em className="italic text-[36px] md:text-[50px] xl:text-[84px] font-dm-serif">& Build Contractor</em>
+                        <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">{titleNormal ?? "Leading Design"}</span>
+                        <em className="italic text-[36px] md:text-[50px] xl:text-[84px] font-dm-serif">{titleFancy ?? "& Build Contractor"}</em>
                     </h1>
 
                     <div className="h-[1px] w-[150px] md:w-[450px] bg-sah-white/20 relative mb-[10px] sm:mb-[56px] ">
@@ -18,15 +29,15 @@ export default function Hero() {
                     </div>
 
                     <Link
-                        href="/register"
+                        href={buttonLink ?? "/register"}
                         className="inline-flex items-center gap-[10px] group bg-sah-red hover:bg-sah-white text-white hover:text-sah-red   text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit transition duration-300"
                     >
-                        You Like to Build?
+                        {buttonLabel ?? "You Like to Build"}?
                         <AngleArrow class_name="!w-[12px] !h-[12px] !fill-white group-hover:!fill-sah-red transition duration-300" />
                     </Link>
 
                     <span className="hidden md:flex flex flex-col items-center gap-3 bg-sah-overlay-dark-50 border border-white/30 rounded-full px-[12px] py-[16px] mt-[80px] w-[max-content]">
-                        <span className="text-white text-[16px] font-normal capitalcase [writing-mode:vertical-rl] rotate-180">Scroll Now</span>
+                        <span className="text-white text-[16px] font-normal capitalcase [writing-mode:vertical-rl] rotate-180">{scrollLabel ?? "Scroll Now"}</span>
                         <DownCurveArrow class_name="!fill-sah-white !h-[20px] !w-[15px]" />
                     </span>
                 </div>
@@ -39,8 +50,8 @@ export default function Hero() {
                         style={{ backgroundImage: "url('/white-dots.jpg')" }}
                     >
                         <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
-                        <StatCounter value={30} suffix="+" className="text-sah-red font-semibold font-geist text-[50px] lg:text-[100px] leading-none" />
-                        <span className="text-sah-gray-1 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">Leading Years in Construction</span>
+                        <StatCounter value={counterNumber ?? 30} suffix="+" className="text-sah-red font-semibold font-geist text-[50px] lg:text-[100px] leading-none" />
+                        <span className="text-sah-gray-1 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">{counterLabel ?? "Leading Years in Construction"}</span>
                     </div>
                 </div>
             </Right>
