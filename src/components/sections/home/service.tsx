@@ -10,7 +10,17 @@ import { AngleArrow, DownLongArrow,ServiceIcon1 ,ServiceIcon2 ,ServiceIcon3 } fr
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Service() {
+interface ServiceProps {
+    subTitle?: string;
+    titleNormal?: string;
+    titleAnimated?: string;
+    buttonLabelOne?: string;
+    buttonLinkOne?: string;
+    buttonLabelTwo?: string;
+    buttonLinkTwo?: string;
+}
+
+export default function Service({subTitle, titleNormal, titleAnimated, buttonLabelOne, buttonLinkOne, buttonLabelTwo, buttonLinkTwo}: ServiceProps) {
     const sectionTitleRef = useRef<HTMLDivElement>(null);
     const cardOneRef = useRef<HTMLDivElement>(null);
     const cardTwoRef = useRef<HTMLDivElement>(null);
@@ -76,14 +86,14 @@ export default function Service() {
                 <div className="mb-[23px]" ref={sectionTitleRef}>
                     <div className="flex items-center justify-center gap-6 mb-[38px]">
                         <span className="text-sah-black flex items-center gap-[6px] text-[16px] font-medium tracking-widest uppercase font-inter">
-                            [ Our Expertise ]
+                            [ {subTitle ?? "Our Expertise"} ]
                             <DownLongArrow class_name="!w-[14px] !h-[14px]" />
                         </span>
                     </div>
                     <ScrollReveal toColor="var(--color-sah-dark-2)">
                         <h2 className="section-heading mx-auto text-center leading-[48px] mb-[60px]">
                             <span className="text-sah-dark-2">
-                                We deliver high quality construction services <br /> with innovation, precision,{" "}
+                                {titleNormal ?? <>We deliver high quality construction services" <br /> "with innovation, precision,</>}{" "}
                             </span>
                             <span className="text-sah-dark-2/50 scroll-color font-bold">and commitment to every client project</span>
                         </h2>

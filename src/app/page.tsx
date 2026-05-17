@@ -23,7 +23,15 @@ export default async function Home() {
                 buttonLabel={content?.banner_button_label}
                 buttonLink={content?.banner_button_link}
             />
-            <Service />
+            <Service
+                subTitle={content?.service_section_sub_title}
+                titleNormal={content?.service_section_title_normal}
+                titleAnimated={content?.service_section_title_animated}
+                buttonLabelOne={content?.service_group_button_label_one}
+                buttonLinkOne={content?.service_group_button_link_one}
+                buttonLabelTwo={content?.service_group_button_label_two}
+                buttonLinkTwo={content?.service_group_button_link_two}
+            />
             <About />
             <Partner />
             <Projects />
