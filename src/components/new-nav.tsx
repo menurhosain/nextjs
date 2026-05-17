@@ -151,7 +151,7 @@ export function NavLinks() {
                                             </a>
                                         </div>
 
-                                        <div className={`w-[70%] grid gap-4 py-[20px] ${link.id === "career" ? "grid-cols-2" : "grid-cols-3"}`}>
+                                        <div className={`w-[70%] grid gap-4 py-[20px] grid-cols-3`}>
                                             {link.id === "news" &&
                                                 link.latest_news?.map((item, i) => (
                                                     <NewsCard
