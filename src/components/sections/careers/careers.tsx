@@ -10,7 +10,7 @@ export default function Careers() {
     return (
         <>
             <section className="section-padding bg-sah-light-4">
-                <div className="container !max-w-[1720px] !px-[50px] pt-[50px] lg:pt-[135px] pb-[50px] lg:pb-[142px] border-x border-sah-light-3">
+                <div className="container !px-[50px] pt-[50px] lg:pt-[135px] pb-[50px] lg:pb-[142px] border-x border-sah-light-3">
                     <div className="flex flex-col items-center">
                         <Section_Title
                             title=<> Build your future through collaboration </>

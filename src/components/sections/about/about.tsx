@@ -1,6 +1,7 @@
 "use client"
 import Section_Title from "@/components/ui/section-title";
 import { useEffect, useRef, useState } from "react";
+import { AboutDotIcon } from "@/components/ui/svgs";
 import Image from "next/image";
 
 interface StatCardProps {
@@ -60,9 +61,7 @@ function StatCard({ label, target, suffix }: StatCardProps) {
         <span className="text-[16px] text-sah-gray-2 font-medium tracking-wide">
           {label}
         </span>
-        <svg width="42" height="8" viewBox="0 0 27 5" xmlns="http://www.w3.org/2000/svg" className="!w-[28px]">
-            <path d="M-0.000107408 4.58997V-3.45409e-05H4.88989V4.58997H-0.000107408ZM7.08974 4.58997V-3.45409e-05H11.9797V4.58997H7.08974ZM14.1796 4.58997V-3.45409e-05H19.0696V4.58997H14.1796ZM21.2694 4.58997V-3.45409e-05H26.1594V4.58997H21.2694Z" fill="#101010"/>
-        </svg>
+        <AboutDotIcon/>
       </div>
  
       {/* Animated Value */}

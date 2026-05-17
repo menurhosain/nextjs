@@ -7,7 +7,7 @@ const policies = [
   {
     id: 1,
     description:
-      "At tempus aenean sapien torquent sed diam class efficitur mus morbi eros dictum quam augue ac laor eet ligula libero mi commodo nibh hac fermentum orci ad pharetra consequat justo pellentesque vulputate malesuada dictumst fames interdum commodo nibh hac fermentum orci efficitur mus morbi.",
+      "At tempus aenean sapien torquent sed diam class efficitur mus morbi eros dictum quam augue ac laor eet ligula libero mi commodo nibh hac fermentum orci ad pharetra consequat justo pellentesque vulputate malesuada dictumst fames interdum commodo nibh hac.",
     link: "#",
   },
 ];
@@ -16,10 +16,10 @@ export default function Subcontractor() {
 
   return (
     <section className="bg-sah-light-4 bg-[url('/careers-bg-pattern.png')] bg-bottom bg-no-repeat">
-      <div className="container !max-w-[1720px] !px-[50px] pt-[50px] lg:pt-[140px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
+      <div className="container !px-[50px] pt-[50px] lg:pt-[140px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
         {/* ── Hero / Intro ── */}
         <div className="pb-[20px] flex gap-12 items-start justify-between flex-wrap">
-          <div className="w-[47%]">
+          <div className="w-[50%]">
             <ScrollReveal toColor="var(--color-sah-dark-2)">
               <h2 className="section-heading mx-auto text-left leading-[48px] mb-[30px]">
                 <span className="text-sah-dark-2">
@@ -29,7 +29,7 @@ export default function Subcontractor() {
               </h2>
             </ScrollReveal>
           </div>
-          <div className="w-[530px]">
+          <div className="w-[560px]">
             <p className="text-[16px] text-sah-gray-1 leading-relaxed">
               Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based
               in the Sultanate of Oman. With a rich legacy spanning several decades, SAH has

@@ -22,7 +22,7 @@ export default function Contact() {
 
     return (
         <section className="bg-sah-light-4">
-            <div className="container flex !max-w-[1720px] !px-[50px] pt-[50px] lg:pt-[150px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
+            <div className="container flex !px-[50px] pt-[50px] lg:pt-[150px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
                 {/* Left: Form Panel */}
                 <div className="w-full bg-white md:max-w-[750px] p-10 flex flex-col justify-between rounded-l-[6px] rounded-b-[6px] overflow-hidden">
                     {/* Header */}
