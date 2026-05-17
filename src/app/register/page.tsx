@@ -1,8 +1,27 @@
 import RegisterForm from "./register-form";
+import { Banner, Left, Right } from "@/components/ui/banner";
+import Banner_Title from "@/components/ui/banner-title";
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-screen register-box flex items-center justify-center bg-gray-50 py-40 px-4">
+    <>
+    <Banner bg="/home-hero.mp4">
+        <Left class_name="">
+            <div className="flex flex-col justify-center">
+                <Banner_Title
+                    subtitle="Building Trust And Excellence"
+                    title={<>
+                        Building Trust Through <br /> Quality Construction <br /> Trust Through
+                    </>}
+                />
+            </div>
+        </Left>
+
+        <Right>
+            <div></div>
+        </Right>
+    </Banner>
+    <div className="py-[150px] register-box flex items-center justify-center bg-gray-50 py-40 px-4">
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-md p-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">
           Create an account
@@ -10,5 +29,6 @@ export default function RegisterPage() {
         <RegisterForm />
       </div>
     </div>
+    </>
   );
 }

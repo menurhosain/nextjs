@@ -38,13 +38,14 @@ export default function ResetPasswordForm({ code }: { code: string }) {
       <input type="hidden" name="code" value={code} />
 
       <div className="space-y-1.5">
-        <Label htmlFor="password">New password</Label>
+        <Label htmlFor="password" className="font-normal text-sah-gray-1 mb-[12px]">New password</Label>
         <Input
           id="password"
           name="password"
           type="password"
           placeholder="••••••••"
           required
+          className="h-[56px] rounded-[6px] border-sah-gray-4 text-sah-gray-1  focus-visible:border-sah-red focus:outline-none focus-visible:ring-0"
         />
         {state.errors.password && (
           <p className="text-sm text-red-500">{state.errors.password}</p>
@@ -52,13 +53,14 @@ export default function ResetPasswordForm({ code }: { code: string }) {
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="confirmPassword">Confirm password</Label>
+        <Label htmlFor="confirmPassword" className="font-normal text-sah-gray-1 mb-[12px]">Confirm password</Label>
         <Input
           id="confirmPassword"
           name="confirmPassword"
           type="password"
           placeholder="••••••••"
           required
+          className="h-[56px] rounded-[6px] border-sah-gray-4 text-sah-gray-1  focus-visible:border-sah-red focus:outline-none focus-visible:ring-0"
         />
         {state.errors.confirmPassword && (
           <p className="text-sm text-red-500">{state.errors.confirmPassword}</p>
@@ -72,7 +74,7 @@ export default function ResetPasswordForm({ code }: { code: string }) {
       <Button
         type="submit"
         disabled={pending}
-        className="w-full mt-2 cursor-pointer"
+        className="w-full mt-2 cursor-pointer bg-sah-black text-sah-white py-5 rounded-[6px] hover:bg-sah-red"
         variant="secondary"
       >
         {pending ? "Resetting..." : "Reset password"}

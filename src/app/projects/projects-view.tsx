@@ -107,7 +107,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
             <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection}>
                 <Left class_name="flex flex-col justify-center">
                     <div className="flex flex-col justify-center mt-[188px]">
-                        <Banner_Title subtitle="Explore Our Recent Projects" title=<>Showcasing our latest construction projects and achievements</> />
+                        <Banner_Title subtitle="Explore Our Recent Projects" title="Showcasing our latest construction projects and achievements" />
                     </div>
                     <div className="flex gap-4 self-start w-[90%] py-[70px] relative  mt-auto">
                         <div className="absolute bg-sah-white/20 top-0 h-[1px] w-[120vw] ml-[calc(50%-50vw)]"></div>

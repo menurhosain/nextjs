@@ -1,18 +1,23 @@
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
+import News from "@/components/sections/news/news";
 
 export default function NewsPage() {
     return (
-        <Banner bg="/home-hero.mp4">
-            <Left class_name="">
-                <div className="flex flex-col justify-center">
-                    <Banner_Title subtitle="Reliable Business Partners" title=<> Our Latest News </> />
-                </div>
-            </Left>
+        <>
+            <Banner bg="/home-hero.mp4">
+                <Left class_name="">
+                    <div className="flex flex-col justify-center">
+                        <Banner_Title subtitle="Reliable Business Partners" title="Our Latest News"/>
+                    </div>
+                </Left>
 
-            <Right>
-                <div></div>
-            </Right>
-        </Banner>
+                <Right>
+                    <div></div>
+                </Right>
+            </Banner>
+
+            <News />
+        </>
     );
 }

@@ -3,17 +3,17 @@
 import { useState } from "react";
 
 const jobListings = [
-    { id: 1, type: "Full Time", title: "Project Manager Consulting", accent: false },
-    { id: 2, type: "Full Time", title: "Project Manager Consulting", accent: true },
-    { id: 3, type: "Full Time", title: "Project Manager Consulting", accent: false },
-    { id: 4, type: "Full Time", title: "Project Manager Consulting", accent: false },
+    { id: 1, type: "Full Time", title: "Project Manager Consulting", accent: false, link: "#1" },
+    { id: 2, type: "Full Time", title: "Project Manager Consulting", accent: true, link: "#2"},
+    { id: 3, type: "Full Time", title: "Project Manager Consulting", accent: false, link: "#3" },
+    { id: 4, type: "Full Time", title: "Project Manager Consulting", accent: false, link: "#4" },
 ];
 
 export default function JobCareers() {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     return (
-        <div className=" bg-[url('/careers-bg-pattern.png')]  bg-bottom bg-no-repeat">
+        <div id="jobboard" className=" bg-[url('/careers-bg-pattern.png')]  bg-bottom bg-no-repeat">
             <div className="container !max-w-[1720px] !px-[50px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
                 <div className="max-w-full">
                     <div className="flex flex-col lg:flex-row justify-between items-start mb-[50px] gap-8">
@@ -58,17 +58,19 @@ export default function JobCareers() {
                                     </span>
 
                                     {/* Job Title */}
-                                    <span
-                                        className={`flex-1 text-[24px] font-semibold text-gray-900 ml-[30px] transition-colors duration-300
+                                    <a
+                                        href={job.link}
+                                        className={`flex-1 text-[20px] font-semibold text-gray-900 ml-[30px] transition-colors duration-300
                       ${hoveredId === job.id ? "text-black" : ""}
                     `}
                                     >
                                         {job.title}
-                                    </span>
+                                    </a>
 
                                     {/* CTA Button */}
                                     <div className="flex items-center gap-[10px] ml-4 shrink-0">
-                                        <button
+                                        <a
+                                            href={job.link}
                                             className={`flex items-center gap-2 text-[16px] font-medium text-sah-dark-2 pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300
                         ${hoveredId === job.id ? "bg-sah-dark-2 text-white scale-105" : "bg-white text-gray-700"}
                       `}
@@ -83,7 +85,7 @@ export default function JobCareers() {
                                                     <path d="M8.35083 2.845L1.17833 10.0175L0 8.83917L7.17167 1.66667H0.850834V0H10.0175V9.16667H8.35083V2.845Z" fill="white" />
                                                 </svg>
                                             </span>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             ))}
