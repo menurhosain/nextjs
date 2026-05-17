@@ -115,6 +115,8 @@ export type ProjectPageContent = {
     pagination_previous_label: string;
     project_card_year_label: string;
     project_card_location_label: string;
+    no_project_label:string;
+    no_project_description:string;
     Banner: ProjectPageBanner;
 };
 export async function get_project_page_content(locale = "en"): Promise<ProjectPageContent | null> {

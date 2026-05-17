@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AngleArrow } from "@/components/ui/svgs";
 
 const jobListings = [
     { id: 1, type: "Full Time", title: "Project Manager Consulting", accent: false, link: "#1" },
@@ -14,7 +15,7 @@ export default function JobCareers() {
 
     return (
         <div id="jobboard" className=" bg-[url('/careers-bg-pattern.png')]  bg-bottom bg-no-repeat">
-            <div className="container !max-w-[1720px] !px-[50px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
+            <div className="container !px-[50px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
                 <div className="max-w-full">
                     <div className="flex flex-col lg:flex-row justify-between items-start mb-[50px] gap-8">
                         <div className="lg:w-1/2">
@@ -81,9 +82,7 @@ export default function JobCareers() {
                           ${job.accent ? (hoveredId === job.id ? "bg-sah-red text-white" : "bg-sah-red text-white") : hoveredId === job.id ? "bg-sah-red text-sah-dark-2" : "bg-sah-dark-2 text-white"}
                         `}
                                             >
-                                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" className="!w-[9px] h-[9px]">
-                                                    <path d="M8.35083 2.845L1.17833 10.0175L0 8.83917L7.17167 1.66667H0.850834V0H10.0175V9.16667H8.35083V2.845Z" fill="white" />
-                                                </svg>
+                                                <AngleArrow class_name="!w-[9px] h-[9px]"/>
                                             </span>
                                         </a>
                                     </div>

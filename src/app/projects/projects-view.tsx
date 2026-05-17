@@ -272,8 +272,8 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
                 <div className="container py-[140px] border-x border-sah-light-3">
                     {filteredProjects.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-[80px] gap-4">
-                            <p className="font-geist text-[32px] font-medium text-sah-dark">No projects found.</p>
-                            <p className="font-inter text-[16px] text-sah-dark/50">Try narrowing your search or adjusting the filters.</p>
+                            <p className="font-geist text-[32px] font-medium text-sah-dark">{content?.no_project_label}</p>
+                            <p className="font-inter text-[16px] text-sah-dark/50">{content?.no_project_description}</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

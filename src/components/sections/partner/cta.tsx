@@ -2,6 +2,7 @@
  
 import { JSX, useState } from "react";
 import Image from "next/image";
+import { AngleArrow } from "@/components/ui/svgs";
 
 type CtaProps = {
   title?: string;
@@ -64,10 +65,7 @@ export default function Cta({ title, description }: CtaProps) {
               `}
             >
               Contact Us Now
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" className="!w-[11px] h-[11px]">
-                    <path d="M8.35083 2.845L1.17833 10.0175L0 8.83917L7.17167 1.66667H0.850834V0H10.0175V9.16667H8.35083V2.845Z" fill="white"/>
-                </svg>
-
+                <AngleArrow class_name="!w-[11px] h-[11px]"/>
             </a>
           </div>
         </div>
