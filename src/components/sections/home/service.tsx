@@ -95,7 +95,7 @@ export default function Service({subTitle, titleNormal, titleAnimated, buttonLab
                             <span className="text-sah-dark-2">
                                 {titleNormal ?? <>We deliver high quality construction services" <br /> "with innovation, precision,</>}{" "}
                             </span>
-                            <span className="text-sah-dark-2/50 scroll-color font-bold">and commitment to every client project</span>
+                            <span className="text-sah-dark-2/50 scroll-color font-bold">{titleAnimated ?? "commitment to every client project"}</span>
                         </h2>
                     </ScrollReveal>
                 </div>
@@ -137,8 +137,8 @@ export default function Service({subTitle, titleNormal, titleAnimated, buttonLab
 
                 <div className="flex justify-center mt-12 mb-[140px]">
                     <div className="inline-flex shadow-sm md:px-[30px] md:py-[8px] bg-sah-white rounded-full gap-[20px]">
-                        <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[10px] font-inter font-medium ">
-                            <span className="text-sah-dark-2 group-hover:text-sah-red">Careers</span>
+                        <a href={buttonLinkOne ?? "#"} className="flex group items-center text-[14px] sm:text-[16px] gap-[10px] font-inter font-medium ">
+                            <span className="text-sah-dark-2 group-hover:text-sah-red">{buttonLabelOne ?? "Careers"}</span>
                             <span
                                 className="flex items-center justify-center w-[30px] h-[30px] sm:w-[28px] sm:h-[28px] rounded-full bg-sah-red text-sah-white flex-shrink-0 group-hover:bg-sah-red/80 transition-colors"
                                 aria-label="Navigate"
@@ -146,9 +146,9 @@ export default function Service({subTitle, titleNormal, titleAnimated, buttonLab
                                 <AngleArrow class_name="!w-[8px] !h-[8px]" />
                             </span>
                         </a>
-                        <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[20px] font-inter font-medium">
+                        <a href={buttonLinkTwo ?? "#"} className="flex group items-center text-[14px] sm:text-[16px] gap-[20px] font-inter font-medium">
                             <span className="text-sah-dark-2 underline underline-offset-2 decoration-sah-dark-2 group-hover:text-sah-red group-hover:decoration-sah-red transition-colors">
-                                View All Services
+                                {buttonLabelTwo ?? "View All Services"}
                             </span>
                         </a>
                     </div>
