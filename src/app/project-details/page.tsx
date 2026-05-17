@@ -4,6 +4,7 @@ import Banner_Title from "@/components/ui/banner-title";
 import { ButtonModern } from "@/components/ui/button";
 import ProjectGallery from "@/components/ui/project-gallery";
 import { useState, useEffect, useCallback } from "react";
+import { ProjectCheck ,ProjectArrowLeft ,ProjectArrowRight } from "@/components/ui/svgs";
 
 
 const projectImages = ["/project-1.jpg", "/project-2.jpg", "/project-3.jpg", "/project-1.jpg", "/project-1.jpg"];
@@ -102,33 +103,25 @@ export default function ProjectDetailsPage() {
                             <ul className="grid grid-cols-2 gap-4 w-150 mt-5">
                                 <li className="flex items-center">
                                     <div className="bg-sah-red  rounded-full h-4 w-4 text-[10px] flex items-center justify-center">
-                                        <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10.5 0.75C10.5 0.960938 10.4062 1.14844 10.2656 1.28906L4.26562 7.28906C4.125 7.42969 3.9375 7.5 3.75 7.5C3.53906 7.5 3.35156 7.42969 3.21094 7.28906L0.210938 4.28906C0.0703125 4.14844 0 3.96094 0 3.75C0 3.32812 0.328125 3 0.75 3C0.9375 3 1.125 3.09375 1.26562 3.23438L3.75 5.69531L9.21094 0.234375C9.35156 0.09375 9.53906 0 9.75 0C10.1484 0 10.5 0.328125 10.5 0.75Z" fill="white"/>
-                                        </svg>
+                                        <ProjectCheck/>
                                     </div>
                                     <p className="text-sah-dark-2 text-[16px] font-medium ml-2">Various analysis options.</p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="bg-sah-red  rounded-full h-4 w-4 text-[10px] flex items-center justify-center">
-                                        <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10.5 0.75C10.5 0.960938 10.4062 1.14844 10.2656 1.28906L4.26562 7.28906C4.125 7.42969 3.9375 7.5 3.75 7.5C3.53906 7.5 3.35156 7.42969 3.21094 7.28906L0.210938 4.28906C0.0703125 4.14844 0 3.96094 0 3.75C0 3.32812 0.328125 3 0.75 3C0.9375 3 1.125 3.09375 1.26562 3.23438L3.75 5.69531L9.21094 0.234375C9.35156 0.09375 9.53906 0 9.75 0C10.1484 0 10.5 0.328125 10.5 0.75Z" fill="white"/>
-                                        </svg>
+                                        <ProjectCheck/>
                                     </div>
                                     <p className="text-sah-dark-2 text-[16px] font-medium ml-2">Page Load (time, size, number of requests).</p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="bg-sah-red  rounded-full h-4 w-4 text-[10px] flex items-center justify-center">
-                                        <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10.5 0.75C10.5 0.960938 10.4062 1.14844 10.2656 1.28906L4.26562 7.28906C4.125 7.42969 3.9375 7.5 3.75 7.5C3.53906 7.5 3.35156 7.42969 3.21094 7.28906L0.210938 4.28906C0.0703125 4.14844 0 3.96094 0 3.75C0 3.32812 0.328125 3 0.75 3C0.9375 3 1.125 3.09375 1.26562 3.23438L3.75 5.69531L9.21094 0.234375C9.35156 0.09375 9.53906 0 9.75 0C10.1484 0 10.5 0.328125 10.5 0.75Z" fill="white"/>
-                                        </svg>
+                                        <ProjectCheck/>
                                     </div>
                                     <p className="text-sah-dark-2 text-[16px] font-medium ml-2">Advance Data analysis operation.</p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="bg-sah-red  rounded-full h-4 w-4 text-[10px] flex items-center justify-center">
-                                        <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10.5 0.75C10.5 0.960938 10.4062 1.14844 10.2656 1.28906L4.26562 7.28906C4.125 7.42969 3.9375 7.5 3.75 7.5C3.53906 7.5 3.35156 7.42969 3.21094 7.28906L0.210938 4.28906C0.0703125 4.14844 0 3.96094 0 3.75C0 3.32812 0.328125 3 0.75 3C0.9375 3 1.125 3.09375 1.26562 3.23438L3.75 5.69531L9.21094 0.234375C9.35156 0.09375 9.53906 0 9.75 0C10.1484 0 10.5 0.328125 10.5 0.75Z" fill="white"/>
-                                        </svg>
+                                        <ProjectCheck/>
                                     </div>
                                     <p className="text-sah-dark-2 text-[16px] font-medium ml-2">Various analysis options.</p>
                                 </li>
@@ -190,7 +183,7 @@ export default function ProjectDetailsPage() {
                         <a href="#"
                             className="flex items-center gap-3 flex-1 transition-all group">
                             <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-1 group-hover:text-sah-red transition-transform">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.83582 12L11.0429 18.2071L12.4571 16.7929L7.66424 12L12.4571 7.20712L11.0429 5.79291L4.83582 12ZM10.4857 12L16.6928 18.2071L18.107 16.7929L13.3141 12L18.107 7.20712L16.6928 5.79291L10.4857 12Z"></path></svg>
+                                <ProjectArrowLeft/>
                             </span>
                             <div>
                             <p className="text-[16px] font-semibold  text-sah-dark-2 group-hover:text-sah-red mb-1 !m-0  transition-all">Previous Project</p>
@@ -201,7 +194,7 @@ export default function ProjectDetailsPage() {
                         <a href="#"
                             className="flex items-center flex-row-reverse gap-3 flex-1 text-right group">
                             <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-[-5px] group-hover:text-sah-red transition-transform">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.1642 12L12.9571 5.79291L11.5429 7.20712L16.3358 12L11.5429 16.7929L12.9571 18.2071L19.1642 12ZM13.5143 12L7.30722 5.79291L5.89301 7.20712L10.6859 12L5.89301 16.7929L7.30722 18.2071L13.5143 12Z"></path></svg>
+                                <ProjectArrowRight/>
                             </span>
                             <div>
                             <p className="text-[16px] font-semibold text-sah-dark-2 group-hover:text-sah-red mb-1 !m-0 transition-all">Next Project</p>

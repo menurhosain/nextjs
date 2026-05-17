@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Section_Title from "@/components/ui/section-title";
 import Image from "next/image";
+import { AngleArrow } from "@/components/ui/svgs";
 
 
 
@@ -27,9 +28,7 @@ export default function Careers() {
                         `}
                         >
                         Start Your Career with Us
-                            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" className="!w-[11px] h-[11px]">
-                                <path d="M8.35083 2.845L1.17833 10.0175L0 8.83917L7.17167 1.66667H0.850834V0H10.0175V9.16667H8.35083V2.845Z" fill="white"/>
-                            </svg>
+                        <AngleArrow class_name="!w-[11px] h-[11px]"/>
 
                         </a>
                         <div className="w-full p-[24px] border border-sah-light-3 rounded-[6px] mt-[60px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
