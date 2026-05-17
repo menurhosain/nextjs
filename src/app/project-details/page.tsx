@@ -87,7 +87,7 @@ export default function ProjectDetailsPage() {
             </Banner>
 
             <section className="section-padding">
-                <div className="container mx-auto py-[140px] border-x border-sah-light-3">
+                <div className="container mx-auto pt-[140px] pb-[150px] border-x border-sah-light-3">
                     <div className="mb-[60px]">
                         <ProjectGallery images={projectImages} />
                     </div>
@@ -172,9 +172,9 @@ export default function ProjectDetailsPage() {
                             src={img.thumb}
                             alt={img.title}
                             loading="lazy"
-                            className="w-full h-full object-cover brightness-90 transition-all duration-500 group-hover:scale-105 group-hover:brightness-100"
+                            className="w-full h-full object-cover brightness-100 transition-all duration-500 group-hover:scale-105 group-hover:brightness-80"
                             />
-                            <div className="absolute inset-0 from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
                             <div>
                                 <p className="text-white text-sm font-medium leading-tight">{img.title}</p>
                                 <p className="text-white/60 text-[11px] uppercase tracking-widest mt-0.5">{img.category}</p>
@@ -184,27 +184,27 @@ export default function ProjectDetailsPage() {
                         ))}
                     </div>
                     <p className="text-[16px] leading-normal text-sah-gray-2 mt-8">At tempus aenean sapien torquent sed diam class efficitur mus morbi eros dictum quam augue ac laor eet ligula libero mi commodo nibh hac fermentum orci ad pharetra consequat justo pellentesque vulputate malesuada dictumst fames interdum cursus an te tellus porta ullamcorper accumsan non eu adipiscing integer venenatis sagittis arcu curae finibus ridi culus aliquam velit lobortis senectus vitae sollicitudin sit consectetuer ultricies rutrum parturient pede nisi nascetur habitant netus quisque elementum inceptos nam felis penatibus feugiat</p>
-                    <div className="flex items-center justify-between border-t border-b border-sah-light-3 pt-4.5 pb-4.5 gap-4 mt-6">
+                    <div className="flex items-center justify-between border-t border-b border-sah-light-3 pt-4.5 pb-4.5 gap-4 mt-11">
 
                         
                         <a href="#"
                             className="flex items-center gap-3 flex-1 transition-all group">
-                            <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-1 transition-transform">
+                            <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-1 group-hover:text-sah-red transition-transform">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.83582 12L11.0429 18.2071L12.4571 16.7929L7.66424 12L12.4571 7.20712L11.0429 5.79291L4.83582 12ZM10.4857 12L16.6928 18.2071L18.107 16.7929L13.3141 12L18.107 7.20712L16.6928 5.79291L10.4857 12Z"></path></svg>
                             </span>
                             <div>
-                            <p className="text-[16px] font-semibold  text-sah-dark-2 mb-1 !m-0">Previous Project</p>
+                            <p className="text-[16px] font-semibold  text-sah-dark-2 group-hover:text-sah-red mb-1 !m-0  transition-all">Previous Project</p>
                             </div>
                         </a>
 
                         {/* Next */}
                         <a href="#"
-                            className="flex items-center flex-row-reverse gap-3 flex-1 text-right">
-                            <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-1 transition-transform">
+                            className="flex items-center flex-row-reverse gap-3 flex-1 text-right group">
+                            <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-[-5px] group-hover:text-sah-red transition-transform">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.1642 12L12.9571 5.79291L11.5429 7.20712L16.3358 12L11.5429 16.7929L12.9571 18.2071L19.1642 12ZM13.5143 12L7.30722 5.79291L5.89301 7.20712L10.6859 12L5.89301 16.7929L7.30722 18.2071L13.5143 12Z"></path></svg>
                             </span>
                             <div>
-                            <p className="text-[16px] font-semibold text-sah-dark-2 mb-1 !m-0">Next Project</p>
+                            <p className="text-[16px] font-semibold text-sah-dark-2 group-hover:text-sah-red mb-1 !m-0 transition-all">Next Project</p>
                             </div>
                         </a>
 
@@ -226,7 +226,7 @@ export default function ProjectDetailsPage() {
                     <button
                         aria-label="Close"
                         onClick={closeImage}
-                        className="fixed top-5 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/70 text-lg hover:text-white hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                        className="fixed top-5 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/70 text-lg hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
                     >
                         ✕
                     </button>
@@ -241,7 +241,7 @@ export default function ProjectDetailsPage() {
                         <button
                             aria-label="Previous image"
                             onClick={() => navigate(-1)}
-                            className="absolute left-0 sm:-left-14 z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-xl hover:text-white hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                            className="absolute left-0 sm:-left-14 z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-[24px] hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
                         >
                             ←
                         </button>
@@ -256,7 +256,7 @@ export default function ProjectDetailsPage() {
                         <button
                             aria-label="Next image"
                             onClick={() => navigate(1)}
-                            className="absolute right-0 sm:-right-14 z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-xl hover:text-white hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                            className="absolute right-0 sm:-right-14 z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-24px hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
                         >
                             →
                         </button>
@@ -279,7 +279,7 @@ export default function ProjectDetailsPage() {
                             e.stopPropagation();
                             setSelected(img);
                             }}
-                            className={`rounded-full transition-all duration-200 ${
+                            className={`rounded-full transition-all duration-200  cursor-pointer ${
                             img.id === selected.id
                                 ? "w-5 h-2 bg-white/90"
                                 : "w-2 h-2 bg-white/30 hover:bg-white/50"
