@@ -7,8 +7,14 @@ import { Cross, DownArrow, DownLongArrow, SearchIcon, SettingIcon } from "@/comp
 import Link from "next/link";
 import { ProjectCardSmall } from "@/components/ui/project-card-small";
 import type { Project, ProjectTag } from "@/services/project.service";
+import type { ProjectPageContent } from "@/services/page_content.service";
 
-export default function ProjectsView({ projects, tags }: { projects: Project[]; tags: ProjectTag[] }) {
+export default function ProjectsView({ projects, tags, content }: { projects: Project[]; tags: ProjectTag[]; content: ProjectPageContent | null }) {
+    const tagLabelMap: Record<string, string | undefined> = {
+        location: content?.location_filter_label,
+        scope: content?.scope_filter_label,
+        industry: content?.industry_filter_label,
+    };
     const [inputValue, setInputValue] = useState("");
     const [query, setQuery] = useState("");
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -107,7 +113,10 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
             <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection}>
                 <Left class_name="flex flex-col justify-center">
                     <div className="flex flex-col justify-center mt-[188px]">
-                        <Banner_Title subtitle="Explore Our Recent Projects" title="Showcasing our latest construction projects and achievements" />
+                        <Banner_Title
+                            subtitle={content?.Banner.banner_label ?? "Explore Our Recent Projects"}
+                            title={content?.Banner.banner_title ?? "Showcasing our latest construction projects and achievements"}
+                        />
                     </div>
                     <div className="flex gap-4 self-start w-[90%] py-[70px] relative  mt-auto">
                         <div className="absolute bg-sah-white/20 top-0 h-[1px] w-[120vw] ml-[calc(50%-50vw)]"></div>
@@ -120,7 +129,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                 onChange={(e) => handleSearch(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && submitSearch()}
                                 className="text-sah-white h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white bg-transparent"
-                                placeholder="Find a project"
+                                placeholder={content?.search_placeholder ?? "Find a project"}
                             />
                             <button type="button" onClick={submitSearch} className="size-[40px] flex items-center justify-center cursor-pointer">
                                 <SearchIcon class_name="!size-[18px]" />
@@ -133,7 +142,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                             className="flex-1 flex items-center gap-[20px] justify-between bg-sah-gray-5 px-6 cursor-pointer transition-colors duration-200 pr-[14px]"
                         >
                             <span className="text-sah-white flex items-center h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white">
-                                Refined Your Search
+                                {content?.filter_label ?? "Refined Your Search"}
                             </span>
                             <div className="size-[40px] flex items-center justify-center">
                                 <SettingIcon class_name="!size-[18px]" />
@@ -188,7 +197,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                 <div className={`w-[350px] h-full bg-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}>
                     {/* Close button row */}
                     <div className="flex justify-between items-center px-6 py-4 border-b border-sah-light-3">
-                        <span className="text-[16px] font-inter font-medium">Refine your search</span>
+                        <span className="text-[16px] font-inter font-medium">{content?.filter_offcanvas_label ?? "Refine your search"}</span>
                         <button type="button" onClick={() => setDrawerOpen(false)} className="size-7 flex items-center justify-end hover:opacity-60 transition-opacity">
                             <Cross class_name="cursor-pointer !size-[24px]" />
                         </button>
@@ -202,7 +211,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                             value={inputValue}
                             onChange={(e) => handleSearch(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && submitSearch()}
-                            placeholder="Find A Project"
+                            placeholder={content?.search_placeholder ?? "Find A Project"}
                             className="flex-1 min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50"
                         />
                     </div>
@@ -210,7 +219,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                     {/* Clear filters */}
                     <div className="flex justify-end px-6 py-3 border-b border-gray-200 ">
                         <button onClick={clear_filters} type="button" className="font-inter cursor-pointer text-[13px] text-sah-dark underline underline-offset-2">
-                            Clear All Filters
+                            {content?.clear_filter_label ?? "Clear All Filters"}
                         </button>
                     </div>
 
@@ -218,7 +227,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                     {tags.map(({ key, label, options }) => (
                         <div key={key} className="border-b border-gray-200">
                             <button type="button" onClick={() => toggleAccordion(key)} className="w-full flex items-center justify-between px-6 py-5 cursor-pointer">
-                                <span className="font-inter text-[13px] font-medium tracking-widest text-sah-dark">{label}</span>
+                                <span className="font-inter text-[13px] font-medium tracking-widest text-sah-dark">{tagLabelMap[key] ?? label}</span>
                                 <DownArrow class_name={`transition-transform duration-200 !fill-sah-red !size-[14px] ${openAccordions[key] ? "rotate-180" : ""}`} />
                             </button>
                             <div className={`grid transition-all duration-300 ease-in-out ${openAccordions[key] ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
@@ -253,7 +262,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                             type="button"
                             className="w-full bg-sah-red text-sah-white font-inter text-[14px] font-semibold py-4 cursor-pointer hover:opacity-90 transition-opacity"
                         >
-                            Apply Filters
+                            {content?.filter_submit_btn_label ?? "Apply Filters"}
                         </button>
                     </div>
                 </div>
@@ -285,7 +294,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                 }}
                                 className="px-5 py-2 rounded-[8px] border border-sah-light-2 font-inter text-[14px] font-bold text-sah-dark hover:border-sah-dark transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                             >
-                                Previous
+                                {content?.pagination_previous_label ?? "Previous"}
                             </button>
 
                             {getVisiblePages().map((page, i) =>
@@ -317,7 +326,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                 }}
                                 className="px-5 py-2 rounded-[8px] bg-sah-red font-inter text-[14px] font-bold text-sah-white hover:bg-sah-red/90 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                             >
-                                Next
+                                {content?.pagination_next_label ?? "Next"}
                             </button>
                         </div>
                     )}
