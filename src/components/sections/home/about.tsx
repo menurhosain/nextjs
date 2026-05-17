@@ -25,7 +25,7 @@ export default function About() {
                         </ScrollReveal>
                         <div className="flex items-center gap-[24px] mt-[46px]">
                             <ButtonModern variant="pill" link="#" label="About Us More" class_name="py-[10px] px-[30px] text-[16px] sah-transition hover:bg-sah-red hover:text-white" />
-                            <ButtonModern variant="text" link="#" label="About Us More" class_name="p-0 text-[16px]" />
+                            <ButtonModern variant="text" link="#" label="Explore More" class_name="p-0 text-[16px]" />
                         </div>
                     </div>
                 </div>
