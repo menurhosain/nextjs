@@ -295,7 +295,7 @@ export function NavActions() {
             <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
                 <div className="flex flex-1 h-full overflow-hidden relative">
                     <div className="absolute top-[100px] right-0 h-[1px] bg-sah-light-3 z-10 w-[80%]  max-[1024]:w-[87.5%] max-[640px]:w-[81%]" />
-                    <div className="absolute top-[100px] left-0 h-[1px] bg-sah-white/30 z-10 w-[20%] max-[640px]:w-[22%] max-[640px]:min-w-[70px]" />
+                    <div className="absolute top-[100px] left-0 h-[1px] bg-sah-white/15 z-10 w-[20%] max-[640px]:w-[22%] max-[640px]:min-w-[70px]" />
                     {/* Column 1 — 20% */}
                     <div className="w-[20%] max-[1024]:w-[12.5%] max-[640px]:w-[17%] max-[640px]:min-w-[70px] h-full bg-sah-red relative overflow-hidden">
                         {/* Scrolling text — spans full column height including behind logo */}
@@ -303,7 +303,7 @@ export function NavActions() {
                             <div className="nav-scroll-up flex flex-col items-center">
                                 {[...Array(2)].map((_, copy) =>
                                     [...Array(8)].map((_, i) => (
-                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10" style={{ fontSize: "250px", writingMode: "vertical-rl", opacity: 0.2 }}>
+                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]" style={{ writingMode: "vertical-rl", opacity: 0.2 }}>
                                             SAH
                                         </span>
                                     )),
@@ -312,7 +312,7 @@ export function NavActions() {
                         </div>
 
                         {/* Logo — sits on top of scrolling text */}
-                        <div className="relative z-10 flex items-center h-[100px] pl-[60px] max-[1280]:pl-[10px] max-[640px]:pl-0 max-[640px]:justify-center">
+                        <div className="relative z-10 flex items-center h-[100px] pl-[60px] max-[1280]:pl-[10px] max-[640px]:pl-0 max-[640px]:justify-center bg-sah-red">
                             <a href="/">
                                 <img src="/logo-white.png" alt="SAH logo" className="size-[70px] object-contain" />
                             </a>
@@ -398,7 +398,7 @@ export function NavActions() {
 
                         {/* Featured project */}
 
-                        <div className="flex-1 overflow-y-auto px-6 py-8">
+                        <div className="flex-1 overflow-y-auto px-6 pt-8 pb-20">
                             <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Connect with us</p>
 							<form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
 								<div className="flex gap-4 flex-col">
@@ -462,7 +462,7 @@ export function NavActions() {
 
                 {/* Footer — absolute bottom, same 3-col layout */}
                 <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
-                    <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/30 max-[640px]:hidden">
+                    <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
                         <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
                             info@example.com
                         </a>
