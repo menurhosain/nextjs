@@ -107,13 +107,13 @@ const navLinks = [
 export function NavLinks() {
     return (
         <div className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
-            <a href="/" className="text-white font-geist text-[36px] font-bold mr-[80px] uppercase">
+            <a href="/" className="text-white font-geist text-[36px] font-bold mr-[20px] 2xl:mr-[80px] uppercase">
                 SAH
             </a>
             {navLinks.map((link) => (
                 <div key={link.label} className="group">
                     {link.parent ? (
-                        <a href={link.link} className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter cursor-pointer">
+                        <a href={link.link} className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[14px] 2xl:text-[16px] font-semibold font-inter cursor-pointer">
                             {link.label}
                             <DownArrow class_name="!w-[10.5px] !h-[6px] transition-transform duration-200 group-hover:rotate-180" />
                         </a>
@@ -132,7 +132,7 @@ export function NavLinks() {
                                 {link.id === "news" || link.id === "career" ? (
                                     /* 2-column layout for news & career */
                                     <div className="flex h-full relative">
-                                        <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
+                                        <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10 max-[1536px]:pl-0">
                                             <div className="flex flex-col gap-4">
                                                 <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
                                                 <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
@@ -176,7 +176,7 @@ export function NavLinks() {
                                         </div>
 
                                         <div className="flex h-full relative">
-                                            <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
+                                            <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10 max-[1536px]:pl-0">
                                                 <div className="flex flex-col gap-4">
                                                     <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
                                                     <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
@@ -187,7 +187,7 @@ export function NavLinks() {
                                                 </a>
                                             </div>
 
-                                            <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10">
+                                            <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10 max-[1536px]:pl-5">
                                                 {link.submenus?.map((sub) => (
                                                     <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
                                                         {sub.label}
@@ -234,7 +234,7 @@ export function NavActions() {
 
                 {/* Language selector */}
                 <div className="relative" ref={langRef}>
-                    <button onClick={() => setLangOpen(!langOpen)} className="flex items-center w-[120px] gap-[8px] text-sah-white cursor-pointer">
+                    <button onClick={() => setLangOpen(!langOpen)} className="flex max-[640px]:justify-end items-center w-[120px] gap-[8px] text-sah-white cursor-pointer">
                         <img className="w-[20px] h-[20px]" src={selectedLang.flag} alt={selectedLang.label} />
                         <span className="font-inter text-[16px] font-semibold leading-[28px]">{selectedLang.label}</span>
                         <DownArrow class_name="!w-[12px] !h-[12px]" />
@@ -284,7 +284,8 @@ export function NavActions() {
             {/* Drawer */}
             <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
                 <div className="flex flex-1 h-full overflow-hidden relative">
-                    <div className="absolute top-[100px] h-[1px] left-0 right-0 bg-sah-light-3 z-10" />
+                    <div className="absolute top-[100px] right-0 h-[1px] bg-sah-light-3 z-10 w-[80%]" />
+                    <div className="absolute top-[100px] left-0 h-[1px] bg-sah-white/30 z-10 w-[20%]" />
                     {/* Column 1 — 20% */}
                     <div className="w-[20%] h-full bg-sah-red relative overflow-hidden">
                         {/* Scrolling text — spans full column height including behind logo */}
@@ -309,7 +310,7 @@ export function NavActions() {
                     </div>
 
                     {/* Column 2 — 60% (main content) */}
-                    <div className="w-[60%] h-full flex flex flex-col border-x border-sah-light-3">
+                    <div className="w-[50%] 2xl:w-[60%] h-full flex flex flex-col border-x border-sah-light-3">
                         <div className="flex items-center justify-between h-[100px]">
                             {/* Search bar */}
                             <div className="flex items-center gap-3 px-6 py-3 group">
@@ -326,7 +327,7 @@ export function NavActions() {
                         </div>
 
                         <div className="pt-5 pb-[90px] flex-col justify-between overflow-y-scroll no-scrollbar flex-1" data-lenis-prevent>
-                            <div className="flex flex-col px-[60px] ">
+                            <div className="flex flex-col px-[30px] 2xl:px-[60px]">
                                 {navLinks.map((link) => (
                                     <div key={link.label} className="border-b border-sah-light-3">
                                         {link.parent && link.id !== "news" && link.id !== "career" ? (
@@ -377,7 +378,7 @@ export function NavActions() {
                     </div>
 
                     {/* Column 3 — 20% */}
-                    <div className="w-[20%] h-full flex flex-col overflow-hidden">
+                    <div className="w-[30%] 2xl:w-[20%] h-full flex flex-col overflow-hidden">
                         {/* Header row — matches other columns */}
                         <div className="flex items-center justify-end h-[100px] pr-[60px] shrink-0">
                             <a href="/contact" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
@@ -414,13 +415,13 @@ export function NavActions() {
                 </div>
 
                 {/* Footer — absolute bottom, same 3-col layout */}
-                <div className="absolute bottom-0 left-0 right-0 flex h-[80px] border-t border-sah-light-3">
-                    <div className="w-[20%] flex items-center pl-[60px]">
+                <div className="absolute bottom-0 left-0 right-0 flex h-[80px]">
+                    <div className="w-[20%] flex items-center pl-[60px]  border-t border-sah-white/30">
                         <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300">
                             info@example.com
                         </a>
                     </div>
-                    <div className="w-[60%] bg-sah-white flex items-center gap-8 px-[60px] border-x border-sah-light-3">
+                    <div className="w-[60%] bg-sah-white flex items-center gap-8 px-[60px]  border-t border-x border-sah-light-3">
                         <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             Facebook
                         </a>
@@ -434,7 +435,7 @@ export function NavActions() {
                             YouTube
                         </a>
                     </div>
-                    <div className="w-[20%] flex items-center justify-start px-[60px]">
+                    <div className="w-[20%] flex items-center justify-start px-[60px] border-t border-sah-light-3">
                         <a href="/projects" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             View all projects
                         </a>

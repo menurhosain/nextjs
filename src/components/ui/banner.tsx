@@ -29,7 +29,7 @@ function Banner({ bg, children, style, bgDirection = "right" }: { bg: string; ch
     const outClass = bgDirection === "right" ? "bg-slide-out-left" : "bg-slide-out-right";
 
     return (
-        <section className="h-[85vh] sm:min-h-[950px] relative w-full flex banner-overlay section-padding overflow-hidden" style={{ ...style }}>
+        <section className="2xl:h-[85vh] sm:min-h-[955px] relative w-full flex banner-overlay section-padding overflow-hidden" style={{ ...style }}>
             {isImage ? (
                 <>
                     {outgoingBg && <img key={`out-${animKey}`} src={outgoingBg} alt="" className={`absolute inset-0 h-full w-full object-cover z-[-2] ${outClass}`} />}
