@@ -18,7 +18,7 @@ export default function About() {
 
                     <div className="lg:mt-[0px] mt-[40px]">
                         <ScrollReveal toColor="var(--color-sah-white)">
-                            <h2 className="2xl:text-[90px] xl:text-[64px] lg:text-[55px] md:text-[46px] sm:text-[38px] text-[20px] md:leading-[1em] leading-[1.2em] sm font-medium tracking-tight font-geist">
+                            <h2 className="2xl:text-[90px] xl:text-[64px] lg:text-[55px] md:text-[46px] sm:text-[38px] text-[24px] md:leading-[1em] leading-[1.2em] sm font-medium tracking-tight font-geist">
                                 <span className="text-white">Crafting exceptional buildings with detail, </span>
                                 <span className="text-sah-overlay-white-30 scroll-color">care, and engineering excellence</span>
                             </h2>
