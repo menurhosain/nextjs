@@ -7,9 +7,11 @@ type ProjectCardSmallProps = {
     year: string;
     location: string[];
     link: string;
+    yearLabel?: string;
+    locationLabel?: string;
 };
 
-export function ProjectCardSmall({ scope, title, image, year, location, link }: ProjectCardSmallProps) {
+export function ProjectCardSmall({ scope, title, image, year, location, link, yearLabel = "Year", locationLabel = "Location" }: ProjectCardSmallProps) {
     return (
         <Link href={link}>
             <div className="bg-white group rounded-2xl p-5 flex flex-col gap-5 shadow-sm">
@@ -26,11 +28,11 @@ export function ProjectCardSmall({ scope, title, image, year, location, link }: 
                     <img src={image} alt={title} className="w-full h-[440px] object-cover group-hover:scale-110 transition-scale duration-500" />
                     <div className="absolute bottom-4 right-4 bg-white rounded-xl px-[24px] py-[20px] grid grid-cols-[max-content_max-content] gap-x-[24px]">
                         <div className="flex flex-col">
-                            <span className="font-inter text-[16px] font-medium leading-[24px] text-[#555555]">Year</span>
+                            <span className="font-inter text-[16px] font-medium leading-[24px] text-[#555555]">{yearLabel}</span>
                             <span className="font-inter text-[16px] font-medium leading-[24px] text-[#111111]">{year}</span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="font-inter text-[16px] font-medium leading-[24px] text-[#555555]">Location</span>
+                            <span className="font-inter text-[16px] font-medium leading-[24px] text-[#555555]">{locationLabel}</span>
                             <span className="font-inter text-[16px] font-medium leading-[24px] text-[#111111]">{location[0]}</span>
                         </div>
                     </div>

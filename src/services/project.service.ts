@@ -28,9 +28,9 @@ type StrapiProjectItem = {
     locations?: StrapiRelationItem[];
 };
 
-async function fetch_raw_projects(): Promise<Project[]> {
+async function fetch_raw_projects(locale = "en"): Promise<Project[]> {
     try {
-        const res = await fetch(`${BASE_URL}/api/projects?populate=*`);
+        const res = await fetch(`${BASE_URL}/api/projects?populate=*&locale=${locale}`);
         if (!res.ok) return [];
         const json = await res.json();
         return (json.data ?? []).map((item: StrapiProjectItem) => {
@@ -50,12 +50,12 @@ async function fetch_raw_projects(): Promise<Project[]> {
     }
 }
 
-export async function get_projects(): Promise<Project[]> {
-    return fetch_raw_projects();
+export async function get_projects(locale = "en"): Promise<Project[]> {
+    return fetch_raw_projects(locale);
 }
 
-export async function get_project_tags(): Promise<ProjectTag[]> {
-    const projects = await fetch_raw_projects();
+export async function get_project_tags(locale = "en"): Promise<ProjectTag[]> {
+    const projects = await fetch_raw_projects(locale);
 
     const unique = (key: keyof Pick<Project, "scope" | "industry" | "location">) => [...new Set(projects.flatMap((p) => p[key]))].filter(Boolean).sort();
 

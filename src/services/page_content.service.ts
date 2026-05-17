@@ -17,6 +17,8 @@ export type ProjectPageContent = {
     filter_submit_btn_label: string;
     pagination_next_label: string;
     pagination_previous_label: string;
+    project_card_year_label: string;
+    project_card_location_label: string;
     Banner: ProjectPageBanner;
 };
 
