@@ -101,7 +101,7 @@ const navLinks = [
             title: "Your Career Starts Here",
             excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
             image: "/team/2.jpg",
-            cta: { label: "Join wit us", href: "/careers" },
+            cta: { label: "Join with us", href: "/careers" },
         },
         submenus: [
             { label: "Career", href: "/careers" },
