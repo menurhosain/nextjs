@@ -24,11 +24,15 @@ export async function proxy(request: NextRequest) {
 
   const user = jwt ? await verify_jwt(jwt) : null;
 
+  const locale = request.cookies.get("locale")?.value ?? "en";
+
   if (!user) {
     if (isProtected) {
       return NextResponse.redirect(new URL("/login", request.nextUrl));
     }
-    return NextResponse.next();
+    const headers = new Headers(request.headers);
+    headers.set("x-locale", locale);
+    return NextResponse.next({ request: { headers } });
   }
 
   if (isAuthRoute) {
@@ -53,6 +57,7 @@ export async function proxy(request: NextRequest) {
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-user", JSON.stringify(user));
+  requestHeaders.set("x-locale", locale);
 
   return NextResponse.next({ request: { headers: requestHeaders } });
 }

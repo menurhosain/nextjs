@@ -1,6 +1,9 @@
 import { NavLinks, NavActions } from "@/components/new-nav";
+import { headers } from "next/headers";
 
-export default function Header() {
+export default async function Header() {
+    const locale = (await headers()).get("x-locale") ?? "en";
+
     return (
         <div className="sah-header section-padding w-full absolute top-0 left-0 right-0 z-9999 border-b border-white/20 max-[1700px]:px-0">
             <div className="container flex-col xl:flex-row flex gap-[0px] xl:gap-[20px] max-[1700px]:!px-4">
@@ -8,7 +11,7 @@ export default function Header() {
                     <NavLinks />
                 </div>
                 <div className="w-[100%] xl:w-[40%]">
-                    <NavActions />
+                    <NavActions locale={locale} />
                 </div>
             </div>
         </div>

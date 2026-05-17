@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
@@ -8,7 +9,7 @@ import NewsCard from "./ui/news-card";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
-    { code: "ar", label: "Arabic", flag: "/oman-flag.svg" },
+    { code: "ar-om", label: "Arabic", flag: "/oman-flag.svg" },
 ];
 
 const navLinks = [
@@ -217,8 +218,11 @@ export function NavLinks() {
     );
 }
 
-export function NavActions() {
-    const [selectedLang, setSelectedLang] = useState(languages[0]);
+export function NavActions({locale}:{locale:string}) {
+    const router = useRouter();
+    const [selectedLang, setSelectedLang] = useState(() => {
+        return languages.find((l) => l.code === locale) ?? languages[0];
+    });
     const [langOpen, setLangOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
@@ -257,6 +261,8 @@ export function NavActions() {
                                     onClick={() => {
                                         setSelectedLang(lang);
                                         setLangOpen(false);
+                                        document.cookie = `locale=${lang.code};path=/;max-age=31536000`;
+                                        router.refresh();
                                     }}
                                     className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap"
                                 >
