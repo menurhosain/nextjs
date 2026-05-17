@@ -10,7 +10,7 @@ export default function Career() {
             <div className="absolute inset-0 bg-black/40 z-[-1]" />
 
             <div className="container h-full flex items-end">
-                <div className="md:w-[80%] lg:w-[60%] p-[30px] md:p-[50px] xl:p-[100px] bg-[url('/career-content-bg.jpg')] bg-cover bg-top bg-no-repeat">
+                <div className="md:w-[80%] lg:w-[60%] p-[30px] md:p-[50px] xl:p-[100px] bg-[url('/career-content-bg.jpg')] bg-cover bg-top bg-no-repeat rounded-tr-[10px] rounded-tl-[10px]">
                     <Section_Title
                         subtitle="Life at Sah"
                         title="Career with SAH"
