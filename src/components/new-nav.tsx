@@ -97,9 +97,17 @@ const navLinks = [
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
             cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/careers" },
         },
-        latest_pages: [
-            { title: "Your Career Starts Here", href: "#", image: "/team/1.jpg" },
-            { title: "Your next Level Awaits", href: "#", image: "/team/2.jpg" },
+        promo: {
+            title: "Your Career Starts Here",
+            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
+            image: "/team/2.jpg",
+            cta: { label: "Join wit us", href: "/careers" },
+        },
+        submenus: [
+            { label: "Career", href: "/careers" },
+            { label: "Partner", href: "/partner" },
+            { label: "Leadership", href: "/leadership" },
+            { label: "Contact", href: "/contact" },
         ],
     },
 ];
@@ -129,7 +137,7 @@ export function NavLinks() {
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
                                 <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }} />
 
-                                {link.id === "news" || link.id === "career" ? (
+                                {link.id === "news" ? (
                                     /* 2-column layout for news & career */
                                     <div className="flex h-full relative">
                                         <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10 max-[1536px]:pl-0">
@@ -153,15 +161,7 @@ export function NavLinks() {
                                                         titleParam={{ title: item.title, className: "md:text-[22px] leading-[28px] mb-3 pr-0 font-medium" }}
                                                     />
                                                 ))}
-                                            {link.id === "career" &&
-                                                link.latest_pages?.map((item, i) => (
-                                                    <NewsCard
-                                                        key={i}
-                                                        href={item.href}
-                                                        imageParam={{ src: item.image, className: "w-full" }}
-                                                        titleParam={{ title: item.title, className: "md:text-[25px] leading-[24px] mb-3 pr-0 font-medium" }}
-                                                    />
-                                                ))}
+
                                         </div>
                                     </div>
                                 ) : (
@@ -223,6 +223,16 @@ export function NavActions() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
     const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
+    const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+
+    const handleChange = (e: any) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        console.log("Form submitted:", formData);
+    };
 
     return (
         <>
@@ -330,7 +340,7 @@ export function NavActions() {
                             <div className="flex flex-col px-[30px] 2xl:px-[60px]">
                                 {navLinks.map((link) => (
                                     <div key={link.label} className="border-b border-sah-light-3">
-                                        {link.parent && link.id !== "news" && link.id !== "career" ? (
+                                        {link.parent && link.id !== "news" ? (
                                             <>
                                                 <button
                                                     onClick={() =>
@@ -388,28 +398,62 @@ export function NavActions() {
 
                         {/* Featured project */}
                         <div className="flex-1 overflow-y-auto px-6 py-8">
-                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Featured Project</p>
-                            <Link href="#">
-                                <div className="bg-white group rounded-2xl p-5 flex flex-col gap-4 shadow-sm">
-                                    <span className="self-start border border-sah-light-2 rounded-full px-[12px] py-[4px] font-inter text-[13px] font-medium text-[#111111] whitespace-nowrap">
-                                        Infrastructure
-                                    </span>
-                                    <h3 className="font-geist text-[18px] group-hover:text-sah-red transition-colors duration-500 font-medium leading-[24px] text-sah-black">Lusail Iconic Stadium</h3>
-                                    <div className="relative rounded-xl overflow-hidden">
-                                        <img src="/project-1.jpg" alt="Lusail Iconic Stadium" className="w-full h-[200px] object-cover group-hover:scale-110 transition-transform duration-500" />
-                                        <div className="absolute bottom-3 right-3 bg-white rounded-xl px-[14px] py-[10px] grid grid-cols-[max-content_max-content] gap-x-[16px]">
-                                            <div className="flex flex-col">
-                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#555555]">Year</span>
-                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#111111]">2022</span>
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#555555]">Location</span>
-                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#111111]">Lusail, Qatar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
+                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Connect with us</p>
+							<form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
+								<div className="flex gap-4 flex-col">
+									<input
+										type="text"
+										name="firstName"
+										placeholder="First Name*"
+										value={formData.firstName}
+										onChange={handleChange}
+										required
+										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+									/>
+									<input
+										type="text"
+										name="lastName"
+										placeholder="Last Name*"
+										value={formData.lastName}
+										onChange={handleChange}
+										required
+										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+									/>
+								</div>
+
+								<div className="flex gap-4 flex-col">
+									<input
+										type="email"
+										name="email"
+										placeholder="Email Address"
+										value={formData.email}
+										onChange={handleChange}
+										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+									/>
+									<input
+										type="tel"
+										name="phone"
+										placeholder="Phone"
+										value={formData.phone}
+										onChange={handleChange}
+										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+									/>
+								</div>
+
+								<textarea
+									name="message"
+									placeholder="Write Message*"
+									value={formData.message}
+									onChange={handleChange}
+									rows={5}
+									required
+									className="border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
+								/>
+
+								<button type="submit" className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer" >
+									Message Now
+								</button>
+							</form>
                         </div>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ export default function ProjectCard({ category, title, description, handover, lo
                     <a href="#">
                         <h3 className="font-geist !font-medium text-sah-black text-[30px] leading-[38px] mb-[20px] transition-colors duration-500 group-hover:text-sah-white pr-[30px]">{title}</h3>
                     </a>
-                    <p className="font-inter text-[18px] font-normal leading-[30px] text-sah-black mb-[40px] transition-color duration-500 group-hover:text-sah-white">
+                    <p className="font-inter opacity-0 transition-opacity group-hover:opacity-100 text-[18px] font-normal leading-[30px] text-sah-black mb-[40px] transition-color duration-500 group-hover:text-sah-white">
                         {description}
                     </p>
                 </div>
