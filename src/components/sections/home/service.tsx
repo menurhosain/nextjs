@@ -40,7 +40,6 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
 							endTrigger: cardRefs[cardRefs.length - 1]?.current,
 						},
 					});
-
 					cardRefs.forEach((ref) => {
 						gsap.to(ref.current, {
 							scrollTrigger: {
@@ -53,7 +52,6 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
 						}});
 					});
 				});
-
 				return () => ctx.revert();
 		  });
 
@@ -63,7 +61,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
     return (
         <section id="services" className="section-padding value-pin-area relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
             <div aria-hidden="true" className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"/>
-            <div className="container mx-auto border-x border-sah-light-3 pt-[140px] max-[1024px]:!px-4">
+            <div className="container mx-auto border-x border-sah-light-3 pt-[73px] lg:pt-[143px] pb-[80px] lg:pb-[150px] max-[1024px]:!px-4">
                 <div className="mb-[23px]" ref={sectionTitleRef}>
                     <div className="flex items-center justify-center gap-6 mb-[38px] max-[1024px]:mb-[20px]">
                         <span className="text-sah-black flex items-center gap-[6px] text-[16px] max-[768px]:text-[14px] font-medium tracking-widest uppercase font-inter">
@@ -72,7 +70,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
                         </span>
                     </div>
                     <ScrollReveal toColor="var(--color-sah-dark-2)">
-                        <h2 className="section-heading max-[1280px]:text-[36px] max-[1024px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[20px] max-[1024px]:leading-[40px] max-[768px]:leading-[32px] max-[640px]:leading-[28px] mx-auto text-center leading-[48px] mb-[60px]">
+                        <h2 className="section-heading max-[1280px]:text-[36px] max-[1024px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[20px] max-[1024px]:leading-[40px] max-[768px]:leading-[32px] max-[640px]:leading-[28px] mx-auto text-center leading-[48px] mb-[30px] lg:mb-[60px]">
                             <span className="text-sah-dark-2">
                                 {titleNormal || (
                                     <>
@@ -91,7 +89,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
                     ))}
                 </div>
 
-                <div className="flex justify-center mt-12 mb-[140px]">
+                <div className="flex justify-center mt-8 lg:mt-12">
                     <div className="inline-flex shadow-sm px-[15px] md:px-[30px] py-[8px] md:py-[8px] bg-sah-white rounded-full max-[640px]:rounded-[10px] justify-center gap-[5px] sm:gap-[20px] flex-wrap">
                         <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[10px] font-inter font-medium ">
                             <span className="text-sah-dark-2 group-hover:text-sah-red">{buttonLabelOne || "Careers"}</span>

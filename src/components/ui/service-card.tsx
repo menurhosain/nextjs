@@ -16,7 +16,7 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(
     function ServiceCard({ icon, class_name, title, description, href = "#", link_label = "Discover More", ...rest }, ref) {
     return (
         <div ref={ref} className={cn(
-            "relative bg-sah-white rounded-[12px] p-[40px] flex flex-col gap-[30px] group",
+            "relative bg-sah-white rounded-[12px] p-[20px] sm:p-[30px] xl:p-[40px] flex flex-col gap-[20px] xl:gap-[30px] group",
             class_name
         )} {...rest}>
             {/* Top-right corner bracket */}
@@ -29,7 +29,7 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(
             <a href={href} className="text-sah-black font-semibold font-geist text-[30px] mb-[40px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit" dangerouslySetInnerHTML={{__html:title}}/>
 
             {/* Description */}
-            <p className="text-sah-gray-1 font-inter text-[18px] leading-[30px]">{description}</p>
+            <p className="text-sah-gray-1 font-inter text-[17px] leading-[30px]">{description}</p>
 
             {/* CTA */}
             <Link href={href} className="text-sah-black font-inter font-medium text-[16px] underline underline-offset-4 decoration-sah-black w-fit mt-auto transition-colors group-hover:text-sah-red group-hover:decoration-sah-red" >

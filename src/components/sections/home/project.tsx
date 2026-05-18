@@ -17,41 +17,42 @@ export default function Projects() {
 
     useEffect(() => {
         if (!ref.current || !endRef.current) return;
+
+        const mm = gsap.matchMedia();
         
         const cards = Array.from(ref.current.children);
         if (cards.length < 2) return;
 
-        const ctx = gsap.context(() => {
+        mm.add("(min-width: 1280px)", () => {
+            const ctx = gsap.context(() => {
+                cards.forEach((card, index) => {
 
-            cards.forEach((card, index) => {
+                    ScrollTrigger.create({
+                        trigger: card,
+                        start: `top top+=${80 + (index * 100)}`,
+                        endTrigger: endRef.current,
+                        end: "bottom bottom-=40",
+                        pin: true,
+                        pinSpacing: false,
+                        markers: false,
+                    });
 
-                ScrollTrigger.create({
-                    trigger: card,
-                    start: `top top+=${80 + (index * 100)}`,
-                    endTrigger: endRef.current,
-                    end: "bottom bottom-=40",
-                    pin: true,
-                    pinSpacing: false,
-                    markers: false,
                 });
-
-            });
-
-        }, ref);
-
-        return () => ctx.revert();
+            }, ref);
+            return () => ctx.revert();
+        });
     }, []);
 
     return (
         <section className="section-padding bg-[linear-gradient(0deg,#f5f5f566_42.16%,#f5f5f5_204.49%),url('/project-section-bg.jpg')] bg-bottom bg-no-repeat">
-            <div className="container py-[140px] mx-auto border-x border-sah-light-3">
-                <div className="mb-[70px]">
+            <div className="container pt-[73px] lg:pt-[143px] pb-[80px] lg:pb-[150px] mx-auto border-x border-sah-light-3  max-[1024px]:!px-4">
+                <div className="mb-[40px] lg:mb-[70px]">
                     <Section_Title
                         subtitle="Latest Projects"
                         title={<>
                             Discover our completed <br /> building projects
                         </>}
-                        class_name={{ subtitle: "text-sah-black text-center ", title: "text-sah-black text-center " }}
+                        class_name={{ subtitle: "text-sah-black text-center ", title: "text-sah-black text-center !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[90px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[90px]" }}
                     />
                 </div>
 

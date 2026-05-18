@@ -60,7 +60,7 @@ export default function Subcontractor() {
         </div>
         <div className="relative z-10 flex gap-5 justify-center mt-[-65px]">
           <a
-            href="register"
+            href="/register-applicant"
             className="px-4 h-[130px] w-[168px] text-center flex flex-col gap-[8px] items-center justify-center rounded-[10px] text-[18px] font-medium  tracking-wide rounded transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white"
           >
             <div className="text-[35px]">
@@ -78,7 +78,7 @@ export default function Subcontractor() {
             Returning Users
           </a>
           <a
-            href="#"
+            href="/register-contractor"
             className="px-4 h-[130px] w-[230px] text-center flex flex-col gap-[8px] items-center justify-center rounded-[10px] text-[18px] font-medium tracking-wide rounded transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white"
           >
             <div className="text-[35px]">

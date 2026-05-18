@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verify_jwt } from "@/services/auth.service";
 
-const AUTH_ROUTES = ["/login", "/register"];
+const AUTH_ROUTES = ["/login", "/register-applicant", "/register-contractor"];
 
 const PROTECTED_ROUTES = [
   "/dashboard",
