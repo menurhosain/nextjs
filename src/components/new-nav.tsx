@@ -14,7 +14,122 @@ const languages = [
     { code: "ar-om", label: "Arabic", flag: "/oman-flag.svg" },
 ];
 
+const STATIC_NAV_LINKS = [
+    {
+        label: "Our Company",
+        parent: true,
+        link: "",
+        id: "",
+        card: {
+            title: "About Us",
+            description: "SAH is a Oman-based, international construction services company and is a leading builder in diverse market segments.",
+            cta: { label: "GET TO KNOW US", href: "/about-us" },
+        },
+        promo: {
+            title: "Become a Subcontractor",
+            excerpt: "With expertise spanning planning, execution, and project delivery, we provide market needs.",
+            image: "/menu/1.jpg",
+            cta: { label: "Learn How", href: "/become-a-subcontractor" },
+        },
+        submenus: [
+            { label: "About Us", href: "/about-us" },
+            { label: "Partner", href: "/partner" },
+            { label: "Leadership", href: "/leadership" },
+            { label: "Contact", href: "/contact" },
+        ],
+        latest_news: [] as { title: string; href: string; image: string }[],
+    },
+    {
+        label: "Our Services",
+        parent: true,
+        link: "",
+        id: "",
+        card: {
+            title: "Our Services",
+            description: "We deliver end-to-end construction and engineering solutions across a wide range of industries and sectors.",
+            cta: { label: "EXPLORE SERVICES", href: "/services" },
+        },
+        promo: {
+            title: "Our Market Value",
+            excerpt: "We provide comprehensive construction and engineering solutions for your need.",
+            image: "/menu/2.jpg",
+            cta: { href: "/services-details", label: "Join us" },
+        },
+        submenus: [
+            { label: "Services", href: "/services" },
+            { label: "Services Details", href: "/services-details" },
+        ],
+        latest_news: [] as { title: string; href: string; image: string }[],
+    },
+    {
+        label: "Our Projects",
+        parent: true,
+        link: "",
+        id: "",
+        card: {
+            title: "Our Projects",
+            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
+            cta: { label: "VIEW ALL PROJECTS", href: "/projects" },
+        },
+        promo: {
+            title: "Police College Package C SQAPS Nizwa",
+            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
+            image: "/project-1-small.jpg",
+            cta: { label: "View Project", href: "/projects" },
+        },
+        submenus: [
+            { label: "Projects", href: "/projects" },
+            { label: "Project Details", href: "/project-details" },
+        ],
+        latest_news: [] as { title: string; href: string; image: string }[],
+    },
+    {
+        label: "News",
+        parent: true,
+        link: "/news",
+        id: "news",
+        card: {
+            title: "Our Latest News",
+            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
+            cta: { href: "/news", label: "Explore our ideas" },
+        },
+        promo: { title: "", excerpt: "", image: "", cta: { label: "", href: "" } },
+        submenus: [] as { label: string; href: string }[],
+        latest_news: [
+            { title: "Cost Effective Solutions for your dream", href: "#", image: "/menu/2.jpg" },
+            { title: "Solutions for Building Projects", href: "#", image: "/menu/1.jpg" },
+            { title: "Medical Pavilion at Institute Square", href: "#", image: "/menu/3.jpg" },
+        ],
+    },
+    {
+        label: "Careers",
+        parent: true,
+        link: "/careers",
+        id: "",
+        card: {
+            title: "Careers With Us",
+            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
+            cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/careers" },
+        },
+        promo: {
+            title: "Your Career Starts Here",
+            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
+            image: "/team/2.jpg",
+            cta: { label: "Join with us", href: "/careers" },
+        },
+        submenus: [
+            { label: "Career", href: "/careers" },
+            { label: "Partner", href: "/partner" },
+            { label: "Leadership", href: "/leadership" },
+            { label: "Contact", href: "/contact" },
+        ],
+        latest_news: [] as { title: string; href: string; image: string }[],
+    },
+];
+
+
 function transformMenus(menus: Menu[]) {
+    if (menus.length === 0) return STATIC_NAV_LINKS;
     return menus.map((menu) => ({
         label: menu.nav_label,
         parent: menu.is_parent,
