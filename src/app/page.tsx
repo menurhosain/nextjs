@@ -13,7 +13,7 @@ import { get_service_cards } from "@/services/service_card.service";
 export default async function Home() {
     const locale = (await headers()).get("x-locale") ?? "en";
     const [ content, service_cards ] = await Promise.all([get_home_page_content(locale), get_service_cards(locale)]);
-
+    console.log('link test:', content?.project_section_button_link);
     return (
         <>
             <Hero
@@ -51,7 +51,12 @@ export default async function Home() {
                 secTitle={content?.about_partner_logo_title}
                 logos={content?.partner_logos}
             />
-            <Projects />
+            <Projects
+                subTitle={content?.project_section_sub_title}
+                title={content?.project_section_title}
+                btnLabel={content?.project_section_button_label}
+                btnLink={content?.project_section_button_link}
+            />
             <Career />
             <News />
         </>
