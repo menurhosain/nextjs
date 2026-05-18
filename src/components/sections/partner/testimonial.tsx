@@ -1,3 +1,5 @@
+import { TestimonialQuote } from "@/components/ui/svgs";
+
 export default function Testimonial() {
     return (
         <>
@@ -22,9 +24,7 @@ export default function Testimonial() {
                                                 </p>
                                             </div>
                                             <div className="flex gap-[3px] items-end opacity-75 ">
-                                                <svg width="44" height="33" viewBox="0 0 44 33" fill="var(--color-sah-red)" xmlns="http://www.w3.org/2000/svg" className="!w-[44px] !h-[44px]">
-                                                    <path d="M0 0V33L16.5 16.5V0H0ZM27.5 0V33L44 16.5V0H27.5Z" fill="var(--color-sah-red)"/>
-                                                </svg>
+                                                <TestimonialQuote/>
                                             </div>
                                         </div>
                                     </div>

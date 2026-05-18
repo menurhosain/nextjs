@@ -7,13 +7,13 @@ export default function Hero() {
     return (
         <Banner bg="/home-hero.mp4">
             <Left has_brand_shape={true}>
-                <div className="flex flex-col">
-                    <h1 className="text-white  font-medium leading-[70px] sm:leading-[60px] xl:leading-[70px] tracking-[-0.05em] flex flex-col gap-[30px] mb-[35px]">
-                        <span className="text-[44px] md:text-[60px] xl:text-[100px] font-geist">Leading Design</span>
-                        <em className="italic text-[36px] md:text-[50px] xl:text-[84px] font-dm-serif">& Build Contractor</em>
+                <div className="flex flex-col max-[768px]:w-full">
+                    <h1 className="text-white  font-medium leading-[20px] sm:leading-[30px] md:leading-[40px] lg:leading-[50px] xl:leading-[50px] 2xl:leading-[70px] tracking-[-0.05em] flex flex-col gap-[20px] sm:gap-[30px] mb-[35px]">
+                        <span className="text-[36px] sm:text-[56px] lg:text-[70px] xl:text-[80px] 2xl:text-[100px] font-geist">Leading Design</span>
+                        <em className="italic text-[30px] sm:text-[46px] lg:text-[54px] xl:text-[64px] 2xl:text-[84px] font-dm-serif">& Build Contractor</em>
                     </h1>
 
-                    <div className="h-[1px] w-[150px] md:w-[450px] bg-sah-white/20 relative mb-[10px] sm:mb-[56px] ">
+                    <div className="h-[1px] w-[250px] sm:w-[350px] md:w-[390px] bg-sah-white/20 relative mb-[35px] sm:mb-[56px] ">
                         <span className="h-[1px] absolute w-[50px] md:w-[80px] bg-sah-red"></span>
                     </div>
 
@@ -33,9 +33,9 @@ export default function Hero() {
             </Left>
 
             <Right>
-                <div className="flex  justify-start pt-[40px] sm:justify-end sm:pb-[100px] h-[100%] w-[max-content] border-x border-sah-white/20">
+                <div className="flex  justify-start pt-[40px] sm:justify-end sm:pb-[30px] md:pb-[100px] h-[100%] w-[max-content] mt-6 sm:mt-0 border-x border-sah-white/20 max-[768px]:border-0">
                     <div
-                        className="relative rounded-[10px] w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] h-[max-content] flex flex-col gap-3 bg-cover bg-center mt-auto"
+                        className="relative rounded-[10px] w-[258px] sm:w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] h-[max-content] flex flex-col gap-3 bg-cover bg-center mt-auto"
                         style={{ backgroundImage: "url('/white-dots.jpg')" }}
                     >
                         <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />

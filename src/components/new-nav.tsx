@@ -97,9 +97,17 @@ const navLinks = [
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
             cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/careers" },
         },
-        latest_pages: [
-            { title: "Your Career Starts Here", href: "#", image: "/team/1.jpg" },
-            { title: "Your next Level Awaits", href: "#", image: "/team/2.jpg" },
+        promo: {
+            title: "Your Career Starts Here",
+            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
+            image: "/team/2.jpg",
+            cta: { label: "Join with us", href: "/careers" },
+        },
+        submenus: [
+            { label: "Career", href: "/careers" },
+            { label: "Partner", href: "/partner" },
+            { label: "Leadership", href: "/leadership" },
+            { label: "Contact", href: "/contact" },
         ],
     },
 ];
@@ -107,13 +115,13 @@ const navLinks = [
 export function NavLinks() {
     return (
         <div className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
-            <a href="/" className="text-white font-geist text-[36px] font-bold mr-[80px] uppercase">
+            <a href="/" className="text-white font-geist text-[36px] font-bold mr-[20px] 2xl:mr-[80px] uppercase">
                 SAH
             </a>
             {navLinks.map((link) => (
                 <div key={link.label} className="group">
                     {link.parent ? (
-                        <a href={link.link} className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[15px] text-[16px] font-semibold font-inter cursor-pointer">
+                        <a href={link.link} className="uppercase h-[90px] flex items-center gap-[6px] text-white text-[14px] 2xl:text-[16px] font-semibold font-inter cursor-pointer">
                             {link.label}
                             <DownArrow class_name="!w-[10.5px] !h-[6px] transition-transform duration-200 group-hover:rotate-180" />
                         </a>
@@ -129,10 +137,10 @@ export function NavLinks() {
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
                                 <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }} />
 
-                                {link.id === "news" || link.id === "career" ? (
+                                {link.id === "news" ? (
                                     /* 2-column layout for news & career */
                                     <div className="flex h-full relative">
-                                        <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
+                                        <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10 max-[1536px]:pl-0">
                                             <div className="flex flex-col gap-4">
                                                 <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
                                                 <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
@@ -143,7 +151,7 @@ export function NavLinks() {
                                             </a>
                                         </div>
 
-                                        <div className={`w-[70%] grid gap-4 py-[20px] ${link.id === "career" ? "grid-cols-2" : "grid-cols-3"}`}>
+                                        <div className={`w-[70%] grid gap-4 py-[20px] grid-cols-3`}>
                                             {link.id === "news" &&
                                                 link.latest_news?.map((item, i) => (
                                                     <NewsCard
@@ -153,15 +161,7 @@ export function NavLinks() {
                                                         titleParam={{ title: item.title, className: "md:text-[22px] leading-[28px] mb-3 pr-0 font-medium" }}
                                                     />
                                                 ))}
-                                            {link.id === "career" &&
-                                                link.latest_pages?.map((item, i) => (
-                                                    <NewsCard
-                                                        key={i}
-                                                        href={item.href}
-                                                        imageParam={{ src: item.image, className: "w-full" }}
-                                                        titleParam={{ title: item.title, className: "md:text-[25px] leading-[24px] mb-3 pr-0 font-medium" }}
-                                                    />
-                                                ))}
+
                                         </div>
                                     </div>
                                 ) : (
@@ -176,7 +176,7 @@ export function NavLinks() {
                                         </div>
 
                                         <div className="flex h-full relative">
-                                            <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10">
+                                            <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10 max-[1536px]:pl-0">
                                                 <div className="flex flex-col gap-4">
                                                     <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
                                                     <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
@@ -187,7 +187,7 @@ export function NavLinks() {
                                                 </a>
                                             </div>
 
-                                            <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10">
+                                            <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10 max-[1536px]:pl-5">
                                                 {link.submenus?.map((sub) => (
                                                     <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
                                                         {sub.label}
@@ -223,6 +223,16 @@ export function NavActions() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
     const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
+    const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+
+    const handleChange = (e: any) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        console.log("Form submitted:", formData);
+    };
 
     return (
         <>
@@ -234,7 +244,7 @@ export function NavActions() {
 
                 {/* Language selector */}
                 <div className="relative" ref={langRef}>
-                    <button onClick={() => setLangOpen(!langOpen)} className="flex items-center w-[120px] gap-[8px] text-sah-white cursor-pointer">
+                    <button onClick={() => setLangOpen(!langOpen)} className="flex max-[640px]:justify-end items-center w-[120px] gap-[8px] text-sah-white cursor-pointer">
                         <img className="w-[20px] h-[20px]" src={selectedLang.flag} alt={selectedLang.label} />
                         <span className="font-inter text-[16px] font-semibold leading-[28px]">{selectedLang.label}</span>
                         <DownArrow class_name="!w-[12px] !h-[12px]" />
@@ -284,15 +294,16 @@ export function NavActions() {
             {/* Drawer */}
             <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
                 <div className="flex flex-1 h-full overflow-hidden relative">
-                    <div className="absolute top-[100px] h-[1px] left-0 right-0 bg-sah-light-3 z-10" />
+                    <div className="absolute top-[100px] right-0 h-[1px] bg-sah-light-3 z-10 w-[80%]  max-[1024]:w-[87.5%] max-[640px]:w-[81%]" />
+                    <div className="absolute top-[100px] left-0 h-[1px] bg-sah-white/15 z-10 w-[20%] max-[640px]:w-[22%] max-[640px]:min-w-[70px]" />
                     {/* Column 1 — 20% */}
-                    <div className="w-[20%] h-full bg-sah-red relative overflow-hidden">
+                    <div className="w-[20%] max-[1024]:w-[12.5%] max-[640px]:w-[17%] max-[640px]:min-w-[70px] h-full bg-sah-red relative overflow-hidden">
                         {/* Scrolling text — spans full column height including behind logo */}
                         <div className="absolute inset-0 overflow-hidden flex justify-center">
                             <div className="nav-scroll-up flex flex-col items-center">
                                 {[...Array(2)].map((_, copy) =>
                                     [...Array(8)].map((_, i) => (
-                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10" style={{ fontSize: "250px", writingMode: "vertical-rl", opacity: 0.2 }}>
+                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]" style={{ writingMode: "vertical-rl", opacity: 0.2 }}>
                                             SAH
                                         </span>
                                     )),
@@ -301,7 +312,7 @@ export function NavActions() {
                         </div>
 
                         {/* Logo — sits on top of scrolling text */}
-                        <div className="relative z-10 flex items-center h-[100px] pl-[60px]">
+                        <div className="relative z-10 flex items-center h-[100px] pl-[60px] max-[1280]:pl-[10px] max-[640px]:pl-0 max-[640px]:justify-center bg-sah-red">
                             <a href="/">
                                 <img src="/logo-white.png" alt="SAH logo" className="size-[70px] object-contain" />
                             </a>
@@ -309,7 +320,7 @@ export function NavActions() {
                     </div>
 
                     {/* Column 2 — 60% (main content) */}
-                    <div className="w-[60%] h-full flex flex flex-col border-x border-sah-light-3">
+                    <div className="w-[50%] 2xl:w-[60%]  max-[1024]:w-[88%] max-[640px]:w-[81%] h-full flex flex flex-col border-x border-sah-light-3">
                         <div className="flex items-center justify-between h-[100px]">
                             {/* Search bar */}
                             <div className="flex items-center gap-3 px-6 py-3 group">
@@ -326,10 +337,10 @@ export function NavActions() {
                         </div>
 
                         <div className="pt-5 pb-[90px] flex-col justify-between overflow-y-scroll no-scrollbar flex-1" data-lenis-prevent>
-                            <div className="flex flex-col px-[60px] ">
+                            <div className="flex flex-col px-[30px] 2xl:px-[60px] max-[640px]:px-[15px]">
                                 {navLinks.map((link) => (
                                     <div key={link.label} className="border-b border-sah-light-3">
-                                        {link.parent && link.id !== "news" && link.id !== "career" ? (
+                                        {link.parent && link.id !== "news" ? (
                                             <>
                                                 <button
                                                     onClick={() =>
@@ -339,7 +350,7 @@ export function NavActions() {
                                                             return next;
                                                         })
                                                     }
-                                                    className="w-full flex text-[40px] items-center justify-between py-4 text-sah-black font-inter font-normal capitalize cursor-pointer transition-colors duration-500 hover:text-sah-red"
+                                                    className="w-full flex text-[40px] max-[1280px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[18px] items-center justify-between py-4 text-sah-black font-inter font-normal capitalize cursor-pointer transition-colors duration-500 hover:text-sah-red"
                                                 >
                                                     {link.label}
                                                     <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-red ${openMenus.has(link.label) ? "rotate-180" : ""}`} />
@@ -355,7 +366,7 @@ export function NavActions() {
                                         ) : (
                                             <a
                                                 href={link.link}
-                                                className="flex text-[40px] items-center py-4 text-sah-black font-inter font-normal capitalize transition-colors duration-500 hover:text-sah-red"
+                                                className="flex text-[40px] max-[1280px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[18px] items-center py-4 text-sah-black font-inter font-normal capitalize transition-colors duration-500 hover:text-sah-red"
                                             >
                                                 {link.label}
                                             </a>
@@ -366,7 +377,7 @@ export function NavActions() {
                                 <div className="py-8">
                                     <Link
                                         href="/become-a-subcontractor"
-                                        className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px]"
+                                        className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px] max-[640px]:text-[14px] max-[380px]:text-[12px] max-[640px]:px-[10px]"
                                     >
                                         Become a Subcontractor
                                         <AngleArrow class_name="!w-[10px] !h-[10px]" />
@@ -377,7 +388,7 @@ export function NavActions() {
                     </div>
 
                     {/* Column 3 — 20% */}
-                    <div className="w-[20%] h-full flex flex-col overflow-hidden">
+                    <div className="w-[30%]  2xl:w-[20%] h-full flex flex-col overflow-hidden overflow-y-scroll no-scrollbar flex-1 max-[1024]:hidden" data-lenis-prevent>
                         {/* Header row — matches other columns */}
                         <div className="flex items-center justify-end h-[100px] pr-[60px] shrink-0">
                             <a href="/contact" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
@@ -386,41 +397,77 @@ export function NavActions() {
                         </div>
 
                         {/* Featured project */}
-                        <div className="flex-1 overflow-y-auto px-6 py-8">
-                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Featured Project</p>
-                            <Link href="#">
-                                <div className="bg-white group rounded-2xl p-5 flex flex-col gap-4 shadow-sm">
-                                    <span className="self-start border border-sah-light-2 rounded-full px-[12px] py-[4px] font-inter text-[13px] font-medium text-[#111111] whitespace-nowrap">
-                                        Infrastructure
-                                    </span>
-                                    <h3 className="font-geist text-[18px] group-hover:text-sah-red transition-colors duration-500 font-medium leading-[24px] text-sah-black">Lusail Iconic Stadium</h3>
-                                    <div className="relative rounded-xl overflow-hidden">
-                                        <img src="/project-1.jpg" alt="Lusail Iconic Stadium" className="w-full h-[200px] object-cover group-hover:scale-110 transition-transform duration-500" />
-                                        <div className="absolute bottom-3 right-3 bg-white rounded-xl px-[14px] py-[10px] grid grid-cols-[max-content_max-content] gap-x-[16px]">
-                                            <div className="flex flex-col">
-                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#555555]">Year</span>
-                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#111111]">2022</span>
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#555555]">Location</span>
-                                                <span className="font-inter text-[12px] font-medium leading-[18px] text-[#111111]">Lusail, Qatar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
+
+                        <div className="flex-1 overflow-y-auto px-6 pt-8 pb-20">
+                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Connect with us</p>
+							<form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
+								<div className="flex gap-4 flex-col">
+									<input
+										type="text"
+										name="firstName"
+										placeholder="First Name*"
+										value={formData.firstName}
+										onChange={handleChange}
+										required
+										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+									/>
+									<input
+										type="text"
+										name="lastName"
+										placeholder="Last Name*"
+										value={formData.lastName}
+										onChange={handleChange}
+										required
+										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+									/>
+								</div>
+
+								<div className="flex gap-4 flex-col">
+									<input
+										type="email"
+										name="email"
+										placeholder="Email Address"
+										value={formData.email}
+										onChange={handleChange}
+										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+									/>
+									<input
+										type="tel"
+										name="phone"
+										placeholder="Phone"
+										value={formData.phone}
+										onChange={handleChange}
+										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+									/>
+								</div>
+
+								<textarea
+									name="message"
+									placeholder="Write Message*"
+									value={formData.message}
+									onChange={handleChange}
+									rows={5}
+									required
+									className="border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
+								/>
+
+								<button type="submit" className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer" >
+									Message Now
+								</button>
+							</form>
+
                         </div>
                     </div>
                 </div>
 
                 {/* Footer — absolute bottom, same 3-col layout */}
-                <div className="absolute bottom-0 left-0 right-0 flex h-[80px] border-t border-sah-light-3">
-                    <div className="w-[20%] flex items-center pl-[60px]">
-                        <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300">
+                <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
+                    <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
+                        <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
                             info@example.com
                         </a>
                     </div>
-                    <div className="w-[60%] bg-sah-white flex items-center gap-8 px-[60px] border-x border-sah-light-3">
+                    <div className="w-[50%] 2xl:w-[60%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
                         <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             Facebook
                         </a>
@@ -434,7 +481,7 @@ export function NavActions() {
                             YouTube
                         </a>
                     </div>
-                    <div className="w-[20%] flex items-center justify-start px-[60px]">
+                    <div className="w-[30%] 2xl:w-[20%] max-[768]:w-[87.5%] max-[640px]:w-full bg-sah-white flex items-center justify-start px-[60px] max-[1024]:px-[20px] max-[1024]:justify-center border-t border-sah-light-3">
                         <a href="/projects" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             View all projects
                         </a>

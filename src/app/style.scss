@@ -8,7 +8,14 @@
         width: 40%;
         inset-inline-end: 0;
         pointer-events: none;
+        @media (max-width: 1280px) {
+            width: 505px;
+        }
+        @media (max-width: 639px) {
+            width: 190px;
+        }
     }
+    
 }
 
 //Button Css
