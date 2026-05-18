@@ -48,6 +48,8 @@ export default function Projects({subTitle, title, btnLabel, btnLink}: Portfolio
             }, ref);
             return () => ctx.revert();
         });
+
+        return () => mm.revert();
     }, []);
 
     return (

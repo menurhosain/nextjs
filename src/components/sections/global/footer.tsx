@@ -66,13 +66,13 @@ function Links({ nav_links, logo }: { nav_links: FooterNavLink[]; logo: FooterCo
 
 function Newsletter({ placeholder, button_label }: { placeholder: string; button_label: string }) {
     return (
-        <div className="flex  flex-col  gap-2 md:flex-row items-center md:items-center max-[640px]:w-full">
+        <div className="flex  flex-col gap-3 sm:gap-2 md:flex-row items-center md:items-center max-[640px]:w-full">
             <Input
                 type="email"
                 placeholder={placeholder}
                 className=" w-[100%] sm:w-56 h-11 rounded-none bg-sah-white text-sah-black placeholder:text-sah-gray-2 border-0 focus-visible:ring-0 text-sm px-4"
             />
-            <Button className="h-11 border-0 rounded-none bg-sah-black hover:bg-sah-dark-1 text-sah-white text-sm font-medium px-6 cursor-pointer">{button_label}</Button>
+            <Button className="h-11 border-0 rounded-none bg-sah-black hover:bg-sah-dark-1 text-sah-white text-sm font-medium px-6 cursor-pointer  max-[640px]:!w-[100%]">{button_label}</Button>
         </div>
     );
 }
