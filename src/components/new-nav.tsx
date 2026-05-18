@@ -158,7 +158,7 @@ export function NavLinks() {
                                                         key={i}
                                                         href={item.href}
                                                         imageParam={{ src: item.image, className: "w-full" }}
-                                                        titleParam={{ title: item.title, className: "md:text-[22px] leading-[28px] mb-3 pr-0 font-medium" }}
+                                                        titleParam={{ title: item.title, className: "!text-[22px] leading-[28px] md:mb-1 pr-0 font-medium !pr-0" }}
                                                     />
                                                 ))}
 
