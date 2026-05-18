@@ -18,8 +18,8 @@ const partners = [
 
 export default function Partner() {
     return (
-        <section className="section-padding pb-[140px] bg-[linear-gradient(0deg,var(--color-sah-red)_0%,var(--color-sah-dark-2)_80%)]">
-            <div className="container mx-auto xl:flex items-center justify-between gap-8.5">
+        <section className="section-padding pb-[80px] lg:pb-[140px] bg-[linear-gradient(0deg,var(--color-sah-red)_0%,var(--color-sah-dark-2)_80%)]">
+            <div className="container mx-auto xl:flex items-center justify-between gap-8.5 max-[1536px]:!px-0">
                 <div className="xl:w-[242px] text-white font-medium text-[24px] shrink-0 xl:mb-[0px] mb-[30px]">Clients who inspire our vision</div>
                 <Swiper
                     pagination={true} modules={[Autoplay]}
@@ -36,7 +36,7 @@ export default function Partner() {
                 >
                     {partners.map((partner, index) => (
                         <SwiperSlide key={index}>
-                            <div className="px-5 py-10 rounded-[20px] hover:rounded-[100px] flex justify-center bg-sah-dark-5 hover:bg-sah-white sah-transition-all duration-600 group">
+                            <div className="px-5 py-6 sm:py-10 rounded-[20px] hover:rounded-[100px] max-[480px]:hover:rounded-[40px] flex justify-center bg-sah-dark-5 hover:bg-sah-white sah-transition-all duration-600 group">
                                 <img src={partner.image} className="group-hover:brightness-90 group-hover:invert sah-transition-all duration-600" alt="logo" />
                             </div>
                         </SwiperSlide>

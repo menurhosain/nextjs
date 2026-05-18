@@ -30,7 +30,7 @@ function Banner({ bg, children, style, bgDirection = "right" }: { bg?: string; c
     const outClass = bgDirection === "right" ? "bg-slide-out-left" : "bg-slide-out-right";
 
     return (
-        <section className="2xl:h-[85vh] sm:min-h-[955px] relative w-full flex banner-overlay section-padding overflow-hidden" style={{ ...style }}>
+        <section className="2xl:h-[85vh] md:min-h-[780px] lg:min-h-[855px] xl:min-h-[955px] max-[768px]:py-18 relative w-full flex banner-overlay section-padding overflow-hidden  max-[1280px]:!px-4" style={{ ...style }}>
             {isImage ? (
                 <>
                     {outgoingBg && <img key={`out-${animKey}`} src={outgoingBg} alt="" className={`absolute inset-0 h-full w-full object-cover z-[-2] ${outClass}`} />}
@@ -41,7 +41,7 @@ function Banner({ bg, children, style, bgDirection = "right" }: { bg?: string; c
                     <source src={bg} type="video/mp4" />
                 </video>
             ) : null}
-            <div className="container relative z-3 flex flex-col justify-center md:flex-row gap-[2%]">{children}</div>
+            <div className="container relative z-3 flex flex-col justify-center md:flex-row gap-[2%] max-[1280px]:!px-0">{children}</div>
         </section>
     );
 }
@@ -56,7 +56,7 @@ function Left({ children, style, class_name, has_brand_shape = false }: { childr
 }
 
 function Right({ children, className }: { children: React.ReactNode; className?: string }) {
-    return <div className={`w-[100%] md:w-[38%] flex flex-col items-end justify-end ${className}`}>{children}</div>;
+    return <div className={`w-[100%] md:w-[38%] flex flex-col items-end justify-end   ${className}`}>{children}</div>;
 }
 
 export { Banner, Left, Right };

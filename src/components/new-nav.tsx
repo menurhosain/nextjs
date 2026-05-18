@@ -300,16 +300,16 @@ export function NavActions({locale}:{locale:string}) {
             {/* Drawer */}
             <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
                 <div className="flex flex-1 h-full overflow-hidden relative">
-                    <div className="absolute top-[100px] right-0 h-[1px] bg-sah-light-3 z-10 w-[80%]" />
-                    <div className="absolute top-[100px] left-0 h-[1px] bg-sah-white/30 z-10 w-[20%]" />
+                    <div className="absolute top-[100px] right-0 h-[1px] bg-sah-light-3 z-10 w-[80%]  max-[1024]:w-[87.5%] max-[640px]:w-[81%]" />
+                    <div className="absolute top-[100px] left-0 h-[1px] bg-sah-white/15 z-10 w-[20%] max-[640px]:w-[22%] max-[640px]:min-w-[70px]" />
                     {/* Column 1 — 20% */}
-                    <div className="w-[20%] h-full bg-sah-red relative overflow-hidden">
+                    <div className="w-[20%] max-[1024]:w-[12.5%] max-[640px]:w-[17%] max-[640px]:min-w-[70px] h-full bg-sah-red relative overflow-hidden">
                         {/* Scrolling text — spans full column height including behind logo */}
                         <div className="absolute inset-0 overflow-hidden flex justify-center">
                             <div className="nav-scroll-up flex flex-col items-center">
                                 {[...Array(2)].map((_, copy) =>
                                     [...Array(8)].map((_, i) => (
-                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10" style={{ fontSize: "250px", writingMode: "vertical-rl", opacity: 0.2 }}>
+                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]" style={{ writingMode: "vertical-rl", opacity: 0.2 }}>
                                             SAH
                                         </span>
                                     )),
@@ -318,7 +318,7 @@ export function NavActions({locale}:{locale:string}) {
                         </div>
 
                         {/* Logo — sits on top of scrolling text */}
-                        <div className="relative z-10 flex items-center h-[100px] pl-[60px]">
+                        <div className="relative z-10 flex items-center h-[100px] pl-[60px] max-[1280]:pl-[10px] max-[640px]:pl-0 max-[640px]:justify-center bg-sah-red">
                             <a href="/">
                                 <img src="/logo-white.png" alt="SAH logo" className="size-[70px] object-contain" />
                             </a>
@@ -326,7 +326,7 @@ export function NavActions({locale}:{locale:string}) {
                     </div>
 
                     {/* Column 2 — 60% (main content) */}
-                    <div className="w-[50%] 2xl:w-[60%] h-full flex flex flex-col border-x border-sah-light-3">
+                    <div className="w-[50%] 2xl:w-[60%]  max-[1024]:w-[88%] max-[640px]:w-[81%] h-full flex flex flex-col border-x border-sah-light-3">
                         <div className="flex items-center justify-between h-[100px]">
                             {/* Search bar */}
                             <div className="flex items-center gap-3 px-6 py-3 group">
@@ -343,7 +343,7 @@ export function NavActions({locale}:{locale:string}) {
                         </div>
 
                         <div className="pt-5 pb-[90px] flex-col justify-between overflow-y-scroll no-scrollbar flex-1" data-lenis-prevent>
-                            <div className="flex flex-col px-[30px] 2xl:px-[60px]">
+                            <div className="flex flex-col px-[30px] 2xl:px-[60px] max-[640px]:px-[15px]">
                                 {navLinks.map((link) => (
                                     <div key={link.label} className="border-b border-sah-light-3">
                                         {link.parent && link.id !== "news" ? (
@@ -356,7 +356,7 @@ export function NavActions({locale}:{locale:string}) {
                                                             return next;
                                                         })
                                                     }
-                                                    className="w-full flex text-[40px] items-center justify-between py-4 text-sah-black font-inter font-normal capitalize cursor-pointer transition-colors duration-500 hover:text-sah-red"
+                                                    className="w-full flex text-[40px] max-[1280px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[18px] items-center justify-between py-4 text-sah-black font-inter font-normal capitalize cursor-pointer transition-colors duration-500 hover:text-sah-red"
                                                 >
                                                     {link.label}
                                                     <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-red ${openMenus.has(link.label) ? "rotate-180" : ""}`} />
@@ -372,7 +372,7 @@ export function NavActions({locale}:{locale:string}) {
                                         ) : (
                                             <a
                                                 href={link.link}
-                                                className="flex text-[40px] items-center py-4 text-sah-black font-inter font-normal capitalize transition-colors duration-500 hover:text-sah-red"
+                                                className="flex text-[40px] max-[1280px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[18px] items-center py-4 text-sah-black font-inter font-normal capitalize transition-colors duration-500 hover:text-sah-red"
                                             >
                                                 {link.label}
                                             </a>
@@ -383,7 +383,7 @@ export function NavActions({locale}:{locale:string}) {
                                 <div className="py-8">
                                     <Link
                                         href="/become-a-subcontractor"
-                                        className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px]"
+                                        className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px] max-[640px]:text-[14px] max-[380px]:text-[12px] max-[640px]:px-[10px]"
                                     >
                                         Become a Subcontractor
                                         <AngleArrow class_name="!w-[10px] !h-[10px]" />
@@ -394,7 +394,7 @@ export function NavActions({locale}:{locale:string}) {
                     </div>
 
                     {/* Column 3 — 20% */}
-                    <div className="w-[30%] 2xl:w-[20%] h-full flex flex-col overflow-hidden">
+                    <div className="w-[30%]  2xl:w-[20%] h-full flex flex-col overflow-hidden overflow-y-scroll no-scrollbar flex-1 max-[1024]:hidden" data-lenis-prevent>
                         {/* Header row — matches other columns */}
                         <div className="flex items-center justify-end h-[100px] pr-[60px] shrink-0">
                             <a href="/contact" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
@@ -403,7 +403,8 @@ export function NavActions({locale}:{locale:string}) {
                         </div>
 
                         {/* Featured project */}
-                        <div className="flex-1 overflow-y-auto px-6 py-8">
+
+                        <div className="flex-1 overflow-y-auto px-6 pt-8 pb-20">
                             <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Connect with us</p>
 							<form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
 								<div className="flex gap-4 flex-col">
@@ -460,18 +461,19 @@ export function NavActions({locale}:{locale:string}) {
 									Message Now
 								</button>
 							</form>
+
                         </div>
                     </div>
                 </div>
 
                 {/* Footer — absolute bottom, same 3-col layout */}
-                <div className="absolute bottom-0 left-0 right-0 flex h-[80px]">
-                    <div className="w-[20%] flex items-center pl-[60px]  border-t border-sah-white/30">
-                        <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300">
+                <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
+                    <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
+                        <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
                             info@example.com
                         </a>
                     </div>
-                    <div className="w-[60%] bg-sah-white flex items-center gap-8 px-[60px]  border-t border-x border-sah-light-3">
+                    <div className="w-[50%] 2xl:w-[60%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
                         <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             Facebook
                         </a>
@@ -485,7 +487,7 @@ export function NavActions({locale}:{locale:string}) {
                             YouTube
                         </a>
                     </div>
-                    <div className="w-[20%] flex items-center justify-start px-[60px] border-t border-sah-light-3">
+                    <div className="w-[30%] 2xl:w-[20%] max-[768]:w-[87.5%] max-[640px]:w-full bg-sah-white flex items-center justify-start px-[60px] max-[1024]:px-[20px] max-[1024]:justify-center border-t border-sah-light-3">
                         <a href="/projects" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             View all projects
                         </a>
