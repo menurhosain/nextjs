@@ -98,6 +98,41 @@ export async function get_home_page_content(locale = "en"): Promise<HomePageCont
     }
 }
 
+// Footer
+export type FooterNavLink = {
+    id: number;
+    button_label: string;
+    button_link: string;
+};
+export type FooterSocialLink = {
+    id: number;
+    icon: string;
+    url: string;
+};
+export type FooterContent = {
+    logo: StrapiMedia | null;
+    nav_links: FooterNavLink[];
+    tagline: string;
+    social_links: FooterSocialLink[];
+    copyright_text: string;
+    terms_label: string;
+    terms_link: string;
+    privacy_label: string;
+    privacy_link: string;
+    newsletter_placeholder: string;
+    newsletter_button_label: string;
+};
+export async function get_footer_content(locale = "en"): Promise<FooterContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/footer?locale=${locale}&populate=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Project Page
 export type ProjectPageBanner = {
     id: number;

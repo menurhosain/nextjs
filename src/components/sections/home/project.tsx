@@ -50,7 +50,9 @@ export default function Projects({subTitle, title, btnLabel, btnLink, projects =
             }, ref);
             return () => ctx.revert();
         });
-    }, [projects]);
+
+        return () => mm.revert();
+    }, []);
 
     return (
         <section className="section-padding bg-[linear-gradient(0deg,#f5f5f566_42.16%,#f5f5f5_204.49%),url('/project-section-bg.jpg')] bg-bottom bg-no-repeat">

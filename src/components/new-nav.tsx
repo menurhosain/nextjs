@@ -6,16 +6,20 @@ import Link from "next/link";
 import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
 import NewsCard from "./ui/news-card";
+import { type Menu } from "@/services/mega_menu.service";
+import { BASE_URL } from "@/lib/constant";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
     { code: "ar-om", label: "Arabic", flag: "/oman-flag.svg" },
 ];
 
-const navLinks = [
+const STATIC_NAV_LINKS = [
     {
         label: "Our Company",
         parent: true,
+        link: "",
+        id: "",
         card: {
             title: "About Us",
             description: "SAH is a Oman-based, international construction services company and is a leading builder in diverse market segments.",
@@ -33,10 +37,13 @@ const navLinks = [
             { label: "Leadership", href: "/leadership" },
             { label: "Contact", href: "/contact" },
         ],
+        latest_news: [] as { title: string; href: string; image: string }[],
     },
     {
         label: "Our Services",
         parent: true,
+        link: "",
+        id: "",
         card: {
             title: "Our Services",
             description: "We deliver end-to-end construction and engineering solutions across a wide range of industries and sectors.",
@@ -52,10 +59,13 @@ const navLinks = [
             { label: "Services", href: "/services" },
             { label: "Services Details", href: "/services-details" },
         ],
+        latest_news: [] as { title: string; href: string; image: string }[],
     },
     {
         label: "Our Projects",
         parent: true,
+        link: "",
+        id: "",
         card: {
             title: "Our Projects",
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
@@ -71,6 +81,7 @@ const navLinks = [
             { label: "Projects", href: "/projects" },
             { label: "Project Details", href: "/project-details" },
         ],
+        latest_news: [] as { title: string; href: string; image: string }[],
     },
     {
         label: "News",
@@ -82,6 +93,8 @@ const navLinks = [
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
             cta: { href: "/news", label: "Explore our ideas" },
         },
+        promo: { title: "", excerpt: "", image: "", cta: { label: "", href: "" } },
+        submenus: [] as { label: string; href: string }[],
         latest_news: [
             { title: "Cost Effective Solutions for your dream", href: "#", image: "/menu/2.jpg" },
             { title: "Solutions for Building Projects", href: "#", image: "/menu/1.jpg" },
@@ -91,8 +104,8 @@ const navLinks = [
     {
         label: "Careers",
         parent: true,
-        id: "career",
         link: "/careers",
+        id: "",
         card: {
             title: "Careers With Us",
             description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
@@ -110,10 +123,48 @@ const navLinks = [
             { label: "Leadership", href: "/leadership" },
             { label: "Contact", href: "/contact" },
         ],
+        latest_news: [] as { title: string; href: string; image: string }[],
     },
 ];
 
-export function NavLinks() {
+
+function transformMenus(menus: Menu[]) {
+    if (menus.length === 0) return STATIC_NAV_LINKS;
+    return menus.map((menu) => ({
+        label: menu.nav_label,
+        parent: menu.is_parent,
+        link: "",
+        id: menu.featured_news?.length > 0 ? "news" : "",
+        card: {
+            title: menu.mega_menu_left_info?.label ?? "",
+            description: menu.mega_menu_left_info?.excerpt ?? "",
+            cta: {
+                label: menu.mega_menu_left_info?.action_link_label ?? "",
+                href: menu.mega_menu_left_info?.action_link_href ?? "",
+            },
+        },
+        promo: {
+            title: menu.mega_menu_right_info?.label ?? "",
+            excerpt: menu.mega_menu_right_info?.excerpt ?? "",
+            image: menu.mega_menu_right_info?.bg_image
+                ? `${BASE_URL}${menu.mega_menu_right_info.bg_image.url}`
+                : "",
+            cta: {
+                label: menu.mega_menu_right_info?.action_link_label ?? "",
+                href: menu.mega_menu_right_info?.action_link_href ?? "",
+            },
+        },
+        submenus: (menu.mega_menu_links ?? []).map((l) => ({ label: l.button_label, href: l.button_link })),
+        latest_news: (menu.featured_news ?? []).map((n) => ({
+            title: n.title,
+            href: n.link_href,
+            image: n.thumbnail ? `${BASE_URL}${n.thumbnail.url}` : "",
+        })),
+    }));
+}
+
+export function NavLinks({ menus }: { menus: Menu[] }) {
+    const navLinks = transformMenus(menus);
     return (
         <div className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
             <a href="/" className="text-white font-geist text-[36px] font-bold mr-[20px] 2xl:mr-[80px] uppercase">
@@ -159,7 +210,7 @@ export function NavLinks() {
                                                         key={i}
                                                         href={item.href}
                                                         imageParam={{ src: item.image, className: "w-full" }}
-                                                        titleParam={{ title: item.title, className: "md:text-[22px] leading-[28px] mb-3 pr-0 font-medium" }}
+                                                        titleParam={{ title: item.title, className: "!text-[22px] leading-[28px] md:mb-1 pr-0 font-medium !pr-0" }}
                                                     />
                                                 ))}
 
@@ -218,7 +269,8 @@ export function NavLinks() {
     );
 }
 
-export function NavActions({locale}:{locale:string}) {
+export function NavActions({ locale, menus }: { locale: string; menus: Menu[] }) {
+    const navLinks = transformMenus(menus);
     const router = useRouter();
     const [selectedLang, setSelectedLang] = useState(() => {
         return languages.find((l) => l.code === locale) ?? languages[0];
@@ -329,9 +381,9 @@ export function NavActions({locale}:{locale:string}) {
                     <div className="w-[50%] 2xl:w-[60%]  max-[1024]:w-[88%] max-[640px]:w-[81%] h-full flex flex flex-col border-x border-sah-light-3">
                         <div className="flex items-center justify-between h-[100px]">
                             {/* Search bar */}
-                            <div className="flex items-center gap-3 px-6 py-3 group">
+                            <div className="flex items-center gap-3 px-2 sm:px-6 py-3 group">
                                 <SearchIcon class_name="!size-[24px] shrink-0 text-sah-dark !fill-sah-black group-hover:rotate-90 transition-rotate duration-500" />
-                                <input type="text" placeholder="Search your query" className="flex-1 min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
+                                <input type="text" placeholder="Search your query" className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
                             </div>
 
                             {/* Close button */}

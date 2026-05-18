@@ -76,11 +76,7 @@ export default function Service({ className, containerClass, bgShape = true, ser
                     <Section_Title
                         subtitle="our expertise"
                         title={<> Our service offerings </>}
-                        class_name={{
-                            subtitle: "text-sah-black !mb-[15px] !tracking-normal",
-                            title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[870px] text-[70px]",
-                            description: "text-sah-gray-1 text-center max-w-[870px]",
-                        }}
+                        class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal", title: "max-w-[350px] sm:max-w-[550px] md:max-w-[650px] lg:max-w-[870px] text-sah-black text-center !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[86px]", description: "text-sah-gray-1 text-center max-w-[870px]" }}
                     />
                 </div>
 
