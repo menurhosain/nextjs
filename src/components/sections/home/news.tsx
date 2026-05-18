@@ -15,11 +15,11 @@ export default function News() {
                             class_name={{ subtitle: "text-sah-black !mb-[15px]", title: "text-sah-black !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[90px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[90px]", description: "text-sah-gray-1 " }}
                         />
                     </div>
-                    <div className="flex items-center justify-center mb-[40px] sm:mb-[70px]"> 
+                    <div className="flex items-center justify-center mb-[40px] xl:mb-[70px]"> 
                         <ButtonModern link="#" label="View All News" />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-[400px_400px] md:grid-rows-[630px] gap-[20px] md:gap-[30px]">
-                        <div className="md:col-span-2">
+                    <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-[300px] sm:grid-rows-[450px] xl:grid-rows-[630px] gap-[20px] md:gap-[30px]">
+                        <div className="col-span-1 lg:col-span-2">
                             <NewsCard
                                 imageParam={{
                                     src: "/news-post-1.jpg"
@@ -33,7 +33,7 @@ export default function News() {
                                 }}
                             />
                         </div>
-                        <div className="md:col-span-3">
+                        <div className="col-span-1 lg:col-span-3">
                             <NewsCard
                                 imageParam={{
                                     src: "/news-post-2.jpg"
