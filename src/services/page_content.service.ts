@@ -82,6 +82,7 @@ export type HomePageContent = {
 
     blog_section_sub_title: string;
     blog_section_title: string;
+    blog_section_description: string;
     blog_section_button_label: string;
     blog_section_button_link: string;
 };
@@ -158,6 +159,30 @@ export type ProjectPageContent = {
 export async function get_project_page_content(locale = "en"): Promise<ProjectPageContent | null> {
     try {
         const res = await fetch(`${BASE_URL}/api/project-page?populate=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// CTA Section
+export type CtaSectionContent = {
+    cta_background: StrapiMedia[];
+    cta_section_title: {
+        sub_title: string;
+        title: string;
+        description: string;
+    };
+    cta_button: {
+        button_label: string;
+        button_link: string;
+    };
+};
+export async function get_cta_section_content(locale = "en"): Promise<CtaSectionContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/cta?populate=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
