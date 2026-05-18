@@ -27,33 +27,37 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
     const cardRefs = service_cards?.map(() => useRef<HTMLDivElement>(null)) ?? [];
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.to(sectionTitleRef.current, {
-                scrollTrigger: {
-                    trigger: sectionTitleRef.current,
-                    start: "top top+=110",
-                    end: "top top+=410",
-                    pin: true,
-                    pinSpacing: false,
-                    endTrigger: cardRefs[cardRefs.length - 1]?.current,
-                },
-            });
+		const mm = gsap.matchMedia();
+		  mm.add("(min-width: 768px)", () => {
+				const ctx = gsap.context(() => {
+					gsap.to(sectionTitleRef.current, {
+						scrollTrigger: {
+							trigger: sectionTitleRef.current,
+							start: "top top+=110",
+							end: "top top+=410",
+							pin: true,
+							pinSpacing: false,
+							endTrigger: cardRefs[cardRefs.length - 1]?.current,
+						},
+					});
 
-            cardRefs.forEach((ref) => {
-                gsap.to(ref.current, {
-                    scrollTrigger: {
-                        trigger: ref.current,
-                        start: "top top+=360",
-                        end: "top top+=360",
-                        pin: true,
-                        pinSpacing: false,
-                        endTrigger: cardRefs[cardRefs.length - 1]?.current,
-                    },
-                });
-            });
-        });
+					cardRefs.forEach((ref) => {
+						gsap.to(ref.current, {
+							scrollTrigger: {
+								trigger: ref.current,
+								start: "top top+=360",
+								end: "top top+=360",
+								pin: true,
+								pinSpacing: false,
+								endTrigger: cardRefs[cardRefs.length - 1]?.current,
+						}});
+					});
+				});
 
-        return () => ctx.revert();
+				return () => ctx.revert();
+		  });
+
+        return () => mm.revert();
     }, []);
 
     return (
@@ -83,7 +87,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element items-start">
                     {service_cards?.map((ser, i) => (
-                        <ServiceCard style={{marginTop: `${i * 400 }px`}} ref={cardRefs[i]} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
+                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="!mt-0 md:mt-auto" ref={cardRefs[i]} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
                     ))}
                 </div>
 
