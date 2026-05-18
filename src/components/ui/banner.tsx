@@ -6,7 +6,7 @@ import { BrandShape } from "./svgs";
 
 const IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg"];
 
-function Banner({ bg, children, style, bgDirection = "right" }: { bg: string; children: React.ReactNode; style?: React.CSSProperties; bgDirection?: "left" | "right" }) {
+function Banner({ bg, children, class_name, style, bgDirection = "right" }: { bg: string; children: React.ReactNode; style?: React.CSSProperties; class_name?: string; bgDirection?: "left" | "right" }) {
     const isImage = IMAGE_EXTS.some((ext) => bg.toLowerCase().endsWith(ext));
 
     const [displayBg, setDisplayBg] = useState(bg);
@@ -29,7 +29,7 @@ function Banner({ bg, children, style, bgDirection = "right" }: { bg: string; ch
     const outClass = bgDirection === "right" ? "bg-slide-out-left" : "bg-slide-out-right";
 
     return (
-        <section className="2xl:h-[85vh] md:min-h-[780px] lg:min-h-[855px] xl:min-h-[955px] max-[768px]:py-18 relative w-full flex banner-overlay section-padding overflow-hidden  max-[1280px]:!px-4" style={{ ...style }}>
+        <section className={cn("2xl:h-[85vh] md:min-h-[780px] lg:min-h-[855px] xl:min-h-[955px] max-[768px]:py-18 relative w-full flex banner-overlay section-padding overflow-hidden  max-[1280px]:!px-4", class_name)} style={{ ...style }}>
             {isImage ? (
                 <>
                     {outgoingBg && <img key={`out-${animKey}`} src={outgoingBg} alt="" className={`absolute inset-0 h-full w-full object-cover z-[-2] ${outClass}`} />}
