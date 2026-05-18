@@ -11,6 +11,7 @@ import { getStrapiMediaUrl } from "@/lib/utils";
 export default async function Home() {
     const locale = "en";
     const content= await get_home_page_content(locale);
+
     return (
         <>
             <Hero
@@ -32,8 +33,21 @@ export default async function Home() {
                 buttonLabelTwo={content?.service_group_button_label_two}
                 buttonLinkTwo={content?.service_group_button_link_two}
             />
-            <About />
-            <Partner />
+            <About
+                subTitle={content?.about_section_sub_title}
+                titleNormal={content?.about_section_title_normal}
+                titleAnimated={content?.about_section_title_animated}
+                imageUrl={getStrapiMediaUrl(content?.about_left_image)}
+                imageTopText={content?.about_image_top_text}
+                btnLabelOne={content?.about_group_button_label_one}
+                btnLinkOne={content?.about_group_button_link_one}
+                btnLabelTwo={content?.about_group_button_label_two}
+                btnLinkTwo={content?.about_group_button_link_two}
+            />
+            <Partner
+                secTitle={content?.about_partner_logo_title}
+                logos={content?.partner_logos}
+            />
             <Projects />
             <Career />
             <News />
