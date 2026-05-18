@@ -19,43 +19,43 @@ interface serviceProps {
 }
 export default function Service({ className, containerClass, bgShape = true, services }: serviceProps) {
     const sectionTitleRef = useRef<HTMLDivElement>(null);
-    const cardRefs = services?.map(() => useRef<HTMLDivElement>(null)) ?? [];
+    const cardRefsArray = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
-		const mm = gsap.matchMedia();
+        const mm = gsap.matchMedia();
 
-			mm.add("(min-width: 768px)", () => { 
-				const ctx = gsap.context(() => {
-					gsap.to(sectionTitleRef.current, {
-						scrollTrigger: {
-							trigger: sectionTitleRef.current,
-							start: "top top+=110",
-							end: "top top+=310",
-							pin: true,
-							pinSpacing: false,
-							endTrigger: cardRefs[cardRefs.length - 1]?.current,
-						},
-					});
+        mm.add("(min-width: 768px)", () => {
+            const ctx = gsap.context(() => {
+                const lastCard = cardRefsArray.current[cardRefsArray.current.length - 1];
+                gsap.to(sectionTitleRef.current, {
+                    scrollTrigger: {
+                        trigger: sectionTitleRef.current,
+                        start: "top top+=110",
+                        end: "top top+=310",
+                        pin: true,
+                        pinSpacing: false,
+                        endTrigger: lastCard,
+                    },
+                });
 
-					cardRefs.forEach((ref) => {
-						gsap.to(ref.current, {
-							scrollTrigger: {
-								trigger: ref.current,
-								start: "top top+=280",
-								end: "top top+=280",
-								pin: true,
-								pinSpacing: false,
-								endTrigger: cardRefs[cardRefs.length - 1]?.current,
-							},
-						});
-					});
-				});
+                cardRefsArray.current.forEach((el) => {
+                    gsap.to(el, {
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top top+=280",
+                            end: "top top+=280",
+                            pin: true,
+                            pinSpacing: false,
+                            endTrigger: lastCard,
+                        },
+                    });
+                });
+            });
 
-			    return () => ctx.revert();
-		  });
+            return () => ctx.revert();
+        });
 
         return () => mm.revert();
-
     }, []);
 
     return (
@@ -86,7 +86,7 @@ export default function Service({ className, containerClass, bgShape = true, ser
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element items-start">
                     {services?.map((ser, i) => (
-                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-md:!mt-0" ref={cardRefs[i]} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
+                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-md:!mt-0" ref={(el) => { cardRefsArray.current[i] = el; }} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
                     ))}
                 </div>
             </div>
