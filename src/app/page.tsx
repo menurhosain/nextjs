@@ -9,10 +9,11 @@ import Career from "@/components/sections/home/career";
 import { get_home_page_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { get_service_cards } from "@/services/service_card.service";
+import { get_news_items } from "@/services/news.service";
 
 export default async function Home() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [ content, service_cards ] = await Promise.all([get_home_page_content(locale), get_service_cards(locale)]);
+    const [content, service_cards, news] = await Promise.all([get_home_page_content(locale), get_service_cards(locale), get_news_items(locale, 2)]);
 
     return (
         <>
@@ -34,7 +35,7 @@ export default async function Home() {
                 buttonLinkOne={content?.service_group_button_link_one}
                 buttonLabelTwo={content?.service_group_button_label_two}
                 buttonLinkTwo={content?.service_group_button_link_two}
-				service_cards={service_cards}
+                service_cards={service_cards}
             />
             <About
                 subTitle={content?.about_section_sub_title}
@@ -47,23 +48,21 @@ export default async function Home() {
                 btnLabelTwo={content?.about_group_button_label_two}
                 btnLinkTwo={content?.about_group_button_link_two}
             />
-            <Partner
-                secTitle={content?.about_partner_logo_title}
-                logos={content?.partner_logos}
-            />
+            <Partner secTitle={content?.about_partner_logo_title} logos={content?.partner_logos} />
             <Projects
                 subTitle={content?.project_section_sub_title}
                 title={content?.project_section_title}
                 btnLabel={content?.project_section_button_label}
                 btnLink={content?.project_section_button_link}
             />
-            <Career/>
+            <Career />
             <News
                 subTitle={content?.blog_section_sub_title}
                 title={content?.blog_section_title}
                 description={content?.blog_section_description}
                 btnLabel={content?.blog_section_button_label}
                 btnLink={content?.blog_section_button_link}
+                posts={news}
             />
         </>
     );
