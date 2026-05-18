@@ -22,33 +22,40 @@ export default function Service({ className, containerClass, bgShape = true, ser
     const cardRefs = services?.map(() => useRef<HTMLDivElement>(null)) ?? [];
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.to(sectionTitleRef.current, {
-                scrollTrigger: {
-                    trigger: sectionTitleRef.current,
-                    start: "top top+=110",
-                    end: "top top+=310",
-                    pin: true,
-                    pinSpacing: false,
-                    endTrigger: cardRefs[cardRefs.length - 1]?.current,
-                },
-            });
+		const mm = gsap.matchMedia();
 
-            cardRefs.forEach((ref) => {
-                gsap.to(ref.current, {
-                    scrollTrigger: {
-                        trigger: ref.current,
-                        start: "top top+=280",
-                        end: "top top+=280",
-                        pin: true,
-                        pinSpacing: false,
-                        endTrigger: cardRefs[cardRefs.length - 1]?.current,
-                    },
-                });
-            });
-        });
+			mm.add("(min-width: 768px)", () => { 
+				const ctx = gsap.context(() => {
+					gsap.to(sectionTitleRef.current, {
+						scrollTrigger: {
+							trigger: sectionTitleRef.current,
+							start: "top top+=110",
+							end: "top top+=310",
+							pin: true,
+							pinSpacing: false,
+							endTrigger: cardRefs[cardRefs.length - 1]?.current,
+						},
+					});
 
-        return () => ctx.revert();
+					cardRefs.forEach((ref) => {
+						gsap.to(ref.current, {
+							scrollTrigger: {
+								trigger: ref.current,
+								start: "top top+=280",
+								end: "top top+=280",
+								pin: true,
+								pinSpacing: false,
+								endTrigger: cardRefs[cardRefs.length - 1]?.current,
+							},
+						});
+					});
+				});
+
+			    return () => ctx.revert();
+		  });
+
+        return () => mm.revert();
+
     }, []);
 
     return (
@@ -79,7 +86,7 @@ export default function Service({ className, containerClass, bgShape = true, ser
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element items-start">
                     {services?.map((ser, i) => (
-                        <ServiceCard style={{marginTop: `${i * 400 }px`}} ref={cardRefs[i]} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
+                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-md:!mt-0" ref={cardRefs[i]} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
                     ))}
                 </div>
             </div>
