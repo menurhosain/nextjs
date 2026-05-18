@@ -16,7 +16,7 @@ interface BannerProps {
 
 export default function Hero({background, titleNormal, titleFancy, scrollLabel, counterLabel, counterNumber, buttonLabel, buttonLink}: BannerProps) {
     return (
-        <Banner bg={background ?? "/home-hero.mp4" }>
+        <Banner bg={background || "/home-hero.mp4" }>
             <Left has_brand_shape={true}>
                 <div className="flex flex-col max-[768px]:w-full">
                     <h1 className="text-white  font-medium leading-[20px] sm:leading-[30px] md:leading-[40px] lg:leading-[50px] xl:leading-[50px] 2xl:leading-[70px] tracking-[-0.05em] flex flex-col gap-[20px] sm:gap-[30px] mb-[35px]">
@@ -29,10 +29,10 @@ export default function Hero({background, titleNormal, titleFancy, scrollLabel, 
                     </div>
 
                     <Link
-                        href={buttonLink ?? "/register"}
+                        href={buttonLink || "/register"}
                         className="inline-flex items-center gap-[10px] group bg-sah-red hover:bg-sah-white text-white hover:text-sah-red   text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit transition duration-300"
                     >
-                        {buttonLabel ?? "You Like to Build"}?
+                        {buttonLabel || "You Like to Build"}?
                         <AngleArrow class_name="!w-[12px] !h-[12px] !fill-white group-hover:!fill-sah-red transition duration-300" />
                     </Link>
 
@@ -50,8 +50,8 @@ export default function Hero({background, titleNormal, titleFancy, scrollLabel, 
                         style={{ backgroundImage: "url('/white-dots.jpg')" }}
                     >
                         <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
-                        <StatCounter value={counterNumber ?? 30} suffix="+" className="text-sah-red font-semibold font-geist text-[50px] lg:text-[100px] leading-none" />
-                        <span className="text-sah-gray-1 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">{counterLabel ?? "Leading Years in Construction"}</span>
+                        <StatCounter value={counterNumber || 30} suffix="+" className="text-sah-red font-semibold font-geist text-[50px] lg:text-[100px] leading-none" />
+                        <span className="text-sah-gray-1 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">{counterLabel || "Leading Years in Construction"}</span>
                     </div>
                 </div>
             </Right>

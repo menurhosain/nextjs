@@ -71,8 +71,9 @@ export type HomePageContent = {
     about_group_button_link_one: string;
     about_group_button_label_two: string;
     about_group_button_link_two: string;
-    about_partner_logo_title: string;
     about_left_image: StrapiMedia[];
+    about_partner_logo_title: string;
+    partner_logos: [any];
 
     project_section_sub_title: string;
     project_section_title: string;
@@ -89,7 +90,7 @@ export async function get_home_page_content(locale = "en"): Promise<HomePageCont
         const res = await fetch(`${BASE_URL}/api/home?populate=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
-        console.log(json);
+        // console.log(json);
         return json.data ?? null;
     } catch {
         return null;

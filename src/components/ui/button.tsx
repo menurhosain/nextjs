@@ -78,15 +78,15 @@ function ButtonModern({ link, label, variant = "outline", class_name }: { link: 
     }
 
     return (
-        <div className={cn("flex items-center gap-[10px] bg-sah-white rounded-full shadow-sm pl-[24px] pr-[10px] py-[8px]")}>
-            <a href="#" className="text-sah-dark-2 text-[16px] font-medium font-inter decoration-sah-dark-2 hover:text-sah-red hover:decoration-sah-red transition-colors">
+        <a href={link} className={cn("flex items-center gap-[10px] bg-sah-white rounded-full shadow-sm pl-[24px] pr-[10px] py-[8px] group")}>
+            <span className="text-sah-dark-2 text-[16px] font-medium font-inter decoration-sah-dark-2 group-hover:text-sah-red hover:decoration-sah-red transition-colors">
                 {label}
-            </a>
+            </span>
 
-            <a href={link} className="flex items-center justify-center w-[28px] h-[28px] rounded-full bg-sah-red flex-shrink-0 transition-colors" aria-label="Navigate">
+            <span className="flex items-center justify-center w-[28px] h-[28px] rounded-full bg-sah-red flex-shrink-0 transition-colors" aria-label="Navigate">
 				<AngleArrow class_name="!w-[8px] !h-[8px] !fill-sah-white"/>
-            </a>
-        </div>
+            </span>
+        </a>
     );
 }
 
