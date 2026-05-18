@@ -75,7 +75,7 @@ export default function Service({ className, containerClass, bgShape = true }: s
     }, []);
 
     return (
-        <section className={cn("section-padding value-pin-area pt-[140px] pb-[150px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden", className)}>
+        <section className={cn("section-padding value-pin-area pt-[73px] lg:pt-[143px] pb-[80px] lg:pb-[150px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden", className)}>
             {bgShape &&
                 <div
                     aria-hidden="true"
@@ -83,11 +83,11 @@ export default function Service({ className, containerClass, bgShape = true }: s
                 />
             }
             <div className={cn("container mx-auto  !px-0", containerClass)}>
-                <div className="mb-[50px] flex flex-col items-center " ref={sectionTitleRef}>
+                <div className="mb-[20px] lg:mb-[50px] flex flex-col items-center " ref={sectionTitleRef}>
                     <Section_Title
                         subtitle="our expertise"
                         title={<> Our service offerings </>}
-                        class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal", title: "max-w-[350px] sm:max-w-[550px] md:max-w-[650px] lg:max-w-[870px] text-sah-black text-center !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[86px]", description: "text-sah-gray-1 text-center max-w-[870px]" }}
+                        class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal text-[14px] sm:text-[16px]", title: "text-sah-black text-center !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[86px]", description: "text-sah-gray-1 text-center max-w-[870px]" }}
                     />
                 </div>
 
@@ -101,7 +101,7 @@ export default function Service({ className, containerClass, bgShape = true }: s
                         icon={<ServiceIcon1 />}
                     />
                     <ServiceCard
-                        class_name="mt-[400]"
+                        class_name="xl:mt-[400]"
                         ref={cardTwoRef}
                         title={<>
                             MEP & Building <br /> Systems{" "}
@@ -110,7 +110,7 @@ export default function Service({ className, containerClass, bgShape = true }: s
                         icon={<ServiceIcon2 />}
                     />
                     <ServiceCard
-                        class_name="mt-[900]"
+                        class_name="xl:mt-[900]"
                         ref={cardThreeRef}
                         title={<>
                             Infrastructure <br /> Works
