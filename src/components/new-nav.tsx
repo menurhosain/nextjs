@@ -323,9 +323,9 @@ export function NavActions() {
                     <div className="w-[50%] 2xl:w-[60%]  max-[1024]:w-[88%] max-[640px]:w-[81%] h-full flex flex flex-col border-x border-sah-light-3">
                         <div className="flex items-center justify-between h-[100px]">
                             {/* Search bar */}
-                            <div className="flex items-center gap-3 px-6 py-3 group">
+                            <div className="flex items-center gap-3 px-2 sm:px-6 py-3 group">
                                 <SearchIcon class_name="!size-[24px] shrink-0 text-sah-dark !fill-sah-black group-hover:rotate-90 transition-rotate duration-500" />
-                                <input type="text" placeholder="Search your query" className="flex-1 min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
+                                <input type="text" placeholder="Search your query" className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
                             </div>
 
                             {/* Close button */}
