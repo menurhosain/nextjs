@@ -6,114 +6,50 @@ import Link from "next/link";
 import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
 import NewsCard from "./ui/news-card";
+import { type Menu } from "@/services/mega_menu.service";
+import { BASE_URL } from "@/lib/constant";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
     { code: "ar-om", label: "Arabic", flag: "/oman-flag.svg" },
 ];
 
-const navLinks = [
-    {
-        label: "Our Company",
-        parent: true,
+function transformMenus(menus: Menu[]) {
+    return menus.map((menu) => ({
+        label: menu.nav_label,
+        parent: menu.is_parent,
+        link: "",
+        id: menu.featured_news?.length > 0 ? "news" : "",
         card: {
-            title: "About Us",
-            description: "SAH is a Oman-based, international construction services company and is a leading builder in diverse market segments.",
-            cta: { label: "GET TO KNOW US", href: "/about-us" },
+            title: menu.mega_menu_left_info?.label ?? "",
+            description: menu.mega_menu_left_info?.excerpt ?? "",
+            cta: {
+                label: menu.mega_menu_left_info?.action_link_label ?? "",
+                href: menu.mega_menu_left_info?.action_link_href ?? "",
+            },
         },
         promo: {
-            title: "Become a Subcontractor",
-            excerpt: "With expertise spanning planning, execution, and project delivery, we provide market needs.",
-            image: "/menu/1.jpg",
-            cta: { label: "Learn How", href: "/become-a-subcontractor" },
+            title: menu.mega_menu_right_info?.label ?? "",
+            excerpt: menu.mega_menu_right_info?.excerpt ?? "",
+            image: menu.mega_menu_right_info?.bg_image
+                ? `${BASE_URL}${menu.mega_menu_right_info.bg_image.url}`
+                : "",
+            cta: {
+                label: menu.mega_menu_right_info?.action_link_label ?? "",
+                href: menu.mega_menu_right_info?.action_link_href ?? "",
+            },
         },
-        submenus: [
-            { label: "About Us", href: "/about-us" },
-            { label: "Partner", href: "/partner" },
-            { label: "Leadership", href: "/leadership" },
-            { label: "Contact", href: "/contact" },
-        ],
-    },
-    {
-        label: "Our Services",
-        parent: true,
-        card: {
-            title: "Our Services",
-            description: "We deliver end-to-end construction and engineering solutions across a wide range of industries and sectors.",
-            cta: { label: "EXPLORE SERVICES", href: "/services" },
-        },
-        promo: {
-            title: "Our Market Value",
-            excerpt: "We provide comprehensive construction and engineering solutions for your need.",
-            image: "/menu/2.jpg",
-            cta: { href: "/services-details", label: "Join us" },
-        },
-        submenus: [
-            { label: "Services", href: "/services" },
-            { label: "Services Details", href: "/services-details" },
-        ],
-    },
-    {
-        label: "Our Projects",
-        parent: true,
-        card: {
-            title: "Our Projects",
-            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { label: "VIEW ALL PROJECTS", href: "/projects" },
-        },
-        promo: {
-            title: "Police College Package C SQAPS Nizwa",
-            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
-            image: "/project-1-small.jpg",
-            cta: { label: "View Project", href: "/projects" },
-        },
-        submenus: [
-            { label: "Projects", href: "/projects" },
-            { label: "Project Details", href: "/project-details" },
-        ],
-    },
-    {
-        label: "News",
-        parent: true,
-        link: "/news",
-        id: "news",
-        card: {
-            title: "Our Latest News",
-            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { href: "/news", label: "Explore our ideas" },
-        },
-        latest_news: [
-            { title: "Cost Effective Solutions for your dream", href: "#", image: "/menu/2.jpg" },
-            { title: "Solutions for Building Projects", href: "#", image: "/menu/1.jpg" },
-            { title: "Medical Pavilion at Institute Square", href: "#", image: "/menu/3.jpg" },
-        ],
-    },
-    {
-        label: "Careers",
-        parent: true,
-        id: "career",
-        link: "/careers",
-        card: {
-            title: "Careers With Us",
-            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/careers" },
-        },
-        promo: {
-            title: "Your Career Starts Here",
-            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
-            image: "/team/2.jpg",
-            cta: { label: "Join with us", href: "/careers" },
-        },
-        submenus: [
-            { label: "Career", href: "/careers" },
-            { label: "Partner", href: "/partner" },
-            { label: "Leadership", href: "/leadership" },
-            { label: "Contact", href: "/contact" },
-        ],
-    },
-];
+        submenus: (menu.mega_menu_links ?? []).map((l) => ({ label: l.button_label, href: l.button_link })),
+        latest_news: (menu.featured_news ?? []).map((n) => ({
+            title: n.title,
+            href: n.link_href,
+            image: n.thumbnail ? `${BASE_URL}${n.thumbnail.url}` : "",
+        })),
+    }));
+}
 
-export function NavLinks() {
+export function NavLinks({ menus }: { menus: Menu[] }) {
+    const navLinks = transformMenus(menus);
     return (
         <div className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
             <a href="/" className="text-white font-geist text-[36px] font-bold mr-[20px] 2xl:mr-[80px] uppercase">
@@ -218,7 +154,8 @@ export function NavLinks() {
     );
 }
 
-export function NavActions({locale}:{locale:string}) {
+export function NavActions({ locale, menus }: { locale: string; menus: Menu[] }) {
+    const navLinks = transformMenus(menus);
     const router = useRouter();
     const [selectedLang, setSelectedLang] = useState(() => {
         return languages.find((l) => l.code === locale) ?? languages[0];
