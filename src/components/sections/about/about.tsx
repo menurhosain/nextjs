@@ -54,18 +54,18 @@ function StatCard({ label, target, suffix }: StatCardProps) {
   return (
     <div
       ref={ref}
-      className="flex-1 bg-white rounded-[12px] p-6 flex flex-col gap-5 transition-shadow duration-300"
+      className="flex-1 bg-white rounded-[12px] p-3 lg:p-6 flex flex-col gap-5 transition-shadow duration-300"
     >
       {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="text-[16px] text-sah-gray-2 font-medium tracking-wide">
+        <span className="text-[14px] lg:text-[16px] text-sah-gray-2 font-medium tracking-wide">
           {label}
         </span>
         <AboutDotIcon/>
       </div>
  
       {/* Animated Value */}
-      <p className="text-[50px] font-bold text-gray-900 tracking-tight leading-none">
+      <p className="text-[36px] lg:text-[50px] font-bold text-gray-900 tracking-tight leading-none">
         {count}
         {suffix}
       </p>
@@ -81,7 +81,7 @@ const stats: StatCardProps[] = [
 
 export default function About() {
     return (
-        <section className="section-padding relative pt-27 lg:pb-[140px] pb-[80px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center">
+        <section className="section-padding relative pt-[73px] lg:pt-[143px] lg:pb-[150px] pb-[80px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center">
             <div className="container mx-auto !px-0">
                 <div className="flex flex-col">
                     <div className="mb-[50px] flex flex-col items-center ">
@@ -89,19 +89,19 @@ export default function About() {
                             subtitle="About SAH"
                             title={<> SAH building company overview profile </>}
                             description="Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based in the Sultanate of Oman. With a rich legacy spanning several decades, SAH has established itself as a trusted name in the construction industry, delivering exceptional projects of the highest quality."
-                            class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal", title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] text-center max-w-[870px] text-[70px] ", description: "text-sah-gray-1 text-center max-w-[870px]" }}
+                            class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal text-[14px] sm:text-[16px]", title: "max-w-[350px] sm:max-w-[550px] md:max-w-[650px] lg:max-w-[870px] text-sah-black text-center !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[86px]", description: "text-sah-gray-1 text-center max-w-[870px]" }}
                         />
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-[30px] px-[125px]">
+                    <div className="flex flex-col sm:flex-row gap-[30px] xl:px-[125px]">
                         {stats.map((stat) => (
                         <StatCard key={stat.label} {...stat} />
                         ))}
                     </div>
-                    <div className="h-[540px] bg-[url('/about/about-bg.jpg')] bg-cover bg-center rounded-[12px] mt-[60px] relative">
-                        <div className="bg-sah-white rounded-[8px] px-[40px] py-[40px] absolute right-[16px] bottom-[16px] group w-[355px]">
+                    <div className="h-[400px] sm:h-[540px] bg-[url('/about/about-bg.jpg')] bg-cover bg-center rounded-[12px] mt-[60px] relative">
+                        <div className="bg-sah-white rounded-[8px] px-[20px] sm:px-[40px] py-[20px] sm:py-[40px] absolute right-[16px] bottom-[16px] group w-[222px] sm:w-[355px]">
                             <div className="relative w-full">
                                 <Image src="/about/about-award.png" alt="" fill className="transition-transform duration-500 group-hover:scale-105 !relative !h-auto !w-auto" />
-                                <h3 className="font-geist !text-[28px] font-medium mt-[16px] leading-[34px]">Construction Project of the Year</h3>
+                                <h3 className="font-geist text-[20px] sm:text-[28px] font-medium mt-[16px] leading-[34px]">Construction Project of the Year</h3>
                                 <p className="text-[16px] text-sah-gray-2 mt-[16px]">Best Builder Award</p>
                                 <span className="absolute right-[16px] top-[16px] text-[18px] text-sah-gray-3">2024</span>
                             </div>

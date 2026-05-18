@@ -41,6 +41,8 @@ export default function Projects() {
             }, ref);
             return () => ctx.revert();
         });
+
+        return () => mm.revert();
     }, []);
 
     return (
