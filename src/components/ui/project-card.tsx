@@ -43,7 +43,7 @@ export default function ProjectCard({ category, title, description, handover, lo
 
             <div className="w-[100%] md:w-[60%] lg:w-[60%] xl:w-[70%] md:min-h-[500px] max-[1024px]:!p-[20px] p-[36px] md:pl-[40px] lg:pl-[80px]">
                 <div className="relative w-full h-full overflow-hidden">
-                    <Image src={image} alt={title} fill className="object-cover !relative sm:absolute transition-transform duration-500 group-hover:scale-105" />
+                    <img src={image} alt={title} className="w-full h-full object-cover !relative sm:absolute transition-transform duration-500 group-hover:scale-105" />
                 </div>
             </div>
         </div>

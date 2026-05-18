@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Section_Title from "@/components/ui/section-title";
 import ProjectCard from "@/components/ui/project-card";
 import { ButtonModern } from "@/components/ui/button";
+import type { Project } from "@/services/project.service";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,10 +16,11 @@ interface PortfolioProps {
     title?: string;
     btnLabel?: string;
     btnLink?: string;
+    projects?: Project[];
 }
 
-export default function Projects({subTitle, title, btnLabel, btnLink}: PortfolioProps) {
-    
+export default function Projects({subTitle, title, btnLabel, btnLink, projects = []}: PortfolioProps) {
+
     const ref = useRef<HTMLDivElement | null>(null);
     const endRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,7 +28,7 @@ export default function Projects({subTitle, title, btnLabel, btnLink}: Portfolio
         if (!ref.current || !endRef.current) return;
 
         const mm = gsap.matchMedia();
-        
+
         const cards = Array.from(ref.current.children);
         if (cards.length < 2) return;
 
@@ -48,7 +50,7 @@ export default function Projects({subTitle, title, btnLabel, btnLink}: Portfolio
             }, ref);
             return () => ctx.revert();
         });
-    }, []);
+    }, [projects]);
 
     return (
         <section className="section-padding bg-[linear-gradient(0deg,#f5f5f566_42.16%,#f5f5f5_204.49%),url('/project-section-bg.jpg')] bg-bottom bg-no-repeat">
@@ -62,30 +64,17 @@ export default function Projects({subTitle, title, btnLabel, btnLink}: Portfolio
                 </div>
 
                 <div ref={ref}>
-                    <ProjectCard
-                        category="Architecture"
-                        title="Police College Package C SQAPS Nizwa"
-                        description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
-                        handover="2021"
-                        location="Nizwa, Oman"
-                        image="/project-1.jpg"
-                    />
-                    <ProjectCard
-                        category="Architecture"
-                        title="Special Task Force Complex – Al Khabourah"
-                        description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
-                        handover="2021"
-                        location="Nizwa, Oman"
-                        image="/project-2.jpg"
-                    />
-                    <ProjectCard
-                        category="Construction"
-                        title="Jabal Akhdar Police Station Complex"
-                        description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures"
-                        handover="2021"
-                        location="Nizwa, Oman"
-                        image="/project-3.jpg"
-                    />
+                    {projects.map((project) => (
+                        <ProjectCard
+                            key={project.link}
+                            category={project.scope[0] ?? ""}
+                            title={project.title}
+                            description={project.excerpt}
+                            handover={project.year}
+                            location={project.location[0] ?? ""}
+                            image={project.image}
+                        />
+                    ))}
                 </div>
 
                 <div className="flex items-center justify-center mt-[50px]" ref={endRef}>
