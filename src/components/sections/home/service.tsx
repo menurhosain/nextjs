@@ -17,50 +17,56 @@ export default function Service() {
     const cardThreeRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.to(sectionTitleRef.current, {
-                scrollTrigger: {
-                    trigger: sectionTitleRef.current,
-                    start: "top top+=110",
-                    end: "top top+=410",
-                    pin: true,
-                    pinSpacing: false,
-                    endTrigger: cardThreeRef.current,
-                },
+        const mm = gsap.matchMedia();
+
+        mm.add("(min-width: 768px)", () => {
+            const ctx = gsap.context(() => {
+                gsap.to(sectionTitleRef.current, {
+                    scrollTrigger: {
+                        trigger: sectionTitleRef.current,
+                        start: "top top+=110",
+                        end: "top top+=410",
+                        pin: true,
+                        pinSpacing: false,
+                        endTrigger: cardThreeRef.current,
+                    },
+                });
+                gsap.to(cardOneRef.current, {
+                    scrollTrigger: {
+                        trigger: cardOneRef.current,
+                        start: "top top+=360",
+                        end: "top top+=360",
+                        pin: true,
+                        pinSpacing: false,
+                        endTrigger: cardThreeRef.current,
+                    },
+                });
+                gsap.to(cardTwoRef.current, {
+                    scrollTrigger: {
+                        trigger: cardTwoRef.current,
+                        start: "top top+=360",
+                        end: "top top+=360",
+                        pin: true,
+                        pinSpacing: false,
+                        endTrigger: cardThreeRef.current,
+                    },
+                });
+                gsap.to(cardThreeRef.current, {
+                    scrollTrigger: {
+                        trigger: cardThreeRef.current,
+                        start: "top top+=360",
+                        end: "top top+=360",
+                        pin: true,
+                        pinSpacing: false,
+                        endTrigger: cardThreeRef.current,
+                    },
+                });
             });
-            gsap.to(cardOneRef.current, {
-                scrollTrigger: {
-                    trigger: cardOneRef.current,
-                    start: "top top+=360",
-                    end: "top top+=360",
-                    pin: true,
-                    pinSpacing: false,
-                    endTrigger: cardThreeRef.current,
-                },
-            });
-            gsap.to(cardTwoRef.current, {
-                scrollTrigger: {
-                    trigger: cardTwoRef.current,
-                    start: "top top+=360",
-                    end: "top top+=360",
-                    pin: true,
-                    pinSpacing: false,
-                    endTrigger: cardThreeRef.current,
-                },
-            });
-            gsap.to(cardThreeRef.current, {
-                scrollTrigger: {
-                    trigger: cardThreeRef.current,
-                    start: "top top+=360",
-                    end: "top top+=360",
-                    pin: true,
-                    pinSpacing: false,
-                    endTrigger: cardThreeRef.current,
-                },
-            });
+
+            return () => ctx.revert();
         });
 
-        return () => ctx.revert();
+        return () => mm.revert();
     }, []);
 
     return (
