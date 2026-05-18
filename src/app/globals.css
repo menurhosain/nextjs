@@ -164,11 +164,11 @@ svg {
     }
 }
 
-@media (min-width: 769px) {
+
     .project-card:hover .project-card-content {
         background: #d00435;
     }
-}
+
 
 @keyframes bg-slide-from-right {
     from {

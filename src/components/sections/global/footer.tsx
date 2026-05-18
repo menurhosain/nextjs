@@ -15,13 +15,13 @@ const links = [
 
 function Links() {
     return (
-        <div className="flex flex-col md:flex-row items-start xl:items-end gap-15 md:items-center">
+        <div className="flex flex-col 2xl:flex-row items-center 2xl:items-end gap-7 2xl:gap-15 md:items-center  max-[640px]:w-full">
             <Link href="/">
                 <Image src="/logo-white.png" alt="SAH" width={80} height={80} />
             </Link>
-            <nav className="flex flex-col md:flex-row items-start xl:items-center gap-4 xl:gap-8">
+            <nav className="flex sm:flex-row flex-wrap max-[768px]:justify-center xl:items-center gap-2.5 sm:gap-4 xl:gap-8">
                 {links.map(({ label, href }) => (
-                    <a key={label} href={href} className="text-sm font-medium hover:opacity-80 transition-opacity whitespace-nowrap">
+                    <a key={label} href={href} className="text-[16px] font-semibold hover:opacity-80 transition-opacity whitespace-nowrap">
                         {label}
                     </a>
                 ))}
@@ -32,7 +32,7 @@ function Links() {
 
 function Newsletter() {
     return (
-        <div className="flex  flex-col  gap-2 md:flex-row items-start md:items-center">
+        <div className="flex  flex-col  gap-2 md:flex-row items-center md:items-center max-[640px]:w-full">
             <Input
                 type="email"
                 placeholder="Enter your email"
@@ -59,7 +59,7 @@ function Social() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-10 h-10 rounded-full border border-sah-overlay-white-30 flex items-center justify-center text-sah-white hover:text-sah-red hover:bg-sah-white hover:border-sah-white transition-colors"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-sah-overlay-white-30 flex items-center justify-center text-sah-white hover:text-sah-red hover:bg-sah-white hover:border-sah-white transition-colors sm:text-[20px] text-[16px]"
                 >
                     {icon}
                 </Link>
@@ -70,13 +70,13 @@ function Social() {
 
 function Copyright() {
     return (
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-6">
-            <p className="text-sm text-sah-white">© Copyright 2026 SAH</p>
-            <div className="flex items-center gap-6">
-                <Link href="#" className="text-sm text-sah-white">
+        <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-4 py-6">
+            <p className="text-[16px] text-sah-white">© Copyright 2026 SAH</p>
+            <div className="flex items-center gap-2 sm:gap-6 flex-wrap justify-center">
+                <Link href="#" className="text-[16px] text-sah-white">
                     Terms &amp; Agreements
                 </Link>
-                <Link href="#" className="text-sm text-sah-white">
+                <Link href="#" className="text-[16px] text-sah-white">
                     Privacy Policy
                 </Link>
             </div>
@@ -89,21 +89,21 @@ export default function Footer() {
         <footer className="bg-sah-red text-sah-white section-padding">
             <div className="container mx-auto !px-0 border-x border-sah-overlay-white-15">
                 {/* Row 1: logo + nav | newsletter */}
-                <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6 py-10 px-[40px] border-b border-sah-overlay-white-15">
+                <div className="flex flex-col 2xl:flex-row items-center 2xl:items-end xl:justify-between gap-6 py-10 px-[15px] sm:px-[40px] border-b border-sah-overlay-white-15">
                     <Links />
                     <Newsletter />
                 </div>
 
                 {/* Row 2: tagline | social */}
-                <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 px-[40px] py-8 border-b border-sah-overlay-white-15">
-                    <p className="text-sm text-sah-white max-w-[670px] leading-relaxed">
+                <div className="flex flex-col xl:flex-row items-center xl:justify-between gap-4 px-[15px] sm:px-[40px] py-8 border-b border-sah-overlay-white-15">
+                    <p className="text-[16px] text-sah-white max-w-[670px] leading-relaxed text-center xl:text-left">
                         We are a forward-thinking consulting firm dedicated to helping businesses grow through strategic insights, innovative solutions, and measurable results.
                     </p>
                     <Social />
                 </div>
 
                 {/* Row 3: copyright */}
-                <div className="px-[40px]">
+                <div className="px-[15px] sm:px-[40px]">
                     <Copyright />
                 </div>
             </div>
