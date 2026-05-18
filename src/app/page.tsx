@@ -10,10 +10,11 @@ import { get_home_page_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { get_service_cards } from "@/services/service_card.service";
 import { get_news_items } from "@/services/news.service";
+import { get_projects } from "@/services/project.service";
 
 export default async function Home() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [content, service_cards, news] = await Promise.all([get_home_page_content(locale), get_service_cards(locale), get_news_items(locale, 2)]);
+    const [content, service_cards, news, projects] = await Promise.all([get_home_page_content(locale), get_service_cards(locale), get_news_items(locale, 2), get_projects(locale, 3)]);
 
     return (
         <>
@@ -54,6 +55,7 @@ export default async function Home() {
                 title={content?.project_section_title}
                 btnLabel={content?.project_section_button_label}
                 btnLink={content?.project_section_button_link}
+                projects={projects}
             />
             <Career />
             <News
