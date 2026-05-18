@@ -46,6 +46,7 @@ export type StrapiMedia = {
 
 // Home page
 export type HomePageContent = {
+    banner_background: StrapiMedia[];
     banner_title_normal: string;
     banner_title_fancy: string;
     banner_scroll_now_label: string;
@@ -53,15 +54,14 @@ export type HomePageContent = {
     banner_counter_number: number;
     banner_button_label: string;
     banner_button_link: string;
-    banner_background: StrapiMedia[];
 
     service_section_sub_title: string;
-    service_group_button_link_one: string;
-    service_group_button_label_two: string;
-    service_group_button_link_two: string;
     service_section_title_normal: string;
     service_section_title_animated: string;
     service_group_button_label_one: string;
+    service_group_button_link_one: string;
+    service_group_button_label_two: string;
+    service_group_button_link_two: string;
 
     about_section_sub_title: string;
     about_section_title_normal: string;

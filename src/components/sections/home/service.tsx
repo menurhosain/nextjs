@@ -6,11 +6,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ServiceCard } from "@/components/ui/service-card";
-import { AngleArrow, DownLongArrow,ServiceIcon1 ,ServiceIcon2 ,ServiceIcon3 } from "@/components/ui/svgs";
+import { AngleArrow, DownLongArrow, ServiceIcon1, ServiceIcon2, ServiceIcon3 } from "@/components/ui/svgs";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Service() {
+interface ServiceProps {
+    subTitle?: string;
+    titleNormal?: string;
+    titleAnimated?: string;
+    buttonLabelOne?: string;
+    buttonLinkOne?: string;
+    buttonLabelTwo?: string;
+    buttonLinkTwo?: string;
+}
+
+export default function Service({ subTitle, titleNormal, titleAnimated, buttonLabelOne, buttonLinkOne, buttonLabelTwo, buttonLinkTwo }: ServiceProps) {
     const sectionTitleRef = useRef<HTMLDivElement>(null);
     const cardOneRef = useRef<HTMLDivElement>(null);
     const cardTwoRef = useRef<HTMLDivElement>(null);
@@ -76,16 +86,20 @@ export default function Service() {
                 <div className="mb-[23px]" ref={sectionTitleRef}>
                     <div className="flex items-center justify-center gap-6 mb-[38px] max-[1024px]:mb-[20px]">
                         <span className="text-sah-black flex items-center gap-[6px] text-[16px] max-[768px]:text-[14px] font-medium tracking-widest uppercase font-inter">
-                            [ Our Expertise ]
+                            [ {subTitle ?? "Our Expertise"} ]
                             <DownLongArrow class_name="!w-[14px] !h-[14px]" />
                         </span>
                     </div>
                     <ScrollReveal toColor="var(--color-sah-dark-2)">
                         <h2 className="section-heading max-[1280px]:text-[36px] max-[1024px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[20px] max-[1024px]:leading-[40px] max-[768px]:leading-[32px] max-[640px]:leading-[28px] mx-auto text-center leading-[48px] mb-[60px]">
                             <span className="text-sah-dark-2">
-                                We deliver high quality construction services <br /> with innovation, precision,{" "}
+                                {titleNormal ?? (
+                                    <>
+                                        We deliver high quality construction services" <br /> "with innovation, precision,
+                                    </>
+                                )}{" "}
                             </span>
-                            <span className="text-sah-dark-2/50 scroll-color font-bold">and commitment to every client project</span>
+                            <span className="text-sah-dark-2/50 scroll-color font-bold">{titleAnimated ?? "commitment to every client project"}</span>
                         </h2>
                     </ScrollReveal>
                 </div>
@@ -99,7 +113,7 @@ export default function Service() {
                             </>
                         }
                         description="Construction & engineering combine expertise, innovation, and precision to deliver safe, durable, and efficient structures that shape modern."
-                        icon={<ServiceIcon1/>}
+                        icon={<ServiceIcon1 />}
                     />
                     <ServiceCard
                         class_name="mt-[400]"
@@ -110,7 +124,7 @@ export default function Service() {
                             </>
                         }
                         description="MEP and building systems integrate mechanical, electrical, and plumbing solutions to ensure efficient, safe, and sustainable building."
-                        icon={<ServiceIcon2/>}
+                        icon={<ServiceIcon2 />}
                     />
                     <ServiceCard
                         class_name="mt-[900]"
@@ -121,14 +135,14 @@ export default function Service() {
                             </>
                         }
                         description="We deliver reliable infrastructure works including transportation, drainage, and public utilities to enhance communities and support long-term."
-                        icon={<ServiceIcon3/>}
+                        icon={<ServiceIcon3 />}
                     />
                 </div>
 
                 <div className="flex justify-center mt-12 mb-[140px]">
                     <div className="inline-flex shadow-sm px-[15px] md:px-[30px] py-[8px] md:py-[8px] bg-sah-white rounded-full max-[640px]:rounded-[10px] justify-center gap-[5px] sm:gap-[20px] flex-wrap">
                         <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[10px] font-inter font-medium ">
-                            <span className="text-sah-dark-2 group-hover:text-sah-red">Careers</span>
+                            <span className="text-sah-dark-2 group-hover:text-sah-red">{buttonLabelOne ?? "Careers"}</span>
                             <span
                                 className="flex items-center justify-center w-[30px] h-[30px] sm:w-[28px] sm:h-[28px] rounded-full bg-sah-red text-sah-white flex-shrink-0 group-hover:bg-sah-red/80 transition-colors"
                                 aria-label="Navigate"
@@ -136,9 +150,9 @@ export default function Service() {
                                 <AngleArrow class_name="!w-[8px] !h-[8px]" />
                             </span>
                         </a>
-                        <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[20px] font-inter font-medium">
+                        <a href={buttonLinkTwo ?? "#"} className="flex group items-center text-[14px] sm:text-[16px] gap-[20px] font-inter font-medium">
                             <span className="text-sah-dark-2 underline underline-offset-2 decoration-sah-dark-2 group-hover:text-sah-red group-hover:decoration-sah-red transition-colors">
-                                View All Services
+                                {buttonLabelTwo ?? "View All Services"}
                             </span>
                         </a>
                     </div>
