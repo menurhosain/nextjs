@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import Hero from "@/components/sections/home/hero";
 import Service from "@/components/sections/home/service";
 import Projects from "@/components/sections/home/project";
@@ -7,10 +8,13 @@ import News from "@/components/sections/home/news";
 import Career from "@/components/sections/home/career";
 import { get_home_page_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
+import { get_service_cards } from "@/services/service_card.service";
 
 export default async function Home() {
-    const locale = "en";
-    const content= await get_home_page_content(locale);
+    const locale = (await headers()).get("x-locale") ?? "en";
+    const [ content, service_cards ] = await Promise.all([get_home_page_content(locale), get_service_cards(locale)]);
+	console.log(service_cards);
+
     return (
         <>
             <Hero
