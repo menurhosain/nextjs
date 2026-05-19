@@ -266,6 +266,11 @@ export type TeamMember = {
     phone: string;
     image: StrapiMedia | null;
 };
+export type SeniorLeader = {
+    id: number;
+    name: string;
+    role: string;
+};
 export type LeadershipPageContent = {
     Banner: {
         id: number;
@@ -274,10 +279,12 @@ export type LeadershipPageContent = {
         banner_bg: StrapiMedia | null;
     };
     executive_leader: ExecutiveLeaderContent;
+    senior_leadership: SeniorLeader[];
+    senior_leadership_title:string
 };
 export async function get_leadership_page_content(locale = "en"): Promise<LeadershipPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/leadership-page?locale=${locale}&populate[Banner][populate]=*&populate[executive_leader][populate]=*`);
+        const res = await fetch(`${BASE_URL}/api/leadership-page?locale=${locale}&populate[Banner][populate]=*&populate[executive_leader][populate]=*&populate[senior_leadership][populate]=*`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -285,9 +292,11 @@ export async function get_leadership_page_content(locale = "en"): Promise<Leader
         return null;
     }
 }
-export async function get_teams(locale = "en"): Promise<TeamMember[]> {
+export async function get_teams(locale = "en", limit?: number): Promise<TeamMember[]> {
     try {
-        const res = await fetch(`${BASE_URL}/api/teams?populate=*&locale=${locale}`);
+        const params = new URLSearchParams({ populate: "*", locale });
+        if (limit !== undefined) params.set("pagination[limit]", String(limit));
+        const res = await fetch(`${BASE_URL}/api/teams?${params}`);
         if (!res.ok) return [];
         const json = await res.json();
         return json.data ?? [];

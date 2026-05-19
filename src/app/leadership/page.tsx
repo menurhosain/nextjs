@@ -7,7 +7,7 @@ import { get_career_cta_section_content, get_leadership_page_content, get_teams 
 
 export default async function LeadershipPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [career, leadership, teams] = await Promise.all([get_career_cta_section_content(locale), get_leadership_page_content(locale), get_teams(locale)]);
+    const [career, leadership, teams] = await Promise.all([get_career_cta_section_content(locale), get_leadership_page_content(locale), get_teams(locale, 3)]);
 
     return (
         <>
@@ -23,7 +23,7 @@ export default async function LeadershipPage() {
                 </Right>
             </Banner>
 
-            <LeadershipSection executive_leader={leadership?.executive_leader} teams={teams} />
+            <LeadershipSection executive_leader={leadership?.executive_leader} teams={teams} senior_leadership={leadership?.senior_leadership} senior_leadership_title={leadership?.senior_leadership_title} />
 
             <Career content={career} />
         </>

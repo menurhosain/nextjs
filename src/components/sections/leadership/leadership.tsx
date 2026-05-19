@@ -1,25 +1,8 @@
 import Link from "next/link";
 import { getStrapiMediaUrl } from "@/lib/utils";
-import { ExecutiveLeaderContent, TeamMember } from "@/services/page_content.service";
+import { ExecutiveLeaderContent, TeamMember, SeniorLeader } from "@/services/page_content.service";
 import TeamGrid from "@/components/sections/leadership/team-grid";
 
-const seniorLeadership = [
-    { name: "Arlene McCoy", role: "Chief Administrative Officer" },
-    { name: "Wade Warren", role: "Managing Director" },
-    { name: "Brooklyn Simmons", role: "Managing Director" },
-    { name: "Annette Black", role: "Managing Director" },
-    { name: "Jacob Jones", role: "Managing Director" },
-    { name: "Devon Lane", role: "Managing Director" },
-    { name: "Eleanor Pena", role: "Managing Director" },
-    { name: "Albert Flores", role: "Managing Director" },
-    { name: "Kathryn Murphy", role: "Managing Director" },
-    { name: "Guy Hawkins", role: "Managing Director" },
-    { name: "Jerome Bell", role: "Managing Director" },
-    { name: "Marvin McKinney", role: "Managing Director" },
-    { name: "Floyd Miles", role: "Managing Director" },
-    { name: "Bessie Cooper", role: "Managing Director" },
-    { name: "Esther Howard", role: "Managing Director" },
-];
 
 function ExecutiveLeader({ data }: { data?: ExecutiveLeaderContent | null }) {
     const image = getStrapiMediaUrl(data?.image) || "/team/mr-gm.png";
@@ -51,13 +34,33 @@ function ExecutiveLeader({ data }: { data?: ExecutiveLeaderContent | null }) {
 }
 
 
-function SeniorLeadership() {
+const FALLBACK_SENIOR_LEADERSHIP = [
+    { id: 1, name: "Arlene McCoy", role: "Chief Administrative Officer" },
+    { id: 2, name: "Wade Warren", role: "Managing Director" },
+    { id: 3, name: "Brooklyn Simmons", role: "Managing Director" },
+    { id: 4, name: "Annette Black", role: "Managing Director" },
+    { id: 5, name: "Jacob Jones", role: "Managing Director" },
+    { id: 6, name: "Devon Lane", role: "Managing Director" },
+    { id: 7, name: "Eleanor Pena", role: "Managing Director" },
+    { id: 8, name: "Albert Flores", role: "Managing Director" },
+    { id: 9, name: "Kathryn Murphy", role: "Managing Director" },
+    { id: 10, name: "Guy Hawkins", role: "Managing Director" },
+    { id: 11, name: "Jerome Bell", role: "Managing Director" },
+    { id: 12, name: "Marvin McKinney", role: "Managing Director" },
+    { id: 13, name: "Floyd Miles", role: "Managing Director" },
+    { id: 14, name: "Bessie Cooper", role: "Managing Director" },
+    { id: 15, name: "Esther Howard", role: "Managing Director" },
+];
+
+function SeniorLeadership({ data, senior_leadership_title }: { data?: SeniorLeader[] | null, senior_leadership_title?:string }) {
+    const items = data && data.length > 0 ? data : FALLBACK_SENIOR_LEADERSHIP;
+
     return (
         <div className="relative px-[20px] sm:px-[40px] 2xl:px-[82px] pt-[40px] 2xl:pt-[82px] pb-[40px] 2xl:pb-[90px] rounded-[16px] bg-white overflow-hidden">
-            <h2 className="font-geist font-medium text-[30px] sm:text-[38px] md:text-[46px] xl:text-[60px] 2xl:text-[80px] leading-[1.2] text-sah-dark-2 mb-[30px] 2xl:mb-[70px]">Senior Leadership</h2>
+            <h2 className="font-geist font-medium text-[30px] sm:text-[38px] md:text-[46px] xl:text-[60px] 2xl:text-[80px] leading-[1.2] text-sah-dark-2 mb-[30px] 2xl:mb-[70px]">{senior_leadership_title || "Senior Leadership"}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-[25px] 2xl:gap-[40px]">
-                {seniorLeadership.map((item, index) => (
-                    <div key={index}>
+                {items.map((item) => (
+                    <div key={item.id}>
                         <h4 className="font-geist font-semibold text-[18px] xl:text-[20px] 2xl:text-[24px] leading-[36px] text-sah-dark-2">{item.name}</h4>
                         <span className="text-[16px] leading-[24px] 2xl:leading-[36px] font-medium text-sah-gray-2">{item.role}</span>
                     </div>
@@ -67,13 +70,13 @@ function SeniorLeadership() {
     );
 }
 
-export default function LeadershipSection({ executive_leader, teams }: { executive_leader?: ExecutiveLeaderContent | null; teams?: TeamMember[] }) {
+export default function LeadershipSection({ executive_leader, teams, senior_leadership, senior_leadership_title }: { executive_leader?: ExecutiveLeaderContent | null; teams?: TeamMember[]; senior_leadership?: SeniorLeader[] | null, senior_leadership_title?:string }) {
     return (
         <section className="section-padding bg-sah-light-4 bg-[url('/mosaic-patternt-bg.png')] bg-contain bg-bottom bg-no-repeat">
             <div className="container pt-[80px] lg:pt-[150px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3 max-[1024px]:!px-4">
                 <ExecutiveLeader data={executive_leader} />
                 <TeamGrid data={teams} />
-                <SeniorLeadership />
+                <SeniorLeadership data={senior_leadership} senior_leadership_title={senior_leadership_title} />
             </div>
         </section>
     );
