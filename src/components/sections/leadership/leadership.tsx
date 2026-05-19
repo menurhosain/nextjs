@@ -1,13 +1,7 @@
 import Link from "next/link";
-import TeamCard from "@/components/ui/team-card";
 import { getStrapiMediaUrl } from "@/lib/utils";
-import { ExecutiveLeaderContent } from "@/services/page_content.service";
-
-const teams = [
-    { image: "/team/1.jpg", name: "Albert Flores", role: "Software Developer", email: "hello@example.com", phone: "+968 9XXX XXXX" },
-    { image: "/team/2.jpg", name: "Jane Cooper", role: "Team Leader", email: "hello@example.com", phone: "+968 9XXX XXXX" },
-    { image: "/team/3.jpg", name: "Darrell Steward", role: "Project manager", email: "hello@example.com", phone: "+968 9XXX XXXX" },
-];
+import { ExecutiveLeaderContent, TeamMember } from "@/services/page_content.service";
+import TeamGrid from "@/components/sections/leadership/team-grid";
 
 const seniorLeadership = [
     { name: "Arlene McCoy", role: "Chief Administrative Officer" },
@@ -56,26 +50,6 @@ function ExecutiveLeader({ data }: { data?: ExecutiveLeaderContent | null }) {
     );
 }
 
-function TeamGrid() {
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px] mt-[50px] mb-[80px] lg:mb-[150px]">
-            {teams.map((team, index) => (
-                <TeamCard
-                    key={index}
-                    className="bg-transparent border border-sah-light-3 pb-[30px]"
-                    titleClass="text-sah-dark-2"
-                    roleClass="text-sah-dark-2"
-                    image={team.image}
-                    name={team.name}
-                    role={team.role}
-                    showContact={true}
-                    email={team.email}
-                    phone={team.phone}
-                />
-            ))}
-        </div>
-    );
-}
 
 function SeniorLeadership() {
     return (
@@ -93,12 +67,12 @@ function SeniorLeadership() {
     );
 }
 
-export default function LeadershipSection({ executive_leader }: { executive_leader?: ExecutiveLeaderContent | null }) {
+export default function LeadershipSection({ executive_leader, teams }: { executive_leader?: ExecutiveLeaderContent | null; teams?: TeamMember[] }) {
     return (
         <section className="section-padding bg-sah-light-4 bg-[url('/mosaic-patternt-bg.png')] bg-contain bg-bottom bg-no-repeat">
             <div className="container pt-[80px] lg:pt-[150px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3 max-[1024px]:!px-4">
                 <ExecutiveLeader data={executive_leader} />
-                <TeamGrid />
+                <TeamGrid data={teams} />
                 <SeniorLeadership />
             </div>
         </section>

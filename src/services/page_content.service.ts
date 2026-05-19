@@ -258,6 +258,14 @@ export type ExecutiveLeaderContent = {
     email: string;
     image: StrapiMedia | null;
 };
+export type TeamMember = {
+    id: number;
+    name: string;
+    role: string;
+    email: string;
+    phone: string;
+    image: StrapiMedia | null;
+};
 export type LeadershipPageContent = {
     Banner: {
         id: number;
@@ -275,6 +283,16 @@ export async function get_leadership_page_content(locale = "en"): Promise<Leader
         return json.data ?? null;
     } catch {
         return null;
+    }
+}
+export async function get_teams(locale = "en"): Promise<TeamMember[]> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/teams?populate=*&locale=${locale}`);
+        if (!res.ok) return [];
+        const json = await res.json();
+        return json.data ?? [];
+    } catch {
+        return [];
     }
 }
 
