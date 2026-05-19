@@ -186,6 +186,17 @@ export type AboutStatCounter = {
     suffix: string;
     target_count: number;
 };
+export type WhyChooseCard = {
+    id: number;
+    icon: string;
+    title: string;
+    description: string;
+};
+export type WhyChooseImageCard = {
+    id: number;
+    image: StrapiMedia | null;
+    alt: string;
+};
 export type AboutPageContent = {
     Banner: AboutPageBanner;
     about_section: AboutPageSectionTitle;
@@ -195,11 +206,14 @@ export type AboutPageContent = {
     about_award_sub_title: string;
     about_award_year: string;
     about_award_logo: StrapiMedia[];
+    why_choose_section: AboutPageSectionTitle;
+    why_choose_cards: WhyChooseCard[];
+    why_choose_image_cards: WhyChooseImageCard[];
 };
 export async function get_about_page_content(locale = "en"): Promise<AboutPageContent | null> {
     try {
         const res = await fetch(
-            `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*`,
+            `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*&populate[why_choose_section][populate]=*&populate[why_choose_cards][populate]=*&populate[why_choose_image_cards][populate]=*`,
         );
         if (!res.ok) return null;
         const json = await res.json();

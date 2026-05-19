@@ -51,7 +51,11 @@ export default async function AboutUsPage() {
                 award_sub_title={about_page?.about_award_sub_title}
                 award_year={about_page?.about_award_year}
             />
-            <WhyChoose />
+            <WhyChoose
+                section={about_page?.why_choose_section}
+                cards={about_page?.why_choose_cards}
+                image_cards={about_page?.why_choose_image_cards}
+            />
             <Service services={service_cards} />
             <Career />
         </>
