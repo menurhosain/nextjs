@@ -110,15 +110,15 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
 
     return (
         <>
-            <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection}>
+            <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection} class_name="lg:min-h-[800px]">
                 <Left class_name="flex flex-col justify-center">
-                    <div className="flex flex-col justify-center mt-[188px]">
+                    <div className="flex flex-col justify-center mt-[110px] xl:mt-[188px]">
                         <Banner_Title
                             subtitle={content?.Banner.banner_label ?? "Explore Our Recent Projects"}
                             title={content?.Banner.banner_title ?? "Showcasing our latest construction projects and achievements"}
                         />
                     </div>
-                    <div className="flex gap-4 self-start w-[90%] py-[70px] relative  mt-auto">
+                    <div className="flex flex-col xl:flex-row gap-4 self-start w-[90%] py-[40px] lg:py-[70px] relative  mt-auto">
                         <div className="absolute bg-sah-white/20 top-0 h-[1px] w-[120vw] ml-[calc(50%-50vw)]"></div>
 
                         {/* Search */}
@@ -151,8 +151,8 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
                     </div>
                 </Left>
 
-                <Right>
-                    <div className="pl-[20px] flex gap-[30px] w-full pb-10">
+                <Right className=" md:w-[55%] xl:w-[38%]">
+                    <div className="lg:pl-[20px] flex gap-[30px] w-full pb-10">
                         <div className="flex items-center flex-col gap-[40px]">
                             <button
                                 type="button"
@@ -182,7 +182,7 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
                         <div className="overflow-hidden">
                             <div key={sliderAnimKey} className={sliderDirection === "right" ? "slider-slide-right" : "slider-slide-left"}>
                                 <span className="mb-[24px] block text-sah-white font-bold text-[16px] leading-[20px] uppercase tracking-wider">{projects[sliderIndex]?.scope[0]}</span>
-                                <Link href={projects[sliderIndex]?.link ?? "#"} className="font-geist font-normal text-[30px] leading-[38px] text-sah-white underline">
+                                <Link href={projects[sliderIndex]?.link ?? "#"} className="font-geist font-normal text-[24px] lg:text-[30px] leading-[38px] text-sah-white underline">
                                     {projects[sliderIndex]?.title}
                                 </Link>
                             </div>
