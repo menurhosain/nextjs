@@ -6,7 +6,7 @@ import { BrandShape } from "./svgs";
 
 const IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg"];
 
-function Banner({ bg, children, class_name, style, bgDirection = "right" }: { bg: string; children: React.ReactNode; style?: React.CSSProperties; class_name?: string; bgDirection?: "left" | "right" }) {
+function Banner({ bg, children, class_name, style, bgDirection = "right", container_class }: { bg: string; children: React.ReactNode; style?: React.CSSProperties; class_name?: string; bgDirection?: "left" | "right", container_class?:string }) {
     const isImage = IMAGE_EXTS.some((ext) => bg.toLowerCase().endsWith(ext));
 
     const [displayBg, setDisplayBg] = useState(bg);
@@ -40,7 +40,7 @@ function Banner({ bg, children, class_name, style, bgDirection = "right" }: { bg
                     <source src={bg} type="video/mp4" />
                 </video>
             )}
-            <div className="container relative z-3 flex flex-col justify-center md:flex-row gap-[2%] max-[1280px]:!px-0">{children}</div>
+            <div className={cn("container relative z-3 flex flex-col justify-center md:flex-row gap-[2%] max-[1280px]:!px-0 ", container_class)}>{children}</div>
         </section>
     );
 }
