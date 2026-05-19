@@ -24,9 +24,9 @@ export type StrapiMedia = {
     height: number;
 
     formats: {
-    small?: StrapiMediaFormat;
-    medium?: StrapiMediaFormat;
-    thumbnail?: StrapiMediaFormat;
+        small?: StrapiMediaFormat;
+        medium?: StrapiMediaFormat;
+        thumbnail?: StrapiMediaFormat;
     } | null;
 
     hash: string;
@@ -152,8 +152,8 @@ export type ProjectPageContent = {
     pagination_previous_label: string;
     project_card_year_label: string;
     project_card_location_label: string;
-    no_project_label:string;
-    no_project_description:string;
+    no_project_label: string;
+    no_project_description: string;
     Banner: ProjectPageBanner;
 };
 export async function get_project_page_content(locale = "en"): Promise<ProjectPageContent | null> {
@@ -198,7 +198,9 @@ export type AboutPageContent = {
 };
 export async function get_about_page_content(locale = "en"): Promise<AboutPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*`);
+        const res = await fetch(
+            `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*`,
+        );
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -207,22 +209,22 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
     }
 }
 
-// CTA Section
-export type CtaSectionContent = {
-    cta_background: StrapiMedia[];
-    cta_section_title: {
+// Career CTA Section
+export type CareerCtaSectionContent = {
+    career_cta_background: StrapiMedia[];
+    career_cta_section_title: {
         sub_title: string;
         title: string;
         description: string;
     };
-    cta_button: {
+    career_cta_button: {
         button_label: string;
         button_link: string;
     };
 };
-export async function get_cta_section_content(locale = "en"): Promise<CtaSectionContent | null> {
+export async function get_career_cta_section_content(locale = "en"): Promise<CareerCtaSectionContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/cta?populate=*&locale=${locale}`);
+        const res = await fetch(`${BASE_URL}/api/career-cta?populate=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -230,3 +232,4 @@ export async function get_cta_section_content(locale = "en"): Promise<CtaSection
         return null;
     }
 }
+
