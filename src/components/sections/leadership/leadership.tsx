@@ -82,7 +82,7 @@ export default function LeadershipSection() {
                 </div>
                 <div className="relative px-[20px] sm:px-[40px] 2xl:px-[82px] pt-[40px] 2xl:pt-[82px] pb-[40px] 2xl:pb-[90px] rounded-[16px] bg-white overflow-hidden">
                     <h2 className="font-geist font-medium text-[30px] sm:text-[38px] md:text-[46px] xl:text-[60px] 2xl:text-[80px] leading-[1.2] text-sah-dark-2 mb-[30px] 2xl:mb-[70px]">Senior Leadership</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-[25px] 2xl:gap-[40px]">
+                    <div className="grid grid-cols-1 min-[500px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-[25px] 2xl:gap-[40px]">
                         {seniorLeadership.map((item, index) => (
                             <div key={index}>
                                 <h4 className="font-geist font-semibold text-[18px] xl:text-[20px] 2xl:text-[24px] leading-[36px] text-sah-dark-2">{item.name}</h4>
