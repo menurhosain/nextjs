@@ -11,7 +11,7 @@ export default async function ServicesPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
     const [content, serviceCards, faqItems] = await Promise.all([
         get_services_page_content(locale),
-        get_service_cards(locale),
+        get_service_cards(locale, 2000),
         get_faq_items(locale),
     ]);
 
