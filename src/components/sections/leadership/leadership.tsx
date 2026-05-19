@@ -48,6 +48,7 @@ export default function LeadershipSection() {
     return (
         <section className="section-padding bg-sah-light-4 bg-[url('/mosaic-patternt-bg.png')] bg-contain bg-bottom bg-no-repeat">
             <div className="container pt-[140px] pb-[140px] border-x border-sah-light-3">
+			   {/*start */}
                 <div className="relative flex items-center p-[24px] pr-[135px] gap-[115px] rounded-[6px] bg-white overflow-hidden">
                     <img className="absolute right-0 bottom-0" src="/construction-vector.png" alt="Vector" />
                     <div className="rounded-[6px] overflow-hidden w-[522px] shrink-0 relative z-1">
@@ -64,6 +65,8 @@ export default function LeadershipSection() {
                         </div>
                     </div>
                 </div>
+			   {/*end */}
+
                 <div className="grid grid-cols-3 gap-[30px] mt-[50px] mb-[140px]">
                     {teams.map((team, index) => (
                         <TeamCard
@@ -80,6 +83,8 @@ export default function LeadershipSection() {
                         />
                     ))}
                 </div>
+
+
                 <div className="relative px-[82px] pt-[82px] pb-[90px] rounded-[16px] bg-white overflow-hidden">
                     <h2 className="font-geist font-medium text-[60px] leading-[78px] text-sah-dark-2 mb-[70px]">Senior Leadership</h2>
                     <div className="grid grid-cols-5 gap-[40px]">
@@ -91,6 +96,8 @@ export default function LeadershipSection() {
                         ))}
                     </div>
                 </div>
+
+
             </div>
         </section>
     );
