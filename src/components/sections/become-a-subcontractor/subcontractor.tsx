@@ -108,7 +108,7 @@ export default function Subcontractor() {
         {/* ── Important Policies ── */}
         <div className="pt-[65px] lg:pt-[135px]">
           <div className="text-center mb-10">
-            <h2 className="text-[40px] md:text-[40px] font-bold text-sah-dark-2 mb-4">Important Policies</h2>
+            <h2 className="text-[26px] sm:text-[40px] font-bold text-sah-dark-2 mb-4">Important Policies</h2>
             <p className="text-[16px] text-sah-gray-1 max-w-[730px] mx-auto leading-relaxed">
               Please take a moment to review these two important policies carefully. They outline the
               key guidelines, responsibilities, and expected conduct required for all our projects to
@@ -120,39 +120,39 @@ export default function Subcontractor() {
             {policies.map((policy) => (
               <div
                 key={policy.id}
-                className="flex flex-col md:flex-row gap-4"
+                className="flex flex-col lg:flex-row gap-4"
               >
                 {/* Left image block */}
-                <div className="md:w-140 w-full h-48 md:h-auto bg-gradient-to-br from-gray-700 to-gray-900 flex-shrink-0 relative overflow-hidden rounded-[8px]">
+                <div className="w-full lg:w-[345px] 2xl:w-[700px] h-60 lg:h-auto bg-gradient-to-br from-gray-700 to-gray-900 flex-shrink-0 relative overflow-hidden rounded-[8px]">
                   <div className="absolute inset-0 bg-[url('/subcontractor-img-2.jpg')] bg-cover bg-center bg-no-repeat" />
 
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 p-10 flex flex-col justify-between bg-white rounded-[8px]">
+                <div className="flex-1 p-4 sm:p-6 xl:p-10 flex flex-col justify-between bg-white rounded-[8px]">
                   <div>
-                    <p className="text-[20px] text-sah-dark-2 leading-[36px]">{policy.description}</p>
+                    <p className="text-[16px] md:text-[20px] text-sah-dark-2 leading-[36px]">{policy.description}</p>
                   </div>
-                  <div className="w-full h-[1px] bg-sah-light-3 mt-[40px]" />
-                  <div className="flex flex-wrap gap-[47px] mt-[50px]">
+                  <div className="w-full h-[1px] bg-sah-light-3 mt-[20px] xl:mt-[40px]" />
+                  <div className="flex items-start flex-col xl:flex-row flex-wrap gap-[20px] xl:gap-[47px] mt-[30px] xl:mt-[50px]">
                     <a
                       href="#"
-                      className={`group flex items-center gap-2 text-[16px] font-medium bg-sah-light-4 text-sah-dark-2 pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300 hover:bg-sah-red hover:text-white scale-105`}
+                      className={`group flex items-center gap-2 text-[12px] md:text-[16px] font-medium bg-sah-light-4 text-sah-dark-2 pl-[10px] sm:pl-[30px] pr-[10px] py-2 rounded-[10px] sm:rounded-full transition-all duration-300 hover:bg-sah-red hover:text-white scale-105`}
                     >
                       CODE OF CONDUCT
                       <span
-                        className={`flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-300 bg-sah-red text-sah-white group-hover:bg-sah-white group-hover:text-sah-dark-2`}
+                        className={`max-[640]:hidden flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-300 bg-sah-red text-sah-white group-hover:bg-sah-white group-hover:text-sah-dark-2`}
                       >
                         <AngleArrow class_name="!w-[9px] h-[9px]" />
                       </span>
                     </a>
                     <a
                       href="#"
-                      className={`group flex items-center gap-2 text-[16px] font-medium bg-sah-light-4 text-sah-dark-2 pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300 hover:bg-sah-red hover:text-white scale-105`}
+                      className={`group flex items-center gap-2 text-[12px] md:text-[16px] font-medium bg-sah-light-4 text-sah-dark-2 pl-[10px] sm:pl-[30px] pr-[10px] py-2 rounded-[10px] sm:rounded-full transition-all duration-300 hover:bg-sah-red hover:text-white scale-105`}
                     >
                       BIAS AND HARASSMENT POLICY
                       <span
-                        className={`flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-300 bg-sah-dark-2 text-sah-white group-hover:bg-sah-white group-hover:text-sah-dark-2`}
+                        className={`max-[640]:hidden flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-300 bg-sah-dark-2 text-sah-white group-hover:bg-sah-white group-hover:text-sah-dark-2`}
                       >
                         <AngleArrow class_name="!w-[9px] h-[9px]" />
                       </span>

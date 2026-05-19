@@ -25,7 +25,7 @@ export function DownCurveArrow({ class_name }: { class_name?: string }) {
 
 export function AngleArrow({ class_name }: { class_name?: string }) {
     return (
-        <svg viewBox="0 0 11 11" className={cn("!fill-white", class_name)}>
+        <svg viewBox="0 0 11 11" className={cn(class_name)}>
             <path d="M8.35083 2.845L1.17833 10.0175L0 8.83917L7.17167 1.66667H0.850834V0H10.0175V9.16667H8.35083V2.845Z" />
         </svg>
     );
