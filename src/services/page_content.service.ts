@@ -251,6 +251,51 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
     }
 }
 
+// Shared section title shape (shared.section-title component)
+export type SectionTitle = {
+    sub_title: string;
+    title: string;
+    description: string;
+};
+
+// Services Page
+export type ServicesPageContent = {
+    banner: {
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    service_section_title: SectionTitle;
+    faq_section_title: SectionTitle;
+};
+export async function get_services_page_content(locale = "en"): Promise<ServicesPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/services-page?populate[banner][populate]=*&populate[service_section_title]=*&populate[faq_section_title]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// FAQ
+export type FaqItem = {
+    id: number;
+    question: string;
+    answer: string;
+};
+export async function get_faq_items(locale = "en"): Promise<FaqItem[]> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/faq?populate[faq_item]=*&locale=${locale}`);
+        if (!res.ok) return [];
+        const json = await res.json();
+        return json.data?.faq_item ?? [];
+    } catch {
+        return [];
+    }
+}
+
 // Contact Page
 export type ContactPageContent = {
     banner: {
