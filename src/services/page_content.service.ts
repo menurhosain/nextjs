@@ -251,6 +251,43 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
     }
 }
 
+// Contact Page
+export type ContactPageContent = {
+    banner: {
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    form_title: string;
+    form_subtitle: string;
+    form_submit_label: string;
+    contact_image: StrapiMedia | null;
+    address_label: string;
+    address_value: string;
+    email_label: string;
+    email_value: string;
+    phone_label: string;
+    phone_value: string;
+    hours_label: string;
+    hours_value: string;
+    map_embed_url: string;
+    placeholder_first_name: string;
+    placeholder_last_name: string;
+    placeholder_email: string;
+    placeholder_phone: string;
+    placeholder_message: string;
+};
+export async function get_contact_page_content(locale = "en"): Promise<ContactPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/contact-page?populate[banner][populate]=*&populate[contact_image][populate]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // CTA Section
 export type CtaContent = {
     title: string;
