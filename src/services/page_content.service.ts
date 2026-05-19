@@ -167,22 +167,22 @@ export async function get_project_page_content(locale = "en"): Promise<ProjectPa
     }
 }
 
-// CTA Section
-export type CtaSectionContent = {
-    cta_background: StrapiMedia[];
-    cta_section_title: {
+// Career CTA Section
+export type CareerCtaSectionContent = {
+    career_cta_background: StrapiMedia[];
+    career_cta_section_title: {
         sub_title: string;
         title: string;
         description: string;
     };
-    cta_button: {
+    career_cta_button: {
         button_label: string;
         button_link: string;
     };
 };
-export async function get_cta_section_content(locale = "en"): Promise<CtaSectionContent | null> {
+export async function get_career_cta_section_content(locale = "en"): Promise<CareerCtaSectionContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/cta?populate=*&locale=${locale}`);
+        const res = await fetch(`${BASE_URL}/api/career-cta?populate=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
