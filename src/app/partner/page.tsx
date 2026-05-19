@@ -4,12 +4,12 @@ import Partner from "@/components/sections/partner/partner";
 import Testimonial from "@/components/sections/partner/testimonial";
 import Cta from "@/components/sections/partner/cta";
 import { headers } from "next/headers";
-import { get_partner_page_content } from "@/services/page_content.service";
+import { get_partner_page_content, get_cta_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 export default async function PartnerPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [content] = await Promise.all([get_partner_page_content(locale)]);
+    const [content, cta] = await Promise.all([get_partner_page_content(locale), get_cta_content(locale)]);
 
     return (
         <>
@@ -34,8 +34,21 @@ export default async function PartnerPage() {
                 titleNormal={content?.partner_section_title_normal}
                 titleAnimated={content?.partner_section_title_animated}
             />
-            <Testimonial />
-            <Cta />
+            <Testimonial
+                bg={getStrapiMediaUrl(content?.testimonial_bg)}
+                quote={content?.testimonial_quote}
+                author_name={content?.testimonial_author_name}
+                author_role={content?.testimonial_author_role}
+            />
+            <Cta
+                title={cta?.title}
+                description={cta?.description}
+                button_label={cta?.button_label}
+                button_link={cta?.button_link}
+                map_image={getStrapiMediaUrl(cta?.map_image)}
+                legend_one={cta?.legend_one}
+                legend_two={cta?.legend_two}
+            />
         </>
     );
 }

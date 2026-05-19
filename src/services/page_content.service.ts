@@ -178,10 +178,14 @@ export type PartnerPageContent = {
     partner_section_title_normal?: string;
     partner_section_title_animated?: string;
     partner_logos: [any];
+    testimonial_bg: StrapiMedia | null;
+    testimonial_quote: string;
+    testimonial_author_name: string;
+    testimonial_author_role: string;
 };
 export async function get_partner_page_content(locale = "en"): Promise<PartnerPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/partner-page?populate[banner][populate]=*&populate[partner_logos][populate]=*&locale=${locale}`);
+        const res = await fetch(`${BASE_URL}/api/partner-page?populate[banner][populate]=*&populate[partner_logos][populate]=*&populate[testimonial_bg][populate]=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -274,10 +278,71 @@ export type ServiceDetailsPageContent = {
     our_value_heading: string;
     our_value_bg: StrapiMedia | null;
     our_value_items: { id: number; title: string; description: string }[];
+
+}
+
+// Contact Page
+export type ContactPageContent = {
+    banner: {
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    form_title: string;
+    form_subtitle: string;
+    form_submit_label: string;
+    contact_image: StrapiMedia | null;
+    address_label: string;
+    address_value: string;
+    email_label: string;
+    email_value: string;
+    phone_label: string;
+    phone_value: string;
+    hours_label: string;
+    hours_value: string;
+    map_embed_url: string;
+    placeholder_first_name: string;
+    placeholder_last_name: string;
+    placeholder_email: string;
+    placeholder_phone: string;
+    placeholder_message: string;
 };
+
 export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
     try {
         const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[service_detail_benefits][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+};
+
+export async function get_contact_page_content(locale = "en"): Promise<ContactPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/contact-page?populate[banner][populate]=*&populate[contact_image][populate]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// CTA Section
+export type CtaContent = {
+    title: string;
+    description: string;
+    button_label: string;
+    button_link: string;
+    map_image: StrapiMedia | null;
+    legend_one: string;
+    legend_two: string;
+};
+export async function get_cta_content(locale = "en"): Promise<CtaContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/cta?populate=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -331,6 +396,7 @@ export async function get_leadership_page_content(locale = "en"): Promise<Leader
         return null;
     }
 }
+
 export async function get_teams(locale = "en", limit?: number): Promise<TeamMember[]> {
     try {
         const params = new URLSearchParams({ populate: "*", locale });
@@ -343,6 +409,7 @@ export async function get_teams(locale = "en", limit?: number): Promise<TeamMemb
         return [];
     }
 }
+
 
 // Career CTA Section
 export type CareerCtaSectionContent = {
