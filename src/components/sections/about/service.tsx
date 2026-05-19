@@ -16,8 +16,10 @@ interface serviceProps {
     containerClass?: string;
     bgShape?: boolean;
     services?: ServiceCardTypes[];
+    subtitle?: string;
+    title?: string;
 }
-export default function Service({ className, containerClass, bgShape = true, services }: serviceProps) {
+export default function Service({ className, containerClass, bgShape = true, services, subtitle, title }: serviceProps) {
     const sectionTitleRef = useRef<HTMLDivElement>(null);
     const cardRefsArray = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -69,8 +71,8 @@ export default function Service({ className, containerClass, bgShape = true, ser
             <div className={cn("container mx-auto  !px-0", containerClass)}>
                 <div className="mb-[20px] lg:mb-[50px] flex flex-col items-center " ref={sectionTitleRef}>
                     <Section_Title
-                        subtitle="our expertise"
-                        title={<> Our service offerings </>}
+                        subtitle={subtitle || "our expertise"}
+                        title={<>{title || "Our service offerings"}</>}
                         class_name={{ subtitle: "text-sah-black !mb-[15px] !tracking-normal text-[14px] sm:text-[16px]", title: "text-sah-black text-center !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[86px]", description: "text-sah-gray-1 text-center max-w-[870px]" }}
                     />
                 </div>

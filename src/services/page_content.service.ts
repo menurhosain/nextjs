@@ -24,9 +24,9 @@ export type StrapiMedia = {
     height: number;
 
     formats: {
-    small?: StrapiMediaFormat;
-    medium?: StrapiMediaFormat;
-    thumbnail?: StrapiMediaFormat;
+        small?: StrapiMediaFormat;
+        medium?: StrapiMediaFormat;
+        thumbnail?: StrapiMediaFormat;
     } | null;
 
     hash: string;
@@ -152,8 +152,8 @@ export type ProjectPageContent = {
     pagination_previous_label: string;
     project_card_year_label: string;
     project_card_location_label: string;
-    no_project_label:string;
-    no_project_description:string;
+    no_project_label: string;
+    no_project_description: string;
     Banner: ProjectPageBanner;
 };
 export async function get_project_page_content(locale = "en"): Promise<ProjectPageContent | null> {
@@ -190,9 +190,66 @@ export async function get_partner_page_content(locale = "en"): Promise<PartnerPa
     }
 }
 
+// About Page
+export type AboutPageBanner = {
+    id: number;
+    banner_label: string;
+    banner_title: string;
+    banner_bg: StrapiMedia | null;
+};
+export type AboutPageSectionTitle = {
+    id: number;
+    sub_title: string;
+    title: string;
+    description: string;
+};
+export type AboutStatCounter = {
+    id: number;
+    label: string;
+    suffix: string;
+    target_count: number;
+};
+export type WhyChooseCard = {
+    id: number;
+    icon: string;
+    title: string;
+    description: string;
+};
+export type WhyChooseImageCard = {
+    id: number;
+    image: StrapiMedia | null;
+    alt: string;
+};
+export type AboutPageContent = {
+    Banner: AboutPageBanner;
+    about_section: AboutPageSectionTitle;
+    about_stats_counters: AboutStatCounter[];
+    about_award_bg: StrapiMedia | null;
+    about_award_title: string;
+    about_award_sub_title: string;
+    about_award_year: string;
+    about_award_logo: StrapiMedia[];
+    why_choose_section: AboutPageSectionTitle;
+    why_choose_cards: WhyChooseCard[];
+    why_choose_image_cards: WhyChooseImageCard[];
+    service_section_title: AboutPageSectionTitle;
+};
+export async function get_about_page_content(locale = "en"): Promise<AboutPageContent | null> {
+    try {
+        const res = await fetch(
+            `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*&populate[why_choose_section][populate]=*&populate[why_choose_cards][populate]=*&populate[why_choose_image_cards][populate]=*&populate[service_section_title][populate]=*`,
+        );
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Career CTA Section
 export type CareerCtaSectionContent = {
-    career_cta_background: StrapiMedia[];
+    career_cta_background?: StrapiMedia | null;
     career_cta_section_title: {
         sub_title: string;
         title: string;
@@ -203,13 +260,26 @@ export type CareerCtaSectionContent = {
         button_link: string;
     };
 };
-export async function get_career_cta_section_content(locale = "en"): Promise<CareerCtaSectionContent | null> {
+const CAREER_CTA_FALLBACK: CareerCtaSectionContent = {
+    career_cta_background: null,
+    career_cta_section_title: {
+        sub_title: "Life at Sah",
+        title: "Career with SAH",
+        description: "Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based in the Sultanate of Oman. With a rich legacy spanning several decades, SAH has established itself as a trusted name in the construction industry, delivering exceptional projects",
+    },
+    career_cta_button: {
+        button_label: "You Like to Build?",
+        button_link: "#",
+    },
+};
+export async function get_career_cta_section_content(locale = "en"): Promise<CareerCtaSectionContent> {
     try {
         const res = await fetch(`${BASE_URL}/api/career-cta?populate=*&locale=${locale}`);
-        if (!res.ok) return null;
+        if (!res.ok) return CAREER_CTA_FALLBACK;
         const json = await res.json();
-        return json.data ?? null;
+        return json.data ?? CAREER_CTA_FALLBACK;
     } catch {
-        return null;
+        return CAREER_CTA_FALLBACK;
     }
 }
+

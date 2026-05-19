@@ -40,9 +40,9 @@ export default function TeamCard(
                 <h4 className={cn("text-white font-geist font-semibold text-[24px] leading-[30px]", titleClass)}>{name}</h4>
                 <span className={cn("text-white text-[16px] font-normal", roleClass)}>{role}</span>
                 {showContact &&
-                    <div className="flex items-center gap-[30px] mt-[20px]">
-                        <Link href={`mailto:${email}`} className="text-[17px] leading-[28px] font-normal sah-transition text-sah-gray-1 hover:text-sah-red">{email}</Link>
-                        <Link href={`tel:${phone}`} className="text-[17px] leading-[28px] font-normal sah-transition text-sah-gray-1 hover:text-sah-red">{phone}</Link>
+                    <div className="flex 2xl:items-center flex-col 2xl:flex-row gap-[10px] 2xl:gap-[30px] mt-[10px] md:mt-[20px]">
+                        <Link href={`mailto:${email}`} className="text-[15px] lg:text-[17px] leading-[28px] font-normal sah-transition text-sah-gray-1 hover:text-sah-red">{email}</Link>
+                        <Link href={`tel:${phone}`} className="text-[15px] lg:text-[17px] leading-[28px] font-normal sah-transition text-sah-gray-1 hover:text-sah-red">{phone}</Link>
                     </div>
                 }
             </div>

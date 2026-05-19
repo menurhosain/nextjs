@@ -6,7 +6,7 @@ import About from "@/components/sections/home/about";
 import Partner from "@/components/sections/home/partner";
 import News from "@/components/sections/home/news";
 import Career from "@/components/sections/home/career";
-import { get_home_page_content } from "@/services/page_content.service";
+import { get_home_page_content, get_career_cta_section_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { get_service_cards } from "@/services/service_card.service";
 import { get_news_items } from "@/services/news.service";
@@ -14,7 +14,7 @@ import { get_projects } from "@/services/project.service";
 
 export default async function Home() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [content, service_cards, news, projects] = await Promise.all([get_home_page_content(locale), get_service_cards(locale), get_news_items(locale, 2), get_projects(locale, 3)]);
+    const [content, service_cards, news, projects, career] = await Promise.all([get_home_page_content(locale), get_service_cards(locale), get_news_items(locale, 2), get_projects(locale, 3), get_career_cta_section_content(locale)]);
 
     return (
         <>
@@ -57,7 +57,7 @@ export default async function Home() {
                 btnLink={content?.project_section_button_link}
                 projects={projects}
             />
-            <Career />
+            <Career content={career} />
             <News
                 subTitle={content?.blog_section_sub_title}
                 title={content?.blog_section_title}
