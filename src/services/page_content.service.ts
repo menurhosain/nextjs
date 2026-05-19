@@ -247,6 +247,35 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
     }
 }
 
+// Service Details Page
+export type ServiceBenefit = {
+    id: number;
+    code: string;
+    label: string;
+};
+export type ServiceDetailsPageContent = {
+    Banner: {
+        id: number;
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    service_detail_title: string;
+    service_detail_description: string;
+    service_detail_benefits_label: string;
+    service_detail_benefits: ServiceBenefit[];
+};
+export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[service_detail_benefits][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Leadership Page
 export type ExecutiveLeaderContent = {
     id: number;
