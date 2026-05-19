@@ -127,13 +127,12 @@ const STATIC_NAV_LINKS = [
     },
 ];
 
-
 function transformMenus(menus: Menu[]) {
     if (menus.length === 0) return STATIC_NAV_LINKS;
     return menus.map((menu) => ({
         label: menu.nav_label,
         parent: menu.is_parent,
-        link: "",
+        link: menu.root_link,
         id: menu.featured_news?.length > 0 ? "news" : "",
         card: {
             title: menu.mega_menu_left_info?.label ?? "",
@@ -146,9 +145,7 @@ function transformMenus(menus: Menu[]) {
         promo: {
             title: menu.mega_menu_right_info?.label ?? "",
             excerpt: menu.mega_menu_right_info?.excerpt ?? "",
-            image: menu.mega_menu_right_info?.bg_image
-                ? `${BASE_URL}${menu.mega_menu_right_info.bg_image.url}`
-                : "",
+            image: menu.mega_menu_right_info?.bg_image ? `${BASE_URL}${menu.mega_menu_right_info.bg_image.url}` : "",
             cta: {
                 label: menu.mega_menu_right_info?.action_link_label ?? "",
                 href: menu.mega_menu_right_info?.action_link_href ?? "",
@@ -213,7 +210,6 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
                                                         titleParam={{ title: item.title, className: "!text-[22px] leading-[28px] md:mb-1 pr-0 font-medium !pr-0" }}
                                                     />
                                                 ))}
-
                                         </div>
                                     </div>
                                 ) : (
@@ -361,7 +357,11 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                             <div className="nav-scroll-up flex flex-col items-center">
                                 {[...Array(2)].map((_, copy) =>
                                     [...Array(8)].map((_, i) => (
-                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]" style={{ writingMode: "vertical-rl", opacity: 0.2 }}>
+                                        <span
+                                            key={`${copy}-${i}`}
+                                            className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]"
+                                            style={{ writingMode: "vertical-rl", opacity: 0.2 }}
+                                        >
                                             SAH
                                         </span>
                                     )),
@@ -383,7 +383,11 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                             {/* Search bar */}
                             <div className="flex items-center gap-3 px-2 sm:px-6 py-3 group">
                                 <SearchIcon class_name="!size-[24px] shrink-0 text-sah-dark !fill-sah-black group-hover:rotate-90 transition-rotate duration-500" />
-                                <input type="text" placeholder="Search your query" className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
+                                <input
+                                    type="text"
+                                    placeholder="Search your query"
+                                    className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50"
+                                />
                             </div>
 
                             {/* Close button */}
@@ -458,62 +462,64 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
 
                         <div className="flex-1 overflow-y-auto px-6 pt-8 pb-20">
                             <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Connect with us</p>
-							<form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
-								<div className="flex gap-4 flex-col">
-									<input
-										type="text"
-										name="firstName"
-										placeholder="First Name*"
-										value={formData.firstName}
-										onChange={handleChange}
-										required
-										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-									/>
-									<input
-										type="text"
-										name="lastName"
-										placeholder="Last Name*"
-										value={formData.lastName}
-										onChange={handleChange}
-										required
-										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-									/>
-								</div>
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
+                                <div className="flex gap-4 flex-col">
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        placeholder="First Name*"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        placeholder="Last Name*"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                </div>
 
-								<div className="flex gap-4 flex-col">
-									<input
-										type="email"
-										name="email"
-										placeholder="Email Address"
-										value={formData.email}
-										onChange={handleChange}
-										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-									/>
-									<input
-										type="tel"
-										name="phone"
-										placeholder="Phone"
-										value={formData.phone}
-										onChange={handleChange}
-										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-									/>
-								</div>
+                                <div className="flex gap-4 flex-col">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email Address"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        placeholder="Phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                </div>
 
-								<textarea
-									name="message"
-									placeholder="Write Message*"
-									value={formData.message}
-									onChange={handleChange}
-									rows={5}
-									required
-									className="border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
-								/>
+                                <textarea
+                                    name="message"
+                                    placeholder="Write Message*"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    rows={5}
+                                    required
+                                    className="border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
+                                />
 
-								<button type="submit" className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer" >
-									Message Now
-								</button>
-							</form>
-
+                                <button
+                                    type="submit"
+                                    className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer"
+                                >
+                                    Message Now
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

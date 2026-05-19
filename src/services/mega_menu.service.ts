@@ -27,6 +27,7 @@ export type FeaturedNews = {
 export type Menu = {
     id: number;
     nav_label: string;
+    root_link: string;
     is_parent: boolean;
     mega_menu_links: MegaMenuLink[];
     mega_menu_left_info: MegaMenuInfo | null;
