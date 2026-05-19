@@ -226,7 +226,7 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
 
 // Career CTA Section
 export type CareerCtaSectionContent = {
-    career_cta_background: StrapiMedia[];
+    career_cta_background?: StrapiMedia | null;
     career_cta_section_title: {
         sub_title: string;
         title: string;
@@ -237,14 +237,26 @@ export type CareerCtaSectionContent = {
         button_link: string;
     };
 };
-export async function get_career_cta_section_content(locale = "en"): Promise<CareerCtaSectionContent | null> {
+const CAREER_CTA_FALLBACK: CareerCtaSectionContent = {
+    career_cta_background: null,
+    career_cta_section_title: {
+        sub_title: "Life at Sah",
+        title: "Career with SAH",
+        description: "Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based in the Sultanate of Oman. With a rich legacy spanning several decades, SAH has established itself as a trusted name in the construction industry, delivering exceptional projects",
+    },
+    career_cta_button: {
+        button_label: "You Like to Build?",
+        button_link: "#",
+    },
+};
+export async function get_career_cta_section_content(locale = "en"): Promise<CareerCtaSectionContent> {
     try {
         const res = await fetch(`${BASE_URL}/api/career-cta?populate=*&locale=${locale}`);
-        if (!res.ok) return null;
+        if (!res.ok) return CAREER_CTA_FALLBACK;
         const json = await res.json();
-        return json.data ?? null;
+        return json.data ?? CAREER_CTA_FALLBACK;
     } catch {
-        return null;
+        return CAREER_CTA_FALLBACK;
     }
 }
 

@@ -6,7 +6,7 @@ import WhyChoose from "@/components/sections/about/whychoose";
 import Service from "@/components/sections/about/service";
 import Career from "@/components/sections/home/career";
 import { get_service_cards } from "@/services/service_card.service";
-import { get_about_page_content } from "@/services/page_content.service";
+import { get_about_page_content, get_career_cta_section_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 const FALLBACK_BG = "/home-hero.mp4";
@@ -19,7 +19,7 @@ const FALLBACK_TITLE = (
 
 export default async function AboutUsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [service_cards, about_page] = await Promise.all([get_service_cards(locale), get_about_page_content(locale)]);
+    const [service_cards, about_page, career] = await Promise.all([get_service_cards(locale), get_about_page_content(locale), get_career_cta_section_content(locale)]);
 
     const banner = about_page?.Banner;
     const bg = getStrapiMediaUrl(banner?.banner_bg) || FALLBACK_BG;
@@ -61,7 +61,7 @@ export default async function AboutUsPage() {
                 subtitle={about_page?.service_section_title?.sub_title}
                 title={about_page?.service_section_title?.title}
             />
-            <Career />
+            <Career content={career} />
         </>
     );
 }
