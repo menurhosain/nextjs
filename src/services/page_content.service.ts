@@ -44,6 +44,13 @@ export type StrapiMedia = {
     publishedAt: string;
 };
 
+export type SectionTitle = {
+    id: number;
+    sub_title: string;
+    title: string;
+    description: string;
+};
+
 // Home page
 export type HomePageContent = {
     banner_background: StrapiMedia[];
@@ -251,11 +258,42 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
     }
 }
 
-// Shared section title shape (shared.section-title component)
-export type SectionTitle = {
-    sub_title: string;
-    title: string;
-    description: string;
+
+// Service Details Page
+export type ServiceBenefit = {
+    id: number;
+    code: string;
+    label: string;
+};
+export type ServiceDetailsPageContent = {
+    Banner: {
+        id: number;
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    service_detail_title: string;
+    service_detail_description: string;
+    service_detail_benefits_label: string;
+    service_detail_benefits: ServiceBenefit[];
+    team_section_title: SectionTitle | null;
+    our_value_heading: string;
+    our_value_bg: StrapiMedia | null;
+    our_value_items: { id: number; title: string; description: string }[];
+    approach_section_title: SectionTitle | null;
+    approach_section_image: StrapiMedia | null;
+    service_section_title: SectionTitle | null;
+};
+
+export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[service_detail_benefits][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[approach_section_title][populate]=*&populate[approach_section_image][populate]=*&populate[service_section_title][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
 };
 
 // Services Page
@@ -322,6 +360,7 @@ export type ContactPageContent = {
     placeholder_phone: string;
     placeholder_message: string;
 };
+
 export async function get_contact_page_content(locale = "en"): Promise<ContactPageContent | null> {
     try {
         const res = await fetch(`${BASE_URL}/api/contact-page?populate[banner][populate]=*&populate[contact_image][populate]=*&locale=${locale}`);

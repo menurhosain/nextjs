@@ -9,9 +9,7 @@ const FALLBACK_TEAMS = [
 ];
 
 export default function TeamGrid({ data }: { data?: TeamMember[] }) {
-    const teams = data && data.length > 0
-        ? data.map((m) => ({ ...m, image: getStrapiMediaUrl(m.image) || "" }))
-        : FALLBACK_TEAMS;
+    const teams = data && data.length > 0 ? data.map((m) => ({ ...m, image: getStrapiMediaUrl(m.image) || "" })) : FALLBACK_TEAMS;
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px] mt-[50px] mb-[80px] lg:mb-[150px]">
