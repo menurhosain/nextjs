@@ -28,7 +28,7 @@ export default function WhyChoose() {
                         />
                     </div>
 
-                    <div className="lg:col-span-1 lg:row-span-1 max-[1024px]:order-1">
+                    <div className="lg:col-span-1 lg:row-span-1 max-[1024px]:order-0">
                         <ChooseCard
                             icon={<WhyChoose1/>}
                             title="Affordable Realty Options"
@@ -55,7 +55,7 @@ export default function WhyChoose() {
                     </div>
 
                     {/* Row 2 */}
-                    <div className="lg:col-span-1 max-[1024px]:order-1">
+                    <div className="lg:col-span-1 max-[1024px]:order-0">
                         <ChooseCard
                             icon={<WhyChoose3/>}
                             title="Hassle-Free Process"

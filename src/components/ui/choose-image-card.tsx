@@ -1,6 +1,6 @@
 export default  function ChoooseImageCard({ src, alt, tall }: { src: string; alt: string; tall?: boolean }) {
     return (
-        <div className={`relative overflow-hidden rounded-2xl group ${tall ? "h-full" : "h-full"}`}>
+        <div className={`relative overflow-hidden rounded-2xl group ${tall ? "md:h-full  sm:h-[450px] h-[500px]" : "h-full"}`}>
             <img
                 src={src}
                 alt={alt}

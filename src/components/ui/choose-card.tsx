@@ -33,7 +33,7 @@ export default  function ChooseCard({ icon, title, desc, accent, dark,
                 >
                     {icon}
                 </div>
-                <h3 className="text-white font-medium text-[22px] 2xl:text-[30px] leading-[1.4] 2xl:leading-[38px] mb-0 2xl:mr-11">{title}</h3>
+                <h3 className="text-white font-medium text-[22px] 2xl:text-[30px] leading-[1.4] 2xl:leading-[38px] mb-0 sm:mr-6 md:mr-0  2xl:mr-11">{title}</h3>
             </div>
             <div>
                 <div
