@@ -253,6 +253,12 @@ export type ServiceBenefit = {
     code: string;
     label: string;
 };
+export type SectionTitle = {
+    id: number;
+    sub_title: string;
+    title: string;
+    description: string;
+};
 export type ServiceDetailsPageContent = {
     Banner: {
         id: number;
@@ -264,10 +270,11 @@ export type ServiceDetailsPageContent = {
     service_detail_description: string;
     service_detail_benefits_label: string;
     service_detail_benefits: ServiceBenefit[];
+    team_section_title: SectionTitle | null;
 };
 export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[service_detail_benefits][populate]=*`);
+        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[service_detail_benefits][populate]=*&populate[team_section_title][populate]=*`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
