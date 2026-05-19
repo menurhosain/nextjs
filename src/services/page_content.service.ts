@@ -167,6 +167,46 @@ export async function get_project_page_content(locale = "en"): Promise<ProjectPa
     }
 }
 
+// About Page
+export type AboutPageBanner = {
+    id: number;
+    banner_label: string;
+    banner_title: string;
+    banner_bg: StrapiMedia | null;
+};
+export type AboutPageSectionTitle = {
+    id: number;
+    sub_title: string;
+    title: string;
+    description: string;
+};
+export type AboutStatCounter = {
+    id: number;
+    label: string;
+    suffix: string;
+    target_count: number;
+};
+export type AboutPageContent = {
+    Banner: AboutPageBanner;
+    about_section: AboutPageSectionTitle;
+    about_stats_counters: AboutStatCounter[];
+    about_award_bg: StrapiMedia | null;
+    about_award_title: string;
+    about_award_sub_title: string;
+    about_award_year: string;
+    about_award_logo: StrapiMedia[];
+};
+export async function get_about_page_content(locale = "en"): Promise<AboutPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // CTA Section
 export type CtaSectionContent = {
     cta_background: StrapiMedia[];
