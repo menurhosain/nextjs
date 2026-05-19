@@ -16,12 +16,12 @@ export type ServiceCard = {
     image: StrapiMedia | null;
 };
 
-export async function get_service_cards(locale = "en"): Promise<ServiceCard[]> {
+export async function get_service_cards(locale = "en", count = 3): Promise<ServiceCard[]> {
     try {
         const res = await fetch(`${BASE_URL}/api/service-card?populate[service_card][populate]=*&locale=${locale}`);
         if (!res.ok) return [];
         const json = await res.json();
-        return json.data?.service_card ?? [];
+        return json.data?.service_card ? json.data.service_card.slice(0, count) : [];
     } catch {
         return [];
     }
