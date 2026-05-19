@@ -15,15 +15,15 @@ export default function JobCareers() {
 
     return (
         <div id="jobboard" className="section-padding bg-[url('/careers-bg-pattern.png')] max-[1280px]:bg-cover  bg-bottom bg-no-repeat">
-            <div className="container !px-[50px] max-[1024px]:!px-4 pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
+            <div className="container !px-[50px] max-[1024px]:!px-4 pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
                 <div className="max-w-full">
                     <div className="flex flex-col xl:flex-row justify-between items-start mb-[50px] gap-4 xl:gap-8">
                         <div className="w-full xl:w-1/2">
-                            <h1 className="text-[48px] 2xl:text-[60px] leading-1.3 font-medium text-sah-dark-2 leading-[68px]">
+                            <h2 className="text-[26px] sm:text-[38px] md:text-[48px] 2xl:text-[60px] leading-[36px] sm:leading-[44px] xl:leading-[64px] font-medium text-sah-dark-2">
                                 Build your future
                                 <br />
                                 through collaboration
-                            </h1>
+                            </h2>
                         </div>
                         <div className="w-full xl:w-[605px]">
                             <p className="text-[16px] text-sah-gray-2 font-medium leading-[28px]">
@@ -38,7 +38,7 @@ export default function JobCareers() {
                         {/* Left: Team Photo */}
                         <div className="w-full xl:w-[35%] 2xl:[46%]">
                             <div className="rounded-[6px] overflow-hidden">
-                                <img src="/jobcareers-thumb.jpg" alt="Team collaboration" className="w-full h-[416px] object-cover object-center" />
+                                <img src="/jobcareers-thumb.jpg" alt="Team collaboration" className="w-full h-[200px] sm:h-[416px] object-cover object-center" />
                             </div>
                         </div>
 
@@ -49,8 +49,8 @@ export default function JobCareers() {
                                     key={job.id}
                                     onMouseEnter={() => setHoveredId(job.id)}
                                     onMouseLeave={() => setHoveredId(null)}
-                                    className={`group flex items-center justify-between py-[27px] px-0 transition-all duration-300 cursor-pointer
-                    ${hoveredId === job.id ? "bg-white -mx-3 px-6" : ""}
+                                    className={`group flex max-[640px]:flex-col max-[640px]:text-center max-[640px]:gap-3 items-center justify-between py-[27px] px-0 transition-all duration-300 cursor-pointer
+                    ${hoveredId === job.id ? "bg-white max-[768px]:bg-transparent max-[768px]:-mx-0 -mx-3 max-[768px]:px-0 px-6" : ""}
                   `}
                                 >
                                     {/* Job Type */}
@@ -61,7 +61,7 @@ export default function JobCareers() {
                                     {/* Job Title */}
                                     <a
                                         href={job.link}
-                                        className={`flex-1 text-[18px] 2xl:text-[20px] font-semibold text-gray-900 ml-[30px] transition-colors duration-300
+                                        className={`flex-1 text-[18px] 2xl:text-[20px] font-semibold text-gray-900 sm:ml-[30px] transition-colors duration-300
                       ${hoveredId === job.id ? "text-black" : ""}
                     `}
                                     >
@@ -69,10 +69,10 @@ export default function JobCareers() {
                                     </a>
 
                                     {/* CTA Button */}
-                                    <div className="flex items-center gap-[10px] ml-4 shrink-0">
+                                    <div className="flex items-center gap-[10px] sm:ml-4 shrink-0">
                                         <a
                                             href={job.link}
-                                            className={`flex items-center gap-2 text-[16px] font-medium text-sah-dark-2 pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300
+                                            className={`flex items-center gap-2 text-[14px] sm:text-[16px] font-medium text-sah-dark-2 pl-2 sm:pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300
                         ${hoveredId === job.id ? "bg-sah-dark-2 text-white scale-105" : "bg-white text-gray-700"}
                       `}
                                         >

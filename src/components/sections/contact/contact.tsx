@@ -60,13 +60,13 @@ export default function Contact({
     };
 
     return (
-        <section className="bg-sah-light-4">
-            <div className="container flex !px-[50px] pt-[50px] lg:pt-[150px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
+        <section className="section-padding bg-sah-light-4">
+            <div className="container flex flex-col lg:flex-row !px-[50px] max-[1024px]:!px-4 pt-[80px] lg:pt-[150px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
                 {/* Left: Form Panel */}
-                <div className="w-full bg-white md:max-w-[750px] p-10 flex flex-col justify-between rounded-l-[6px] rounded-b-[6px] overflow-hidden">
+                <div className="w-full bg-white lg:max-w-[750px] max-[640px]:px-4 p-10 flex flex-col justify-between rounded-l-[6px] max-[1024]:rounded-t-[6px] rounded-b-[6px] overflow-hidden">
                     {/* Header */}
-                    <div className="bg-sah-red -mx-10 -mt-10 px-10 pt-[69px] pb-[70px] mb-8">
-                        <h2 className="text-[52px] font-medium text-white leading-[62px]">
+                    <div className="bg-sah-red max-[640px]:-mx-4 -mx-10 -mt-10 px-4 xl:px-10 pt-[30px] xl:pt-[69px] pb-[30px] xl:pb-[70px] mb-8">
+                        <h2 className="text-[26px] sm:text-[36px] 2xl:text-[52px] font-medium text-white leading-[36px] sm:leading-[46px] 2xl:leading-[62px]">
                             {form_title || "Let's Collaborate With Us!"}
                         </h2>
                         <p className="text-red-100 text-[17px] mt-4">
@@ -76,7 +76,7 @@ export default function Contact({
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
-                        <div className="flex gap-4">
+                        <div className="flex max-[640px]:flex-col gap-4">
                             <input
                                 type="text"
                                 name="firstName"
@@ -84,7 +84,7 @@ export default function Contact({
                                 value={formData.firstName}
                                 onChange={handleChange}
                                 required
-                                className="w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
                             />
                             <input
                                 type="text"
@@ -93,18 +93,18 @@ export default function Contact({
                                 value={formData.lastName}
                                 onChange={handleChange}
                                 required
-                                className="w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
                             />
                         </div>
 
-                        <div className="flex gap-4">
+                        <div className="flex  max-[640px]:flex-col gap-4">
                             <input
                                 type="email"
                                 name="email"
                                 placeholder={placeholder_email || "Email Address"}
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
                             />
                             <input
                                 type="tel"
@@ -112,7 +112,7 @@ export default function Contact({
                                 placeholder={placeholder_phone || "Phone"}
                                 value={formData.phone}
                                 onChange={handleChange}
-                                className="w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
                             />
                         </div>
 
@@ -136,20 +136,21 @@ export default function Contact({
                 </div>
 
                 {/* Right: Image + Info Panel */}
-                <div className="w-full relative rounded-r-[6px] rounded-t-[6px] overflow-hidden">
+
+                <div className="w-full relative rounded-r-[6px] rounded-t-[6px]  overflow-hidden max-[1024]:h-[680px] max-[1024]:mt-8">
                     {/* Background image */}
                     <div
-                        className="absolute inset-0 bg-cover bg-center"
+                        className="absolute inset-0 bg-cover bg-center max-[640px]:rounded-[6px]"
                         style={{
                             backgroundImage: `url('${contact_image || "/contact-thumb.jpg"}')`,
                         }}
                     />
 
                     {/* Info Card */}
-                    <div className="absolute bottom-5 right-5 grid grid-cols-1 rounded-[6px] overflow-hidden">
-                        <div className="backdrop-blur-[21px] bg-[radial-gradient(152.51%_133.12%_at_50%_39.93%,_#656161_0%,_rgba(0,0,0,0)_100%)] flex w-[545px] px-[45px] pt-[30px] pb-[30px] gap-[40px] rounded-tr-[6px] rounded-tl-[6px]">
+                    <div className="absolute bottom-2 sm:bottom-5 max-[640px]:left-2 right-2 sm:right-5 grid grid-cols-1 rounded-[6px] overflow-hidden">
+                        <div className="backdrop-blur-[21px]  bg-[radial-gradient(152.51%_133.12%_at_50%_39.93%,_#656161_0%,_rgba(0,0,0,0)_100%)] flex flex-col xl:flex-row w-full sm:w-[340px] xl:w-[460px] 2xl:w-[545px] px-[20px] 2xl:px-[45px] pt-[30px] pb-[30px] gap-[20px] 2xl:gap-[40px] rounded-tr-[6px] rounded-tl-[6px]">
                             {/* Office Address */}
-                            <div className="flex flex-col gap-3 w-1/2">
+                            <div className="flex flex-col gap-[10px] 2xl:gap-3 xl:w-1/2">
                                 <div className="text-sah-white mt-0.5 shrink-0">
                                     <ContactIcon1 class_name="!w-[36px] !h-[36px]" />
                                 </div>
@@ -164,7 +165,7 @@ export default function Contact({
                             </div>
 
                             {/* Email Address */}
-                            <div className="flex flex-col gap-3 w-1/2">
+                            <div className="flex flex-col gap-[10px] 2xl:gap-3 xl:w-1/2">
                                 <div className="text-sah-white mt-0.5 shrink-0">
                                     <ContactIcon2 class_name="!w-[36px] !h-[36px]" />
                                 </div>
@@ -178,9 +179,9 @@ export default function Contact({
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-sah-white flex w-[545px] px-[45px] pt-[30px] pb-[30px] gap-[40px]">
+                        <div className="bg-sah-white flex flex-col xl:flex-row w-full sm:w-[340px] xl:w-[460px] 2xl:w-[545px] px-[20px] 2xl:px-[45px] pt-[30px] pb-[30px] gap-[20px] 2xl:gap-[40px]">
                             {/* Phone Number */}
-                            <div className="flex flex-col gap-3 w-1/2">
+                            <div className="flex flex-col gap-3 xl:w-1/2">
                                 <div className="text-sah-black mt-0.5 shrink-0">
                                     <ContactIcon3 class_name="!w-[36px] !h-[36px]" />
                                 </div>
@@ -195,9 +196,9 @@ export default function Contact({
                             </div>
 
                             {/* Working Hours */}
-                            <div className="flex flex-col gap-3 w-1/2">
-                                <div className="text-sah-black mt-0.5 shrink-0">
-                                    <ContactIcon4 class_name="!w-[36px] !h-[36px]" />
+                            <div className="flex flex-col gap-3 xl:w-1/2">
+                                <div className="text-sah-black  mt-0.5 shrink-0">
+                                    <ContactIcon4 class_name="!w-[36px] !h-[36px]"/>
                                 </div>
                                 <div>
                                     <p className="text-[16px] font-medium text-sah-dark-2 mb-0.5">
