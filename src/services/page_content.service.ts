@@ -167,6 +167,29 @@ export async function get_project_page_content(locale = "en"): Promise<ProjectPa
     }
 }
 
+// Partner page Section
+export type PartnerPageContent = {
+    banner: {
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    partner_section_sub_title?: string;
+    partner_section_title_normal?: string;
+    partner_section_title_animated?: string;
+    partner_logos: [any];
+};
+export async function get_partner_page_content(locale = "en"): Promise<PartnerPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/partner-page?populate[banner][populate]=*&populate[partner_logos][populate]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Career CTA Section
 export type CareerCtaSectionContent = {
     career_cta_background: StrapiMedia[];
