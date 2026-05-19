@@ -60,7 +60,10 @@ export default async function ServicesDetailsPage() {
                 legend_two={cta?.legend_two}
             />
 
-            <Approach />
+            <Approach
+                section_title={page?.approach_section_title}
+                image={getStrapiMediaUrl(page?.approach_section_image)}
+            />
 
             <FeatureSection />
 

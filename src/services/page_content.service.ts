@@ -278,12 +278,14 @@ export type ServiceDetailsPageContent = {
     our_value_heading: string;
     our_value_bg: StrapiMedia | null;
     our_value_items: { id: number; title: string; description: string }[];
+    approach_section_title: SectionTitle | null;
+    approach_section_image: StrapiMedia | null;
     service_section_title: SectionTitle | null;
 }
 
 export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[service_detail_benefits][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[service_section_title][populate]=*`);
+        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[service_detail_benefits][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[approach_section_title][populate]=*&populate[approach_section_image][populate]=*&populate[service_section_title][populate]=*`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
