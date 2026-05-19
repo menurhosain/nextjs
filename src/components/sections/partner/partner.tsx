@@ -51,11 +51,11 @@ export default function Partner({logos, subtitle, titleNormal, titleAnimated}: p
                             </span>
                         </div>
                         <ScrollReveal toColor="var(--color-sah-dark-2)">
-                            <h2 className="section-heading max-[1280px]:text-[36px] max-[1024px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[20px] max-[1024px]:leading-[40px] max-[768px]:leading-[32px] max-[640px]:leading-[28px] mx-auto text-center leading-[48px] mb-[10px] lg:mb-[35px]">
+                            <h2 className="section-heading max-[1280px]:text-[36px] max-[1024px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[20px] max-[1024px]:leading-[40px] max-[768px]:leading-[32px] max-[640px]:leading-[28px] mx-auto text-center leading-[48px] mb-[10px] lg:mb-[35px] max-w-[800px]">
                                 <span className="text-sah-dark-2">
                                     {titleNormal || "Working with industry leading partners to ensure excellence in"} {" "}
                                 </span>
-                                <span className="text-sah-dark-2/50 scroll-color font-bold">every construction <br/> project we deliver</span>
+                                <span className="text-sah-dark-2/50 scroll-color font-bold">{titleAnimated || "every construction project we deliver"}</span>
                             </h2>
                         </ScrollReveal>
                     </div>

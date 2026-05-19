@@ -178,10 +178,14 @@ export type PartnerPageContent = {
     partner_section_title_normal?: string;
     partner_section_title_animated?: string;
     partner_logos: [any];
+    testimonial_bg: StrapiMedia | null;
+    testimonial_quote: string;
+    testimonial_author_name: string;
+    testimonial_author_role: string;
 };
 export async function get_partner_page_content(locale = "en"): Promise<PartnerPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/partner-page?populate[banner][populate]=*&populate[partner_logos][populate]=*&locale=${locale}`);
+        const res = await fetch(`${BASE_URL}/api/partner-page?populate[banner][populate]=*&populate[partner_logos][populate]=*&populate[testimonial_bg][populate]=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -239,6 +243,27 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
         const res = await fetch(
             `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*&populate[why_choose_section][populate]=*&populate[why_choose_cards][populate]=*&populate[why_choose_image_cards][populate]=*&populate[service_section_title][populate]=*`,
         );
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// CTA Section
+export type CtaContent = {
+    title: string;
+    description: string;
+    button_label: string;
+    button_link: string;
+    map_image: StrapiMedia | null;
+    legend_one: string;
+    legend_two: string;
+};
+export async function get_cta_content(locale = "en"): Promise<CtaContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/cta?populate=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
