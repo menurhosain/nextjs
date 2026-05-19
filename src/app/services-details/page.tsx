@@ -9,13 +9,15 @@ import FaqSection from "@/components/sections/service/faq";
 import Service from "@/components/sections/about/service";
 import FeatureSection from "@/components/sections/service-details/features";
 import Approach from "@/components/sections/service-details/approach";
-import { get_service_details_page_content, get_teams, get_cta_content } from "@/services/page_content.service";
+
+import { get_service_details_page_content, get_teams, get_cta_content, get_faq_items } from "@/services/page_content.service";
 import { get_service_cards } from "@/services/service_card.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 export default async function ServicesDetailsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [page, teams, cta, service_cards] = await Promise.all([get_service_details_page_content(locale), get_teams(locale, 4), get_cta_content(locale), get_service_cards(locale)]);
+
+    const [page, teams, cta, service_cards, faqItems] = await Promise.all([get_service_details_page_content(locale), get_teams(locale, 4), get_cta_content(locale), get_service_cards(locale), get_faq_items(locale)] );
 
     const bg = getStrapiMediaUrl(page?.Banner?.banner_bg) || "/home-hero.mp4";
     const subtitle = page?.Banner?.banner_label || "Detailed Service Overview Here";
@@ -51,7 +53,7 @@ export default async function ServicesDetailsPage() {
             />
 
             <Cta
-                title={cta?.title}
+                title={cta?.title ?? "Available Nationwide"}
                 description={cta?.description}
                 button_label={cta?.button_label}
                 button_link={cta?.button_link}
@@ -76,7 +78,7 @@ export default async function ServicesDetailsPage() {
                 bgShape={false}
             />
 
-            <FaqSection />
+            <FaqSection items={faqItems} />
         </>
     );
 }

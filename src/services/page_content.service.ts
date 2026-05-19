@@ -44,6 +44,13 @@ export type StrapiMedia = {
     publishedAt: string;
 };
 
+export type SectionTitle = {
+    id: number;
+    sub_title: string;
+    title: string;
+    description: string;
+};
+
 // Home page
 export type HomePageContent = {
     banner_background: StrapiMedia[];
@@ -251,17 +258,12 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
     }
 }
 
+
 // Service Details Page
 export type ServiceBenefit = {
     id: number;
     code: string;
     label: string;
-};
-export type SectionTitle = {
-    id: number;
-    sub_title: string;
-    title: string;
-    description: string;
 };
 export type ServiceDetailsPageContent = {
     Banner: {
@@ -281,7 +283,7 @@ export type ServiceDetailsPageContent = {
     approach_section_title: SectionTitle | null;
     approach_section_image: StrapiMedia | null;
     service_section_title: SectionTitle | null;
-}
+};
 
 export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
     try {
@@ -293,6 +295,44 @@ export async function get_service_details_page_content(locale = "en"): Promise<S
         return null;
     }
 };
+
+// Services Page
+export type ServicesPageContent = {
+    banner: {
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    service_section_title: SectionTitle;
+    faq_section_title: SectionTitle;
+};
+export async function get_services_page_content(locale = "en"): Promise<ServicesPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/services-page?populate[banner][populate]=*&populate[service_section_title]=*&populate[faq_section_title]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// FAQ
+export type FaqItem = {
+    id: number;
+    question: string;
+    answer: string;
+};
+export async function get_faq_items(locale = "en"): Promise<FaqItem[]> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/faq?populate[faq_item]=*&locale=${locale}`);
+        if (!res.ok) return [];
+        const json = await res.json();
+        return json.data?.faq_item ?? [];
+    } catch {
+        return [];
+    }
+}
 
 // Contact Page
 export type ContactPageContent = {
