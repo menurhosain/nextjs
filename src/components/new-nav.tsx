@@ -320,7 +320,7 @@ export function NavActions() {
                     </div>
 
                     {/* Column 2 — 60% (main content) */}
-                    <div className="w-[50%] 2xl:w-[60%]  max-[1024]:w-[88%] max-[640px]:w-[81%] h-full flex flex flex-col border-x border-sah-light-3">
+                    <div className="w-[50%] 2xl:w-[50%]  max-[1024]:w-[88%] max-[640px]:w-[81%] h-full flex flex flex-col border-x border-sah-light-3">
                         <div className="flex items-center justify-between h-[100px]">
                             {/* Search bar */}
                             <div className="flex items-center gap-3 px-2 sm:px-6 py-3 group">
@@ -330,7 +330,7 @@ export function NavActions() {
 
                             {/* Close button */}
                             <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="cursor-pointer h-full w-[100px] flex items-center justify-center border-l border-sah-light-3">
-                                <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-black stroke-2">
+                                <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-sah-red stroke-2">
                                     <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
                                 </svg>
                             </button>
@@ -353,7 +353,7 @@ export function NavActions() {
                                                     className="w-full flex text-[40px] max-[1280px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[18px] items-center justify-between py-4 text-sah-black font-inter font-normal capitalize cursor-pointer transition-colors duration-500 hover:text-sah-red"
                                                 >
                                                     {link.label}
-                                                    <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-red ${openMenus.has(link.label) ? "rotate-180" : ""}`} />
+                                                    <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenus.has(link.label) ? "rotate-180" : ""}`} />
                                                 </button>
                                                 <div className={`flex flex-col overflow-hidden transition-all duration-300 ${openMenus.has(link.label) ? "max-h-[400px] pb-3" : "max-h-0"}`}>
                                                     {link.submenus?.map((sub) => (
@@ -388,7 +388,7 @@ export function NavActions() {
                     </div>
 
                     {/* Column 3 — 20% */}
-                    <div className="w-[30%]  2xl:w-[20%] h-full flex flex-col overflow-hidden overflow-y-scroll no-scrollbar flex-1 max-[1024]:hidden" data-lenis-prevent>
+                    <div className="w-[30%]  2xl:w-[30%] h-full flex flex-col overflow-hidden overflow-y-scroll no-scrollbar flex-1 max-[1024]:hidden" data-lenis-prevent>
                         {/* Header row — matches other columns */}
                         <div className="flex items-center justify-end h-[100px] pr-[60px] shrink-0">
                             <a href="/contact" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
@@ -463,11 +463,11 @@ export function NavActions() {
                 {/* Footer — absolute bottom, same 3-col layout */}
                 <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
                     <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
-                        <a href="mailto:info@example.com" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
-                            info@example.com
+                        <a href="mailto:enquiries@sah.om" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
+							enquiries@sah.om
                         </a>
                     </div>
-                    <div className="w-[50%] 2xl:w-[60%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
+                    <div className="w-[50%] 2xl:w-[50%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
                         <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             Facebook
                         </a>
@@ -481,7 +481,7 @@ export function NavActions() {
                             YouTube
                         </a>
                     </div>
-                    <div className="w-[30%] 2xl:w-[20%] max-[768]:w-[87.5%] max-[640px]:w-full bg-sah-white flex items-center justify-start px-[60px] max-[1024]:px-[20px] max-[1024]:justify-center border-t border-sah-light-3">
+                    <div className="w-[30%] 2xl:w-[30%] max-[768]:w-[87.5%] max-[640px]:w-full bg-sah-white flex items-center justify-start px-[60px] max-[1024]:px-[20px] max-[1024]:justify-center border-t border-sah-light-3">
                         <a href="/projects" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             View all projects
                         </a>
