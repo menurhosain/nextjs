@@ -491,3 +491,22 @@ export async function get_career_cta_section_content(locale = "en"): Promise<Car
     }
 }
 
+// News Page
+export type NewsPageContent = {
+    Banner: {
+        id: number;
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+};
+export async function get_news_page_content(locale = "en"): Promise<NewsPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/news-page?locale=${locale}&populate[Banner][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
