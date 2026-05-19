@@ -40,7 +40,7 @@ function Banner({ bg, children, class_name, style, bgDirection = "right" }: { bg
                     <source src={bg} type="video/mp4" />
                 </video>
             )}
-            <div className="container relative z-3 flex flex-col justify-center md:flex-row gap-[2%] max-[1280px]:!px-0">{children}</div>
+            <div className="container relative z-3 flex flex-col justify-center md:flex-row gap-[2%] max-[1280px]:!px-0 ">{children}</div>
         </section>
     );
 }
