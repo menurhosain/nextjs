@@ -67,7 +67,10 @@ export default async function ServicesDetailsPage() {
                 image={getStrapiMediaUrl(page?.approach_section_image)}
             />
 
-            <FeatureSection />
+            <FeatureSection
+                bg={getStrapiMediaUrl(page?.feature_section_bg)}
+                items={page?.feature_items}
+            />
 
             <Service
                 services={service_cards}
