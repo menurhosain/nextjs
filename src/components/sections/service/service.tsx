@@ -21,7 +21,7 @@ export default function Service({ section_title, cards }: Props) {
                         <Section_Title
                             subtitle={section_title?.sub_title || "Our Culture"}
                             title={section_title?.title || "What we offer"}
-                            description={section_title?.description || "Offsite, part of the SAH group, is reshaping construction through innovative and scalable offsite manufacturing methods. Backed by more than two decades of experience, we enable clients to achieve faster timelines, improved safety, and smarter building practices."}
+                            description={section_title?.description || "Offsite, part of the SAH group, is reshaping construction through innovative and scalable offsite manufacturing methods. Backed by more than two decades of experience, we enable clients to achieve faster timelines, improved safety, and smarter building practices. Our goal is to transform how projects."}
                             class_name={{
                                 subtitle: "text-sah-black !mb-[15px]",
                                 title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] max-w-[870px] text-[70px]",
@@ -30,30 +30,16 @@ export default function Service({ section_title, cards }: Props) {
                         />
                     </div>
                     <div className="col-span-4 flex flex-col gap-[30px]">
-                        {cards && cards.length > 0 ? (
-                            cards.map((card) => (
-                                <ServiceCardTwo
-                                    key={card.id}
-                                    icon={
-                                        card.svg ? (
-                                            <span dangerouslySetInnerHTML={{ __html: card.svg }} />
-                                        ) : undefined
-                                    }
-                                    title={card.title}
-                                    description={card.description}
-                                    image={getStrapiMediaUrl(card.image) || "/service-card/1.jpg"}
-                                    href={card.button_link || "#"}
-                                />
-                            ))
-                        ) : (
-                            // fallback static cards shown when CMS has no data
-                            <>
-                                <ServiceCardTwo title="Construction & Engineering" description="We oversee every construction stage carefully, coordinating teams and ensuring smooth execution from start to finish." image="/service-card/1.jpg" href="#" />
-                                <ServiceCardTwo title="MEP & Building Systems" description="From concept to completion, we approach every project with a focus on innovation, sustainability, and efficiency." image="/service-card/2.jpg" href="#" />
-                                <ServiceCardTwo title="Infrastructure Works" description="Expertly crafting the custom homes duplexes apartments, and residential complexes with precision and care." image="/service-card/3.jpg" href="#" />
-                                <ServiceCardTwo title="Project Management" description="Expertise in designing and analyzing structural systems to ensure safety, stability, longevity of buildings and infrastructure." image="/service-card/4.jpg" href="#" />
-                            </>
-                        )}
+                        {cards?.map((card) => (
+                            <ServiceCardTwo
+                                key={card.id}
+                                icon={card.svg ? <span dangerouslySetInnerHTML={{ __html: card.svg }} /> : undefined}
+                                title={card.title}
+                                description={card.description}
+                                image={getStrapiMediaUrl(card.image) || "/service-card/1.jpg"}
+                                href={card.button_link || "#"}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
