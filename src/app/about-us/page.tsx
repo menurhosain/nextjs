@@ -56,7 +56,11 @@ export default async function AboutUsPage() {
                 cards={about_page?.why_choose_cards}
                 image_cards={about_page?.why_choose_image_cards}
             />
-            <Service services={service_cards} />
+            <Service
+                services={service_cards}
+                subtitle={about_page?.service_section_title?.sub_title}
+                title={about_page?.service_section_title?.title}
+            />
             <Career />
         </>
     );

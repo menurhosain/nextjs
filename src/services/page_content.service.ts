@@ -209,11 +209,12 @@ export type AboutPageContent = {
     why_choose_section: AboutPageSectionTitle;
     why_choose_cards: WhyChooseCard[];
     why_choose_image_cards: WhyChooseImageCard[];
+    service_section_title: AboutPageSectionTitle;
 };
 export async function get_about_page_content(locale = "en"): Promise<AboutPageContent | null> {
     try {
         const res = await fetch(
-            `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*&populate[why_choose_section][populate]=*&populate[why_choose_cards][populate]=*&populate[why_choose_image_cards][populate]=*`,
+            `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*&populate[why_choose_section][populate]=*&populate[why_choose_cards][populate]=*&populate[why_choose_image_cards][populate]=*&populate[service_section_title][populate]=*`,
         );
         if (!res.ok) return null;
         const json = await res.json();
