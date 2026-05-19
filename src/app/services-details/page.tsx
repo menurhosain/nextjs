@@ -43,7 +43,11 @@ export default async function ServicesDetailsPage() {
 
             <TeamSection section_title={page?.team_section_title} teams={teams} />
 
-            <OurValue />
+            <OurValue
+                heading={page?.our_value_heading}
+                bg={getStrapiMediaUrl(page?.our_value_bg)}
+                items={page?.our_value_items}
+            />
 
             <Cta title="Available Nationwide" />
 
