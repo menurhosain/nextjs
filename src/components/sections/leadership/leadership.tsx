@@ -47,7 +47,7 @@ export default function LeadershipSection() {
 
     return (
         <section className="section-padding bg-sah-light-4 bg-[url('/mosaic-patternt-bg.png')] bg-contain bg-bottom bg-no-repeat">
-            <div className="container pt-[80px] lg:pt-[150px] pb-[140px] border-x border-sah-light-3 max-[1024px]:!px-4">
+            <div className="container pt-[80px] lg:pt-[150px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3 max-[1024px]:!px-4">
                 <div className="relative flex max-[768px]:flex-col xl:items-center p-[20px] sm:p-[24px] pr-[30px] 2xl:pr-[135px] gap-[20px] md:gap-[40px] 2xl:gap-[115px] rounded-[6px] bg-white overflow-hidden">
                     <img className="absolute right-[-170px] 2xl:right-0 bottom-0" src="/construction-vector.png" alt="Vector" />
                     <div className="rounded-[6px] overflow-hidden w-full md:w-[280px] lg:w-[350px] xl:w-[522px] shrink-0 relative z-1">
@@ -80,13 +80,13 @@ export default function LeadershipSection() {
                         />
                     ))}
                 </div>
-                <div className="relative px-[82px] pt-[82px] pb-[90px] rounded-[16px] bg-white overflow-hidden">
-                    <h2 className="font-geist font-medium text-[60px] leading-[78px] text-sah-dark-2 mb-[70px]">Senior Leadership</h2>
-                    <div className="grid grid-cols-5 gap-[40px]">
+                <div className="relative px-[20px] sm:px-[40px] 2xl:px-[82px] pt-[40px] 2xl:pt-[82px] pb-[40px] 2xl:pb-[90px] rounded-[16px] bg-white overflow-hidden">
+                    <h2 className="font-geist font-medium text-[30px] sm:text-[38px] md:text-[46px] xl:text-[60px] 2xl:text-[80px] leading-[1.2] text-sah-dark-2 mb-[30px] 2xl:mb-[70px]">Senior Leadership</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-[25px] 2xl:gap-[40px]">
                         {seniorLeadership.map((item, index) => (
                             <div key={index}>
-                                <h4 className="font-geist font-semibold text-[24px] leading-[36px] text-sah-dark-2">{item.name}</h4>
-                                <span className="text-[16px] leading-[36px] font-medium text-sah-gray-2">{item.role}</span>
+                                <h4 className="font-geist font-semibold text-[18px] xl:text-[20px] 2xl:text-[24px] leading-[36px] text-sah-dark-2">{item.name}</h4>
+                                <span className="text-[16px] leading-[24px] 2xl:leading-[36px] font-medium text-sah-gray-2">{item.role}</span>
                             </div>
                         ))}
                     </div>
