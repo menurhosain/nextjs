@@ -18,13 +18,6 @@ export default function ProjectGallery({ images }: { images: string[] }) {
         if (progressRef.current) clearInterval(progressRef.current);
     };
 
-    const scrollThumbIntoView = (index: number) => {
-        thumbRefs.current[index]?.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-        });
-    };
-
     const startAutoplay = useCallback(() => {
         clearTimers();
         setProgress(0);
@@ -37,7 +30,6 @@ export default function ProjectGallery({ images }: { images: string[] }) {
         intervalRef.current = setInterval(() => {
             setSelected((prev) => {
                 const next = (prev + 1) % images.length;
-                scrollThumbIntoView(next);
                 return next;
             });
             setProgress(0);
