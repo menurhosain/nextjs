@@ -131,7 +131,7 @@ export default function Subcontractor() {
                 {/* Content */}
                 <div className="flex-1 p-4 sm:p-6 xl:p-10 flex flex-col justify-between bg-white rounded-[8px]">
                   <div>
-                    <p className="text-[16px] md:text-[20px] text-sah-dark-2 leading-[36px]">{policy.description}</p>
+                    <p className="text-[16px] md:text-[20px] text-sah-dark-2 leading-[26px] sm:leading-[36px]">{policy.description}</p>
                   </div>
                   <div className="w-full h-[1px] bg-sah-light-3 mt-[20px] xl:mt-[40px]" />
                   <div className="flex items-start flex-col xl:flex-row flex-wrap gap-[20px] xl:gap-[47px] mt-[30px] xl:mt-[50px]">
