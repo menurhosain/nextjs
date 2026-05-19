@@ -9,12 +9,12 @@ import FaqSection from "@/components/sections/service/faq";
 import Service from "@/components/sections/about/service";
 import FeatureSection from "@/components/sections/service-details/features";
 import Approach from "@/components/sections/service-details/approach";
-import { get_service_details_page_content, get_teams } from "@/services/page_content.service";
+import { get_service_details_page_content, get_teams, get_cta_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 export default async function ServicesDetailsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [page, teams] = await Promise.all([get_service_details_page_content(locale), get_teams(locale, 4)]);
+    const [page, teams, cta] = await Promise.all([get_service_details_page_content(locale), get_teams(locale, 4), get_cta_content(locale)]);
 
     const bg = getStrapiMediaUrl(page?.Banner?.banner_bg) || "/home-hero.mp4";
     const subtitle = page?.Banner?.banner_label || "Detailed Service Overview Here";
@@ -49,7 +49,15 @@ export default async function ServicesDetailsPage() {
                 items={page?.our_value_items}
             />
 
-            <Cta title="Available Nationwide" />
+            <Cta
+                title={cta?.title}
+                description={cta?.description}
+                button_label={cta?.button_label}
+                button_link={cta?.button_link}
+                map_image={getStrapiMediaUrl(cta?.map_image)}
+                legend_one={cta?.legend_one}
+                legend_two={cta?.legend_two}
+            />
 
             <Approach />
 
