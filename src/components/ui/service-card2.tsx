@@ -17,11 +17,9 @@ export function ServiceCardTwo({ icon, title, description, image, href = "#", cl
         <div className={cn("bg-white rounded-[12px] overflow-hidden flex flex-row px-[30px] py-[40px] gap-[40px] sah-transition group", className)}>
             <div className="flex flex-col gap-[20px]">
                 <div className="flex items-start gap-4">
-                    {icon && <div className="shrink-0 text-[48px] leading-none group-hover:scale-90 sah-transition">{icon}</div>}
+                    {icon && <div className="shrink-0 text-[48px] leading-none group-hover:scale-90 sah-transition" >{icon}</div>}
 
-                    <Link href={href} className="text-sah-black font-semibold font-geist text-[30px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit">
-                        {title}
-                    </Link>
+                    <a href={href} dangerouslySetInnerHTML={{__html:title}} className="text-sah-black font-semibold font-geist text-[30px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit"/>
                 </div>
 
                 <hr className="border-gray-200" />
