@@ -31,11 +31,11 @@ export default function Careers() {
                         <AngleArrow class_name="!w-[11px] h-[11px]"/>
 
                         </a>
-                        <div className="w-full p-[15px] xl:p-[24px] border border-sah-light-3 rounded-[6px] mt-[60px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[30px]">
+                        <div className="w-full p-[0px] sm:p-[15px] xl:p-[24px] max-[640px]:border-0 border border-sah-light-3 rounded-[6px] mt-[60px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[30px]">
                             <div className=" max-[768px]:order-2">
                                 <Image src="/careers-thumb-1.jpg" alt="" fill className="!h-full !w-full !relative rounded-[6px]" />
                             </div>
-                            <div className="w-full relative bg-sah-white rounded-[6px] px-[30px] pb-[25px]  max-[768px]:order-0">
+                            <div className="w-full relative bg-sah-white rounded-[6px] px-[15px] sm:px-[30px] pb-[25px] max-[768px]:order-0">
                                 {/* Legend */}
                                 <div className="mt-[30px] lg:mt-[55px] 2xl:mr-[50px] flex flex-col items-start gap-[12px] 2xl:pl-[120px] relative z-[5] ">
                                     <div className="flex items-start gap-2 md:max-w-[220px]">
