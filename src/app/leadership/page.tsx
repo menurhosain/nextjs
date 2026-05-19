@@ -3,11 +3,11 @@ import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import LeadershipSection from "@/components/sections/leadership/leadership";
 import Career from "@/components/sections/home/career";
-import { get_career_cta_section_content } from "@/services/page_content.service";
+import { get_career_cta_section_content, get_leadership_page_content } from "@/services/page_content.service";
 
 export default async function LeadershipPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [ career] = await Promise.all([get_career_cta_section_content(locale)]);
+    const [career, leadership] = await Promise.all([get_career_cta_section_content(locale), get_leadership_page_content(locale)]);
 
     return (
         <>
@@ -23,7 +23,7 @@ export default async function LeadershipPage() {
                 </Right>
             </Banner>
 
-            <LeadershipSection />
+            <LeadershipSection executive_leader={leadership?.executive_leader} />
 
             <Career content={career} />
         </>

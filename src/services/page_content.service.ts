@@ -224,6 +224,37 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
     }
 }
 
+// Leadership Page
+export type ExecutiveLeaderContent = {
+    id: number;
+    label: string;
+    name: string;
+    description: string;
+    quote: string;
+    phone: string;
+    email: string;
+    image: StrapiMedia | null;
+};
+export type LeadershipPageContent = {
+    Banner: {
+        id: number;
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    executive_leader: ExecutiveLeaderContent;
+};
+export async function get_leadership_page_content(locale = "en"): Promise<LeadershipPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/leadership-page?locale=${locale}&populate[Banner][populate]=*&populate[executive_leader][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Career CTA Section
 export type CareerCtaSectionContent = {
     career_cta_background?: StrapiMedia | null;
