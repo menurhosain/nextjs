@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Serif_Display, Inter } from "next/font/google";
 import Header from "@/components/layout/header/header";
 import { LenisProvider } from "@/components/layout/lenis-provider";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 import "./style.scss";
 
 import "./globals.css";
@@ -48,6 +49,7 @@ export default function RootLayout({
                     <Header />
                     <main>{children}</main>
                     <Footer />
+                    <ScrollToTop />
                 </LenisProvider>
             </body>
         </html>
