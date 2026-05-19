@@ -14,18 +14,18 @@ export default function JobCareers() {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     return (
-        <div id="jobboard" className=" bg-[url('/careers-bg-pattern.png')]  bg-bottom bg-no-repeat">
-            <div className="container !px-[50px] pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
+        <div id="jobboard" className="section-padding bg-[url('/careers-bg-pattern.png')] max-[1280px]:bg-cover  bg-bottom bg-no-repeat">
+            <div className="container !px-[50px] max-[1024px]:!px-4 pb-[50px] lg:pb-[150px] border-x border-sah-light-3">
                 <div className="max-w-full">
-                    <div className="flex flex-col lg:flex-row justify-between items-start mb-[50px] gap-8">
-                        <div className="lg:w-1/2">
-                            <h1 className="text-[60px] font-medium text-sah-dark-2 leading-[68px]">
+                    <div className="flex flex-col xl:flex-row justify-between items-start mb-[50px] gap-4 xl:gap-8">
+                        <div className="w-full xl:w-1/2">
+                            <h1 className="text-[48px] 2xl:text-[60px] leading-1.3 font-medium text-sah-dark-2 leading-[68px]">
                                 Build your future
                                 <br />
                                 through collaboration
                             </h1>
                         </div>
-                        <div className="lg:w-[605px]">
+                        <div className="w-full xl:w-[605px]">
                             <p className="text-[16px] text-sah-gray-2 font-medium leading-[28px]">
                                 With us, your career is always moving forward. You'll grow through continuous learning, guided by mentorship at every stage, while collaborating with diverse teams to
                                 broaden your skills, knowledge, and experience. Our leadership is rooted in strong values. Our culture reflects principles.
@@ -34,16 +34,16 @@ export default function JobCareers() {
                     </div>
 
                     {/* Bottom Section: Image + Job Listings */}
-                    <div className="flex flex-col lg:flex-row gap-[95px] items-start">
+                    <div className="flex flex-col xl:flex-row gap-[40px] 2xl:gap-[95px] items-start">
                         {/* Left: Team Photo */}
-                        <div className="lg:w-[46%]">
+                        <div className="w-full xl:w-[35%] 2xl:[46%]">
                             <div className="rounded-[6px] overflow-hidden">
                                 <img src="/jobcareers-thumb.jpg" alt="Team collaboration" className="w-full h-[416px] object-cover object-center" />
                             </div>
                         </div>
 
                         {/* Right: Job Listings */}
-                        <div className="lg:w-[54%] flex flex-col divide-y divide-sah-gray-4 border-t border-t-sah-gray-4 border-b border-b-sah-gray-4">
+                        <div className="w-full xl:w-[65%] 2xl:[54%] flex flex-col divide-y divide-sah-gray-4 border-t border-t-sah-gray-4 border-b border-b-sah-gray-4">
                             {jobListings.map((job) => (
                                 <div
                                     key={job.id}
@@ -61,7 +61,7 @@ export default function JobCareers() {
                                     {/* Job Title */}
                                     <a
                                         href={job.link}
-                                        className={`flex-1 text-[20px] font-semibold text-gray-900 ml-[30px] transition-colors duration-300
+                                        className={`flex-1 text-[18px] 2xl:text-[20px] font-semibold text-gray-900 ml-[30px] transition-colors duration-300
                       ${hoveredId === job.id ? "text-black" : ""}
                     `}
                                     >
