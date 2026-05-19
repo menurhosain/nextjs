@@ -269,7 +269,7 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
             </div>
 
             <section ref={sectionRef} className="section-padding bg-sah-light-4">
-                <div className="container py-[140px] border-x border-sah-light-3">
+                <div className="container pt-[80px] lg:py-[150px] border-x border-sah-light-3 max-[1024px]:!px-4">
                     {filteredProjects.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-[80px] gap-4">
                             <p className="font-geist text-[32px] font-medium text-sah-dark">{content?.no_project_label}</p>
