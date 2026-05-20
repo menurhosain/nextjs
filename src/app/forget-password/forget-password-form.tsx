@@ -14,7 +14,7 @@ export default function ForgetPasswordForm() {
   if (state.success) {
     return (
       <>
-        <h1 className="text-2xl text-center font-bold text-gray-900 mb-2">Check your email</h1>
+        <h2 className="text-[24px] sm:text-2xl text-center font-bold text-gray-900 mb-2">Check your email</h2>
         <p className="text-sm text-gray-500 text-center">
           If an account exists for{" "}
           <span className="font-medium text-gray-700">{state.email}</span>, you
@@ -26,7 +26,7 @@ export default function ForgetPasswordForm() {
 
   return (
     <form action={formAction} className="space-y-5">
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">Forgot password</h1>
+      <h2 className="text-[24px] sm: font-bold text-gray-900 mb-2">Forgot password</h2>
       <p className="text-sm text-gray-500 mb-6">
         Enter your email and we&apos;ll send you a reset link.
       </p>
