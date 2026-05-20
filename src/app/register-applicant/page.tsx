@@ -24,7 +24,7 @@ export default function RegisterApplicantPage() {
       <div className="py-[150px] register-box flex items-center justify-center bg-gray-50 py-40 px-4">
         <div className="w-full max-w-[700px] bg-white rounded-2xl shadow-md p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Create/Register a applicant account
+            Create an applicant account
           </h2>
           <RegisterApplicantForm />
         </div>
