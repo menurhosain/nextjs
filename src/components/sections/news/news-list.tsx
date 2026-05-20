@@ -78,9 +78,9 @@ export default function NewsList({ posts, tags }: NewsListProps) {
     }
 
     return (
-        <div ref={sectionRef} className="container pt-[140px] pb-[140px] border-x border-sah-light-3">
-            <div className="flex mb-[60px] gap-[50px]">
-                <div className="w-[500px] shrink-0 border-r border-sah-gray-4 pr-[50px]">
+        <div ref={sectionRef} className="container pt-[80px] lg:pt-[140px] pb-[80px] lg:pb-[140px] border-x border-sah-light-3 max-[1280px]:!px-4">
+            <div className="flex flex-col md:flex-row mb-[40px] md:mb-[60px] gap-[20px] md:gap-[50px]">
+                <div className="w-full md:w-[350px] lg:w-[500px] shrink-0 md:border-r border-sah-gray-4 md:pr-[50px]">
                     <input
                         type="text"
                         value={search}
@@ -116,13 +116,13 @@ export default function NewsList({ posts, tags }: NewsListProps) {
                 </div>
             ) : (
                 <>
-                    <div className="grid grid-cols-3 gap-[30px]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px]">
                         {pagedPosts.map((post) => (
                             <NewsCard
                                 key={post.documentId}
                                 className="rounded-[12px]"
                                 titleParam={{
-                                    className: "p-0 md:text-[24px]",
+                                    className: "p-0 md:text-[24px] !pr-0 max-[1280px]:!text-[20px] max-[1280px]:!mb-3",
                                     title: post.title,
                                 }}
                                 metaParam={{
