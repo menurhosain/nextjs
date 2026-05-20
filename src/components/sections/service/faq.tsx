@@ -22,8 +22,8 @@ export default function FaqSection({ section_title, items }: Props) {
 
     return (
         <section className="section-padding lg:py-[140px] py-[80px] bg-[url('/faq_sec_bg.jpg')] bg-cover bg-bottom bg-no-repeat">
-            <div className="container">
-                <div className="grid grid-cols-8 gap-10 items-start">
+            <div className="container  max-[1536px]:!px-0">
+                <div className="grid grid-cols-1 lg:grid-cols-8 gap-5 lg:gap-10 items-start">
                     <div className="col-span-4">
                         <Section_Title
                             subtitle={section_title?.sub_title || "Life at SAH"}
@@ -31,7 +31,7 @@ export default function FaqSection({ section_title, items }: Props) {
                             description={section_title?.description || "Real stories from homeowners and investors who trusted us to guide their real estate journey."}
                             class_name={{
                                 subtitle: "text-sah-black !mb-[15px]",
-                                title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[60px] text-[70px]",
+                                title: "xl:!text-[66px] 2xl:!text-[80px] !leading-[36px] sm:!leading-[50px] xl:!leading-[76px] 2xl:!leading-[86px] text-sah-black !mb-[20px] 2xl:!mb-[60px] ",
                                 description: "text-sah-gray-1 max-w-[453px]",
                             }}
                         />
@@ -42,7 +42,7 @@ export default function FaqSection({ section_title, items }: Props) {
                             mode="exclusive"
                             showControls={false}
                             defaultOpen={0}
-                            descClass="pr-[60px]"
+                            descClass="pr-3 sm:pr-[60px] max-[640px]:pl-3"
                         />
                     </div>
                 </div>

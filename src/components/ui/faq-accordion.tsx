@@ -90,10 +90,10 @@ export function FaqAccordion({
                                 onClick={() => toggle(index)}
                                 aria-expanded={open}
                                 aria-controls={panelId}
-                                className={cn("w-full flex items-center gap-4 py-[18px] px-[30px] text-left", titleClass)}
+                                className={cn("w-full flex items-center gap-4 py-[18px] px-[15px] sm:px-[30px] text-left", titleClass)}
                             >
                                 <div className="flex-1 min-w-0">
-                                    <span className="font-semibold text-sah-black text-[24px] block">
+                                    <span className="font-semibold text-sah-black text-[17px] sm:text-[20px] 2xl:text-[24px] block">
                                         {item.question}
                                     </span>
                                 </div>

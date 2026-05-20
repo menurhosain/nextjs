@@ -14,21 +14,21 @@ interface ServiceCardTwoProps {
 
 export function ServiceCardTwo({ icon, title, description, image, href = "#", className }: ServiceCardTwoProps) {
     return (
-        <div className={cn("bg-white rounded-[12px] overflow-hidden flex flex-row px-[30px] py-[40px] gap-[40px] sah-transition group", className)}>
+        <div className={cn("bg-white rounded-[12px] overflow-hidden flex flex-col sm:flex-row px-[20px] md:px-[30px] py-[20px] md:py-[40px] gap-[40px] sah-transition group", className)}>
             <div className="flex flex-col gap-[20px]">
-                <div className="flex items-start gap-4">
+                <div className="flex max-[640px]:flex-col items-start gap-4">
                     {icon && <div className="shrink-0 text-[48px] leading-none group-hover:scale-90 sah-transition" >{icon}</div>}
 
-                    <a href={href} dangerouslySetInnerHTML={{__html:title}} className="text-sah-black font-semibold font-geist text-[30px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit"/>
+                    <a href={href} dangerouslySetInnerHTML={{__html:title}} className="text-sah-black font-semibold font-geist text-[24x] md:text-[30px] leading-[26px] md:leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit"/>
                 </div>
 
                 <hr className="border-gray-200" />
 
-                <p className="text-[16px] leading-[26px] text-sah-gray-2">{description}</p>
+                <p className="text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] text-sah-gray-2">{description}</p>
             </div>
 
             <div className="relative rounded-[12px] overflow-hidden">
-                <img src={image} alt="Service" className="w-full h-auto" />
+                <img src={image} alt="Service" className="w-full h-full lg:h-auto object-cover object-center" />
                 <Link
                     href={href}
                     className="absolute bottom-3 text-[11px] right-3 w-9 h-9 rounded-full bg-white group-hover:bg-sah-red group-hover:text-white flex items-center justify-center shadow sah-transition group-hover:rotate-45"

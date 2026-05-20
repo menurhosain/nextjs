@@ -14,18 +14,18 @@ type Props = {
 
 export default function Service({ section_title, cards }: Props) {
     return (
-        <section className="section-padding relative pt-27 lg:pb-[140px] pb-[80px] bg-[var(--color-sah-light-4)] bg-[url('/page_service_bg.jpg')] bg-contain bg-bottom bg-no-repeat">
-            <div className="container">
-                <div className="grid grid-cols-7 gap-10 items-start">
-                    <div className="col-span-3 sticky top-[30px] left-0">
+        <section className="section-padding relative pt-[73px] lg:pt-[143px] lg:pb-[140px] pb-[80px] bg-[var(--color-sah-light-4)] bg-[url('/page_service_bg.jpg')] bg-contain bg-bottom bg-no-repeat">
+            <div className="container max-[1536px]:!px-0">
+                <div className="sm:grid grid-cols-1 xl:grid-cols-7 gap-5 lg:gap-10 items-start">
+                    <div className="col-span-3 xl:sticky xl:top-[30px] left-0 max-[640px]:mb-6">
                         <Section_Title
                             subtitle={section_title?.sub_title || "Our Culture"}
                             title={section_title?.title || "What we offer"}
                             description={section_title?.description || "Offsite, part of the SAH group, is reshaping construction through innovative and scalable offsite manufacturing methods. Backed by more than two decades of experience, we enable clients to achieve faster timelines, improved safety, and smarter building practices. Our goal is to transform how projects."}
                             class_name={{
-                                subtitle: "text-sah-black !mb-[15px]",
-                                title: "xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] max-w-[870px] text-[70px]",
-                                description: "text-sah-gray-1 max-w-[870px]",
+                                subtitle: "text-sah-black !mb-[15px] text-[14px] md:text-[16px]",
+                                title: "xl:!text-[70px] 2xl:!text-[80px] xl:!leading-[86px] text-sah-black !mb-[10px] max-w-[870px]",
+                                description: "text-sah-gray-1 max-w-[870px] text-[14px] md:text-[16px]",
                             }}
                         />
                     </div>
