@@ -34,7 +34,7 @@ export default function ScrollToTop() {
             aria-label="Back to top"
             tabIndex={0}
             onKeyDown={(e) => e.key === "Enter" && handleClick()}
-            className={`fixed bottom-8 right-8 z-[999] w-[40px] h-[40px] rounded-full bg-sah-red cursor-pointer transition-all duration-300 ${
+            className={`fixed bottom-[20px] right-[20px] z-[999] w-[40px] h-[40px] rounded-full bg-sah-red cursor-pointer transition-all duration-300 ${
                 visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
             }`}
         >

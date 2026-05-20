@@ -76,7 +76,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
                             <span className="text-sah-dark-2">
                                 {titleNormal || (
                                     <>
-                                        We deliver high quality construction services" <br /> "with innovation, precision,
+                                        We deliver high quality construction services <br /> with innovation, precision,
                                     </>
                                 )}{" "}
                             </span>
