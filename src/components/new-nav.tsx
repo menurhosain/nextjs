@@ -7,6 +7,7 @@ import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
 import NewsCard from "./ui/news-card";
 import { type Menu } from "@/services/mega_menu.service";
+import { type OffcanvasContent } from "@/services/offcanvas.service";
 import { BASE_URL } from "@/lib/constant";
 
 const languages = [
@@ -265,7 +266,14 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
     );
 }
 
-export function NavActions({ locale, menus }: { locale: string; menus: Menu[] }) {
+const DEFAULT_SOCIAL_LINKS = [
+    { button_label: "Facebook",  button_link: "#" },
+    { button_label: "Instagram", button_link: "#" },
+    { button_label: "LinkedIn",  button_link: "#" },
+    { button_label: "YouTube",   button_link: "#" },
+];
+
+export function NavActions({ locale, menus, offcanvas }: { locale: string; menus: Menu[]; offcanvas?: OffcanvasContent | null }) {
     const navLinks = transformMenus(menus);
     const router = useRouter();
     const [selectedLang, setSelectedLang] = useState(() => {
@@ -324,10 +332,10 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
 
                 {/* CTA button */}
                 <Link
-                    href="/become-a-subcontractor"
+                    href={offcanvas?.menu_button?.button_link || "/become-a-subcontractor"}
                     className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
                 >
-                    Become a Subcontractor
+                    {offcanvas?.menu_button?.button_label || "Become a Subcontractor"}
                     <AngleArrow class_name="!w-[10px] !h-[10px]" />
                 </Link>
 
@@ -362,7 +370,7 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                                             className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]"
                                             style={{ writingMode: "vertical-rl", opacity: 0.2 }}
                                         >
-                                            SAH
+                                            {offcanvas?.vertical_text || "SAH"}
                                         </span>
                                     )),
                                 )}
@@ -385,7 +393,7 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                                 <SearchIcon class_name="!size-[24px] shrink-0 text-sah-dark !fill-sah-black group-hover:rotate-90 transition-rotate duration-500" />
                                 <input
                                     type="text"
-                                    placeholder="Search your query"
+                                    placeholder={offcanvas?.search_placeholder || "Search your query"}
                                     className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50"
                                 />
                             </div>
@@ -438,10 +446,10 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
 
                                 <div className="py-8">
                                     <Link
-                                        href="/become-a-subcontractor"
+                                        href={offcanvas?.menu_button?.button_link || "/become-a-subcontractor"}
                                         className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px] max-[640px]:text-[14px] max-[380px]:text-[12px] max-[640px]:px-[10px]"
                                     >
-                                        Become a Subcontractor
+                                        {offcanvas?.menu_button?.button_label || "Become a Subcontractor"}
                                         <AngleArrow class_name="!w-[10px] !h-[10px]" />
                                     </Link>
                                 </div>
@@ -453,21 +461,21 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                     <div className="w-[30%]  2xl:w-[30%] h-full flex flex-col overflow-hidden overflow-y-scroll no-scrollbar flex-1 max-[1024]:hidden" data-lenis-prevent>
                         {/* Header row — matches other columns */}
                         <div className="flex items-center justify-end h-[100px] pr-[60px] shrink-0">
-                            <a href="/contact" className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
-                                Contact Us
+                            <a href={offcanvas?.contact_us_link || "/contact"} className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
+                                {offcanvas?.contact_us_label || "Contact Us"}
                             </a>
                         </div>
 
                         {/* Featured project */}
 
                         <div className="flex-1 overflow-y-auto px-6 pt-8 pb-20">
-                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Connect with us</p>
+                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">{offcanvas?.form_title || "Connect with us"}</p>
                             <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
                                 <div className="flex gap-4 flex-col">
                                     <input
                                         type="text"
                                         name="firstName"
-                                        placeholder="First Name*"
+                                        placeholder={offcanvas?.placeholder_first_name || "First Name*"}
                                         value={formData.firstName}
                                         onChange={handleChange}
                                         required
@@ -476,7 +484,7 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                                     <input
                                         type="text"
                                         name="lastName"
-                                        placeholder="Last Name*"
+                                        placeholder={offcanvas?.placeholder_last_name || "Last Name*"}
                                         value={formData.lastName}
                                         onChange={handleChange}
                                         required
@@ -488,7 +496,7 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                                     <input
                                         type="email"
                                         name="email"
-                                        placeholder="Email Address"
+                                        placeholder={offcanvas?.placeholder_email || "Email Address"}
                                         value={formData.email}
                                         onChange={handleChange}
                                         className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
@@ -496,7 +504,7 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                                     <input
                                         type="tel"
                                         name="phone"
-                                        placeholder="Phone"
+                                        placeholder={offcanvas?.placeholder_phone || "Phone"}
                                         value={formData.phone}
                                         onChange={handleChange}
                                         className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
@@ -505,7 +513,7 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
 
                                 <textarea
                                     name="message"
-                                    placeholder="Write Message*"
+                                    placeholder={offcanvas?.placeholder_message || "Write Message*"}
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows={5}
@@ -517,7 +525,7 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                                     type="submit"
                                     className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer"
                                 >
-                                    Message Now
+                                    {offcanvas?.form_submit_label || "Message Now"}
                                 </button>
                             </form>
                         </div>
@@ -527,27 +535,20 @@ export function NavActions({ locale, menus }: { locale: string; menus: Menu[] })
                 {/* Footer — absolute bottom, same 3-col layout */}
                 <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
                     <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
-                        <a href="mailto:enquiries@sah.om" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
-							enquiries@sah.om
+                        <a href={`mailto:${offcanvas?.email || "enquiries@sah.om"}`} className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
+                            {offcanvas?.email || "enquiries@sah.om"}
                         </a>
                     </div>
                     <div className="w-[50%] 2xl:w-[50%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
-                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
-                            Facebook
-                        </a>
-                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
-                            Instagram
-                        </a>
-                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
-                            LinkedIn
-                        </a>
-                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
-                            YouTube
-                        </a>
+                        {(offcanvas?.social_links?.length ? offcanvas.social_links : DEFAULT_SOCIAL_LINKS).map((link) => (
+                            <a key={link.button_label} href={link.button_link} className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                                {link.button_label}
+                            </a>
+                        ))}
                     </div>
                     <div className="w-[30%] 2xl:w-[30%] max-[768]:w-[87.5%] max-[640px]:w-full bg-sah-white flex items-center justify-start px-[60px] max-[1024]:px-[20px] max-[1024]:justify-center border-t border-sah-light-3">
-                        <a href="/projects" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
-                            View all projects
+                        <a href={offcanvas?.view_all_projects_link || "/projects"} className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                            {offcanvas?.view_all_projects_label || "View all projects"}
                         </a>
                     </div>
                 </div>

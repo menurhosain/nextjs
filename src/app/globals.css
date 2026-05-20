@@ -48,8 +48,6 @@
     --container-width: 1620px;
 }
 
-
-
 @keyframes fade-in {
     from {
         opacity: 0;
@@ -164,11 +162,9 @@ svg {
     }
 }
 
-
-    .project-card:hover .project-card-content {
-        background: #d00435;
-    }
-
+.project-card:hover .project-card-content {
+    background: #d00435;
+}
 
 @keyframes bg-slide-from-right {
     from {
@@ -260,4 +256,43 @@ svg {
     border-right: 6px solid transparent;
     border-top: 6px solid #333;
     pointer-events: none;
+}
+
+.rich-content {
+    p {
+        @apply text-[16px] leading-normal text-sah-gray-2 mt-2;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-bold font-geist;
+    }
+
+    h1 {
+        @apply text-[40px];
+    }
+
+    h2 {
+        @apply text-[34px];
+    }
+
+    h3 {
+        @apply text-[30px];
+    }
+
+    h4 {
+        @apply text-[24px];
+    }
+
+    h5 {
+        @apply text-[16px];
+    }
+
+    h6 {
+        @apply text-[12px];
+    }
 }
