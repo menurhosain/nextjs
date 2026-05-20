@@ -197,6 +197,74 @@ export async function get_partner_page_content(locale = "en"): Promise<PartnerPa
     }
 }
 
+// Subcontractor Page
+export type SubcontractorPageContent = {
+    banner: {
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    intro_title_normal: string;
+    intro_title_animated: string;
+    intro_description: string;
+    hero_image: StrapiMedia | null;
+    icon_box: {
+        id: number;
+        Icon: string;
+        Title: string;
+        Link: string
+    }[];
+    policies_title: string;
+    policies_description: string;
+    policy_image: StrapiMedia | null;
+    policy_description: string;
+    policy_button_1_label: string;
+    policy_button_1_link: string;
+    policy_button_2_label: string;
+    policy_button_2_link: string;
+};
+export async function get_subcontractor_page_content(locale = "en"): Promise<SubcontractorPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/subcontractor-page?populate[icon_box][populate]=*&populate[banner][populate]=*&populate[hero_image][populate]=*&populate[policy_image][populate]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// Career Page
+export type CareerPageContent = {
+    banner: {
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    section_title: string;
+    section_description: string;
+    section_button_label: string;
+    section_button_link: string;
+    image_1: StrapiMedia | null;
+    image_2: StrapiMedia | null;
+    map_image: StrapiMedia | null;
+    map_legend_1: string;
+    map_legend_2: string;
+    job_section_title: string;
+    job_section_description: string;
+    job_board_image: StrapiMedia | null;
+};
+export async function get_career_page_content(locale = "en"): Promise<CareerPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/career-page?populate[banner][populate]=*&populate[image_1][populate]=*&populate[image_2][populate]=*&populate[map_image][populate]=*&populate[job_board_image][populate]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Voices of Experience (global testimonial)
 export type VoicesOfExperienceContent = {
     background: StrapiMedia | null;
