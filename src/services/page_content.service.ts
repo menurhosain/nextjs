@@ -197,6 +197,34 @@ export async function get_partner_page_content(locale = "en"): Promise<PartnerPa
     }
 }
 
+// Project Details Page
+export type ProjectDetailsPageContent = {
+    banner: {
+        banner_label: string;
+        banner_title: string;
+        banner_bg: StrapiMedia | null;
+    };
+    project_info_heading: string;
+    client_label: string;
+    category_label: string;
+    start_date_label: string;
+    end_date_label: string;
+    discuss_button_label: string;
+    discuss_button_link: string;
+    previous_project_label: string;
+    next_project_label: string;
+};
+export async function get_project_details_page_content(locale = "en"): Promise<ProjectDetailsPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/project-details-page?populate[banner][populate]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Subcontractor Page
 export type SubcontractorPageContent = {
     banner: {
@@ -209,10 +237,9 @@ export type SubcontractorPageContent = {
     intro_description: string;
     hero_image: StrapiMedia | null;
     icon_box: {
-        id: number;
         Icon: string;
         Title: string;
-        Link: string
+        Link: string;
     }[];
     policies_title: string;
     policies_description: string;
