@@ -280,8 +280,8 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {pagedProjects.map((project) => (
-                                <ProjectCardSmall key={project.title} {...project} yearLabel={content?.project_card_year_label} locationLabel={content?.project_card_location_label} />
+                            {pagedProjects.map((project, index) => (
+                                <ProjectCardSmall key={index} {...project} yearLabel={content?.project_card_year_label} locationLabel={content?.project_card_location_label} />
                             ))}
                         </div>
                     )}

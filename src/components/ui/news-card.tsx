@@ -73,14 +73,14 @@ export default function NewsCard({ className, contentClass, titleParam, metaPara
 
                     { titleParam?.title && (
                         <h3 className={cn("mb-1 sm:mb-5 font-geist text-[18px] sm:text-[24px] xl:text-[30px] leading-[1.3] font-semibold md:leading-[1.2em] 2xl:pr-[100px] ", titleParam?.className)}>
-                            <Link href={href} className={cn("text-sah-white hover:text-sah-red transition duration-300 line-clamp-2", titleParam?.linkClass)}>
+                            <a href={href} className={cn("text-sah-white hover:text-sah-red transition duration-300 line-clamp-2", titleParam?.linkClass)}>
                                 {titleParam?.title}
-                            </Link>
+                            </a>
                         </h3>
                     )}
 
                     <span className="text-[14px] sm:text-[16px] font-medium capitalize">
-                        <Link href={href} className="underline underline-offset-4 text-sah-white hover:text-sah-red transition duration-300">Explore More</Link>
+                        <a href={href} className="underline underline-offset-4 text-sah-white hover:text-sah-red transition duration-300">Explore More</a>
                     </span>
                 </div>
             </div>

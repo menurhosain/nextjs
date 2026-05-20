@@ -34,6 +34,7 @@ export default function News({ subTitle, title, description, btnLabel, btnLink, 
                         {posts.map((post, index) => (
                             <div key={post.documentId} className={COL_SPANS[index] ?? "col-span-1 lg:col-span-3"}>
                                 <NewsCard
+                                    href={`/news/${post.slug}`}
                                     imageParam={{ src: post.image }}
                                     metaParam={{
                                         author: post.author,
