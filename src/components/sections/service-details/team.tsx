@@ -21,9 +21,9 @@ export default function TeamSection({ section_title, teams }: TeamSectionProps) 
         : FALLBACK_TEAMS;
 
     return (
-        <section className="relative w-full section-padding lg:pt-[140px] lg:pb-[110px] py-[80px] bg-sah-dark-2">
-            <div className="container">
-                <div className="grid grid-cols-6 gap-5 items-start mb-[50px]">
+        <section className="relative w-full section-padding lg:pt-[143px] lg:pb-[110px] py-[80px] bg-sah-dark-2">
+            <div className="container max-[1536px]:!px-0">
+                <div className="grid grid-cols-1 xl:grid-cols-6 gap-5 items-start mb-[30px] lg:mb-[50px]">
                     <div className="col-span-3">
                         <Section_Title
                             subtitle={section_title?.sub_title || "Our Teams"}
@@ -35,13 +35,13 @@ export default function TeamSection({ section_title, teams }: TeamSectionProps) 
                             title={section_title?.title || "Our leadership teams"}
                             description={section_title?.description || "Our team brings extensive expertise in modular construction, offsite manufacturing, and complex project execution. With a strong focus on innovation, efficiency, and precision, we continuously."}
                             class_name={{
-                                title: "xl:!text-[80px] xl:!leading-[86px] font-medium text-white !mb-[15px] max-w-[870px] text-[70px] ",
+                                title: "xl:!text-[60px] 2xl:!text-[80px] xl:!leading-[66px] 2xl:!leading-[86px] font-medium text-white !mb-[15px] max-w-[870px] max-[640]:!leading-[36px] ",
                                 description: "text-white"
                             }}
                         />
                     </div>
                 </div>
-                <div className="grid grid-cols-4 gap-[30px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[15px] xl:gap-[30px]">
                     {displayTeams.map((team, index) => (
                         <TeamCard
                             key={team.id || index}
