@@ -22,6 +22,7 @@ export type Project = {
     scope: string[];
     industry: string[];
     title: string;
+    slug: string;
     image: string;
     year: string;
     location: string[];
