@@ -185,14 +185,28 @@ export type PartnerPageContent = {
     partner_section_title_normal?: string;
     partner_section_title_animated?: string;
     partner_logos: [any];
-    testimonial_bg: StrapiMedia | null;
-    testimonial_quote: string;
-    testimonial_author_name: string;
-    testimonial_author_role: string;
 };
 export async function get_partner_page_content(locale = "en"): Promise<PartnerPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/partner-page?populate[banner][populate]=*&populate[partner_logos][populate]=*&populate[testimonial_bg][populate]=*&locale=${locale}`);
+        const res = await fetch(`${BASE_URL}/api/partner-page?populate[banner][populate]=*&populate[partner_logos][populate]=*&locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// Voices of Experience (global testimonial)
+export type VoicesOfExperienceContent = {
+    background: StrapiMedia | null;
+    quote: string;
+    name: string;
+    role: string;
+};
+export async function get_voices_of_experience_content(locale = "en"): Promise<VoicesOfExperienceContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/voices-of-experience?populate=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
