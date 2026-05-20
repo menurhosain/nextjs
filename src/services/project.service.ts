@@ -16,6 +16,8 @@ export type ProjectDetail = {
     industries: string[];
     locations: string[];
     content: BlocksContent;
+    end_content: BlocksContent;
+    highlited_lists: [{ id: number; text: string }];
 };
 
 export type Project = {
@@ -90,6 +92,8 @@ export async function get_project_by_slug(slug: string, locale = "en"): Promise<
             imageGallery?: { url: string }[];
             imageGallerySecond?: { url: string }[];
             content?: BlocksContent;
+            end_content?: BlocksContent;
+            highlited_lists: [{ id: number; text: string }];
         } = json.data?.[0];
         if (!item) return null;
 
@@ -110,6 +114,8 @@ export async function get_project_by_slug(slug: string, locale = "en"): Promise<
             industries: (item.industries ?? []).map((i) => i.name),
             locations: (item.locations ?? []).map((l) => l.name),
             content: item.content ?? [],
+            end_content: item.end_content ?? [],
+            highlited_lists: item.highlited_lists ?? [],
         };
     } catch {
         return null;
