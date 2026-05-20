@@ -4,14 +4,14 @@ import NewsCard from "@/components/ui/news-card";
 import type { NewsItem, NewsTag } from "@/services/news.service";
 import { useEffect, useRef, useState } from "react";
 
-const ITEMS_PER_PAGE = 6;
-
 type NewsListProps = {
     posts: NewsItem[];
     tags: NewsTag[];
+    count?: number;
 };
 
-export default function NewsList({ posts, tags }: NewsListProps) {
+export default function NewsList({ posts, tags, count }: NewsListProps) {
+    const ITEMS_PER_PAGE = count || 6;
     const [activeTags, setActiveTags] = useState<string[]>([]);
     const [search, setSearch] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -120,6 +120,7 @@ export default function NewsList({ posts, tags }: NewsListProps) {
                         {pagedPosts.map((post) => (
                             <NewsCard
                                 key={post.documentId}
+                                href={`/news/${post.slug}`}
                                 className="rounded-[12px]"
                                 titleParam={{
                                     className: "p-0 md:text-[24px]",

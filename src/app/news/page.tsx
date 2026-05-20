@@ -9,6 +9,7 @@ import { getStrapiMediaUrl } from "@/lib/utils";
 export default async function NewsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
     const [posts, tags, page] = await Promise.all([get_news_items(), get_news_tags(), get_news_page_content(locale)]);
+    const post_count = page?.post_per_page ?? 0;
 
     const bg = getStrapiMediaUrl(page?.Banner?.banner_bg) || "/home-hero.mp4";
     const subtitle = page?.Banner?.banner_label || "Reliable Business Partners";
@@ -28,7 +29,7 @@ export default async function NewsPage() {
                 </Right>
             </Banner>
 
-            <News posts={posts} tags={tags} />
+            <News posts={posts} tags={tags} count={post_count} />
         </>
     );
 }

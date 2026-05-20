@@ -608,6 +608,7 @@ export type NewsPageContent = {
         banner_title: string;
         banner_bg: StrapiMedia | null;
     };
+    post_per_page: number | null;
 };
 export async function get_news_page_content(locale = "en"): Promise<NewsPageContent | null> {
     try {
