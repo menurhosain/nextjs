@@ -67,7 +67,7 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                     </div>
 
                     <div className="lg:grid 2xl:grid-cols-[1fr_370px] xl:grid-cols-[1fr_303px] lg:place-items-start gap-x-[30px] 2xl:gap-x-[65px]">
-                        <div className="">
+                        <div className="rich-content">
                             <BlocksRenderer content={project_content.content} />
 
                             <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full sm:w-150 mt-5">
@@ -130,7 +130,7 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                         ))}
                     </div>
 
-                    <div className="mt-8">
+                    <div className="mt-8 rich-content">
                         <BlocksRenderer content={project_content.end_content} />
                     </div>
 
