@@ -77,7 +77,7 @@ export default async function ServicesDetailsPage() {
                 subtitle={page?.service_section_title?.sub_title}
                 title={page?.service_section_title?.title}
                 className="bg-none bg-sah-light-4 py-0"
-                containerClass="border-x border-sah-light-3 pt-[140px] pb-[150px]"
+                containerClass="xl:border-x border-sah-light-3 !px-0 xl:!px-10"
                 bgShape={false}
             />
 

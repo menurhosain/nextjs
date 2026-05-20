@@ -49,48 +49,32 @@ export default function ProjectGallery({ images }: { images: string[] }) {
     };
 
     return (
-        <div
-            className="flex flex-col-reverse sm:grid lg:grid-cols-[200px_1fr] grid-cols-[127px_1fr] gap-3"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-        >
+        <div className="flex flex-col-reverse sm:grid lg:grid-cols-[200px_1fr] grid-cols-[127px_1fr] gap-3" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
             {/* Thumbnail strip */}
             <div className="no-scrollbar flex sm:flex-col gap-[10px] sm:gap-[20px] h-[60px] sm:h-[420px] lg:h-[640px] overflow-hidden">
                 {images.map((src, i) => (
                     <button
                         key={i}
-                        ref={(el) => { thumbRefs.current[i] = el; }}
+                        ref={(el) => {
+                            thumbRefs.current[i] = el;
+                        }}
                         type="button"
                         onClick={() => handleSelect(i)}
                         className={`relative w-[60px] sm:w-[127px] lg:w-[200px] h-[60px] sm:h-[127px] lg:h-[200px] shrink-0 overflow-hidden cursor-pointer ${
                             selected === i ? "border-4 border-sah-red" : ""
                         }`}
                     >
-                        <Image
-                            src={src}
-                            alt={`Project thumbnail ${i + 1}`}
-                            fill
-                            className="object-cover"
-                        />
+                        <img src={src} alt={`Project thumbnail ${i + 1}`} className="object-cover absolute inset-0 h-full w-full" />
 
                         {/* Progress bar on active thumb */}
-                        {selected === i && !paused && (
-                            <div className="absolute bottom-0 left-0 h-1 bg-sah-red/30 transition-none"
-                                style={{ width: `${progress}%` }}
-                            />
-                        )}
+                        {selected === i && !paused && <div className="absolute bottom-0 left-0 h-1 bg-sah-red/30 transition-none" style={{ width: `${progress}%` }} />}
                     </button>
                 ))}
             </div>
 
             {/* Main image */}
             <div key={selected} className="fade-in relative h-[300px] sm:h-[420px] lg:h-[640px] overflow-hidden">
-                <Image
-                    src={images[selected]}
-                    alt="Project main image"
-                    fill
-                    className="object-cover"
-                />
+                <img src={images[selected]} alt="Project main image" className="object-cover absolute inset-0 h-full w-full" />
 
                 {/* Dot indicators */}
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
@@ -99,11 +83,7 @@ export default function ProjectGallery({ images }: { images: string[] }) {
                             key={i}
                             type="button"
                             onClick={() => handleSelect(i)}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                selected === i
-                                    ? "bg-white scale-125"
-                                    : "bg-white/50 hover:bg-white/80"
-                            }`}
+                            className={`w-2 h-2 rounded-full transition-all duration-300  ${selected === i ? "bg-white scale-125" : "bg-white/50 hover:bg-white/80"}`}
                         />
                     ))}
                 </div>

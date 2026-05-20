@@ -21,7 +21,7 @@ export default function FeatureCard({ icon, step, title, description, className 
                 <span className="text-white text-[16px] leading-[24px] font-medium">{step}</span>
             </div>
             <div className="flex flex-col gap-[18px]">
-                <h3 className="text-white font-semibold text-[24px] leading-[28px] font-geist">{title}</h3>
+                <h3 className="text-white font-semibold text-[20px] 2xl:text-[24px] leading-[28px] font-geist">{title}</h3>
                 <div className="relative w-[145px] h-px">
                     <div className="w-[70px] h-full bg-white mb-[-1px] sah-transition group-hover:w-full" />
                     <div className="w-full h-full bg-white/30" />

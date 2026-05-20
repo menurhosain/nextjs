@@ -35,7 +35,7 @@ export default function FeatureSection({ bg, items }: FeatureSectionProps) {
 
     return (
         <section className="relative w-full section-padding bg-cover bg-no-repeat" style={{ backgroundImage: `url('${bgUrl}')` }}>
-            <div className="grid grid-cols-3 backdrop-blur-[32px] w-full max-w-[1282px] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 backdrop-blur-[32px] w-full max-w-[1282px] mx-auto">
                 {displayItems.map((feature, index) => (
                     <FeatureCard
                         key={feature.id}
@@ -44,8 +44,8 @@ export default function FeatureSection({ bg, items }: FeatureSectionProps) {
                         title={feature.title}
                         description={feature.description}
                         className={`
-                            px-[45px] pt-[50px] pb-[34px]
-                            ${index !== displayItems.length - 1 ? "border-r border-r-sah-overlay-white-15" : ""}
+                            pt-[50px] pb-[34px] !px-[20px] 2xl:px-[45px]
+                            ${index !== displayItems.length - 1 ? "md:border-r md:border-r-sah-overlay-white-15  max-[768px]:border-b max-[768px]:border-b-sah-overlay-white-15" : ""}
                         `}
                     />
                 ))}
