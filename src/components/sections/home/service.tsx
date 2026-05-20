@@ -28,7 +28,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
 
     useEffect(() => {
         const mm = gsap.matchMedia();
-        mm.add("(min-width: 768px)", () => {
+        mm.add("(min-width: 1280px)", () => {
             const ctx = gsap.context(() => {
                 const lastCard = cardRefsArray.current[cardRefsArray.current.length - 1];
                 gsap.to(sectionTitleRef.current, {
@@ -63,7 +63,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
     return (
         <section id="services" className="section-padding value-pin-area relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden">
             <div aria-hidden="true" className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"/>
-            <div className="container mx-auto border-x border-sah-light-3 pt-[73px] lg:pt-[143px] pb-[80px] lg:pb-[150px] max-[1024px]:!px-4">
+            <div className="container mx-auto border-x border-sah-light-3 pt-[73px] lg:pt-[143px] pb-[80px] lg:pb-[150px] max-[1280px]:!px-4">
                 <div className="mb-[23px]" ref={sectionTitleRef}>
                     <div className="flex items-center justify-center gap-6 mb-[38px] max-[1024px]:mb-[20px]">
                         <span className="text-sah-black flex items-center gap-[6px] text-[16px] max-[768px]:text-[14px] font-medium tracking-widest uppercase font-inter">
@@ -87,7 +87,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element items-start">
                     {service_cards?.map((ser, i) => (
-                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-md:!mt-0" ref={(el) => { cardRefsArray.current[i] = el; }} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
+                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-xl:!mt-0" ref={(el) => { cardRefsArray.current[i] = el; }} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
                     ))}
                 </div>
 
