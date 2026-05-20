@@ -26,7 +26,7 @@ export default function Service({ className, containerClass, bgShape = true, ser
     useEffect(() => {
         const mm = gsap.matchMedia();
 
-        mm.add("(min-width: 768px)", () => {
+        mm.add("(min-width: 1280px)", () => {
             const ctx = gsap.context(() => {
                 const lastCard = cardRefsArray.current[cardRefsArray.current.length - 1];
                 gsap.to(sectionTitleRef.current, {
@@ -61,14 +61,14 @@ export default function Service({ className, containerClass, bgShape = true, ser
     }, []);
 
     return (
-        <section className={cn("section-padding value-pin-area pt-[73px] lg:pt-[143px] pb-[80px] lg:pb-[150px] relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden", className)}>
+        <section className={cn("section-padding value-pin-area  relative bg-[linear-gradient(0deg,#f5f5f58f_42.16%,#fff0_204.49%),url('/home_service_bg.jpg')] bg-cover bg-center overflow-hidden", className)}>
             {bgShape &&
                 <div
                     aria-hidden="true"
                     className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-[780px] md:h-[600px] bg-[url('/brand_shape.png')] bg-no-repeat bg-center bg-bottom pointer-events-none"
                 />
             }
-            <div className={cn("container mx-auto  !px-0", containerClass)}>
+            <div className={cn("container mx-auto pt-[73px] lg:pt-[143px] pb-[80px] lg:pb-[150px] !px-0", containerClass)}>
                 <div className="mb-[20px] lg:mb-[50px] flex flex-col items-center " ref={sectionTitleRef}>
                     <Section_Title
                         subtitle={subtitle || "our expertise"}
@@ -79,7 +79,7 @@ export default function Service({ className, containerClass, bgShape = true, ser
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element items-start">
                     {services?.map((ser, i) => (
-                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-md:!mt-0" ref={(el) => { cardRefsArray.current[i] = el; }} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
+                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-xl:!mt-0" ref={(el) => { cardRefsArray.current[i] = el; }} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
                     ))}
                 </div>
             </div>
