@@ -21,8 +21,8 @@ export default function ForgetPasswordPage() {
               <div></div>
           </Right>
       </Banner>
-      <div className="py-[150px] flex items-center justify-center bg-gray-50 px-4">
-        <div className="w-full max-w-sm bg-white rounded-2xl shadow-md p-8">
+      <div className="py-[80px] lg:py-[150px] flex items-center justify-center bg-gray-50 px-4">
+        <div className="w-full max-w-sm bg-white rounded-2xl shadow-md p-5 sm:p-8">
           <ForgetPasswordForm />
           <p className="mt-6 text-center text-sm text-gray-500">
             Remember your password?{" "}
