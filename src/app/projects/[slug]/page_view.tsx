@@ -8,46 +8,13 @@ import { ProjectCheck, ProjectArrowLeft, ProjectArrowRight } from "@/components/
 import { ProjectDetail } from "@/services/project.service";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
-const projectImages = ["/project-1.jpg", "/project-2.jpg", "/project-3.jpg", "/project-1.jpg", "/project-1.jpg"];
-
-type GalleryImage = {
-    id: number;
-    src: string;
-    thumb: string;
-    title: string;
-    category: string;
-};
-
-const images: GalleryImage[] = [
-    {
-        id: 1,
-        src: "/project-4.jpg",
-        thumb: "/project-4.jpg",
-        title: "Mountain Peaks",
-        category: "Landscape",
-    },
-    {
-        id: 2,
-        src: "/project-5.jpg",
-        thumb: "/project-5.jpg",
-        title: "Aerial Forest",
-        category: "Nature",
-    },
-    {
-        id: 3,
-        src: "/project-6.jpg",
-        thumb: "/project-6.jpg",
-        title: "Golden Dunes",
-        category: "Desert",
-    },
-];
-
 export default function ProjectDetailsPage({ project_content }: { project_content: ProjectDetail }) {
-    const [selected, setSelected] = useState<GalleryImage | null>(null);
+    const gallery = project_content.imageGallerySecond;
+    const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
     const [isVisible, setIsVisible] = useState(false);
 
-    const openImage = (img: GalleryImage) => {
-        setSelected(img);
+    const openImage = (idx: number) => {
+        setSelectedIdx(idx);
         setIsVisible(true);
         document.body.style.overflow = "hidden";
     };
@@ -55,31 +22,29 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
     const closeImage = useCallback(() => {
         setIsVisible(false);
         setTimeout(() => {
-            setSelected(null);
+            setSelectedIdx(null);
             document.body.style.overflow = "";
         }, 250);
     }, []);
 
     const navigate = useCallback(
         (dir: number) => {
-            if (!selected) return;
-            const idx = images.findIndex((img) => img.id === selected.id);
-            const next = (idx + dir + images.length) % images.length;
-            setSelected(images[next]);
+            if (selectedIdx === null) return;
+            setSelectedIdx((selectedIdx + dir + gallery.length) % gallery.length);
         },
-        [selected],
+        [selectedIdx, gallery.length],
     );
 
     useEffect(() => {
         const handleKey = (e: KeyboardEvent) => {
-            if (!selected) return;
+            if (selectedIdx === null) return;
             if (e.key === "Escape") closeImage();
             if (e.key === "ArrowRight") navigate(1);
             if (e.key === "ArrowLeft") navigate(-1);
         };
         window.addEventListener("keydown", handleKey);
         return () => window.removeEventListener("keydown", handleKey);
-    }, [selected, closeImage, navigate]);
+    }, [selectedIdx, closeImage, navigate]);
 
     return (
         <>
@@ -146,19 +111,18 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                         </div>
                     </div>
                     <div className="grid  md:grid-cols-3 grid-cols-1 gap-6 mt-9">
-                        {images.map((img) => (
+                        {gallery.map((src, idx) => (
                             <div
-                                key={img.id}
+                                key={idx}
                                 role="button"
                                 tabIndex={0}
-                                aria-label={`Open ${img.title}`}
-                                onClick={() => openImage(img)}
-                                onKeyDown={(e) => e.key === "Enter" && openImage(img)}
+                                onClick={() => openImage(idx)}
+                                onKeyDown={(e) => e.key === "Enter" && openImage(idx)}
                                 className="group relative overflow-hidden bg-neutral-900 cursor-pointer"
                             >
                                 <img
-                                    src={img.thumb}
-                                    alt={img.title}
+                                    src={src}
+                                    alt={`${project_content.title} image ${idx + 1}`}
                                     loading="lazy"
                                     className="w-full h-full object-cover brightness-100 transition-all duration-500 group-hover:scale-105 group-hover:brightness-80"
                                 />
@@ -201,7 +165,7 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
             </section>
 
             {/* Lightbox */}
-            {selected && (
+            {selectedIdx !== null && (
                 <div
                     role="dialog"
                     aria-modal="true"
@@ -232,13 +196,13 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                                 ←
                             </button>
 
-                            <img src={selected.src} alt={selected.title} className="max-w-full max-h-[72vh] object-contain rounded shadow-2xl" />
+                            <img src={gallery[selectedIdx]} alt={`${project_content.title} image ${selectedIdx + 1}`} className="max-w-full max-h-[72vh] object-contain rounded shadow-2xl" />
 
                             {/* Next */}
                             <button
                                 aria-label="Next image"
                                 onClick={() => navigate(1)}
-                                className="absolute right-15 xl:-right-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-24px hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
+                                className="absolute right-15 xl:-right-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-[24px] hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
                             >
                                 →
                             </button>
@@ -247,15 +211,15 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
 
                     {/* Dot indicators */}
                     <div className="fixed bottom-7 max-[1024px]:hidden left-1/2 -translate-x-1/2 flex gap-1.5 z-50">
-                        {images.map((img) => (
+                        {gallery.map((_, idx) => (
                             <button
-                                key={img.id}
-                                aria-label={`Go to ${img.title}`}
+                                key={idx}
+                                aria-label={`Go to image ${idx + 1}`}
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    setSelected(img);
+                                    setSelectedIdx(idx);
                                 }}
-                                className={`rounded-full transition-all duration-200  cursor-pointer ${img.id === selected.id ? "w-5 h-2 bg-white/90" : "w-2 h-2 bg-white/30 hover:bg-white/50"}`}
+                                className={`rounded-full transition-all duration-200 cursor-pointer ${idx === selectedIdx ? "w-5 h-2 bg-white/90" : "w-2 h-2 bg-white/30 hover:bg-white/50"}`}
                             />
                         ))}
                     </div>
