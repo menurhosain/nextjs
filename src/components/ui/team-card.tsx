@@ -37,7 +37,7 @@ export default function TeamCard(
             </div>
             )}
             <div className="flex flex-col gap-1 px-[10px]">
-                <h4 className={cn("text-white font-geist font-semibold text-[20px] sm:text-[24px] leading-[30px]", titleClass)}>{name}</h4>
+                <h4 className={cn("text-white font-geist font-semibold text-[20px] xl:text-[24px] leading-[30px]", titleClass)}>{name}</h4>
                 <span className={cn("text-white text-[16px] font-normal", roleClass)}>{role}</span>
                 {showContact &&
                     <div className="flex 2xl:items-center flex-col 2xl:flex-row gap-[10px] 2xl:gap-[30px] mt-[10px] md:mt-[20px]">

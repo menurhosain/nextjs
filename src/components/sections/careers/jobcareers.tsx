@@ -3,6 +3,12 @@
 import { useState } from "react";
 import { AngleArrow } from "@/components/ui/svgs";
 
+type Props = {
+    job_section_title?: string;
+    job_section_description?: string;
+    job_board_image?: string | null;
+};
+
 const jobListings = [
     { id: 1, type: "Full Time", title: "Project Manager Consulting", accent: false, link: "#1" },
     { id: 2, type: "Full Time", title: "Project Manager Consulting", accent: true, link: "#2"},
@@ -10,7 +16,7 @@ const jobListings = [
     { id: 4, type: "Full Time", title: "Project Manager Consulting", accent: false, link: "#4" },
 ];
 
-export default function JobCareers() {
+export default function JobCareers({ job_section_title, job_section_description, job_board_image }: Props) {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     return (
@@ -20,15 +26,12 @@ export default function JobCareers() {
                     <div className="flex flex-col xl:flex-row justify-between items-start mb-[50px] gap-4 xl:gap-8">
                         <div className="w-full xl:w-1/2">
                             <h2 className="text-[26px] sm:text-[38px] md:text-[48px] 2xl:text-[60px] leading-[36px] sm:leading-[44px] xl:leading-[64px] font-medium text-sah-dark-2">
-                                Build your future
-                                <br />
-                                through collaboration
+                                {job_section_title || <>Build your future<br />through collaboration</>}
                             </h2>
                         </div>
                         <div className="w-full xl:w-[605px]">
                             <p className="text-[16px] text-sah-gray-2 font-medium leading-[28px]">
-                                With us, your career is always moving forward. You'll grow through continuous learning, guided by mentorship at every stage, while collaborating with diverse teams to
-                                broaden your skills, knowledge, and experience. Our leadership is rooted in strong values. Our culture reflects principles.
+                                {job_section_description || "With us, your career is always moving forward. You'll grow through continuous learning, guided by mentorship at every stage, while collaborating with diverse teams to broaden your skills, knowledge, and experience. Our leadership is rooted in strong values. Our culture reflects principles."}
                             </p>
                         </div>
                     </div>
@@ -38,7 +41,7 @@ export default function JobCareers() {
                         {/* Left: Team Photo */}
                         <div className="w-full xl:w-[35%] 2xl:[46%]">
                             <div className="rounded-[6px] overflow-hidden">
-                                <img src="/jobcareers-thumb.jpg" alt="Team collaboration" className="w-full h-[200px] sm:h-[416px] object-cover object-center" />
+                                <img src={job_board_image || "/jobcareers-thumb.jpg"} alt="Team collaboration" className="w-full h-[200px] sm:h-[416px] object-cover object-center" />
                             </div>
                         </div>
 
