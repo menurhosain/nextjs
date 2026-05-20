@@ -22,6 +22,7 @@ type StrapiRelationItem = { name: string };
 type StrapiProjectItem = {
     documentId: string;
     title?: string;
+    slug?: string;
     excerpt?: string;
     year?: number;
     featuredImage?: { url: string } | null;
@@ -39,9 +40,10 @@ async function fetch_raw_projects(locale = "en", count = 2000): Promise<Project[
             const imageUrl = item.featuredImage?.url ?? "";
             return {
                 title: item.title ?? "",
+                slug: item.title ?? "",
                 excerpt: item.excerpt ?? "",
                 year: String(item.year ?? ""),
-                link: `/projects/${item.documentId}`,
+                link: `/projects/${item.slug}`,
                 image: imageUrl.startsWith("http") ? imageUrl : `${BASE_URL}${imageUrl}`,
                 scope: (item.scopes ?? []).map((s) => s.name),
                 industry: (item.industries ?? []).map((i) => i.name),

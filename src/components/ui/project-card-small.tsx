@@ -3,6 +3,7 @@ import Link from "next/link";
 type ProjectCardSmallProps = {
     scope: string[];
     title: string;
+    slug: string;
     image: string;
     year: string;
     location: string[];
