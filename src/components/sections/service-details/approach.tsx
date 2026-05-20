@@ -16,7 +16,7 @@ export default function Approach({ section_title, image }: ApproachProps) {
                     <div className="col-span-7">
                         <Section_Title
                             subtitle={section_title?.sub_title || "Our Approach"}
-                            title={section_title?.title || "Our Approach Engineer Led, Owner-Focused."}
+                            title={section_title?.title || "Our approach engineer led, owner-focused."}
                             description={section_title?.description || "Offsite operates a 200,000-square-foot manufacturing facility in central Alabama, designed to support high-efficiency production and precision engineering. The facility integrates advanced technologies, including Lincoln Python systems for streamlined steel processing, ABB robotics for accurate beam assembly, and a TopStation to optimize fabrication workflows. This modern."}
                             class_name={{
                                 subtitle: "text-sah-black !mb-[15px] text-white",
