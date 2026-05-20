@@ -104,13 +104,13 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
 
     return (
         <>
-            <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection} class_name="lg:min-h-[800px]">
-                <Left class_name="flex flex-col justify-center w-[100%] md:w-[45%] xl:w-[60%]">
-                    <div className="flex flex-col justify-center mt-[110px] xl:mt-[188px]">
+            <Banner bg={projects[sliderIndex]?.image} bgDirection={sliderDirection} class_name="lg:min-h-[800px] max-[768px]:!pb-0" container_class="max-[1024px]:!flex-col">
+                <Left class_name="flex flex-col justify-center w-[100%] md:w-[100%] lg:w-[45%] xl:w-[60%]">
+                    <div className="flex flex-col justify-center md:mt-[110px] xl:mt-[188px]">
                         <Banner_Title subtitle="Explore Our Recent Projects" title="Showcasing our latest construction projects and achievements" />
                     </div>
-                    <div className="flex flex-col xl:flex-row gap-4 self-start w-[90%] py-[40px] lg:py-[70px] relative  mt-auto">
-                        <div className="absolute bg-sah-white/20 top-0 h-[1px] w-[120vw] ml-[calc(50%-50vw)]"></div>
+                    <div className="flex flex-col xl:flex-row gap-4 self-start w-full md:w-[90%] py-[40px] lg:py-[70px] relative  mt-auto">
+                        <div className="absolute bg-sah-white/20 top-0 h-[1px] w-[120vw] ml-[calc(50%-50vw)] max-[1024px]:hidden"></div>
 
                         {/* Search */}
                         <div className="flex-1 flex items-center gap-[20px] justify-between bg-sah-gray-5 px-6 transition-colors duration-200 pr-[14px]">
@@ -119,7 +119,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                                 value={inputValue}
                                 onChange={(e) => handleSearch(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && submitSearch()}
-                                className="text-sah-white h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white bg-transparent"
+                                className="text-sah-white h-[65px] flex-1 border-none outline-none font-inter text-[16px] font-medium placeholder:text-sah-white bg-transparent max-[640px]:w-[90%]"
                                 placeholder="Find a project"
                             />
                             <button type="button" onClick={submitSearch} className="size-[40px] flex items-center justify-center cursor-pointer">
@@ -143,7 +143,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                 </Left>
 
                 <Right className=" md:w-[55%] xl:w-[38%]">
-                    <div className="lg:pl-[20px] flex gap-[30px] w-full pb-10">
+                    <div className="lg:pl-[20px] flex gap-[20px] sm:gap-[30px] w-full pb-10">
                         <div className="flex items-center flex-col gap-[40px]">
                             <button
                                 type="button"
@@ -172,8 +172,8 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
 
                         <div className="overflow-hidden">
                             <div key={sliderAnimKey} className={sliderDirection === "right" ? "slider-slide-right" : "slider-slide-left"}>
-                                <span className="mb-[24px] block text-sah-white font-bold text-[16px] leading-[20px] uppercase tracking-wider">{projects[sliderIndex]?.scope[0]}</span>
-                                <Link href={projects[sliderIndex]?.link ?? "#"} className="font-geist font-normal text-[24px] lg:text-[30px] leading-[38px] text-sah-white underline">
+                                <span className="mb-[24px] block text-sah-white font-bold text-[14px] sm:text-[16px] leading-[20px] uppercase tracking-wider">{projects[sliderIndex]?.scope[0]}</span>
+                                <Link href={projects[sliderIndex]?.link ?? "#"} className="font-geist font-normal text-[18px] sm:text-[24px] max-[640px]:block lg:text-[30px] leading-[38px] text-sah-white underline">
                                     {projects[sliderIndex]?.title}
                                 </Link>
                             </div>
@@ -260,7 +260,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
             </div>
 
             <section ref={sectionRef} className="section-padding bg-sah-light-4">
-                <div className="container pt-[80px] lg:py-[150px] border-x border-sah-light-3 max-[1024px]:!px-4">
+                <div className="container pt-[80px] pb-[80px] lg:py-[150px] border-x border-sah-light-3 max-[1024px]:!px-4">
                     {filteredProjects.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-[80px] gap-4">
                             <p className="font-geist text-[32px] font-medium text-sah-dark">No projects found.</p>
@@ -275,7 +275,7 @@ export default function ProjectsView({ projects, tags }: { projects: Project[]; 
                     )}
 
                     {filteredProjects.length > 0 && (
-                        <div className="flex items-center justify-center gap-2 mt-[60px]">
+                        <div className="flex items-center justify-center gap-2 mt-[40px] lg:mt-[60px] max-[640px]:flex-wrap">
                             <button
                                 type="button"
                                 disabled={currentPage === 1}

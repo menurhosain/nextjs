@@ -18,13 +18,6 @@ export default function ProjectGallery({ images }: { images: string[] }) {
         if (progressRef.current) clearInterval(progressRef.current);
     };
 
-    const scrollThumbIntoView = (index: number) => {
-        thumbRefs.current[index]?.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-        });
-    };
-
     const startAutoplay = useCallback(() => {
         clearTimers();
         setProgress(0);
@@ -37,7 +30,6 @@ export default function ProjectGallery({ images }: { images: string[] }) {
         intervalRef.current = setInterval(() => {
             setSelected((prev) => {
                 const next = (prev + 1) % images.length;
-                scrollThumbIntoView(next);
                 return next;
             });
             setProgress(0);
@@ -58,19 +50,19 @@ export default function ProjectGallery({ images }: { images: string[] }) {
 
     return (
         <div
-            className="grid grid-cols-[200px_1fr] gap-3"
+            className="flex flex-col-reverse sm:grid lg:grid-cols-[200px_1fr] grid-cols-[127px_1fr] gap-3"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
         >
             {/* Thumbnail strip */}
-            <div className="no-scrollbar flex flex-col gap-[20px] h-[640px] overflow-hidden">
+            <div className="no-scrollbar flex sm:flex-col gap-[10px] sm:gap-[20px] h-[60px] sm:h-[420px] lg:h-[640px] overflow-hidden">
                 {images.map((src, i) => (
                     <button
                         key={i}
                         ref={(el) => { thumbRefs.current[i] = el; }}
                         type="button"
                         onClick={() => handleSelect(i)}
-                        className={`relative w-[200px] h-[200px] shrink-0 overflow-hidden cursor-pointer ${
+                        className={`relative w-[60px] sm:w-[127px] lg:w-[200px] h-[60px] sm:h-[127px] lg:h-[200px] shrink-0 overflow-hidden cursor-pointer ${
                             selected === i ? "border-4 border-sah-red" : ""
                         }`}
                     >
@@ -92,7 +84,7 @@ export default function ProjectGallery({ images }: { images: string[] }) {
             </div>
 
             {/* Main image */}
-            <div key={selected} className="fade-in relative h-[640px] overflow-hidden">
+            <div key={selected} className="fade-in relative h-[300px] sm:h-[420px] lg:h-[640px] overflow-hidden">
                 <Image
                     src={images[selected]}
                     alt="Project main image"
