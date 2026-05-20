@@ -1,10 +1,14 @@
 import { NavLinks, NavActions } from "@/components/new-nav";
 import { headers } from "next/headers";
 import { get_mega_menu } from "@/services/mega_menu.service";
+import { get_offcanvas_content } from "@/services/offcanvas.service";
 
 export default async function Header() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const menus = await get_mega_menu(locale);
+    const [menus, offcanvas] = await Promise.all([
+        get_mega_menu(locale),
+        get_offcanvas_content(locale),
+    ]);
 
     return (
         <div className="sah-header section-padding w-full absolute top-0 left-0 right-0 z-9999 border-b border-white/20 max-[1700px]:px-0">
@@ -13,7 +17,7 @@ export default async function Header() {
                     <NavLinks menus={menus} />
                 </div>
                 <div className="w-[100%] xl:w-[40%]">
-                    <NavActions locale={locale} menus={menus} />
+                    <NavActions locale={locale} menus={menus} offcanvas={offcanvas} />
                 </div>
             </div>
         </div>
