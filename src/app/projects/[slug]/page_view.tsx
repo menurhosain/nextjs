@@ -171,24 +171,31 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                     </div>
 
                     <div className="flex sm:flex-row flex-col items-center justify-between border-t border-b border-sah-light-3 pt-4.5 pb-4.5 gap-4 mt-11">
-                        <a href="#" className="flex items-center gap-3 flex-1 transition-all group">
-                            <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-1 group-hover:text-sah-red transition-transform">
-                                <ProjectArrowLeft />
-                            </span>
-                            <div>
-                                <p className="text-[16px] font-semibold  text-sah-dark-2 group-hover:text-sah-red mb-1 !m-0  transition-all">Previous Project</p>
-                            </div>
-                        </a>
+                        {project_content.prev ? (
+                            <a href={`/projects/${project_content.prev.slug}`} className="flex items-center gap-3 flex-1 transition-all group">
+                                <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-1 group-hover:text-sah-red transition-transform">
+                                    <ProjectArrowLeft />
+                                </span>
+                                <div>
+                                    <p className="text-[16px] font-semibold text-sah-dark-2 group-hover:text-sah-red mb-1 !m-0 transition-all">Previous Project</p>
+                                    <p className="text-[13px] text-sah-dark-2/60 !m-0">{project_content.prev.title}</p>
+                                </div>
+                            </a>
+                        ) : (
+                            <div className="flex-1" />
+                        )}
 
-                        {/* Next */}
-                        <a href="#" className="flex items-center flex-row-reverse gap-3 flex-1 text-right group">
-                            <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-[-5px] group-hover:text-sah-red transition-transform">
-                                <ProjectArrowRight />
-                            </span>
-                            <div>
-                                <p className="text-[16px] font-semibold text-sah-dark-2 group-hover:text-sah-red mb-1 !m-0 transition-all">Next Project</p>
-                            </div>
-                        </a>
+                        {project_content.next && (
+                            <a href={`/projects/${project_content.next.slug}`} className="flex items-center flex-row-reverse gap-3 flex-1 text-right group">
+                                <span className="text-[20px] text-sah-dark-2 group-hover:translate-x-1 group-hover:text-sah-red transition-transform">
+                                    <ProjectArrowRight />
+                                </span>
+                                <div>
+                                    <p className="text-[16px] font-semibold text-sah-dark-2 group-hover:text-sah-red mb-1 !m-0 transition-all">Next Project</p>
+                                    <p className="text-[13px] text-sah-dark-2/60 !m-0">{project_content.next.title}</p>
+                                </div>
+                            </a>
+                        )}
                     </div>
                 </div>
             </section>

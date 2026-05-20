@@ -1,6 +1,8 @@
 import { BASE_URL } from "@/lib/constant";
 import type { BlocksContent } from "@strapi/blocks-react-renderer";
 
+export type AdjacentProject = { slug: string; title: string; documentId: string } | null;
+
 export type ProjectDetail = {
     title: string;
     slug: string;
@@ -18,6 +20,8 @@ export type ProjectDetail = {
     content: BlocksContent;
     end_content: BlocksContent;
     highlited_lists: [{ id: number; text: string }];
+    prev: AdjacentProject;
+    next: AdjacentProject;
 };
 
 export type Project = {
@@ -82,9 +86,13 @@ export async function get_projects(locale = "en", count = 2000): Promise<Project
 
 export async function get_project_by_slug(slug: string, locale = "en"): Promise<ProjectDetail | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/projects?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*&locale=${locale}`);
-        if (!res.ok) return null;
-        const json = await res.json();
+        const [projectRes, adjacentRes] = await Promise.all([
+            fetch(`${BASE_URL}/api/projects?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*&locale=${locale}`),
+            fetch(`${BASE_URL}/api/projects/${encodeURIComponent(slug)}/adjacent?locale=${locale}`),
+        ]);
+
+        if (!projectRes.ok) return null;
+        const json = await projectRes.json();
         const item: StrapiProjectItem & {
             startDate?: string;
             endDate?: string;
@@ -97,6 +105,7 @@ export async function get_project_by_slug(slug: string, locale = "en"): Promise<
         } = json.data?.[0];
         if (!item) return null;
 
+        const adjacent = adjacentRes.ok ? await adjacentRes.json() : { prev: null, next: null };
         const resolveUrl = (url: string) => (url.startsWith("http") ? url : `${BASE_URL}${url}`);
 
         return {
@@ -116,6 +125,8 @@ export async function get_project_by_slug(slug: string, locale = "en"): Promise<
             content: item.content ?? [],
             end_content: item.end_content ?? [],
             highlited_lists: item.highlited_lists ?? [],
+            prev: adjacent.prev ?? null,
+            next: adjacent.next ?? null,
         };
     } catch {
         return null;
