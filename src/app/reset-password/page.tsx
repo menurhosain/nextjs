@@ -11,8 +11,8 @@ export default async function ResetPasswordPage({
 
   return (
     <>
-      <Banner bg="/home-hero.mp4">
-          <Left class_name="">
+      <Banner bg="/home-hero.mp4" class_name="lg:min-h-[auto] xl:min-h-[auto] md:min-h-[auto] 2xl:h-[100vh] py-18 2xl:py-0 max-[640px]:pb-[65px]">
+          <Left class_name="max-[640px]:pt-[70px]">
               <div className="flex flex-col justify-center">
                   <Banner_Title
                       subtitle="Building Trust And Excellence"
@@ -27,13 +27,13 @@ export default async function ResetPasswordPage({
               <div></div>
           </Right>
       </Banner>
-    <div className="py-[150px] flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-sm bg-white rounded-2xl shadow-md p-8">
+    <div className="py-[80px] lg:py-[150px] flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-md p-5 sm:p-8">
         {code ? (
           <ResetPasswordForm code={code} />
         ) : (
           <>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Invalid link</h1>
+            <h2 className="text-[24px] sm:text-2xl font-bold text-gray-900 mb-2">Invalid link</h2>
             <p className="text-sm text-gray-500 mb-6">
               This reset link is missing a token. Please request a new one.
             </p>

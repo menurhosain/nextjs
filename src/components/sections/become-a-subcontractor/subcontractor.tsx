@@ -4,7 +4,6 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SubcontractorIcon1, SubcontractorIcon2, SubcontractorIcon3, SubcontractorIcon4, SubcontractorIcon5, AngleArrow } from "@/components/ui/svgs";
 
 type IconBoxItem = {
-    id: number;
     Icon: string;
     Title: string;
     Link: string;
@@ -34,12 +33,12 @@ const ICON_COMPONENTS = [
     SubcontractorIcon5,
 ];
 
-const DEFAULT_LINKS = [
-    { Title: "New User Registration",            Link: "/register-applicant" },
-    { Title: "Returning Users",                  Link: "login" },
-    { Title: "Subcontractor Quick Start Guide",  Link: "/register-contractor" },
-    { Title: "Subcontractor Navigation Guide",   Link: "#" },
-    { Title: "Email Help Desk",                  Link: "contact" },
+const DEFAULT_LINKS: IconBoxItem[] = [
+    { Icon: "", Title: "New User Registration",           Link: "/register-applicant" },
+    { Icon: "", Title: "Returning Users",                 Link: "login" },
+    { Icon: "", Title: "Subcontractor Quick Start Guide", Link: "/register-contractor" },
+    { Icon: "", Title: "Subcontractor Navigation Guide",  Link: "#" },
+    { Icon: "", Title: "Email Help Desk",                 Link: "contact" },
 ];
 
 export default function Subcontractor({
@@ -103,7 +102,7 @@ export default function Subcontractor({
             return (
               <a key={index} href={item.Link} className="px-4 h-[130px] w-full sm:w-auto sm:min-w-[150px] sm:max-w-[230px] text-center flex flex-col gap-[8px] items-center justify-center rounded-[10px] text-[16px] xl:text-[18px] font-medium tracking-wide transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white">
                 <div className="text-[35px]">
-                  {item.Icon
+                  {item?.Icon
                     ? <span dangerouslySetInnerHTML={{ __html: item.Icon }} />
                     : <IconComponent />
                   }

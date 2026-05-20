@@ -41,7 +41,7 @@ export default function NewsCard({ className, contentClass, titleParam, metaPara
                     <div className={cn("absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent", overlayParam?.className)} />
                 )}
 
-                <div className={cn("absolute bottom-0 left-0 right-0 z-10 p-5 xl:p-8 ", contentClass)}>
+                <div className={cn("absolute bottom-0 left-0 right-0 z-10 !p-5 xl:p-8 ", contentClass)}>
                     {metaParam && (
                         <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1">
                             {metaParam.author && (
@@ -72,15 +72,15 @@ export default function NewsCard({ className, contentClass, titleParam, metaPara
                     )}
 
                     { titleParam?.title && (
-                        <h3 className={cn("mb-1 sm:mb-5 font-geist text-[20px] sm:text-[24px] xl:text-[30px] leading-[1.3] font-semibold md:leading-[1.2em] 2xl:pr-[100px] ", titleParam?.className)}>
-                            <Link href={href} className={cn("text-sah-white hover:text-sah-red transition duration-300 line-clamp-2", titleParam?.linkClass)}>
+                        <h3 className={cn("mb-1 sm:mb-5 font-geist text-[18px] sm:text-[24px] xl:text-[30px] leading-[1.3] font-semibold md:leading-[1.2em] 2xl:pr-[100px] ", titleParam?.className)}>
+                            <a href={href} className={cn("text-sah-white hover:text-sah-red transition duration-300 line-clamp-2", titleParam?.linkClass)}>
                                 {titleParam?.title}
-                            </Link>
+                            </a>
                         </h3>
                     )}
 
                     <span className="text-[14px] sm:text-[16px] font-medium capitalize">
-                        <Link href={href} className="underline underline-offset-4 text-sah-white hover:text-sah-red transition duration-300">Explore More</Link>
+                        <a href={href} className="underline underline-offset-4 text-sah-white hover:text-sah-red transition duration-300">Explore More</a>
                     </span>
                 </div>
             </div>

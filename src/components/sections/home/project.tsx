@@ -66,9 +66,9 @@ export default function Projects({subTitle, title, btnLabel, btnLink, projects =
                 </div>
 
                 <div ref={ref}>
-                    {projects.map((project) => (
+                    {projects.map((project, index) => (
                         <ProjectCard
-                            key={project.link}
+                            key={index}
                             category={project.scope[0] ?? ""}
                             title={project.title}
                             description={project.excerpt}

@@ -30,7 +30,7 @@ export default function RegisterApplicantForm() {
       <input type="hidden" name="register_as" value="applicant" />
 
       {/* First name & Last name */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label htmlFor="firstName" className="font-normal text-sah-gray-1 mb-[12px]">
             First name <span className="text-red-500">*</span>
@@ -70,7 +70,7 @@ export default function RegisterApplicantForm() {
       </div>
 
       {/* Password & Confirm Password */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label htmlFor="password" className="font-normal text-sah-gray-1 mb-[12px]">
             Password <span className="text-red-500">*</span>

@@ -33,7 +33,7 @@ export default function LoginForm() {
       </div>
 
       <div className="space-y-1.5">
-        <div className="flex items-center justify-between">
+        <div className="flex sm:items-center justify-between flex-col sm:flex-row">
           <Label htmlFor="password" className="font-normal text-sah-gray-1 mb-[12px]">Password</Label>
           <a href="/forget-password" className="text-xs text-gray-500 hover:underline">
             Forgot password?

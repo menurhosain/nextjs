@@ -1,5 +1,6 @@
 import { BASE_URL } from "@/lib/constant";
 import type { StrapiMedia } from "./page_content.service";
+import type { BlocksContent } from "@strapi/blocks-react-renderer";
 
 export type NewsTag = {
     documentId: string;
@@ -62,6 +63,59 @@ export async function get_news_items(locale = "en", limit = 1000): Promise<NewsI
         return (json.data ?? []).map(map_news_item);
     } catch {
         return [];
+    }
+}
+
+export type AdjacentNewsItem = { slug: string; title: string; documentId: string } | null;
+
+export type NewsItemDetail = {
+    title: string;
+    slug: string;
+    excerpt: string;
+    date: string;
+    author: string;
+    featuredImage: string | null;
+    tags: NewsTag[];
+    content: BlocksContent;
+    prev: AdjacentNewsItem;
+    next: AdjacentNewsItem;
+};
+
+export async function get_news_item_by_slug(slug: string, locale = "en"): Promise<NewsItemDetail | null> {
+    try {
+        const [itemRes, adjacentRes] = await Promise.all([
+            fetch(`${BASE_URL}/api/news-items?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*&locale=${locale}`),
+            fetch(`${BASE_URL}/api/news-items/${encodeURIComponent(slug)}/adjacent?locale=${locale}`),
+        ]);
+
+        if (!itemRes.ok) return null;
+        const json = await itemRes.json();
+        const item = json.data?.[0];
+        if (!item) return null;
+
+        const adjacent = adjacentRes.ok ? await adjacentRes.json() : { prev: null, next: null };
+        const resolveUrl = (url: string) => (url.startsWith("http") ? url : `${BASE_URL}${url}`);
+
+        return {
+            title: item.title ?? "",
+            slug: item.slug ?? slug,
+            excerpt: item.excerpt ?? "",
+            date: item.publishedAt
+                ? new Date(item.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
+                : "",
+            author: item.author_name ?? "",
+            featuredImage: item.featured_image?.url ? resolveUrl(item.featured_image.url) : null,
+            tags: (item.tags ?? []).map(({ documentId, name, slug: tagSlug }: { documentId: string; name: string; slug: string }) => ({
+                documentId,
+                name,
+                slug: tagSlug,
+            })),
+            content: item.content ?? [],
+            prev: adjacent.prev ?? null,
+            next: adjacent.next ?? null,
+        };
+    } catch {
+        return null;
     }
 }
 
