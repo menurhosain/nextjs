@@ -4,12 +4,16 @@ import Testimonial from "@/components/sections/careers/testimonial";
 import Careers from "@/components/sections/careers/careers";
 import JobCareers from "@/components/sections/careers/jobcareers";
 import { get_voices_of_experience_content, get_career_page_content } from "@/services/page_content.service";
+import { get_jobs } from "@/services/job.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
+import { headers } from "next/headers";
 
 export default async function CareersPage() {
-    const [content, voices] = await Promise.all([
+    const locale = (await headers()).get("x-locale") ?? "en";
+    const [content, voices, jobs] = await Promise.all([
         get_career_page_content(),
         get_voices_of_experience_content(),
+        get_jobs(locale),
     ]);
 
     return (
@@ -43,6 +47,7 @@ export default async function CareersPage() {
                 job_section_title={content?.job_section_title}
                 job_section_description={content?.job_section_description}
                 job_board_image={getStrapiMediaUrl(content?.job_board_image)}
+                jobs={jobs}
             />
             <Testimonial
                 bg={getStrapiMediaUrl(voices?.background)}
