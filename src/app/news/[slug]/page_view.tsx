@@ -110,7 +110,7 @@ export default function NewsItemView({
 
                 {/* Overlay content */}
                 <div className="relative z-10 w-full section-padding">
-                    <div className="container  pb-[60px] pt-[140px]">
+                    <div className="container max-[640px]:!px-0 pb-[60px] pt-[140px]">
 
                         {/* Tags */}
                         {news.tags.length > 0 && (
@@ -146,15 +146,15 @@ export default function NewsItemView({
 
             {/* ── Article body ── */}
             <section className="section-padding">
-                <div className="container mx-auto border-x border-sah-light-3 max-[1024px]:!px-4 pt-[80px] pb-[80px] lg:pt-[100px] lg:pb-[120px]">
+                <div className="container mx-auto border-x border-sah-light-3 max-[1024px]:!px-4 pt-[80px] pb-[80px] lg:pt-[150px] lg:pb-[150px] max-[1280px]:!px-4">
 
-                    <div className="flex flex-col lg:flex-row gap-[50px] xl:gap-[80px] items-start">
+                    <div className="flex flex-col lg:flex-row gap-[30px] 2xl:gap-[80px] items-start">
 
                         {/* ── Main content ── */}
                         <div className="min-w-0 flex-1">
                             {/* Excerpt pull-quote */}
                             {news.excerpt && (
-                                <p className="text-[17px] lg:text-[19px] leading-relaxed text-sah-gray-2 font-medium border-l-[3px] border-sah-red pl-5 mb-10">
+                                <p className="text-[16px] xl:text-[19px] leading-relaxed text-sah-gray-2 font-medium border-l-[3px] border-sah-red pl-5 mb-10">
                                     {news.excerpt}
                                 </p>
                             )}

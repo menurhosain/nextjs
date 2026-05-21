@@ -82,7 +82,7 @@ export default function JobCareers({ job_section_title, job_section_description,
                                             View Open Positions
                                             <span
                                                 className={`flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-300
-                          ${job.accent ? (hoveredId === job.id ? "bg-sah-red text-white" : "bg-sah-red text-white") : hoveredId === job.id ? "bg-sah-red text-sah-dark-2" : "bg-sah-dark-2 text-white"}
+                          ${job.accent ? (hoveredId === job.id ? "bg-sah-red text-white" : "bg-sah-red text-white") : hoveredId === job.id ? "bg-sah-red text-sah-white" : "bg-sah-dark-2 text-white"}
                         `}
                                             >
                                                 <AngleArrow class_name="!w-[9px] h-[9px]"/>
