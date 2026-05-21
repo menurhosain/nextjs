@@ -13,7 +13,7 @@ export default function TypewriterText({
     texts,
     typingSpeed = 100,
     deletingSpeed = 40,
-    pauseDuration = 1800,
+    pauseDuration = 10000,
 }: Props) {
     const [displayText, setDisplayText] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
