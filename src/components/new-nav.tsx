@@ -269,13 +269,13 @@ export function NavActions() {
                 </div>
 
                 {/* CTA button */}
-                <Link
+                <a
                     href="/become-a-subcontractor"
                     className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
                 >
                     Become a Subcontractor
                     <AngleArrow class_name="!w-[10px] !h-[10px]" />
-                </Link>
+                </a>
 
                 {/* Hamburger */}
                 <button onClick={() => setMenuOpen(true)} className="group flex flex-col justify-center items-center gap-[5px] text-white cursor-pointer" aria-label="Open menu">
