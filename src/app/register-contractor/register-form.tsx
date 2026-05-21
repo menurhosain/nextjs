@@ -16,9 +16,8 @@ declare global {
         };
     }
 }
-const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
-
 type Props = {
+    recaptcha_site_key: string;
     first_name_label?: string | null;
     last_name_label?: string | null;
     email_label?: string | null;
@@ -42,6 +41,7 @@ const inputClass = "h-[56px] rounded-[6px] border-sah-gray-4 text-sah-gray-1 foc
 const labelClass = "font-normal text-sah-gray-1 mb-[12px]";
 
 export default function RegisterContractorForm({
+    recaptcha_site_key,
     first_name_label,
     last_name_label,
     email_label,
@@ -70,7 +70,7 @@ export default function RegisterContractorForm({
         e.preventDefault();
         const token = await new Promise<string>((resolve) => {
             window.grecaptcha.ready(() => {
-                window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "register" }).then(resolve);
+                window.grecaptcha.execute(recaptcha_site_key, { action: "register" }).then(resolve);
             });
         });
         const formData = new FormData(e.target as HTMLFormElement);

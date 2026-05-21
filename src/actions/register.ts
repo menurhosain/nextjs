@@ -2,6 +2,7 @@
 
 import { register_user as register_user_service } from "@/services/auth.service";
 import { verify_recaptcha } from "@/lib/recaptcha";
+import { get_global_settings } from "@/services/global.service";
 
 export type FormState = {
     errors: {
@@ -19,7 +20,9 @@ export type FormState = {
 
 export async function register_user(_prevState: FormState, formData: FormData): Promise<FormState> {
     const recaptcha_token = formData.get("recaptcha_token") as string;
-    const recaptcha_ok = recaptcha_token && (await verify_recaptcha(recaptcha_token));
+    const global = await get_global_settings();
+    const secret_key = global?.recaptcha_secret_key ?? process.env.RECAPTCHA_SECRET_KEY ?? "";
+    const recaptcha_ok = recaptcha_token && secret_key && (await verify_recaptcha(recaptcha_token, secret_key));
     if (!recaptcha_ok) {
         return { errors: {}, serverError: "reCAPTCHA verification failed. Please try again." };
     }

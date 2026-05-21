@@ -3,12 +3,14 @@ import RegisterApplicantForm from "./register-form";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { get_register_applicant_page_content } from "@/services/page_content.service";
+import { get_global_settings } from "@/services/global.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { headers } from "next/headers";
 
 export default async function RegisterApplicantPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const page = await get_register_applicant_page_content(locale);
+    const [page, global] = await Promise.all([get_register_applicant_page_content(locale), get_global_settings()]);
+    const recaptcha_site_key = global?.recaptcha_site_key ?? process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 
     const bg = getStrapiMediaUrl(page?.banner?.banner_bg) || "/home-hero.mp4";
     const subtitle = page?.banner?.banner_label || "Building Trust And Excellence";
@@ -16,7 +18,7 @@ export default async function RegisterApplicantPage() {
 
     return (
         <>
-            <Script src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`} />
+            <Script src={`https://www.google.com/recaptcha/api.js?render=${recaptcha_site_key}`} />
             <Banner bg={bg} class_name="lg:min-h-[auto] xl:min-h-[auto] md:min-h-[auto] 2xl:h-[100vh] py-18 2xl:py-0 max-[640px]:pb-[65px]">
                 <Left class_name="max-[640px]:pt-[70px]">
                     <div className="flex flex-col justify-center">
@@ -32,6 +34,7 @@ export default async function RegisterApplicantPage() {
                 <div className="w-full max-w-[700px] bg-white rounded-2xl shadow-md p-8">
                     <h2 className="text-[24px] sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">{page?.form_title || "Create an applicant account"}</h2>
                     <RegisterApplicantForm
+                        recaptcha_site_key={recaptcha_site_key}
                         first_name_label={page?.first_name_label}
                         last_name_label={page?.last_name_label}
                         email_label={page?.email_label}
