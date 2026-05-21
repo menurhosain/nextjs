@@ -20,7 +20,6 @@ export default function RegisterApplicantPage() {
                         />
                     </div>
                 </Left>
-
                 <Right>
                     <div></div>
                 </Right>
