@@ -32,7 +32,7 @@ export default function Hero({background, titleNormal, titleFancy, scrollLabel, 
                         href={buttonLink || "/register"}
                         className="inline-flex items-center gap-[10px] group bg-sah-red hover:bg-sah-white text-white hover:text-sah-red   text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit transition duration-300"
                     >
-                        {buttonLabel || "You Like to Build"}?
+                        {buttonLabel || "You Like to Build ?"}
                         <AngleArrow class_name="!w-[12px] !h-[12px] !fill-white group-hover:!fill-sah-red transition duration-300" />
                     </Link>
 
