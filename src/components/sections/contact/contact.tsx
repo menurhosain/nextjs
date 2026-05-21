@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, startTransition } from "react";
 import { ContactIcon1, ContactIcon2, ContactIcon3, ContactIcon4 } from "@/components/ui/svgs";
+import { submit_contact_form, type ContactFormState } from "@/actions/contact";
 
 type ContactProps = {
     form_title?: string;
@@ -21,6 +22,7 @@ type ContactProps = {
     placeholder_email?: string;
     placeholder_phone?: string;
     placeholder_message?: string;
+    recaptcha_site_key?: string;
 };
 
 export default function Contact({
@@ -41,22 +43,22 @@ export default function Contact({
     placeholder_email,
     placeholder_phone,
     placeholder_message,
+    recaptcha_site_key,
 }: ContactProps) {
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        message: "",
-    });
+    const [state, formAction, isPending] = useActionState<ContactFormState, FormData>(submit_contact_form, { errors: {} });
 
-    const handleChange = (e: any) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
+        const token = await new Promise<string>((resolve) => {
+            window.grecaptcha.ready(() => {
+                window.grecaptcha.execute(recaptcha_site_key ?? "", { action: "contact" }).then(resolve);
+            });
+        });
+        const formData = new FormData(e.target as HTMLFormElement);
+        formData.append("recaptcha_token", token);
+        startTransition(() => {
+            formAction(formData);
+        });
     };
 
     return (
@@ -69,70 +71,74 @@ export default function Contact({
                         <h2 className="text-[26px] sm:text-[36px] 2xl:text-[52px] font-medium text-white leading-[36px] sm:leading-[46px] 2xl:leading-[62px]">
                             {form_title || "Let's Collaborate With Us!"}
                         </h2>
-                        <p className="text-red-100 text-[17px] mt-4">
-                            {form_subtitle || "Read and update the latest news from us. done eu magna quis felis."}
-                        </p>
+                        <p className="text-red-100 text-[17px] mt-4">{form_subtitle || "Read and update the latest news from us. done eu magna quis felis."}</p>
                     </div>
 
-                    {/* Form */}
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
-                        <div className="flex max-[640px]:flex-col gap-4">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder={placeholder_first_name || "First Name*"}
-                                value={formData.firstName}
-                                onChange={handleChange}
-                                required
-                                className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-                            />
-                            <input
-                                type="text"
-                                name="lastName"
-                                placeholder={placeholder_last_name || "Last Name*"}
-                                value={formData.lastName}
-                                onChange={handleChange}
-                                required
-                                className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-                            />
+                    {/* Form / Success */}
+                    {state.success ? (
+                        <div className="flex flex-col items-start gap-3 py-6">
+                            <p className="font-inter text-[24px] font-semibold text-sah-black">Message Sent!</p>
+                            <p className="font-inter text-[16px] text-sah-black/60">Thank you for reaching out. We'll get back to you shortly.</p>
                         </div>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
+                            <div className="flex max-[640px]:flex-col gap-4">
+                                <div className="sm:w-1/2">
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        placeholder={placeholder_first_name || "First Name*"}
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                    {state.errors.firstName && <p className="text-red-500 text-[12px] mt-1">{state.errors.firstName}</p>}
+                                </div>
+                                <div className="sm:w-1/2">
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        placeholder={placeholder_last_name || "Last Name*"}
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                    {state.errors.lastName && <p className="text-red-500 text-[12px] mt-1">{state.errors.lastName}</p>}
+                                </div>
+                            </div>
 
-                        <div className="flex  max-[640px]:flex-col gap-4">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder={placeholder_email || "Email Address"}
-                                value={formData.email}
-                                onChange={handleChange}
-                                className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-                            />
-                            <input
-                                type="tel"
-                                name="phone"
-                                placeholder={placeholder_phone || "Phone"}
-                                value={formData.phone}
-                                onChange={handleChange}
-                                className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-                            />
-                        </div>
+                            <div className="flex max-[640px]:flex-col gap-4">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder={placeholder_email || "Email Address"}
+                                    className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                />
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder={placeholder_phone || "Phone"}
+                                    className="sm:w-1/2 border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                />
+                            </div>
 
-                        <textarea
-                            name="message"
-                            placeholder={placeholder_message || "Write Message*"}
-                            value={formData.message}
-                            onChange={handleChange}
-                            rows={5}
-                            required
-                            className="border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
-                        />
+                            <div>
+                                <textarea
+                                    name="message"
+                                    placeholder={placeholder_message || "Write Message*"}
+                                    rows={5}
+                                    className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
+                                />
+                                {state.errors.message && <p className="text-red-500 text-[12px] mt-1">{state.errors.message}</p>}
+                            </div>
 
-                        <button
-                            type="submit"
-                            className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer"
-                        >
-                            {form_submit_label || "Message Now"}
-                        </button>
-                    </form>
+                            {state.serverError && <p className="text-red-500 text-[13px]">{state.serverError}</p>}
+
+                            <button
+                                type="submit"
+                                disabled={isPending}
+                                className="w-full bg-sah-dark-2 hover:bg-sah-red disabled:opacity-60 rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer"
+                            >
+                                {isPending ? "Sending..." : form_submit_label || "Message Now"}
+                            </button>
+                        </form>
+                    )}
                 </div>
 
                 {/* Right: Image + Info Panel */}
@@ -155,12 +161,8 @@ export default function Contact({
                                     <ContactIcon1 class_name="!w-[36px] !h-[36px]" />
                                 </div>
                                 <div>
-                                    <p className="text-[16px] font-medium text-sah-white mb-0.5">
-                                        {address_label || "Office Address:"}
-                                    </p>
-                                    <p className="text-[14px] text-sah-white leading-[28px] whitespace-pre-line">
-                                        {address_value || "P.O. Box 1850, P.C, 112, Ruwi,\nSultanate Of Oman"}
-                                    </p>
+                                    <p className="text-[16px] font-medium text-sah-white mb-0.5">{address_label || "Office Address:"}</p>
+                                    <p className="text-[14px] text-sah-white leading-[28px] whitespace-pre-line">{address_value || "P.O. Box 1850, P.C, 112, Ruwi,\nSultanate Of Oman"}</p>
                                 </div>
                             </div>
 
@@ -170,12 +172,8 @@ export default function Contact({
                                     <ContactIcon2 class_name="!w-[36px] !h-[36px]" />
                                 </div>
                                 <div>
-                                    <p className="text-[16px] font-medium text-sah-white mb-0.5">
-                                        {email_label || "Email Address:"}
-                                    </p>
-                                    <p className="text-[14px] text-sah-white leading-[28px]">
-                                        {email_value || "Enquiries@Sah.Om"}
-                                    </p>
+                                    <p className="text-[16px] font-medium text-sah-white mb-0.5">{email_label || "Email Address:"}</p>
+                                    <p className="text-[14px] text-sah-white leading-[28px]">{email_value || "Enquiries@Sah.Om"}</p>
                                 </div>
                             </div>
                         </div>
@@ -186,27 +184,19 @@ export default function Contact({
                                     <ContactIcon3 class_name="!w-[36px] !h-[36px]" />
                                 </div>
                                 <div>
-                                    <p className="text-[16px] font-medium text-sah-dark-2 mb-0.5">
-                                        {phone_label || "Phone Number:"}
-                                    </p>
-                                    <p className="text-[14px] text-sah-dark-2">
-                                        {phone_value || "+968 24 70 32 66"}
-                                    </p>
+                                    <p className="text-[16px] font-medium text-sah-dark-2 mb-0.5">{phone_label || "Phone Number:"}</p>
+                                    <p className="text-[14px] text-sah-dark-2">{phone_value || "+968 24 70 32 66"}</p>
                                 </div>
                             </div>
 
                             {/* Working Hours */}
                             <div className="flex flex-col gap-3 xl:w-1/2">
                                 <div className="text-sah-black  mt-0.5 shrink-0">
-                                    <ContactIcon4 class_name="!w-[36px] !h-[36px]"/>
+                                    <ContactIcon4 class_name="!w-[36px] !h-[36px]" />
                                 </div>
                                 <div>
-                                    <p className="text-[16px] font-medium text-sah-dark-2 mb-0.5">
-                                        {hours_label || "Working Hours:"}
-                                    </p>
-                                    <p className="text-[14px] text-sah-dark-2">
-                                        {hours_value || "Mon – Fri: 9AM – 8PM"}
-                                    </p>
+                                    <p className="text-[16px] font-medium text-sah-dark-2 mb-0.5">{hours_label || "Working Hours:"}</p>
+                                    <p className="text-[14px] text-sah-dark-2">{hours_value || "Mon – Fri: 9AM – 8PM"}</p>
                                 </div>
                             </div>
                         </div>

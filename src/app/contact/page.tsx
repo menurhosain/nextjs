@@ -4,11 +4,13 @@ import Contact from "@/components/sections//contact/contact";
 import Map from "@/components/sections//contact/map";
 import { headers } from "next/headers";
 import { get_contact_page_content } from "@/services/page_content.service";
+import { get_global_settings } from "@/services/global.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 export default async function ContactPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const content = await get_contact_page_content(locale);
+    const [content, global] = await Promise.all([get_contact_page_content(locale), get_global_settings(locale)]);
+    const recaptcha_site_key = global?.recaptcha_site_key ?? process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 
     return (
         <>
@@ -44,6 +46,7 @@ export default async function ContactPage() {
                 placeholder_email={content?.placeholder_email}
                 placeholder_phone={content?.placeholder_phone}
                 placeholder_message={content?.placeholder_message}
+                recaptcha_site_key={recaptcha_site_key}
             />
             <Map embed_url={content?.map_embed_url} />
         </>
