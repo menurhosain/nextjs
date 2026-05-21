@@ -620,3 +620,22 @@ export async function get_news_page_content(locale = "en"): Promise<NewsPageCont
         return null;
     }
 }
+
+// News Details Page
+export type NewsDetailsPageContent = {
+    related_posts_label: string | null;
+    share_label: string | null;
+    previous_article_label: string | null;
+    next_article_label: string | null;
+};
+
+export async function get_news_details_page_content(locale = "en"): Promise<NewsDetailsPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/news-details-page?locale=${locale}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
