@@ -55,7 +55,7 @@ export type SectionTitle = {
 export type HomePageContent = {
     banner_background: StrapiMedia[];
     banner_title_normal: string;
-    banner_title_fancy: string;
+    banner_typewriter_texts: { id: number; text: string }[];
     banner_scroll_now_label: string;
     banner_counter_label: string;
     banner_counter_number: number;
