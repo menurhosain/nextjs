@@ -161,7 +161,6 @@ export function NavLinks() {
                                                         titleParam={{ title: item.title, className: "!text-[22px] leading-[28px] md:mb-1 pr-0 font-medium !pr-0" }}
                                                     />
                                                 ))}
-
                                         </div>
                                     </div>
                                 ) : (
@@ -303,7 +302,11 @@ export function NavActions() {
                             <div className="nav-scroll-up flex flex-col items-center">
                                 {[...Array(2)].map((_, copy) =>
                                     [...Array(8)].map((_, i) => (
-                                        <span key={`${copy}-${i}`} className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]" style={{ writingMode: "vertical-rl", opacity: 0.2 }}>
+                                        <span
+                                            key={`${copy}-${i}`}
+                                            className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]"
+                                            style={{ writingMode: "vertical-rl", opacity: 0.2 }}
+                                        >
                                             SAH
                                         </span>
                                     )),
@@ -325,7 +328,11 @@ export function NavActions() {
                             {/* Search bar */}
                             <div className="flex items-center gap-3 px-2 sm:px-6 py-3 group">
                                 <SearchIcon class_name="!size-[24px] shrink-0 text-sah-dark !fill-sah-black group-hover:rotate-90 transition-rotate duration-500" />
-                                <input type="text" placeholder="Search your query" className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50" />
+                                <input
+                                    type="text"
+                                    placeholder="Search your query"
+                                    className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[16px] text-sah-dark placeholder:text-sah-dark/50"
+                                />
                             </div>
 
                             {/* Close button */}
@@ -398,64 +405,66 @@ export function NavActions() {
 
                         {/* Featured project */}
 
-                        <div className="flex-1 overflow-y-auto px-6 pt-8 pb-20">
+                        <div className="flex-1 overflow-y-auto px-6 pt-[67px] pb-20">
                             <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">Connect with us</p>
-							<form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
-								<div className="flex gap-4 flex-col">
-									<input
-										type="text"
-										name="firstName"
-										placeholder="First Name*"
-										value={formData.firstName}
-										onChange={handleChange}
-										required
-										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-									/>
-									<input
-										type="text"
-										name="lastName"
-										placeholder="Last Name*"
-										value={formData.lastName}
-										onChange={handleChange}
-										required
-										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-									/>
-								</div>
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
+                                <div className="flex gap-4 flex-col">
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        placeholder="First Name*"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        placeholder="Last Name*"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                </div>
 
-								<div className="flex gap-4 flex-col">
-									<input
-										type="email"
-										name="email"
-										placeholder="Email Address"
-										value={formData.email}
-										onChange={handleChange}
-										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-									/>
-									<input
-										type="tel"
-										name="phone"
-										placeholder="Phone"
-										value={formData.phone}
-										onChange={handleChange}
-										className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-									/>
-								</div>
+                                <div className="flex gap-4 flex-col">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email Address"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        placeholder="Phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
+                                    />
+                                </div>
 
-								<textarea
-									name="message"
-									placeholder="Write Message*"
-									value={formData.message}
-									onChange={handleChange}
-									rows={5}
-									required
-									className="border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
-								/>
+                                <textarea
+                                    name="message"
+                                    placeholder="Write Message*"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    rows={5}
+                                    required
+                                    className="border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
+                                />
 
-								<button type="submit" className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer" >
-									Message Now
-								</button>
-							</form>
-
+                                <button
+                                    type="submit"
+                                    className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[20px] font-medium py-[14px] transition-colors duration-300 mt-2 cursor-pointer"
+                                >
+                                    Message Now
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -463,12 +472,12 @@ export function NavActions() {
                 {/* Footer — absolute bottom, same 3-col layout */}
                 <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
                     <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
-                        <a href="mailto:enquiries@sah.om" className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
-							enquiries@sah.om
+                        <a href="mailto:info@sah.om" className="font-inter text-[16px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
+                            info@sah.om
                         </a>
                     </div>
                     <div className="w-[50%] 2xl:w-[50%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
-                        <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                        <a href="#" className="font-inter text-[16px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             Facebook
                         </a>
                         <a href="#" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
@@ -482,7 +491,7 @@ export function NavActions() {
                         </a>
                     </div>
                     <div className="w-[30%] 2xl:w-[30%] max-[768]:w-[87.5%] max-[640px]:w-full bg-sah-white flex items-center justify-start px-[60px] max-[1024]:px-[20px] max-[1024]:justify-center border-t border-sah-light-3">
-                        <a href="/projects" className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                        <a href="/projects" className="font-inter text-[16px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             View all projects
                         </a>
                     </div>
