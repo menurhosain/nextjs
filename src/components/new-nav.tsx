@@ -394,7 +394,7 @@ export function NavActions({ locale, menus, offcanvas, light_logo_url }: { local
                                 <input
                                     type="text"
                                     placeholder={offcanvas?.search_placeholder || "Search your query"}
-                                    className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[14px] text-sah-dark placeholder:text-sah-dark/50"
+                                    className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[16px] text-sah-dark placeholder:text-sah-dark/50"
                                 />
                             </div>
 
@@ -468,8 +468,8 @@ export function NavActions({ locale, menus, offcanvas, light_logo_url }: { local
 
                         {/* Featured project */}
 
-                        <div className="flex-1 overflow-y-auto px-6 pt-8 pb-20">
-                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">{offcanvas?.form_title || "Connect with us"}</p>
+                        <div className="flex-1 overflow-y-auto px-6 pt-[67px] pb-20">
+                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">{offcanvas?.form_title || "Start the Conversation"}</p>
                             <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
                                 <div className="flex gap-4 flex-col">
                                     <input
@@ -523,7 +523,7 @@ export function NavActions({ locale, menus, offcanvas, light_logo_url }: { local
 
                                 <button
                                     type="submit"
-                                    className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[14px] font-regular py-4 transition-colors duration-300 mt-2 cursor-pointer"
+                                    className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[20px] font-medium py-[14px] transition-colors duration-300 mt-2 cursor-pointer"
                                 >
                                     {offcanvas?.form_submit_label || "Message Now"}
                                 </button>
@@ -536,21 +536,21 @@ export function NavActions({ locale, menus, offcanvas, light_logo_url }: { local
                 <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
                     <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
                         <a
-                            href={`mailto:${offcanvas?.email || "enquiries@sah.om"}`}
-                            className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden"
+                            href={`mailto:${offcanvas?.email || "info@sah.om"}`}
+                            className="font-inter text-[16px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden"
                         >
                             {offcanvas?.email || "info@sah.om"}
                         </a>
                     </div>
                     <div className="w-[50%] 2xl:w-[50%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
                         {(offcanvas?.social_links?.length ? offcanvas.social_links : DEFAULT_SOCIAL_LINKS).map((link) => (
-                            <a key={link.button_label} href={link.button_link} className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                            <a key={link.button_label} href={link.button_link} className="font-inter text-[16px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                                 {link.button_label}
                             </a>
                         ))}
                     </div>
                     <div className="w-[30%] 2xl:w-[30%] max-[768]:w-[87.5%] max-[640px]:w-full bg-sah-white flex items-center justify-start px-[60px] max-[1024]:px-[20px] max-[1024]:justify-center border-t border-sah-light-3">
-                        <a href={offcanvas?.view_all_projects_link || "/projects"} className="font-inter text-[14px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
+                        <a href={offcanvas?.view_all_projects_link || "/projects"} className="font-inter text-[16px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
                             {offcanvas?.view_all_projects_label || "View all projects"}
                         </a>
                     </div>
