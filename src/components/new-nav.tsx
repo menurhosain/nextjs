@@ -9,6 +9,7 @@ import NewsCard from "./ui/news-card";
 import { type Menu } from "@/services/mega_menu.service";
 import { type OffcanvasContent } from "@/services/offcanvas.service";
 import { BASE_URL } from "@/lib/constant";
+import { OffcanvasContactForm } from "./ui/contact-form";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
@@ -273,7 +274,7 @@ const DEFAULT_SOCIAL_LINKS = [
     { button_label: "YouTube", button_link: "#" },
 ];
 
-export function NavActions({ locale, menus, offcanvas, light_logo_url }: { locale: string; menus: Menu[]; offcanvas?: OffcanvasContent | null; light_logo_url?: string }) {
+export function NavActions({ locale, menus, offcanvas, light_logo_url, recaptcha_site_key }: { locale: string; menus: Menu[]; offcanvas?: OffcanvasContent | null; light_logo_url?: string; recaptcha_site_key?: string }) {
     const navLinks = transformMenus(menus);
     const router = useRouter();
     const [selectedLang, setSelectedLang] = useState(() => {
@@ -283,16 +284,6 @@ export function NavActions({ locale, menus, offcanvas, light_logo_url }: { local
     const [menuOpen, setMenuOpen] = useState(false);
     const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
     const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
-    const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", message: "" });
-
-    const handleChange = (e: any) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        console.log("Form submitted:", formData);
-    };
 
     return (
         <>
@@ -468,67 +459,16 @@ export function NavActions({ locale, menus, offcanvas, light_logo_url }: { local
 
                         {/* Featured project */}
 
-                        <div className="flex-1 overflow-y-auto px-6 pt-[67px] pb-20">
-                            <p className="font-inter text-[15px] font-semibold tracking-widest uppercase text-sah-red mb-4">{offcanvas?.form_title || "Start the Conversation"}</p>
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
-                                <div className="flex gap-4 flex-col">
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        placeholder={offcanvas?.placeholder_first_name || "First Name*"}
-                                        value={formData.firstName}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="lastName"
-                                        placeholder={offcanvas?.placeholder_last_name || "Last Name*"}
-                                        value={formData.lastName}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-                                    />
-                                </div>
-
-                                <div className="flex gap-4 flex-col">
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder={offcanvas?.placeholder_email || "Email Address"}
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-                                    />
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        placeholder={offcanvas?.placeholder_phone || "Phone"}
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition"
-                                    />
-                                </div>
-
-                                <textarea
-                                    name="message"
-                                    placeholder={offcanvas?.placeholder_message || "Write Message*"}
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    rows={5}
-                                    required
-                                    className="border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 resize-none focus:outline-none focus:border-red-500 transition"
-                                />
-
-                                <button
-                                    type="submit"
-                                    className="w-full bg-sah-dark-2 hover:bg-sah-red rounded-[5px] text-white text-[20px] font-medium py-[14px] transition-colors duration-300 mt-2 cursor-pointer"
-                                >
-                                    {offcanvas?.form_submit_label || "Message Now"}
-                                </button>
-                            </form>
-                        </div>
+                        <OffcanvasContactForm
+                            title={offcanvas?.form_title || "Start the Conversation"}
+                            placeholderFirstName={offcanvas?.placeholder_first_name || "First Name*"}
+                            placeholderLastName={offcanvas?.placeholder_last_name || "Last Name*"}
+                            placeholderEmail={offcanvas?.placeholder_email || "Email Address"}
+                            placeholderPhone={offcanvas?.placeholder_phone || "Phone"}
+                            placeholderMessage={offcanvas?.placeholder_message || "Write Message*"}
+                            submitLabel={offcanvas?.form_submit_label || "Message Now"}
+                            recaptchaSiteKey={recaptcha_site_key ?? ""}
+                        />
                     </div>
                 </div>
 
