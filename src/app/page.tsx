@@ -21,7 +21,7 @@ export default async function Home() {
             <Hero
                 background={getStrapiMediaUrl(content?.banner_background)}
                 titleNormal={content?.banner_title_normal}
-                titleFancy={content?.banner_title_fancy}
+                typewriterTexts={content?.banner_typewriter_texts?.map((t) => t.text) ?? []}
                 scrollLabel={content?.banner_scroll_now_label}
                 counterLabel={content?.banner_counter_label}
                 counterNumber={content?.banner_counter_number}

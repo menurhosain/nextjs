@@ -2,11 +2,12 @@ import Link from "next/link";
 import { StatCounter } from "@/components/ui/stat-counter";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import { AngleArrow, DownCurveArrow } from "@/components/ui/svgs";
+import TypewriterText from "@/components/ui/typewriter-text";
 
 interface BannerProps {
     background?: string;
     titleNormal?: string;
-    titleFancy?: string;
+    typewriterTexts?: string[];
     scrollLabel?: string;
     counterLabel?: string;
     counterNumber?: number;
@@ -14,14 +15,19 @@ interface BannerProps {
     buttonLink?: string;
 }
 
-export default function Hero({background, titleNormal, titleFancy, scrollLabel, counterLabel, counterNumber, buttonLabel, buttonLink}: BannerProps) {
+const FALLBACK_TYPEWRITER_TEXTS = ["& Build Contractor", "& Expert Renovation", "& Quality Finishes"];
+
+export default function Hero({background, titleNormal, typewriterTexts, scrollLabel, counterLabel, counterNumber, buttonLabel, buttonLink}: BannerProps) {
+    const texts = typewriterTexts && typewriterTexts.length > 0 ? typewriterTexts : FALLBACK_TYPEWRITER_TEXTS;
     return (
         <Banner bg={background || "/home-hero.mp4" }>
             <Left has_brand_shape={true}>
                 <div className="flex flex-col max-[768px]:w-full">
                     <h1 className="text-white  font-medium leading-[20px] sm:leading-[30px] md:leading-[40px] lg:leading-[50px] xl:leading-[50px] 2xl:leading-[70px] tracking-[-0.05em] flex flex-col gap-[20px] sm:gap-[30px] mb-[35px]">
-                        <span className="text-[36px] sm:text-[56px] lg:text-[70px] xl:text-[80px] 2xl:text-[100px] font-geist">Leading Design</span>
-                        <em className="italic text-[30px] sm:text-[46px] lg:text-[54px] xl:text-[64px] 2xl:text-[84px] font-dm-serif">& Build Contractor</em>
+                        <span className="text-[36px] sm:text-[56px] lg:text-[70px] xl:text-[80px] 2xl:text-[100px] font-geist">{titleNormal || "Leading Design"}</span>
+                        <em className="italic text-[30px] sm:text-[46px] lg:text-[54px] xl:text-[64px] 2xl:text-[84px] font-dm-serif">
+                            <TypewriterText texts={texts} />
+                        </em>
                     </h1>
 
                     <div className="h-[1px] w-[250px] sm:w-[350px] md:w-[390px] bg-sah-white/20 relative mb-[35px] sm:mb-[56px] ">
