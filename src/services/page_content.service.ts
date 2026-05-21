@@ -639,3 +639,120 @@ export async function get_news_details_page_content(locale = "en"): Promise<News
         return null;
     }
 }
+
+// Register Applicant Page
+export type RegisterApplicantPageContent = {
+    banner: { banner_label: string; banner_title: string; banner_bg: StrapiMedia | null } | null;
+    form_title: string | null;
+    first_name_label: string | null;
+    last_name_label: string | null;
+    email_label: string | null;
+    username_label: string | null;
+    password_label: string | null;
+    confirm_password_label: string | null;
+    phone_label: string | null;
+    location_label: string | null;
+    first_name_placeholder: string | null;
+    last_name_placeholder: string | null;
+    email_placeholder: string | null;
+    username_placeholder: string | null;
+    phone_placeholder: string | null;
+    location_placeholder: string | null;
+    submit_button_label: string | null;
+    submitting_label: string | null;
+};
+
+export async function get_register_applicant_page_content(locale = "en"): Promise<RegisterApplicantPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/register-applicant-page?locale=${locale}&populate[banner][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// Login Page
+export type LoginPageContent = {
+    banner: { banner_label: string; banner_title: string; banner_bg: StrapiMedia | null } | null;
+    form_title: string | null;
+    email_label: string | null;
+    email_placeholder: string | null;
+    password_label: string | null;
+    forgot_password_label: string | null;
+    forgot_password_link: string | null;
+    submit_button_label: string | null;
+    submitting_label: string | null;
+};
+
+export async function get_login_page_content(locale = "en"): Promise<LoginPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/login-page?locale=${locale}&populate[banner][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// Forget Password Page
+export type ForgetPasswordPageContent = {
+    banner: { banner_label: string; banner_title: string; banner_bg: StrapiMedia | null } | null;
+    form_title: string | null;
+    form_description: string | null;
+    email_label: string | null;
+    email_placeholder: string | null;
+    submit_button_label: string | null;
+    submitting_label: string | null;
+    success_title: string | null;
+    success_description: string | null;
+    back_to_login_text: string | null;
+    back_to_login_link_label: string | null;
+    back_to_login_link: string | null;
+};
+
+export async function get_forget_password_page_content(locale = "en"): Promise<ForgetPasswordPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/forget-password-page?locale=${locale}&populate[banner][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+// Register Contractor Page
+export type RegisterContractorPageContent = {
+    banner: { banner_label: string; banner_title: string; banner_bg: StrapiMedia | null } | null;
+    form_title: string | null;
+    first_name_label: string | null;
+    last_name_label: string | null;
+    email_label: string | null;
+    username_label: string | null;
+    password_label: string | null;
+    confirm_password_label: string | null;
+    phone_label: string | null;
+    location_label: string | null;
+    first_name_placeholder: string | null;
+    last_name_placeholder: string | null;
+    email_placeholder: string | null;
+    username_placeholder: string | null;
+    phone_placeholder: string | null;
+    location_placeholder: string | null;
+    submit_button_label: string | null;
+    submitting_label: string | null;
+};
+
+export async function get_register_contractor_page_content(locale = "en"): Promise<RegisterContractorPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/register-contractor-page?locale=${locale}&populate[banner][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
