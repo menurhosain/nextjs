@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { NewsletterForm } from "@/components/ui/newsletter-form";
 import { get_footer_content, type FooterContent, type FooterNavLink, type FooterSocialLink } from "@/services/page_content.service";
 import { get_global_settings } from "@/services/global.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
@@ -63,18 +62,6 @@ function Links({ nav_links, logo, light_logo_url }: { nav_links: FooterNavLink[]
     );
 }
 
-function Newsletter({ placeholder, button_label }: { placeholder: string; button_label: string }) {
-    return (
-        <div className="flex  flex-col gap-3 sm:gap-2 md:flex-row items-center md:items-center max-[640px]:w-full">
-            <Input
-                type="email"
-                placeholder={placeholder}
-                className=" w-[100%] sm:w-56 h-11 rounded-none bg-sah-white text-sah-black placeholder:text-sah-gray-2 border-0 focus-visible:ring-0 text-sm px-4"
-            />
-            <Button className="h-11 border-0 rounded-none bg-sah-black hover:bg-sah-dark-1 text-sah-white text-sm font-medium px-6 cursor-pointer  max-[640px]:!w-[100%]">{button_label}</Button>
-        </div>
-    );
-}
 
 function Social({ social_links }: { social_links: FooterSocialLink[] }) {
     return (
@@ -132,7 +119,7 @@ export default async function Footer() {
                 {/* Row 1: logo + nav | newsletter */}
                 <div className="flex flex-col 2xl:flex-row items-center 2xl:items-end xl:justify-between gap-6 py-10 px-[15px] sm:px-[40px] border-b border-sah-overlay-white-15">
                     <Links nav_links={content.nav_links} logo={content.logo} light_logo_url={light_logo_url} />
-                    <Newsletter placeholder={content.newsletter_placeholder} button_label={content.newsletter_button_label} />
+                    <NewsletterForm placeholder={content.newsletter_placeholder} button_label={content.newsletter_button_label} />
                 </div>
 
                 {/* Row 2: tagline | social */}
