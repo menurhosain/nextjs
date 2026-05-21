@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { get_footer_content, type FooterContent, type FooterNavLink, type FooterSocialLink } from "@/services/page_content.service";
-import { BASE_URL } from "@/lib/constant";
+import { get_global_settings } from "@/services/global.service";
+import { getStrapiMediaUrl } from "@/lib/utils";
 
 const DEFAULTS: FooterContent = {
     logo: null,
@@ -42,10 +43,8 @@ function merge(data: FooterContent | null): FooterContent {
     };
 }
 
-function Links({ nav_links, logo }: { nav_links: FooterNavLink[]; logo: FooterContent["logo"] }) {
-    const logoSrc = logo?.url
-        ? logo.url.startsWith("/") ? `${BASE_URL}${logo.url}` : logo.url
-        : "/logo-white.png";
+function Links({ nav_links, logo, light_logo_url }: { nav_links: FooterNavLink[]; logo: FooterContent["logo"]; light_logo_url: string }) {
+    const logoSrc = light_logo_url || getStrapiMediaUrl(logo) || "/logo-white.png";
     const logoAlt = logo?.alternativeText || "SAH";
 
     return (
@@ -123,15 +122,16 @@ function Copyright({
 }
 
 export default async function Footer() {
-    const data = await get_footer_content();
+    const [data, global] = await Promise.all([get_footer_content(), get_global_settings()]);
     const content = merge(data);
+    const light_logo_url = getStrapiMediaUrl(global?.light_logo);
 
     return (
         <footer className="bg-sah-red text-sah-white section-padding">
             <div className="container mx-auto !px-0 border-x border-sah-overlay-white-15">
                 {/* Row 1: logo + nav | newsletter */}
                 <div className="flex flex-col 2xl:flex-row items-center 2xl:items-end xl:justify-between gap-6 py-10 px-[15px] sm:px-[40px] border-b border-sah-overlay-white-15">
-                    <Links nav_links={content.nav_links} logo={content.logo} />
+                    <Links nav_links={content.nav_links} logo={content.logo} light_logo_url={light_logo_url} />
                     <Newsletter placeholder={content.newsletter_placeholder} button_label={content.newsletter_button_label} />
                 </div>
 

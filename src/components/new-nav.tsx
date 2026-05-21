@@ -267,13 +267,13 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
 }
 
 const DEFAULT_SOCIAL_LINKS = [
-    { button_label: "Facebook",  button_link: "#" },
+    { button_label: "Facebook", button_link: "#" },
     { button_label: "Instagram", button_link: "#" },
-    { button_label: "LinkedIn",  button_link: "#" },
-    { button_label: "YouTube",   button_link: "#" },
+    { button_label: "LinkedIn", button_link: "#" },
+    { button_label: "YouTube", button_link: "#" },
 ];
 
-export function NavActions({ locale, menus, offcanvas }: { locale: string; menus: Menu[]; offcanvas?: OffcanvasContent | null }) {
+export function NavActions({ locale, menus, offcanvas, light_logo_url }: { locale: string; menus: Menu[]; offcanvas?: OffcanvasContent | null; light_logo_url?: string }) {
     const navLinks = transformMenus(menus);
     const router = useRouter();
     const [selectedLang, setSelectedLang] = useState(() => {
@@ -380,7 +380,7 @@ export function NavActions({ locale, menus, offcanvas }: { locale: string; menus
                         {/* Logo — sits on top of scrolling text */}
                         <div className="relative z-10 flex items-center h-[100px] pl-[60px] max-[1280]:pl-[10px] max-[640px]:pl-0 max-[640px]:justify-center bg-sah-red">
                             <a href="/">
-                                <img src="/logo-white.png" alt="SAH logo" className="size-[70px] object-contain" />
+                                <img src={light_logo_url || "/logo-white.png"} alt="SAH logo" className="size-[70px] object-contain" />
                             </a>
                         </div>
                     </div>
@@ -535,8 +535,11 @@ export function NavActions({ locale, menus, offcanvas }: { locale: string; menus
                 {/* Footer — absolute bottom, same 3-col layout */}
                 <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
                     <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
-                        <a href={`mailto:${offcanvas?.email || "enquiries@sah.om"}`} className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden">
-                            {offcanvas?.email || "enquiries@sah.om"}
+                        <a
+                            href={`mailto:${offcanvas?.email || "enquiries@sah.om"}`}
+                            className="font-inter text-[14px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden"
+                        >
+                            {offcanvas?.email || "info@sah.om"}
                         </a>
                     </div>
                     <div className="w-[50%] 2xl:w-[50%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
