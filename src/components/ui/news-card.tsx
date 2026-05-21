@@ -35,7 +35,7 @@ export default function NewsCard({ className, contentClass, titleParam, metaPara
     return (
         <article className={cn("relative w-full h-full overflow-hidden rounded-2xl", className)}>
             <div className="block w-full h-full group">
-                <img src={imageParam?.src} alt={imageParam?.alt ?? titleParam?.title} className={cn("h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] object-cover object-center max-[640px]:h-[350px]", imageParam?.className)} />
+                <img src={imageParam?.src || undefined} alt={imageParam?.alt ?? titleParam?.title} className={cn("h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] object-cover object-center max-[640px]:h-[350px]", imageParam?.className)} />
 
                 { overlay && (
                     <div className={cn("absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent", overlayParam?.className)} />
