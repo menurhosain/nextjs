@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, startTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,7 +8,16 @@ import { Button } from "@/components/ui/button";
 import { register_user } from "@/actions/register";
 import type { FormState } from "@/actions/register";
 
+declare global {
+    interface Window {
+        grecaptcha: {
+            ready: (cb: () => void) => void;
+            execute: (siteKey: string, options: { action: string }) => Promise<string>;
+        };
+    }
+}
 type Props = {
+    recaptcha_site_key: string;
     first_name_label?: string | null;
     last_name_label?: string | null;
     email_label?: string | null;
@@ -32,6 +41,7 @@ const inputClass = "h-[56px] rounded-[6px] border-sah-gray-4 text-sah-gray-1 foc
 const labelClass = "font-normal text-sah-gray-1 mb-[12px]";
 
 export default function RegisterContractorForm({
+    recaptcha_site_key,
     first_name_label,
     last_name_label,
     email_label,
@@ -56,10 +66,24 @@ export default function RegisterContractorForm({
         if (state.success) router.push("/login");
     }, [state.success, router]);
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const token = await new Promise<string>((resolve) => {
+            window.grecaptcha.ready(() => {
+                window.grecaptcha.execute(recaptcha_site_key, { action: "register" }).then(resolve);
+            });
+        });
+        const formData = new FormData(e.target as HTMLFormElement);
+        formData.append("recaptcha_token", token);
+        startTransition(() => {
+            formAction(formData);
+        });
+    };
+
     const e = state.errors;
 
     return (
-        <form action={formAction} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
             <input type="hidden" name="register_as" value="contractor" />
 
             {/* First name & Last name */}
@@ -132,17 +156,10 @@ export default function RegisterContractorForm({
                 <Input id="location" name="location" placeholder={location_placeholder || "New York, USA"} className={inputClass} />
             </div>
 
-            {state.serverError && (
-                <p className="text-sm text-red-500 text-center">{state.serverError}</p>
-            )}
+            {state.serverError && <p className="text-sm text-red-500 text-center">{state.serverError}</p>}
 
-            <Button
-                type="submit"
-                disabled={pending}
-                className="w-full mt-2 cursor-pointer bg-sah-black text-sah-white py-5 rounded-[6px] hover:bg-sah-red"
-                variant="secondary"
-            >
-                {pending ? (submitting_label || "Registering...") : (submit_button_label || "Register")}
+            <Button type="submit" disabled={pending} className="w-full mt-2 cursor-pointer bg-sah-black text-sah-white py-5 rounded-[6px] hover:bg-sah-red" variant="secondary">
+                {pending ? submitting_label || "Registering..." : submit_button_label || "Register"}
             </Button>
         </form>
     );

@@ -55,9 +55,7 @@ export default function JobCareers({ job_section_title, job_section_description,
                                     key={job.id}
                                     onMouseEnter={() => setHoveredId(job.id)}
                                     onMouseLeave={() => setHoveredId(null)}
-                                    className={`group flex max-[640px]:flex-col max-[640px]:text-center max-[640px]:gap-3 items-center justify-between py-[27px] px-0 transition-all duration-300 cursor-pointer
-                    ${hoveredId === job.id ? "bg-white max-[768px]:bg-transparent max-[768px]:-mx-0 -mx-3 max-[768px]:px-0 px-6" : ""}
-                  `}
+                                    className={`group flex max-[640px]:flex-col max-[640px]:text-center max-[640px]:gap-3 items-center justify-between py-[27px] px-0 transition-all duration-300 cursor-pointer ${hoveredId === job.id ? "bg-white max-[768px]:bg-transparent max-[768px]:-mx-0 -mx-3 max-[768px]:px-0 px-6" : ""}`}
                                 >
                                     {/* Job Type */}
                                     <span className="text-[17px] text-sah-dark-2 px-[10px] py-[4px] font-regular rounded-[30px] bg-sah-white transition-all duration-300 group-hover:bg-sah-light-4">
@@ -67,9 +65,7 @@ export default function JobCareers({ job_section_title, job_section_description,
                                     {/* Job Title */}
                                     <a
                                         href={job.link || "#"}
-                                        className={`flex-1 text-[18px] 2xl:text-[20px] font-semibold text-gray-900 sm:ml-[30px] transition-colors duration-300
-                      ${hoveredId === job.id ? "text-black" : ""}
-                    `}
+                                        className={`flex-1 text-[18px] 2xl:text-[20px] font-semibold text-gray-900 sm:ml-[30px] transition-colors duration-300 ${hoveredId === job.id ? "text-black" : ""}`}
                                     >
                                         {job.title}
                                     </a>
@@ -78,15 +74,11 @@ export default function JobCareers({ job_section_title, job_section_description,
                                     <div className="flex items-center gap-[10px] sm:ml-4 shrink-0">
                                         <a
                                             href={job.link || "#"}
-                                            className={`flex items-center gap-2 text-[14px] sm:text-[16px] font-medium text-sah-dark-2 pl-2 sm:pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300
-                        ${hoveredId === job.id ? "bg-sah-dark-2 text-white scale-105" : "bg-white text-gray-700"}
-                      `}
+                                            className={`flex items-center gap-2 text-[14px] sm:text-[16px] font-medium text-sah-dark-2 pl-2 sm:pl-[30px] pr-[10px] py-2 rounded-full transition-all duration-300 ${hoveredId === job.id ? "bg-sah-dark-2 text-white scale-105" : "bg-white text-gray-700"}`}
                                         >
                                             View Open Positions
                                             <span
-                                                className={`flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-300
-                          ${hoveredId === job.id ? "bg-sah-red text-white" : "bg-sah-dark-2 text-white"}
-                        `}
+                                                className={`flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-300 ${hoveredId === job.id ? "bg-sah-red text-white" : "bg-sah-dark-2 text-white"}`}
                                             >
                                                 <AngleArrow class_name="!w-[9px] h-[9px]"/>
                                             </span>
