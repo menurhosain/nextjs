@@ -37,7 +37,7 @@ export default  function ChooseCard({ icon, title, desc, accent, dark,
             </div>
             <div>
                 <div
-                    className={`w-8 h-[1px] bg-sah-white/15 mb-[47px] transition-all duration-500 ${hovered ? "w-full !bg-sah-red" : "w-[350px]" }`}
+                    className={`w-8 h-[1px] bg-sah-white/15 mb-[47px] transition-all duration-500 ${hovered ? "w-full" : "w-[350px]" }`}
                 />
                 <p className="text-white/70 text-[16px] leading-relaxed group-hover:text-white transition-colors duration-300">
                     {desc}

@@ -6,7 +6,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import type { NewsItemDetail, NewsItem } from "@/services/news.service";
 
 /* ─── Share Buttons ─────────────────────────────────────────────────────── */
-function ShareButtons({ title }: { title: string }) {
+function ShareButtons({ title, share_label }: { title: string; share_label?: string | null }) {
     const [copied, setCopied] = useState(false);
     const getUrl = () => (typeof window !== "undefined" ? window.location.href : "");
 
@@ -47,7 +47,7 @@ function ShareButtons({ title }: { title: string }) {
 
     return (
         <div className="border border-sah-light-3 p-6">
-            <p className="text-[20px] font-semibold capitalize text-sah-dark-2 mb-[5px]">Share</p>
+            <p className="text-[20px] font-semibold capitalize text-sah-dark-2 mb-[5px]">{share_label || "Share"}</p>
             <div className="w-[50px] h-[3px] bg-sah-red mb-5"></div>
             <div className="flex flex-wrap gap-2">
                 <button aria-label="Share on Facebook" onClick={() => share("facebook")} className={btn}>
@@ -75,7 +75,23 @@ function ShareButtons({ title }: { title: string }) {
 }
 
 /* ─── Page View ─────────────────────────────────────────────────────────── */
-export default function NewsItemView({ news, relatedPosts = [] }: { news: NewsItemDetail; relatedPosts?: NewsItem[] }) {
+type PageViewProps = {
+    news: NewsItemDetail;
+    relatedPosts?: NewsItem[];
+    related_posts_label?: string | null;
+    share_label?: string | null;
+    previous_article_label?: string | null;
+    next_article_label?: string | null;
+};
+
+export default function NewsItemView({
+    news,
+    relatedPosts = [],
+    related_posts_label,
+    share_label,
+    previous_article_label,
+    next_article_label,
+}: PageViewProps) {
     return (
         <>
             {/* ── Hero banner ── */}
@@ -154,7 +170,7 @@ export default function NewsItemView({ news, relatedPosts = [] }: { news: NewsIt
                             {/* Related Posts */}
                             {relatedPosts.length > 0 && (
                                 <div className="border border-sah-light-3 p-6">
-                                    <p className="text-[20px] font-semibold capitalize text-sah-dark-2 mb-[5px]">Related Posts</p>
+                                    <p className="text-[20px] font-semibold capitalize text-sah-dark-2 mb-[5px]">{related_posts_label || "Related Posts"}</p>
                                     <div className="w-[50px] h-[3px] bg-sah-red mb-5"></div>
                                     <div className="flex flex-col gap-5">
                                         {relatedPosts.map((post) => (
@@ -175,7 +191,7 @@ export default function NewsItemView({ news, relatedPosts = [] }: { news: NewsIt
                             )}
 
                             {/* Share */}
-                            <ShareButtons title={news.title} />
+                            <ShareButtons title={news.title} share_label={share_label} />
 
                         </aside>
                     </div>
@@ -188,7 +204,7 @@ export default function NewsItemView({ news, relatedPosts = [] }: { news: NewsIt
                                     <ProjectArrowLeft />
                                 </span>
                                 <div>
-                                    <p className="text-[13px] font-semibold uppercase tracking-wide text-sah-gray-2 !m-0">Previous Article</p>
+                                    <p className="text-[13px] font-semibold uppercase tracking-wide text-sah-gray-2 !m-0">{previous_article_label || "Previous Article"}</p>
                                     <p className="text-[15px] font-semibold text-sah-dark-2 group-hover:text-sah-red !m-0 transition-all line-clamp-1">{news.prev.title}</p>
                                 </div>
                             </a>
@@ -204,7 +220,7 @@ export default function NewsItemView({ news, relatedPosts = [] }: { news: NewsIt
                                     <ProjectArrowRight />
                                 </span>
                                 <div>
-                                    <p className="text-[13px] font-semibold uppercase tracking-wide text-sah-gray-2 !m-0">Next Article</p>
+                                    <p className="text-[13px] font-semibold uppercase tracking-wide text-sah-gray-2 !m-0">{next_article_label || "Next Article"}</p>
                                     <p className="text-[15px] font-semibold text-sah-dark-2 group-hover:text-sah-red !m-0 transition-all line-clamp-1">{news.next.title}</p>
                                 </div>
                             </a>
