@@ -242,7 +242,7 @@ export function NavLinks() {
                                             <div className="w-[40%] flex justify-start gap-[30px] py-[30px] px-[15px] max-[1536px]:pl-5 justify-start">
                                                 {link.submenus?.map((group) => (
                                                     <div key={group.label} className="flex flex-col gap-3">
-                                                        <p className="font-inter text-[16px] font-semibold tracking-widest uppercase text-sah-black">{group.label}</p>
+                                                        <p className="font-inter text-[16px] font-semibold uppercase text-sah-black">{group.label}</p>
                                                         {group.links.map((sub) => (
                                                             <a key={sub.label} href={sub.href} className="text-[14px] font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
                                                                 {sub.label}
