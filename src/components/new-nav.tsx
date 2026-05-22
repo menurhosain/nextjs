@@ -27,10 +27,30 @@ const navLinks = [
             cta: { label: "Learn How", href: "/become-a-subcontractor" },
         },
         submenus: [
-            { label: "About Us", href: "/about-us" },
-            { label: "Partner", href: "/partner" },
-            { label: "Leadership", href: "/leadership" },
-            { label: "Contact", href: "/contact" },
+            {
+                label: "Who We Are",
+                links: [
+                    { label: "About Us", href: "/about-us" },
+                    { label: "Our Leadership", href: "/leadership" },
+                    { label: "Market Sectors", href: "#" },
+                ],
+            },
+            {
+                label: "Our Culture",
+                links: [
+                    { label: "Our Values", href: "#" },
+                    { label: "Health, Safety & Environment (HSE)", href: "#" },
+                    { label: "Innovation & Technology", href: "#" },
+                    { label: "Ethics & Compliance", href: "#" },
+                    { label: "Community Engagement", href: "#" },
+                    { label: "Training", href: "#" },
+                    { label: "Sustainability", href: "#" },
+                ],
+            },
+            {
+                label: "Resources",
+                links: [{ label: "General Inquiries", href: "/contact" }],
+            },
         ],
     },
     {
@@ -48,12 +68,54 @@ const navLinks = [
             cta: { href: "/services-details", label: "Join us" },
         },
         submenus: [
-            { label: "Services", href: "/services" },
-            { label: "Services Details", href: "/services-details" },
+            {
+                label: "Approach",
+                links: [
+                    { label: "Pre-construction", href: "#" },
+                    { label: "Construction Management", href: "#" },
+                    { label: "Project Management", href: "#" },
+                ],
+            },
+            {
+                label: "Areas of Expertise",
+                links: [
+                    { label: "Civil Construction", href: "#" },
+                    { label: "MEP Engineering", href: "#" },
+                    { label: "Design & Build", href: "#" },
+                    { label: "HVAC & FCU Systems", href: "#" },
+                    { label: "BIM & Virtual Construction", href: "#" },
+                    { label: "Facility Management", href: "#" },
+                ],
+            },
         ],
     },
     {
-        label: "Our Projects",
+        label: "Careers",
+        parent: true,
+        link: "/careers",
+        card: {
+            title: "Careers With Us",
+            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
+            cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/careers" },
+        },
+        promo: {
+            title: "Your Career Starts Here",
+            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
+            image: "/team/2.jpg",
+            cta: { label: "Join with us", href: "/careers" },
+        },
+        submenus: [
+            {
+                label: "Join Us",
+                links: [
+                    { label: "Life at SAH", href: "#" },
+                    { label: "Careers", href: "/careers" },
+                ],
+            },
+        ],
+    },
+    {
+        label: "Projects",
         parent: true,
         card: {
             title: "Our Projects",
@@ -67,8 +129,22 @@ const navLinks = [
             cta: { label: "View Project", href: "/projects" },
         },
         submenus: [
-            { label: "Projects", href: "/projects" },
-            { label: "Project Details", href: "/project-details" },
+            {
+                label: "Flagship Projects",
+                links: [
+                    { label: "Completed Projects", href: "#" },
+                    { label: "On-Going Projects", href: "#" },
+                ],
+            },
+            {
+                label: "Categories",
+                links: [
+                    { label: "Education", href: "#" },
+                    { label: "MOD", href: "#" },
+                    { label: "MOI", href: "#" },
+                    { label: "MOC", href: "#" },
+                ],
+            },
         ],
     },
     {
@@ -85,29 +161,6 @@ const navLinks = [
             { title: "Cost Effective Solutions for your dream", href: "#", image: "/menu/2.jpg" },
             { title: "Solutions for Building Projects", href: "#", image: "/menu/1.jpg" },
             { title: "Medical Pavilion at Institute Square", href: "#", image: "/menu/3.jpg" },
-        ],
-    },
-    {
-        label: "Careers",
-        parent: true,
-        id: "career",
-        link: "/careers",
-        card: {
-            title: "Careers With Us",
-            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/careers" },
-        },
-        promo: {
-            title: "Your Career Starts Here",
-            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
-            image: "/team/2.jpg",
-            cta: { label: "Join with us", href: "/careers" },
-        },
-        submenus: [
-            { label: "Career", href: "/careers" },
-            { label: "Partner", href: "/partner" },
-            { label: "Leadership", href: "/leadership" },
-            { label: "Contact", href: "/contact" },
         ],
     },
 ];
@@ -186,11 +239,16 @@ export function NavLinks() {
                                                 </a>
                                             </div>
 
-                                            <div className="w-[40%] flex flex-col justify-start gap-4 py-6 px-10 max-[1536px]:pl-5">
-                                                {link.submenus?.map((sub) => (
-                                                    <a key={sub.label} href={sub.href} className="text-sm font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
-                                                        {sub.label}
-                                                    </a>
+                                            <div className="w-[40%] flex justify-start gap-[30px] py-[30px] px-[15px] max-[1536px]:pl-5 justify-start">
+                                                {link.submenus?.map((group) => (
+                                                    <div key={group.label} className="flex flex-col gap-3">
+                                                        <p className="font-inter text-[16px] font-semibold tracking-widest uppercase text-sah-black">{group.label}</p>
+                                                        {group.links.map((sub) => (
+                                                            <a key={sub.label} href={sub.href} className="text-[14px] font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
+                                                                {sub.label}
+                                                            </a>
+                                                        ))}
+                                                    </div>
                                                 ))}
                                             </div>
 
@@ -362,11 +420,16 @@ export function NavActions() {
                                                     {link.label}
                                                     <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenus.has(link.label) ? "rotate-180" : ""}`} />
                                                 </button>
-                                                <div className={`flex flex-col overflow-hidden transition-all duration-300 ${openMenus.has(link.label) ? "max-h-[400px] pb-3" : "max-h-0"}`}>
-                                                    {link.submenus?.map((sub) => (
-                                                        <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-sm hover:text-sah-red">
-                                                            {sub.label}
-                                                        </a>
+                                                <div className={`flex gap-8 overflow-hidden transition-all duration-300 ${openMenus.has(link.label) ? "max-h-[400px] pb-3" : "max-h-0"}`}>
+                                                    {link.submenus?.map((group) => (
+                                                        <div key={group.label} className="flex flex-col gap-1">
+                                                            <p className="py-1 pl-4 font-inter text-[16px] font-semibold tracking-widest uppercase text-sah-black">{group.label}</p>
+                                                            {group.links.map((sub) => (
+                                                                <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-[12px] hover:text-sah-red">
+                                                                    {sub.label}
+                                                                </a>
+                                                            ))}
+                                                        </div>
                                                     ))}
                                                 </div>
                                             </>
