@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
 import ResetPasswordForm from "./reset-password-form";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
+
+export const metadata: Metadata = { title: "Reset Password" };
 
 export default async function ResetPasswordPage({
   searchParams,

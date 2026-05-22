@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Script from "next/script";
 import RegisterContractorForm from "./register-form";
 import { Banner, Left, Right } from "@/components/ui/banner";
@@ -6,6 +7,8 @@ import { get_register_contractor_page_content } from "@/services/page_content.se
 import { get_global_settings } from "@/services/global.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { headers } from "next/headers";
+
+export const metadata: Metadata = { title: "Register Contractor" };
 
 export default async function RegisterContractorPage() {
     const locale = (await headers()).get("x-locale") ?? "en";

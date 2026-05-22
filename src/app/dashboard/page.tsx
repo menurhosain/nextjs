@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import { headers, cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { get_user_applications } from "@/services/applicant.service";
 import { get_user_subcontractor_applications } from "@/services/subcontractor.service";
 import { CONTRACTOR } from "@/lib/constant";
+
+export const metadata: Metadata = { title: "Dashboard" };
 
 export default async function DashboardPage() {
   const headersList = await headers();

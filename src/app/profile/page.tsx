@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { BASE_URL } from "@/lib/constant";
+
+export const metadata: Metadata = { title: "Profile" };
 
 export default async function ProfilePage() {
   const headersList = await headers();

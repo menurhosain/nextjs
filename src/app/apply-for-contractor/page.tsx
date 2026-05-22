@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import ApplyForm from "./apply-form";
+
+export const metadata: Metadata = { title: "Apply for Contractor" };
 
 export default function ApplyForContractorPage() {
   return (

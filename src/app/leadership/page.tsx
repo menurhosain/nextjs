@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import LeadershipSection from "@/components/sections/leadership/leadership";
 import Career from "@/components/sections/home/career";
 import { get_career_cta_section_content, get_leadership_page_content, get_teams } from "@/services/page_content.service";
+
+export const metadata: Metadata = { title: "Leadership" };
 
 export default async function LeadershipPage() {
     const locale = (await headers()).get("x-locale") ?? "en";

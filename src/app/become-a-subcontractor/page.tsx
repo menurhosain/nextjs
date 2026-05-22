@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Subcontractor from "@/components/sections/become-a-subcontractor/subcontractor";
 import Cta from "@/components/sections/become-a-subcontractor/cta";
 import { get_subcontractor_page_content, get_career_cta_section_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
+
+export const metadata: Metadata = { title: "Become a Subcontractor" };
 
 export default async function BecomeASubcontrctorPage() {
     const [content, cta] = await Promise.all([

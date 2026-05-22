@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import EditProfileForm from "./edit-form";
 import { BASE_URL } from "@/lib/constant";
+
+export const metadata: Metadata = { title: "Edit Profile" };
 
 export default async function EditProfilePage() {
   const headersList = await headers();

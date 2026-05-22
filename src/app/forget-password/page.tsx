@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import ForgetPasswordForm from "./forget-password-form";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { get_forget_password_page_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { headers } from "next/headers";
+
+export const metadata: Metadata = { title: "Forget Password" };
 
 export default async function ForgetPasswordPage() {
     const locale = (await headers()).get("x-locale") ?? "en";

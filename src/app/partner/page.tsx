@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Partner from "@/components/sections/partner/partner";
@@ -6,6 +7,8 @@ import Cta from "@/components/sections/partner/cta";
 import { headers } from "next/headers";
 import { get_partner_page_content, get_cta_content, get_voices_of_experience_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
+
+export const metadata: Metadata = { title: "Partner" };
 
 export default async function PartnerPage() {
     const locale = (await headers()).get("x-locale") ?? "en";

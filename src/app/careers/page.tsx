@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Testimonial from "@/components/sections/careers/testimonial";
@@ -7,6 +8,8 @@ import { get_voices_of_experience_content, get_career_page_content } from "@/ser
 import { get_jobs } from "@/services/job.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { headers } from "next/headers";
+
+export const metadata: Metadata = { title: "Careers" };
 
 export default async function CareersPage() {
     const locale = (await headers()).get("x-locale") ?? "en";

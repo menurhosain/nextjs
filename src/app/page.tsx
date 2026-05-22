@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Hero from "@/components/sections/home/hero";
 import Service from "@/components/sections/home/service";
@@ -11,6 +12,8 @@ import { getStrapiMediaUrl } from "@/lib/utils";
 import { get_service_cards } from "@/services/service_card.service";
 import { get_news_items } from "@/services/news.service";
 import { get_projects } from "@/services/project.service";
+
+export const metadata: Metadata = { title: "Home" };
 
 export default async function Home() {
     const locale = (await headers()).get("x-locale") ?? "en";

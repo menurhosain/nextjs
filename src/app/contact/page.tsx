@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Contact from "@/components/sections//contact/contact";
@@ -6,6 +7,8 @@ import { headers } from "next/headers";
 import { get_contact_page_content } from "@/services/page_content.service";
 import { get_global_settings } from "@/services/global.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
+
+export const metadata: Metadata = { title: "Contact" };
 
 export default async function ContactPage() {
     const locale = (await headers()).get("x-locale") ?? "en";

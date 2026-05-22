@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Service from "@/components/sections/service/service";
@@ -6,6 +7,8 @@ import { headers } from "next/headers";
 import { get_services_page_content, get_faq_items } from "@/services/page_content.service";
 import { get_service_cards } from "@/services/service_card.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
+
+export const metadata: Metadata = { title: "Services" };
 
 export default async function ServicesPage() {
     const locale = (await headers()).get("x-locale") ?? "en";

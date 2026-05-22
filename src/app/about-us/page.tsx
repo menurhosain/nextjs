@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
@@ -16,6 +17,8 @@ const FALLBACK_TITLE = (
         Building Trust Through <br /> Quality Construction <br /> Trust Through
     </>
 );
+
+export const metadata: Metadata = { title: "About Us" };
 
 export default async function AboutUsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";

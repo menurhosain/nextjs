@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
@@ -5,6 +6,8 @@ import News from "@/components/sections/news/news";
 import { get_news_items, get_news_tags } from "@/services/news.service";
 import { get_news_page_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
+
+export const metadata: Metadata = { title: "News" };
 
 export default async function NewsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
