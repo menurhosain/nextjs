@@ -3,8 +3,9 @@ import { BASE_URL } from "@/lib/constant";
 export type Script = {
     id: number;
     name: string | null;
-    script: string | null;
-    place: "Header" | "Footer" | null;
+    src: string | null;
+    content: string | null;
+    strategy: "beforeInteractive" | "afterInteractive" | "lazyOnload" | null;
 };
 
 export async function get_scripts(): Promise<Script[]> {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Serif_Display, Inter } from "next/font/google";
 import { headers } from "next/headers";
+import Script from "next/script";
 import Header from "@/components/layout/header/header";
 import { LenisProvider } from "@/components/layout/lenis-provider";
 import ScrollToTop from "@/components/ui/scroll-to-top";
@@ -60,24 +61,23 @@ export default async function RootLayout({
     //dir={isRtl ? "rtl" : "ltr"}
 
     const scripts = await get_scripts();
-    const headerScripts = scripts.filter((s) => s.place !== "Footer");
-    const footerScripts = scripts.filter((s) => s.place === "Footer");
 
     return (
         <html lang={locale} className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col overflow-x-hidden">
-                {headerScripts.map((s) => (
-                    <div key={s.id} dangerouslySetInnerHTML={{ __html: s.script ?? "" }} />
-                ))}
                 <LenisProvider>
                     <Header />
                     <main>{children}</main>
                     <Footer />
                     <ScrollToTop />
                 </LenisProvider>
-                {footerScripts.map((s) => (
-                    <div key={s.id} dangerouslySetInnerHTML={{ __html: s.script ?? "" }} />
-                ))}
+                {scripts.map((s) =>
+                    s.src ? (
+                        <Script key={s.id} src={s.src} strategy={s.strategy ?? "afterInteractive"} />
+                    ) : s.content ? (
+                        <Script key={s.id} id={`cms-script-${s.id}`} strategy={s.strategy ?? "afterInteractive"} dangerouslySetInnerHTML={{ __html: s.content }} />
+                    ) : null,
+                )}
             </body>
         </html>
     );
