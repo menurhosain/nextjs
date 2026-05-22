@@ -7,6 +7,7 @@ import { LenisProvider } from "@/components/layout/lenis-provider";
 import ScrollToTop from "@/components/ui/scroll-to-top";
 import { get_global_settings } from "@/services/global.service";
 import { get_scripts } from "@/services/script.service";
+import { get_stylesheets } from "@/services/stylesheet.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import "./style.scss";
 
@@ -60,10 +61,19 @@ export default async function RootLayout({
     const isRtl = locale === "ar-om";
     //dir={isRtl ? "rtl" : "ltr"}
 
-    const scripts = await get_scripts();
+    const [scripts, stylesheets] = await Promise.all([get_scripts(), get_stylesheets()]);
 
     return (
         <html lang={locale} className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} h-full antialiased`}>
+            <head>
+                {stylesheets.map((s) =>
+                    s.href ? (
+                        <link key={s.id} rel="stylesheet" href={s.href} />
+                    ) : s.content ? (
+                        <style key={s.id} dangerouslySetInnerHTML={{ __html: s.content }} />
+                    ) : null
+                )}
+            </head>
             <body className="min-h-full flex flex-col overflow-x-hidden">
                 <LenisProvider>
                     <Header />
