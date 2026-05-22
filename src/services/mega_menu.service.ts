@@ -16,6 +16,12 @@ export type MegaMenuLink = {
     button_link: string;
 };
 
+export type MegaMenuLinkGroup = {
+    id: number;
+    group_label: string;
+    links: MegaMenuLink[];
+};
+
 export type FeaturedNews = {
     id: number;
     title: string;
@@ -29,7 +35,7 @@ export type Menu = {
     nav_label: string;
     root_link: string;
     is_parent: boolean;
-    mega_menu_links: MegaMenuLink[];
+    mega_menu_link_groups: MegaMenuLinkGroup[];
     mega_menu_left_info: MegaMenuInfo | null;
     mega_menu_right_info: MegaMenuInfo | null;
     featured_news: FeaturedNews[];
@@ -38,7 +44,7 @@ export type Menu = {
 export async function get_mega_menu(locale = "en"): Promise<Menu[]> {
     try {
         const res = await fetch(
-            `${BASE_URL}/api/mega-menu?locale=${locale}&populate[menus][populate][mega_menu_left_info][populate]=*&populate[menus][populate][mega_menu_right_info][populate]=*&populate[menus][populate][mega_menu_links][populate]=*&populate[menus][populate][featured_news][populate]=*`,
+            `${BASE_URL}/api/mega-menu?locale=${locale}&populate[menus][populate][mega_menu_left_info][populate]=*&populate[menus][populate][mega_menu_right_info][populate]=*&populate[menus][populate][mega_menu_link_groups][populate][links][populate]=*&populate[menus][populate][featured_news][populate]=*`,
         );
         if (!res.ok) return [];
         const json = await res.json();

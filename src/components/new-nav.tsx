@@ -209,8 +209,11 @@ function transformMenus(menus: Menu[]) {
                 href: menu.mega_menu_right_info?.action_link_href ?? "",
             },
         },
-        submenus: menu.mega_menu_links?.length
-            ? [{ label: "", links: menu.mega_menu_links.map((l) => ({ label: l.button_label, href: l.button_link })) }]
+        submenus: menu.mega_menu_link_groups?.length
+            ? menu.mega_menu_link_groups.map((g) => ({
+                  label: g.group_label,
+                  links: (g.links ?? []).map((l) => ({ label: l.button_label, href: l.button_link })),
+              }))
             : ([] as SubmenuGroup[]),
         latest_news: (menu.featured_news ?? []).map((n) => ({
             title: n.title,
@@ -295,12 +298,12 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
                                                 </a>
                                             </div>
 
-                                            <div className="w-[40%] flex justify-start gap-10 py-6 px-10 max-[1536px]:pl-5">
+                                            <div className="w-[40%] flex justify-start gap-[30px] py-[30px] px-[15px] max-[1536px]:pl-5">
                                                 {link.submenus?.map((group) => (
                                                     <div key={group.label} className="flex flex-col gap-3">
-                                                        {group.label && <p className="font-inter text-[16px] font-semibold tracking-widest uppercase text-sah-black">{group.label}</p>}
+                                                        {group.label && <p className="font-inter text-[16px] font-semibold uppercase text-sah-black">{group.label}</p>}
                                                         {group.links.map((sub) => (
-                                                            <a key={sub.label} href={sub.href} className="text-[12px] font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
+                                                            <a key={sub.label} href={sub.href} className="text-[14px] font-medium text-sah-black hover:text-sah-red whitespace-nowrap font-inter">
                                                                 {sub.label}
                                                             </a>
                                                         ))}
@@ -337,7 +340,19 @@ const DEFAULT_SOCIAL_LINKS = [
     { button_label: "YouTube", button_link: "#" },
 ];
 
-export function NavActions({ locale, menus, offcanvas, light_logo_url, recaptcha_site_key }: { locale: string; menus: Menu[]; offcanvas?: OffcanvasContent | null; light_logo_url?: string; recaptcha_site_key?: string }) {
+export function NavActions({
+    locale,
+    menus,
+    offcanvas,
+    light_logo_url,
+    recaptcha_site_key,
+}: {
+    locale: string;
+    menus: Menu[];
+    offcanvas?: OffcanvasContent | null;
+    light_logo_url?: string;
+    recaptcha_site_key?: string;
+}) {
     const navLinks = transformMenus(menus);
     const router = useRouter();
     const [selectedLang, setSelectedLang] = useState(() => {
@@ -482,9 +497,9 @@ export function NavActions({ locale, menus, offcanvas, light_logo_url, recaptcha
                                                 <div className={`flex gap-8 overflow-hidden transition-all duration-300 ${openMenus.has(link.label) ? "max-h-[400px] pb-3" : "max-h-0"}`}>
                                                     {link.submenus?.map((group) => (
                                                         <div key={group.label} className="flex flex-col gap-1">
-                                                            {group.label && <p className="py-1 pl-4 font-inter text-[16px] font-semibold tracking-widest uppercase text-sah-black">{group.label}</p>}
+                                                            {group.label && <p className="py-1 pl-4 font-inter text-[16px] font-semibold uppercase text-sah-black">{group.label}</p>}
                                                             {group.links.map((sub) => (
-                                                                <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-[12px] hover:text-sah-red">
+                                                                <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-[14px] hover:text-sah-red">
                                                                     {sub.label}
                                                                 </a>
                                                             ))}
