@@ -5,6 +5,7 @@ import Header from "@/components/layout/header/header";
 import { LenisProvider } from "@/components/layout/lenis-provider";
 import ScrollToTop from "@/components/ui/scroll-to-top";
 import { get_global_settings } from "@/services/global.service";
+import { get_scripts } from "@/services/script.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import "./style.scss";
 
@@ -58,15 +59,25 @@ export default async function RootLayout({
     const isRtl = locale === "ar-om";
     //dir={isRtl ? "rtl" : "ltr"}
 
+    const scripts = await get_scripts();
+    const headerScripts = scripts.filter((s) => s.place !== "Footer");
+    const footerScripts = scripts.filter((s) => s.place === "Footer");
+
     return (
         <html lang={locale} className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col overflow-x-hidden">
+                {headerScripts.map((s) => (
+                    <div key={s.id} dangerouslySetInnerHTML={{ __html: s.script ?? "" }} />
+                ))}
                 <LenisProvider>
                     <Header />
                     <main>{children}</main>
                     <Footer />
                     <ScrollToTop />
                 </LenisProvider>
+                {footerScripts.map((s) => (
+                    <div key={s.id} dangerouslySetInnerHTML={{ __html: s.script ?? "" }} />
+                ))}
             </body>
         </html>
     );
