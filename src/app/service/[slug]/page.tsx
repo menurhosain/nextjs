@@ -13,12 +13,36 @@ import Approach from "@/components/sections/service-details/approach";
 
 import { get_service_details_page_content, get_teams, get_cta_content, get_faq_items } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
+import { get_service_by_slug } from "@/services/service.service";
 
-export const metadata: Metadata = { title: "Services Details" };
-
-export default async function ServicesDetailsPage() {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
     const locale = (await headers()).get("x-locale") ?? "en";
+    const service = await get_service_by_slug(slug, locale);
 
+    if (!service) return {};
+
+    return {
+        title: service.title,
+        description: service.description || undefined,
+        openGraph: {
+            title: service.title,
+            description: service.description || undefined,
+            ...(service.image && { images: [{ url: service.image }] }),
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: service.title,
+            description: service.description || undefined,
+            ...(service.image && { images: [service.image] }),
+        },
+    };
+}
+
+export default async function ServicesDetailsPage({params}:{params:Promise<{slug:string}>}) {
+    const locale = (await headers()).get("x-locale") ?? "en";
+    const { slug } = await params;
+    const service = await get_service_by_slug(slug, locale);
     const [page, teams, cta,  faqItems] = await Promise.all([get_service_details_page_content(locale), get_teams(locale, 4), get_cta_content(locale), get_faq_items(locale)] );
 
     const bg = getStrapiMediaUrl(page?.Banner?.banner_bg) || "/home-hero.mp4";
@@ -40,10 +64,10 @@ export default async function ServicesDetailsPage() {
             </Banner>
 
             <ServiceDetails
-                title={page?.service_detail_title}
-                description={page?.service_detail_description}
+                title={service?.title}
+                description={service?.content}
                 benefits_label={page?.service_detail_benefits_label}
-                benefits={page?.service_detail_benefits}
+                benefits={service?.benefits}
             />
 
             <TeamSection section_title={page?.team_section_title} teams={teams} />

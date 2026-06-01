@@ -39,7 +39,7 @@ type StrapiServiceRaw = {
     button_label: string | null;
     button_link: string | null;
     image: { url: string } | null;
-    content?: BlocksContent;
+    content: BlocksContent;
     benefits?: BenefitListItem[];
 };
 
