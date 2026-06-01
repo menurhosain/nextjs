@@ -1,7 +1,7 @@
 import { ServiceCardTwo } from "@/components/ui/service-card2";
 import Section_Title from "@/components/ui/section-title";
 import { SectionTitle } from "@/services/page_content.service";
-import { ServiceCard } from "@/services/service_card.service";
+import { Service as ServiceCard } from "@/services/service.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 type Props = {
@@ -32,12 +32,12 @@ export default function Service({ section_title, cards }: Props) {
                     <div className="col-span-4 flex flex-col gap-[30px]">
                         {cards?.map((card) => (
                             <ServiceCardTwo
-                                key={card.id}
+                                key={card.slug}
                                 icon={card.svg ? <span dangerouslySetInnerHTML={{ __html: card.svg }} /> : undefined}
                                 title={card.title}
                                 description={card.description}
                                 image={getStrapiMediaUrl(card.image) || "/service-card/1.jpg"}
-                                href={card.button_link || "#"}
+                                href={`/service/${card.slug}`}
                             />
                         ))}
                     </div>

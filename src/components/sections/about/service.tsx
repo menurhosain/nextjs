@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ServiceCard } from "@/components/ui/service-card";
 import Section_Title from "@/components/ui/section-title";
 import { cn } from "@/lib/utils";
-import { ServiceCard as ServiceCardTypes } from "@/services/service_card.service";
+import {Service as ServiceCardTypes} from "@/services/service.service";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,7 +79,7 @@ export default function Service({ className, containerClass, bgShape = true, ser
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rs-pin-element items-start">
                     {services?.map((ser, i) => (
-                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-xl:!mt-0" ref={(el) => { cardRefsArray.current[i] = el; }} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={ser.button_link} key={ser.id} />
+                        <ServiceCard style={{marginTop: `${i * 400 }px`}} class_name="max-xl:!mt-0" ref={(el) => { cardRefsArray.current[i] = el; }} title={ser.title} description={ser.description} icon={ser.svg} link_label={ser.button_label} href={`/service/${ser.slug}`} key={ser.slug} />
                     ))}
                 </div>
             </div>

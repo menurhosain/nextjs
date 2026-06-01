@@ -26,7 +26,9 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(
             <a href={href} className="text-[56px] flex items-start justify-start shrink-0 text-sah-gray-2 transition-transform duration-500 group-hover:scale-80 w-fit" dangerouslySetInnerHTML={{__html:icon}} />
 
             {/* Title */}
-            <a href={href} className="text-sah-black font-semibold font-geist text-[26px] xl:text-[30px] mb-[10px] xl:mb-[40px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit" dangerouslySetInnerHTML={{__html:title}}/>
+            <a href={href} className="text-sah-black max-w-[220px] font-semibold font-geist text-[26px] xl:text-[30px] mb-[10px] xl:mb-[40px] leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit" > 
+				{title}
+			</a>
 
             {/* Description */}
             <p className="text-sah-gray-1 font-inter text-[17px] leading-[30px]">{description}</p>

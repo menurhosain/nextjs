@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/lib/constant";
+import { Service } from "./service.service";
 
 export type StrapiMediaFormat = {
     ext: string;
@@ -69,6 +70,7 @@ export type HomePageContent = {
     service_group_button_link_one: string;
     service_group_button_label_two: string;
     service_group_button_link_two: string;
+	services:Service[],
 
     about_section_sub_title: string;
     about_section_title_normal: string;
@@ -353,11 +355,12 @@ export type AboutPageContent = {
     why_choose_cards: WhyChooseCard[];
     why_choose_image_cards: WhyChooseImageCard[];
     service_section_title: AboutPageSectionTitle;
+	services:Service[]
 };
 export async function get_about_page_content(locale = "en"): Promise<AboutPageContent | null> {
     try {
         const res = await fetch(
-            `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*&populate[why_choose_section][populate]=*&populate[why_choose_cards][populate]=*&populate[why_choose_image_cards][populate]=*&populate[service_section_title][populate]=*`,
+            `${BASE_URL}/api/about-page?locale=${locale}&populate[Banner][populate]=*&populate[about_section][populate]=*&populate[about_stats_counters][populate]=*&populate[about_award_bg][populate]=*&populate[about_award_logo][populate]=*&populate[why_choose_section][populate]=*&populate[why_choose_cards][populate]=*&populate[why_choose_image_cards][populate]=*&populate[service_section_title][populate]=*&populate[services][populate]=*`,
         );
         if (!res.ok) return null;
         const json = await res.json();
@@ -394,11 +397,12 @@ export type ServiceDetailsPageContent = {
     service_section_title: SectionTitle | null;
     feature_section_bg: StrapiMedia | null;
     feature_items: { id: number; icon: string; step: string; title: string; description: string }[];
+	services:Service[]
 };
 
 export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[service_detail_benefits][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[approach_section_title][populate]=*&populate[approach_section_image][populate]=*&populate[service_section_title][populate]=*&populate[feature_section_bg][populate]=*&populate[feature_items][populate]=*`);
+        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[approach_section_title][populate]=*&populate[approach_section_image][populate]=*&populate[service_section_title][populate]=*&populate[feature_section_bg][populate]=*&populate[feature_items][populate]=*&populate[services][populate]=*`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -416,10 +420,11 @@ export type ServicesPageContent = {
     };
     service_section_title: SectionTitle;
     faq_section_title: SectionTitle;
+	services:Service[];
 };
 export async function get_services_page_content(locale = "en"): Promise<ServicesPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/services-page?populate[banner][populate]=*&populate[service_section_title]=*&populate[faq_section_title]=*&locale=${locale}`);
+        const res = await fetch(`${BASE_URL}/api/services-page?populate[banner][populate]=*&populate[service_section_title]=*&populate[services][populate]=*&populate[faq_section_title]=*&locale=${locale}`);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;

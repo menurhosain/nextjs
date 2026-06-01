@@ -5,18 +5,13 @@ import Service from "@/components/sections/service/service";
 import FaqSection from "@/components/sections/service/faq";
 import { headers } from "next/headers";
 import { get_services_page_content, get_faq_items } from "@/services/page_content.service";
-import { get_service_cards } from "@/services/service_card.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Services" };
 
 export default async function ServicesPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [content, serviceCards, faqItems] = await Promise.all([
-        get_services_page_content(locale),
-        get_service_cards(locale, 2000),
-        get_faq_items(locale),
-    ]);
+    const [content,  faqItems] = await Promise.all([ get_services_page_content(locale), get_faq_items(locale) ]);
 
     return (
         <>
@@ -36,7 +31,7 @@ export default async function ServicesPage() {
 
             <Service
                 section_title={content?.service_section_title}
-                cards={serviceCards}
+                cards={content?.services}
             />
 
             <FaqSection

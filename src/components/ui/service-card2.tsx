@@ -19,7 +19,9 @@ export function ServiceCardTwo({ icon, title, description, image, href = "#", cl
                 <div className="flex max-[640px]:flex-col items-start gap-4">
                     {icon && <div className="shrink-0 text-[48px] leading-none group-hover:scale-90 sah-transition" >{icon}</div>}
 
-                    <a href={href} dangerouslySetInnerHTML={{__html:title}} className="text-sah-black font-semibold font-geist text-[24x] md:text-[30px] leading-[26px] md:leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit"/>
+                    <a href={href} className="max-w-[220px] text-sah-black font-semibold font-geist text-[24x] md:text-[30px] leading-[26px] md:leading-[34px] hover:text-sah-red transition-colors duration-300 w-fit">
+						{title}
+					</a>
                 </div>
 
                 <hr className="border-gray-200" />

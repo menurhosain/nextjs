@@ -9,7 +9,6 @@ import News from "@/components/sections/home/news";
 import Career from "@/components/sections/home/career";
 import { get_home_page_content, get_career_cta_section_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
-import { get_service_cards } from "@/services/service_card.service";
 import { get_news_items } from "@/services/news.service";
 import { get_projects } from "@/services/project.service";
 
@@ -17,7 +16,7 @@ export const metadata: Metadata = { title: "Home" };
 
 export default async function Home() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [content, service_cards, news, projects, career] = await Promise.all([get_home_page_content(locale), get_service_cards(locale), get_news_items(locale, 2), get_projects(locale, 3), get_career_cta_section_content(locale)]);
+    const [content,  news, projects, career] = await Promise.all([get_home_page_content(locale), get_news_items(locale, 2), get_projects(locale, 3), get_career_cta_section_content(locale)]);
 
     return (
         <>
@@ -39,7 +38,7 @@ export default async function Home() {
                 buttonLinkOne={content?.service_group_button_link_one}
                 buttonLabelTwo={content?.service_group_button_label_two}
                 buttonLinkTwo={content?.service_group_button_link_two}
-                service_cards={service_cards}
+                service_cards={content?.services}
             />
             <About
                 subTitle={content?.about_section_sub_title}

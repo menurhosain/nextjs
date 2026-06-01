@@ -6,7 +6,6 @@ import About from "@/components/sections/about/about";
 import WhyChoose from "@/components/sections/about/whychoose";
 import Service from "@/components/sections/about/service";
 import Career from "@/components/sections/home/career";
-import { get_service_cards } from "@/services/service_card.service";
 import { get_about_page_content, get_career_cta_section_content } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
@@ -22,7 +21,7 @@ export const metadata: Metadata = { title: "About Us" };
 
 export default async function AboutUsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [service_cards, about_page, career] = await Promise.all([get_service_cards(locale), get_about_page_content(locale), get_career_cta_section_content(locale)]);
+    const [about_page, career] = await Promise.all([get_about_page_content(locale), get_career_cta_section_content(locale)]);
 
     const banner = about_page?.Banner;
     const bg = getStrapiMediaUrl(banner?.banner_bg) || FALLBACK_BG;
@@ -60,7 +59,7 @@ export default async function AboutUsPage() {
                 image_cards={about_page?.why_choose_image_cards}
             />
             <Service
-                services={service_cards}
+                services={about_page?.services}
                 subtitle={about_page?.service_section_title?.sub_title}
                 title={about_page?.service_section_title?.title}
             />
