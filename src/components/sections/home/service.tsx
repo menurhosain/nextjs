@@ -93,7 +93,7 @@ export default function Service({ subTitle, titleNormal, titleAnimated, buttonLa
 
                 <div className="flex justify-center mt-8 lg:mt-12">
                     <div className="inline-flex shadow-sm px-[15px] md:px-[30px] py-[8px] md:py-[8px] bg-sah-white rounded-full max-[640px]:rounded-[10px] justify-center gap-[5px] sm:gap-[20px] flex-wrap">
-                        <a href="#" className="flex group items-center text-[14px] sm:text-[16px] gap-[10px] font-inter font-medium ">
+                        <a href={buttonLinkOne || "#"} className="flex group items-center text-[14px] sm:text-[16px] gap-[10px] font-inter font-medium ">
                             <span className="text-sah-dark-2 group-hover:text-sah-red">{buttonLabelOne || "Careers"}</span>
                             <span
                                 className="flex items-center justify-center w-[30px] h-[30px] sm:w-[28px] sm:h-[28px] rounded-full bg-sah-red text-sah-white flex-shrink-0 group-hover:bg-sah-red/80 transition-colors"
