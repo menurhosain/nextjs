@@ -16,7 +16,7 @@ const FALLBACK_BENEFITS: BenefitListItem[] = [
 
 interface ServiceDetailsProps {
     title?: string;
-    description?: BlocksContent;
+    description: BlocksContent;
     benefits_label?: string;
     benefits?: BenefitListItem[];
 }

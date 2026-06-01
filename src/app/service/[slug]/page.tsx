@@ -65,7 +65,7 @@ export default async function ServicesDetailsPage({params}:{params:Promise<{slug
 
             <ServiceDetails
                 title={service?.title}
-                description={service?.content}
+                description={service?.content ?? []}
                 benefits_label={page?.service_detail_benefits_label}
                 benefits={service?.benefits}
             />
