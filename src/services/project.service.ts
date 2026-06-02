@@ -71,9 +71,11 @@ export function mapProject(item: StrapiProjectItem): Project {
     };
 }
 
-async function fetch_raw_projects(locale = "en", count = 2000): Promise<Project[]> {
+async function fetch_raw_projects(locale = "en", count = 2000, tag?: string): Promise<Project[]> {
     try {
-        const res = await fetch(`${BASE_URL}/api/projects?populate=*&locale=${locale}&pagination[pageSize]=${count}`);
+        let url = `${BASE_URL}/api/projects?populate=*&locale=${locale}&pagination[pageSize]=${count}`;
+        if (tag) url += `&filters[tags][slug][$eq]=${encodeURIComponent(tag)}`;
+        const res = await fetch(url);
         if (!res.ok) return [];
         const json = await res.json();
         return (json.data ?? []).map(mapProject);
@@ -82,8 +84,8 @@ async function fetch_raw_projects(locale = "en", count = 2000): Promise<Project[
     }
 }
 
-export async function get_projects(locale = "en", count = 2000): Promise<Project[]> {
-    return fetch_raw_projects(locale, count);
+export async function get_projects(locale = "en", count = 2000, tag?: string): Promise<Project[]> {
+    return fetch_raw_projects(locale, count, tag);
 }
 
 export async function get_project_by_slug(slug: string, locale = "en"): Promise<ProjectDetail | null> {

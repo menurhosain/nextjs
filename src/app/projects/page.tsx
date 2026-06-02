@@ -6,8 +6,9 @@ import ProjectsView from "./projects-view";
 
 export const metadata: Metadata = { title: "Projects" };
 
-export default async function ProjectsPage() {
+export default async function ProjectsPage({ searchParams }: { searchParams: Promise<{ tag?: string }> }) {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [projects, tags, content] = await Promise.all([get_projects(locale), get_project_tags(locale), get_project_page_content(locale)]);
+    const { tag } = await searchParams;
+    const [projects, tags, content] = await Promise.all([get_projects(locale, 2000, tag), get_project_tags(locale), get_project_page_content(locale)]);
     return <ProjectsView projects={projects} tags={tags} content={content} />;
 }
