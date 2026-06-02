@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 type ProjectCardProps = {
     category: string;
@@ -9,21 +8,21 @@ type ProjectCardProps = {
     location: string;
     image: string;
     class_name?: string;
+    slug: string;
 };
 
-export default function ProjectCard({ category, title, description, handover, location, image, class_name }: ProjectCardProps) {
+export default function ProjectCard({ category, title, description, handover, location, image, class_name, slug }: ProjectCardProps) {
     return (
-        <div className={cn(
-            "project-card group flex flex-col max-[1280px]:mb-6 md:flex-row border border-sah-light-3 rounded-sm overflow-hidden bg-sah-white",
-            class_name
-        )}>
+        <div className={cn("project-card group flex flex-col max-[1280px]:mb-6 md:flex-row border border-sah-light-3 rounded-sm overflow-hidden bg-sah-white", class_name)}>
             <div className="project-card-content flex flex-col justify-between w-[100%] md:w-[60%] lg:w-[40%] xl:w-[30%] max-[1024px]:p-[20px] p-[36px] border-r border-sah-light-3 transition-colors duration-500">
                 <div className="flex flex-col">
                     <span className="inline-flex w-fit mb-[14px] text-[16px] font-medium text-sah-black border border-sah-light-1 rounded-full px-[13px] py-[5px] transition-colors duration-500 group-hover:text-sah-white group-hover:border-sah-white/30">
                         {category}
                     </span>
-                    <a href="#">
-                        <h3 className="font-geist !font-medium text-sah-black text-[20px] 2xl:text-[30px] leading-[30px] 2xl:leading-[38px] mb-[20px] transition-colors duration-500 group-hover:text-sah-white pr-[30px]">{title}</h3>
+                    <a href={`/projects/${slug}`}>
+                        <h3 className="font-geist !font-medium text-sah-black text-[20px] 2xl:text-[30px] leading-[30px] 2xl:leading-[38px] mb-[20px] transition-colors duration-500 group-hover:text-sah-white pr-[30px]">
+                            {title}
+                        </h3>
                     </a>
                     <p className="font-inter md:opacity-0 transition-all group-hover:opacity-100 text-[15px] md:text-[17px] font-normal leading-[30px] text-sah-black mb-[30px] md:mb-[40px] duration-500 group-hover:text-sah-white">
                         {description}

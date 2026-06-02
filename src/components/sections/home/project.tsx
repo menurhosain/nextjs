@@ -19,8 +19,7 @@ interface PortfolioProps {
     projects?: Project[];
 }
 
-export default function Projects({subTitle, title, btnLabel, btnLink, projects = []}: PortfolioProps) {
-
+export default function Projects({ subTitle, title, btnLabel, btnLink, projects = [] }: PortfolioProps) {
     const ref = useRef<HTMLDivElement | null>(null);
     const endRef = useRef<HTMLDivElement | null>(null);
 
@@ -35,17 +34,15 @@ export default function Projects({subTitle, title, btnLabel, btnLink, projects =
         mm.add("(min-width: 1280px)", () => {
             const ctx = gsap.context(() => {
                 cards.forEach((card, index) => {
-
                     ScrollTrigger.create({
                         trigger: card,
-                        start: `top top+=${80 + (index * 100)}`,
+                        start: `top top+=${80 + index * 100}`,
                         endTrigger: endRef.current,
                         end: "bottom bottom-=20",
                         pin: true,
                         pinSpacing: false,
                         markers: false,
                     });
-
                 });
             }, ref);
             return () => ctx.revert();
@@ -61,7 +58,10 @@ export default function Projects({subTitle, title, btnLabel, btnLink, projects =
                     <Section_Title
                         subtitle={subTitle || "Latest Projects"}
                         title={title || "Discover our completed building projects"}
-                        class_name={{ subtitle: "text-sah-black text-center ", title: "text-sah-black text-center !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[90px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[90px]" }}
+                        class_name={{
+                            subtitle: "text-sah-black text-center ",
+                            title: "text-sah-black text-center !mb-[10px] text-[30px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[90px] leading-[1.1em] xl:leading-[70px] 2xl:leading-[90px]",
+                        }}
                     />
                 </div>
 
@@ -75,6 +75,7 @@ export default function Projects({subTitle, title, btnLabel, btnLink, projects =
                             handover={project.year}
                             location={project.location[0] ?? ""}
                             image={project.image}
+                            slug={project.slug}
                         />
                     ))}
                 </div>
