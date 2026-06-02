@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { NewsletterForm } from "@/components/ui/newsletter-form";
 import { get_footer_content, type FooterContent, type FooterNavLink, type FooterSocialLink } from "@/services/page_content.service";
 import { get_global_settings } from "@/services/global.service";
@@ -48,9 +47,10 @@ function Links({ nav_links, logo, light_logo_url }: { nav_links: FooterNavLink[]
 
     return (
         <div className="flex flex-col 2xl:flex-row items-center 2xl:items-end gap-7 2xl:gap-15 md:items-center  max-[640px]:w-full">
-            <Link href="/">
-                <img src={logoSrc} alt={logoAlt} width={80} height={80} />
-            </Link>
+            <a href="/">
+                {" "}
+                <img src={logoSrc} alt={logoAlt} width={80} height={80} />{" "}
+            </a>
             <nav className="flex sm:flex-row flex-wrap max-[768px]:justify-center xl:items-center gap-2.5 sm:gap-4 xl:gap-8">
                 {nav_links.map(({ id, button_label, button_link }) => (
                     <a key={id} href={button_link} className="text-[16px] font-semibold hover:opacity-80 transition-opacity whitespace-nowrap">
@@ -62,12 +62,11 @@ function Links({ nav_links, logo, light_logo_url }: { nav_links: FooterNavLink[]
     );
 }
 
-
 function Social({ social_links }: { social_links: FooterSocialLink[] }) {
     return (
         <div className="flex items-center gap-3">
             {social_links.map(({ id, icon, url }) => (
-                <Link
+                <a
                     key={id}
                     href={url}
                     target="_blank"
@@ -97,12 +96,12 @@ function Copyright({
         <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-4 py-6">
             <p className="text-[16px] text-sah-white">{copyright_text}</p>
             <div className="flex items-center gap-2 sm:gap-6 flex-wrap justify-center">
-                <Link href={terms_link} className="text-[16px] text-sah-white">
+                <a href={terms_link} className="text-[16px] text-sah-white">
                     {terms_label}
-                </Link>
-                <Link href={privacy_link} className="text-[16px] text-sah-white">
+                </a>
+                <a href={privacy_link} className="text-[16px] text-sah-white">
                     {privacy_label}
-                </Link>
+                </a>
             </div>
         </div>
     );
