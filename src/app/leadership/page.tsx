@@ -4,13 +4,13 @@ import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import LeadershipSection from "@/components/sections/leadership/leadership";
 import Career from "@/components/sections/home/career";
-import { get_career_cta_section_content, get_leadership_page_content, get_teams } from "@/services/page_content.service";
+import { get_career_cta_section_content, get_leadership_page_content } from "@/services/page_content.service";
 
 export const metadata: Metadata = { title: "Leadership" };
 
 export default async function LeadershipPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [career, leadership, teams] = await Promise.all([get_career_cta_section_content(locale), get_leadership_page_content(locale), get_teams(locale, 3)]);
+    const [career, leadership] = await Promise.all([get_career_cta_section_content(locale), get_leadership_page_content(locale)]);
 
     return (
         <>
@@ -26,7 +26,7 @@ export default async function LeadershipPage() {
                 </Right>
             </Banner>
 
-            <LeadershipSection executive_leader={leadership?.executive_leader} teams={teams} senior_leadership={leadership?.senior_leadership} senior_leadership_title={leadership?.senior_leadership_title} />
+            <LeadershipSection executive_leader={leadership?.executive_leader} teams={leadership?.teams} senior_leadership={leadership?.senior_leadership} senior_leadership_title={leadership?.senior_leadership_title} />
 
             <Career content={career} />
         </>

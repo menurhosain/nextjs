@@ -422,13 +422,13 @@ export type ServiceDetailsPageContent = {
     feature_section_bg: StrapiMedia | null;
     feature_items: { id: number; icon: string; step: string; title: string; description: string }[];
     services: Service[];
+    teams: TeamMember[];
 };
 
 export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
     try {
-        const res = await fetch(
-            `${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[approach_section_title][populate]=*&populate[approach_section_image][populate]=*&populate[service_section_title][populate]=*&populate[feature_section_bg][populate]=*&populate[feature_items][populate]=*&populate[services][populate]=*`,
-        );
+        const url = `${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[approach_section_title][populate]=*&populate[approach_section_image][populate]=*&populate[service_section_title][populate]=*&populate[feature_section_bg][populate]=*&populate[feature_items][populate]=*&populate[services][populate]=*&populate[teams][populate]=*`;
+        const res = await fetch(url);
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -571,10 +571,13 @@ export type LeadershipPageContent = {
     executive_leader: ExecutiveLeaderContent;
     senior_leadership: SeniorLeader[];
     senior_leadership_title: string;
+    teams: TeamMember[];
 };
 export async function get_leadership_page_content(locale = "en"): Promise<LeadershipPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/leadership-page?locale=${locale}&populate[Banner][populate]=*&populate[executive_leader][populate]=*&populate[senior_leadership][populate]=*`);
+        const res = await fetch(
+            `${BASE_URL}/api/leadership-page?locale=${locale}&populate[Banner][populate]=*&populate[executive_leader][populate]=*&populate[senior_leadership][populate]=*&populate[teams][populate][image][populate]=*`,
+        );
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;

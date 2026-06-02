@@ -11,7 +11,7 @@ import Service from "@/components/sections/about/service";
 import FeatureSection from "@/components/sections/service-details/features";
 import Approach from "@/components/sections/service-details/approach";
 
-import { get_service_details_page_content, get_teams, get_cta_content, get_faq_items } from "@/services/page_content.service";
+import { get_service_details_page_content, get_cta_content, get_faq_items } from "@/services/page_content.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { get_service_by_slug } from "@/services/service.service";
 
@@ -43,7 +43,7 @@ export default async function ServicesDetailsPage({params}:{params:Promise<{slug
     const locale = (await headers()).get("x-locale") ?? "en";
     const { slug } = await params;
     const service = await get_service_by_slug(slug, locale);
-    const [page, teams, cta,  faqItems] = await Promise.all([get_service_details_page_content(locale), get_teams(locale, 4), get_cta_content(locale), get_faq_items(locale)] );
+    const [page, cta, faqItems] = await Promise.all([get_service_details_page_content(locale), get_cta_content(locale), get_faq_items(locale)]);
 
     const bg = getStrapiMediaUrl(page?.Banner?.banner_bg) || "/home-hero.mp4";
     const subtitle = page?.Banner?.banner_label || "Detailed Service Overview Here";
@@ -70,7 +70,7 @@ export default async function ServicesDetailsPage({params}:{params:Promise<{slug
                 benefits={service?.benefits}
             />
 
-            <TeamSection section_title={page?.team_section_title} teams={teams} />
+            <TeamSection section_title={page?.team_section_title} teams={page?.teams} />
 
             <OurValue
                 heading={page?.our_value_heading}
