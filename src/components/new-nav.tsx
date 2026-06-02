@@ -502,7 +502,9 @@ export function NavActions({
                                                     {link.label}
                                                     <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenus.has(link.label) ? "rotate-180" : ""}`} />
                                                 </button>
-                                                <div className={`flex gap-8 overflow-hidden transition-all duration-300 ${openMenus.has(link.label) ? "max-h-[400px] pb-3" : "max-h-0"}`}>
+                                                <div
+                                                    className={`flex gap-8 overflow-hidden transition-all duration-300 max-[650px]:flex-col  ${openMenus.has(link.label) ? "max-h-[800px] pb-3 max-[650px]:max-h-none" : "max-h-0"}`}
+                                                >
                                                     {link.submenus?.map((group) => (
                                                         <div key={group.label} className="flex flex-col gap-1">
                                                             {group.label && <p className="py-1 pl-4 font-inter text-[16px] font-semibold uppercase text-sah-black">{group.label}</p>}
