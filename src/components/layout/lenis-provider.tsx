@@ -2,12 +2,11 @@
 
 import Lenis from "lenis";
 import { useEffect } from "react";
-// import gsap from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-//
-// gsap.registerPlugin(ScrollTrigger);
+import { usePathname } from "next/navigation";
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+
     useEffect(() => {
         const lenis = new Lenis({
             autoRaf: true,
@@ -18,7 +17,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         });
 
         return () => lenis.destroy();
-    }, []);
+    }, [pathname]);
 
     return <>{children}</>;
 }

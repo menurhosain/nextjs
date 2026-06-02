@@ -361,6 +361,7 @@ export function NavActions({
     const [langOpen, setLangOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
+    const [searchQuery, setSearchQuery] = useState("");
     const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
 
     return (
@@ -464,6 +465,13 @@ export function NavActions({
                                     type="text"
                                     placeholder={offcanvas?.search_placeholder || "Search your query"}
                                     className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[16px] text-sah-dark placeholder:text-sah-dark/50"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter" && searchQuery.trim()) {
+                                            window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
+                                        }
+                                    }}
                                 />
                             </div>
 
