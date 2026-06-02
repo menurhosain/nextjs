@@ -1,5 +1,7 @@
 import { BASE_URL } from "@/lib/constant";
 import { Service } from "./service.service";
+import { type Project, mapProject } from "./project.service";
+import { type NewsItem, map_news_item } from "./news.service";
 
 export type StrapiMediaFormat = {
     ext: string;
@@ -70,7 +72,7 @@ export type HomePageContent = {
     service_group_button_link_one: string;
     service_group_button_label_two: string;
     service_group_button_link_two: string;
-	services:Service[],
+    services: Service[];
 
     about_section_sub_title: string;
     about_section_title_normal: string;
@@ -88,20 +90,39 @@ export type HomePageContent = {
     project_section_title: string;
     project_section_button_label: string;
     project_section_button_link: string;
+    projects: Project[];
 
     blog_section_sub_title: string;
     blog_section_title: string;
     blog_section_description: string;
     blog_section_button_label: string;
     blog_section_button_link: string;
+    news_items: NewsItem[];
 };
 export async function get_home_page_content(locale = "en"): Promise<HomePageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/home?populate=*&locale=${locale}`);
+        const url =
+            `${BASE_URL}/api/home?locale=${locale}` +
+            `&populate[0]=banner_background` +
+            `&populate[1]=banner_typewriter_texts` +
+            `&populate[2]=about_left_image` +
+            `&populate[3]=partner_logos` +
+            `&populate[4]=services.image` +
+            `&populate[5]=projects.featuredImage` +
+            `&populate[6]=projects.scopes` +
+            `&populate[7]=projects.industries` +
+            `&populate[8]=projects.locations` +
+            `&populate[9]=news_items.featured_image` +
+            `&populate[10]=news_items.tags`;
+        const res = await fetch(url);
         if (!res.ok) return null;
         const json = await res.json();
-        // console.log(json);
-        return json.data ?? null;
+        if (!json.data) return null;
+        return {
+            ...json.data,
+            projects: (json.data.projects ?? []).map(mapProject),
+            news_items: (json.data.news_items ?? []).map(map_news_item),
+        };
     } catch {
         return null;
     }
@@ -254,7 +275,9 @@ export type SubcontractorPageContent = {
 };
 export async function get_subcontractor_page_content(locale = "en"): Promise<SubcontractorPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/subcontractor-page?populate[icon_box][populate]=*&populate[banner][populate]=*&populate[hero_image][populate]=*&populate[policy_image][populate]=*&locale=${locale}`);
+        const res = await fetch(
+            `${BASE_URL}/api/subcontractor-page?populate[icon_box][populate]=*&populate[banner][populate]=*&populate[hero_image][populate]=*&populate[policy_image][populate]=*&locale=${locale}`,
+        );
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -285,7 +308,9 @@ export type CareerPageContent = {
 };
 export async function get_career_page_content(locale = "en"): Promise<CareerPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/career-page?populate[banner][populate]=*&populate[image_1][populate]=*&populate[image_2][populate]=*&populate[map_image][populate]=*&populate[job_board_image][populate]=*&locale=${locale}`);
+        const res = await fetch(
+            `${BASE_URL}/api/career-page?populate[banner][populate]=*&populate[image_1][populate]=*&populate[image_2][populate]=*&populate[map_image][populate]=*&populate[job_board_image][populate]=*&locale=${locale}`,
+        );
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -355,7 +380,7 @@ export type AboutPageContent = {
     why_choose_cards: WhyChooseCard[];
     why_choose_image_cards: WhyChooseImageCard[];
     service_section_title: AboutPageSectionTitle;
-	services:Service[]
+    services: Service[];
 };
 export async function get_about_page_content(locale = "en"): Promise<AboutPageContent | null> {
     try {
@@ -369,7 +394,6 @@ export async function get_about_page_content(locale = "en"): Promise<AboutPageCo
         return null;
     }
 }
-
 
 // Service Details Page
 export type ServiceBenefit = {
@@ -397,19 +421,21 @@ export type ServiceDetailsPageContent = {
     service_section_title: SectionTitle | null;
     feature_section_bg: StrapiMedia | null;
     feature_items: { id: number; icon: string; step: string; title: string; description: string }[];
-	services:Service[]
+    services: Service[];
 };
 
 export async function get_service_details_page_content(locale = "en"): Promise<ServiceDetailsPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[approach_section_title][populate]=*&populate[approach_section_image][populate]=*&populate[service_section_title][populate]=*&populate[feature_section_bg][populate]=*&populate[feature_items][populate]=*&populate[services][populate]=*`);
+        const res = await fetch(
+            `${BASE_URL}/api/service-details?locale=${locale}&populate[Banner][populate]=*&populate[team_section_title][populate]=*&populate[our_value_bg][populate]=*&populate[our_value_items][populate]=*&populate[approach_section_title][populate]=*&populate[approach_section_image][populate]=*&populate[service_section_title][populate]=*&populate[feature_section_bg][populate]=*&populate[feature_items][populate]=*&populate[services][populate]=*`,
+        );
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
     } catch {
         return null;
     }
-};
+}
 
 // Services Page
 export type ServicesPageContent = {
@@ -420,11 +446,13 @@ export type ServicesPageContent = {
     };
     service_section_title: SectionTitle;
     faq_section_title: SectionTitle;
-	services:Service[];
+    services: Service[];
 };
 export async function get_services_page_content(locale = "en"): Promise<ServicesPageContent | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/services-page?populate[banner][populate]=*&populate[service_section_title]=*&populate[services][populate]=*&populate[faq_section_title]=*&locale=${locale}`);
+        const res = await fetch(
+            `${BASE_URL}/api/services-page?populate[banner][populate]=*&populate[service_section_title]=*&populate[services][populate]=*&populate[faq_section_title]=*&locale=${locale}`,
+        );
         if (!res.ok) return null;
         const json = await res.json();
         return json.data ?? null;
@@ -542,7 +570,7 @@ export type LeadershipPageContent = {
     };
     executive_leader: ExecutiveLeaderContent;
     senior_leadership: SeniorLeader[];
-    senior_leadership_title:string
+    senior_leadership_title: string;
 };
 export async function get_leadership_page_content(locale = "en"): Promise<LeadershipPageContent | null> {
     try {
@@ -568,7 +596,6 @@ export async function get_teams(locale = "en", limit?: number): Promise<TeamMemb
     }
 }
 
-
 // Career CTA Section
 export type CareerCtaSectionContent = {
     career_cta_background?: StrapiMedia | null;
@@ -587,7 +614,8 @@ const CAREER_CTA_FALLBACK: CareerCtaSectionContent = {
     career_cta_section_title: {
         sub_title: "Life at Sah",
         title: "Career with SAH",
-        description: "Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based in the Sultanate of Oman. With a rich legacy spanning several decades, SAH has established itself as a trusted name in the construction industry, delivering exceptional projects",
+        description:
+            "Saif Salim Essa Al Harasi & Co. LLC. (SAH) is a renowned construction company based in the Sultanate of Oman. With a rich legacy spanning several decades, SAH has established itself as a trusted name in the construction industry, delivering exceptional projects",
     },
     career_cta_button: {
         button_label: "You Like to Build?",

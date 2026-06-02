@@ -41,7 +41,7 @@ type StrapiNewsItemRaw = {
     author_name: string | null;
 };
 
-function map_news_item(item: StrapiNewsItemRaw): NewsItem {
+export function map_news_item(item: StrapiNewsItemRaw): NewsItem {
     const imageUrl = item.featured_image?.url ?? "";
     return {
         documentId: item.documentId,
