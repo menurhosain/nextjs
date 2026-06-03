@@ -13,7 +13,7 @@ import { OffcanvasContactForm } from "./ui/contact-form";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
-    { code: "ar-om", label: "Arabic", flag: "/oman-flag.svg" },
+    { code: "ar-OM", label: "Arabic", flag: "/oman-flag.svg" },
 ];
 
 type SubmenuGroup = { label: string; links: { label: string; href: string }[] };
@@ -388,7 +388,7 @@ export function NavActions({
                                         setSelectedLang(lang);
                                         setLangOpen(false);
                                         document.cookie = `locale=${lang.code};path=/;max-age=31536000`;
-                                        router.refresh();
+                                        window.location.reload();
                                     }}
                                     className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-sah-black hover:bg-sah-light-4 whitespace-nowrap"
                                 >
