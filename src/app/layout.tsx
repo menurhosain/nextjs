@@ -58,21 +58,15 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const isRtl = locale === "ar-om";
+    const isRtl = locale === "ar-OM";
     //dir={isRtl ? "rtl" : "ltr"}
 
     const [scripts, stylesheets] = await Promise.all([get_scripts(), get_stylesheets()]);
 
     return (
-        <html lang={locale} className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} h-full antialiased`}>
+        <html lang={locale} dir={isRtl ? "rtl" : "ltr"} className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} h-full antialiased`}>
             <head>
-                {stylesheets.map((s) =>
-                    s.href ? (
-                        <link key={s.id} rel="stylesheet" href={s.href} />
-                    ) : s.content ? (
-                        <style key={s.id} dangerouslySetInnerHTML={{ __html: s.content }} />
-                    ) : null
-                )}
+                {stylesheets.map((s) => (s.href ? <link key={s.id} rel="stylesheet" href={s.href} /> : s.content ? <style key={s.id} dangerouslySetInnerHTML={{ __html: s.content }} /> : null))}
             </head>
             <body className="min-h-full flex flex-col overflow-x-hidden">
                 <LenisProvider>
