@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import Script from "next/script";
 import Header from "@/components/layout/header/header";
 import { LenisProvider } from "@/components/layout/lenis-provider";
+import { PageWrapper } from "@/components/layout/page-wrapper";
 import ScrollToTop from "@/components/ui/scroll-to-top";
 import { get_global_settings } from "@/services/global.service";
 import { get_scripts } from "@/services/script.service";
@@ -71,7 +72,7 @@ export default async function RootLayout({
             <body className="min-h-full flex flex-col overflow-x-hidden">
                 <LenisProvider>
                     <Header />
-                    <main>{children}</main>
+                    <PageWrapper>{children}</PageWrapper>
                     <Footer />
                     <ScrollToTop />
                 </LenisProvider>

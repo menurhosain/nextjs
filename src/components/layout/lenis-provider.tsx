@@ -1,14 +1,13 @@
 "use client";
 
 import Lenis from "lenis";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
-    const pathname = usePathname();
+    const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
-        const lenis = new Lenis({
+        lenisRef.current = new Lenis({
             autoRaf: true,
             smoothWheel: true,
             wheelMultiplier: 1.4,
@@ -16,8 +15,11 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
             lerp: 0.5,
         });
 
-        return () => lenis.destroy();
-    }, [pathname]);
+        return () => {
+            lenisRef.current?.destroy();
+            lenisRef.current = null;
+        };
+    }, []);
 
     return <>{children}</>;
 }
