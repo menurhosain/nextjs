@@ -19,15 +19,19 @@ export default function ApplyForRecrutementPage() {
                     <div></div>
                 </Right>
             </Banner>
-            <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50">
-                <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-8 space-y-6">
-                    <div className="space-y-1">
-                        <h1 className="text-2xl font-semibold">Apply for Recruitment</h1>
-                        <p className="text-sm text-muted-foreground">Fill in the form below to submit your application.</p>
+            <section className="section-padding bg-sah-light-4">
+                <div className="container !px-[50px] max-[1024px]:!px-4 pt-[80px] lg:pt-[150px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
+                    <div className="w-full bg-white lg:max-w-[750px] max-[640px]:px-4 p-10 flex flex-col rounded-[6px] overflow-hidden mx-auto">
+                        <div className="bg-sah-red max-[640px]:-mx-4 -mx-10 -mt-10 px-4 xl:px-10 pt-[30px] xl:pt-[50px] pb-[30px] xl:pb-[50px] mb-8">
+                            <h2 className="text-[26px] sm:text-[36px] font-medium text-white leading-[36px] sm:leading-[46px]">
+                                Apply for Recruitment
+                            </h2>
+                            <p className="text-red-100 text-[17px] mt-2">Fill in the form below to submit your application.</p>
+                        </div>
+                        <ApplyForm />
                     </div>
-                    <ApplyForm />
                 </div>
-            </div>
+            </section>
         </>
     );
 }

@@ -28,7 +28,7 @@ export default function ServiceDetails({ title, description, benefits_label, ben
         <section className="section-padding relative w-full">
             <div className="container border-x border-sah-light-3 pt-[73px] lg:pt-[143px] lg:pb-[150px] pb-[80px] max-[1024px]:!px-4">
                 <div className="grid grid-cols-1 xl:grid-cols-7 xl:gap-5 items-start">
-                    <div className="col-span-3 xl:sticky xl:top-[30px] left-0 max-[640px]:text-center">
+                    <div className="col-span-3 xl:sticky xl:top-[30px] start-0 max-[640px]:text-center">
                         <Section_Title
                             title={title || FALLBACK_TITLE}
                             class_name={{ title: "xl:!text-[60px] 2xl:!text-[80px] xl:!leading-[66px] 2xl:!leading-[86px] font-medium text-sah-black !mb-[10px] max-w-[870px] max-[640]:!leading-[36px]" }}

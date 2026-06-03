@@ -191,12 +191,12 @@ export default function ProjectDetailsClient({
                     onClick={closeImage}
                     className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/95 backdrop-blur-sm transition-opacity duration-[250ms] ${isVisible ? "opacity-100" : "opacity-0"}`}
                 >
-                    <button aria-label="Close" onClick={closeImage} className="fixed top-5 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/70 text-lg hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer">✕</button>
+                    <button aria-label="Close" onClick={closeImage} className="fixed top-5 end-6 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/70 text-lg hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer">✕</button>
                     <div className="relative flex flex-col items-center gap-5 w-full max-w-5xl px-4" onClick={(e) => e.stopPropagation()}>
                         <div className="relative flex items-center justify-center w-full">
-                            <button aria-label="Previous image" onClick={() => navigate(-1)} className="absolute left-15 xl:-left-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-[24px] hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer">←</button>
+                            <button aria-label="Previous image" onClick={() => navigate(-1)} className="absolute start-15 xl:-start-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-[24px] hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer">←</button>
                             <img src={selected.src} alt={selected.title} className="max-w-full max-h-[72vh] object-contain rounded shadow-2xl" />
-                            <button aria-label="Next image" onClick={() => navigate(1)} className="absolute right-15 xl:-right-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-24px hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer">→</button>
+                            <button aria-label="Next image" onClick={() => navigate(1)} className="absolute end-15 xl:-end-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-24px hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer">→</button>
                         </div>
                         <div className="text-center">
                             <p className="text-white/90 text-base font-light tracking-wide">{selected.title}</p>

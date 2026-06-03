@@ -98,7 +98,7 @@ export default function WhyChoose({ section, cards, image_cards }: WhyChooseProp
                     {/* Tall image spanning 2 rows */}
                     <div className="lg:col-span-1 lg:row-span-2 relative max-[1024px]:order-1">
                         <ChoooseImageCard src={getImageSrc(1)} alt={getImageAlt(1)} tall />
-                        <div className="lg:col-span-1 lg:col-start-3 lg:row-start-3 absolute bottom-[10px] left-[10px] right-[10px]">
+                        <div className="lg:col-span-1 lg:col-start-3 lg:row-start-3 absolute bottom-[10px] start-[10px] end-[10px]">
                             <ChooseCard
                                 icon={getIcon(displayCards[1], 1)}
                                 title={displayCards[1].title}

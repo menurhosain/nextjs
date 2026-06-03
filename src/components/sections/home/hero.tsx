@@ -55,7 +55,7 @@ export default function Hero({background, titleNormal, typewriterTexts, scrollLa
                         className="relative rounded-[10px] w-[258px] sm:w-[288px] py-[20px] px-[15px] md:px-[30px] md:py-[42px] h-[max-content] flex flex-col gap-3 bg-cover bg-center mt-auto"
                         style={{ backgroundImage: "url('/white-dots.jpg')" }}
                     >
-                        <div className="absolute top-0 right-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
+                        <div className="absolute top-0 end-0 w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-sah-red" />
                         <StatCounter value={counterNumber || 30} suffix="+" className="text-sah-red font-semibold font-geist text-[50px] lg:text-[100px] leading-none" />
                         <span className="text-sah-gray-1 font-geist font-semibold text-[18px] lg:text-[22px] uppercase tracking-wide leading-snug">{counterLabel || "Leading Years in Construction"}</span>
                     </div>

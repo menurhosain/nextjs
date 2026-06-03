@@ -44,7 +44,7 @@ export default function ProfileMenu({ displayName, pictureUrl }: ProfileMenuProp
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-44 rounded-lg border bg-white shadow-md z-50 py-1">
+        <div className="absolute end-0 mt-2 w-44 rounded-lg border bg-white shadow-md z-50 py-1">
           <a
             href="/profile"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"

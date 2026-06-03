@@ -197,7 +197,7 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
             {/* Drawer overlay */}
             <div className={`fixed inset-0 z-[9999] flex justify-end transition-all duration-300 ${drawerOpen ? "pointer-events-auto" : "pointer-events-none"}`}>
                 <div onClick={() => setDrawerOpen(false)} className={`flex-1 bg-black/40 transition-opacity duration-300 ${drawerOpen ? "opacity-100" : "opacity-0"}`} />
-                <div className={`w-[350px] h-full bg-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}>
+                <div className={`w-[350px] h-full bg-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${drawerOpen ? "translate-x-0" : "ltr:translate-x-full rtl:-translate-x-full"}`}>
                     {/* Close button row */}
                     <div className="flex justify-between items-center px-6 py-4 border-b border-sah-light-3">
                         <span className="text-[16px] font-inter font-medium">{content?.filter_offcanvas_label ?? "Refine your search"}</span>

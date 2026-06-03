@@ -139,12 +139,12 @@ export default function About({ subtitle, title, description, stats, award_bg, a
                         className="h-[400px] sm:h-[540px] bg-cover bg-center rounded-[12px] mt-[60px] relative"
                         style={{ backgroundImage: `url('${bgUrl}')` }}
                     >
-                        <div className="bg-sah-white rounded-[8px] px-[20px] sm:px-[40px] py-[20px] sm:py-[40px] absolute right-[16px] bottom-[16px] group w-[222px] sm:w-[355px]">
+                        <div className="bg-sah-white rounded-[8px] px-[20px] sm:px-[40px] py-[20px] sm:py-[40px] absolute end-[16px] bottom-[16px] group w-[222px] sm:w-[355px]">
                             <div className="relative w-full">
                                 <img src={logoUrl} alt={awardTitle} className="transition-transform duration-500 group-hover:scale-105 h-auto w-auto" />
                                 <h3 className="font-geist text-[20px] sm:text-[28px] font-medium mt-[16px] leading-[34px]">{awardTitle}</h3>
                                 <p className="text-[16px] text-sah-gray-2 mt-[16px]">{awardSubTitle}</p>
-                                <span className="absolute right-[16px] top-[16px] text-[18px] text-sah-gray-3">{awardYear}</span>
+                                <span className="absolute end-[16px] top-[16px] text-[18px] text-sah-gray-3">{awardYear}</span>
                             </div>
                         </div>
                     </div>

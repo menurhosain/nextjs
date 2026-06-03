@@ -67,7 +67,7 @@ export default function ProjectGallery({ images }: { images: string[] }) {
                         <img src={src} alt={`Project thumbnail ${i + 1}`} className="object-cover absolute inset-0 h-full w-full" />
 
                         {/* Progress bar on active thumb */}
-                        {selected === i && !paused && <div className="absolute bottom-0 left-0 h-1 bg-sah-red/30 transition-none" style={{ width: `${progress}%` }} />}
+                        {selected === i && !paused && <div className="absolute bottom-0 start-0 h-1 bg-sah-red/30 transition-none" style={{ width: `${progress}%` }} />}
                     </button>
                 ))}
             </div>

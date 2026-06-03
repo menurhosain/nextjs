@@ -153,7 +153,7 @@ export default function Contact({
                     />
 
                     {/* Info Card */}
-                    <div className="absolute bottom-2 sm:bottom-5 max-[640px]:left-2 right-2 sm:right-5 grid grid-cols-1 rounded-[6px] overflow-hidden">
+                    <div className="absolute bottom-2 sm:bottom-5 max-[640px]:start-2 end-2 sm:end-5 grid grid-cols-1 rounded-[6px] overflow-hidden">
                         <div className="backdrop-blur-[21px]  bg-[radial-gradient(152.51%_133.12%_at_50%_39.93%,_#656161_0%,_rgba(0,0,0,0)_100%)] flex flex-col xl:flex-row w-full sm:w-[340px] xl:w-[460px] 2xl:w-[545px] px-[20px] 2xl:px-[45px] pt-[30px] pb-[30px] gap-[20px] 2xl:gap-[40px] rounded-tr-[6px] rounded-tl-[6px]">
                             {/* Office Address */}
                             <div className="flex flex-col gap-[10px] 2xl:gap-3 xl:w-1/2">

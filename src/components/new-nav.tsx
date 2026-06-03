@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
 import NewsCard from "./ui/news-card";
@@ -244,10 +243,10 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
                     )}
 
                     {link.parent && (
-                        <div className="absolute top-full left-0 h-[350px] w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+                        <div className="absolute top-full start-0 h-[350px] w-screen bg-white shadow-lg z-50 transition-all duration-200 ease-out opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
                             <div className="container h-full relative">
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
-                                <div className="absolute inset-y-0 bg-sah-red" style={{ left: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }} />
+                                <div className="absolute inset-y-0 bg-sah-red" style={{ insetInlineStart: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }} />
 
                                 {link.id === "news" ? (
                                     /* 2-column layout for news & career */
@@ -281,9 +280,9 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
                                         {/* Image bg bleeds from right column to right screen edge */}
                                         <div
                                             className="absolute inset-y-0 bg-cover bg-top"
-                                            style={{ right: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)", backgroundImage: `url(${link.promo?.image})` }}
+                                            style={{ insetInlineEnd: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)", backgroundImage: `url(${link.promo?.image})` }}
                                         >
-                                            <div className="absolute bottom-0 left-0 right-0 h-[90%] bg-gradient-to-t from-black to-transparent" />
+                                            <div className="absolute bottom-0 start-0 end-0 h-[90%] bg-gradient-to-t from-black to-transparent" />
                                         </div>
 
                                         <div className="flex h-full relative">
@@ -380,7 +379,7 @@ export function NavActions({
                         <DownArrow class_name="!w-[12px] !h-[12px]" />
                     </button>
                     {langOpen && (
-                        <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-50">
+                        <div className="absolute top-full start-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-50">
                             {languages.map((lang) => (
                                 <button
                                     key={lang.code}
@@ -424,10 +423,10 @@ export function NavActions({
             />
 
             {/* Drawer */}
-            <div className={`fixed top-0 right-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
+            <div className={`fixed top-0 end-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
                 <div className="flex flex-1 h-full overflow-hidden relative">
-                    <div className="absolute top-[100px] right-0 h-[1px] bg-sah-light-3 z-10 w-[80%]  max-[1024]:w-[87.5%] max-[640px]:w-[81%]" />
-                    <div className="absolute top-[100px] left-0 h-[1px] bg-sah-white/15 z-10 w-[20%] max-[640px]:w-[22%] max-[640px]:min-w-[70px]" />
+                    <div className="absolute top-[100px] end-0 h-[1px] bg-sah-light-3 z-10 w-[80%]  max-[1024]:w-[87.5%] max-[640px]:w-[81%]" />
+                    <div className="absolute top-[100px] start-0 h-[1px] bg-sah-white/15 z-10 w-[20%] max-[640px]:w-[22%] max-[640px]:min-w-[70px]" />
                     {/* Column 1 — 20% */}
                     <div className="w-[20%] max-[1024]:w-[12.5%] max-[640px]:w-[17%] max-[640px]:min-w-[70px] h-full bg-sah-red relative overflow-hidden">
                         {/* Scrolling text — spans full column height including behind logo */}
@@ -529,13 +528,13 @@ export function NavActions({
                                 ))}
 
                                 <div className="py-8">
-                                    <Link
+                                    <a
                                         href={offcanvas?.menu_button?.button_link || "/become-a-subcontractor"}
                                         className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px] max-[640px]:text-[14px] max-[380px]:text-[12px] max-[640px]:px-[10px]"
                                     >
                                         {offcanvas?.menu_button?.button_label || "Become a Subcontractor"}
                                         <AngleArrow class_name="!w-[10px] !h-[10px]" />
-                                    </Link>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -566,7 +565,7 @@ export function NavActions({
                 </div>
 
                 {/* Footer — absolute bottom, same 3-col layout */}
-                <div className="absolute bottom-0 left-0 right-0 flex h-[80px] max-[640px]:h-[60px]">
+                <div className="absolute bottom-0 start-0 end-0 flex h-[80px] max-[640px]:h-[60px]">
                     <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
                         <a
                             href={`mailto:${offcanvas?.email || "info@sah.om"}`}

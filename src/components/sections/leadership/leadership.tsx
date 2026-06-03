@@ -15,7 +15,7 @@ function ExecutiveLeader({ data }: { data?: ExecutiveLeaderContent | null }) {
 
     return (
         <div className="relative flex max-[768px]:flex-col xl:items-center p-[20px] sm:p-[24px] pr-[30px] 2xl:pr-[135px] gap-[20px] md:gap-[40px] 2xl:gap-[115px] rounded-[6px] bg-white overflow-hidden">
-            <img className="absolute right-[-170px] 2xl:right-0 bottom-0" src="/construction-vector.png" alt="Vector" />
+            <img className="absolute end-[-170px] 2xl:end-0 bottom-0" src="/construction-vector.png" alt="Vector" />
             <div className="rounded-[6px] overflow-hidden w-full md:w-[280px] lg:w-[350px] xl:w-[522px] shrink-0 relative z-1">
                 <img src={image} alt={name} className="rounded-[6px]" />
             </div>

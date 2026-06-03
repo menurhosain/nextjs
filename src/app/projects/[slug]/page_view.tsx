@@ -76,7 +76,7 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                                         <div className="bg-sah-red  rounded-full min-w-4 h-4 w-4 text-[10px] flex items-center justify-center">
                                             <ProjectCheck />
                                         </div>
-                                        <p className="text-sah-dark-2 text-[16px] font-medium ml-2">{item.text}</p>
+                                        <p className="text-sah-dark-2 text-[16px] font-medium ms-2">{item.text}</p>
                                     </li>
                                 ))}
                             </ul>
@@ -137,7 +137,7 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                     <div className="flex sm:flex-row flex-col items-center justify-between border-t border-b border-sah-light-3 pt-4.5 pb-4.5 gap-4 mt-11">
                         {project_content.prev ? (
                             <a href={`/projects/${project_content.prev.slug}`} className="flex items-center gap-3 flex-1 transition-all group">
-                                <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-1 group-hover:text-sah-red transition-transform">
+                                <span className="text-[20px] text-sah-dark-2 group-hover:-translate-x-1 rtl:group-hover:translate-x-1 group-hover:text-sah-red transition-transform">
                                     <ProjectArrowLeft />
                                 </span>
                                 <div>
@@ -150,8 +150,8 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                         )}
 
                         {project_content.next && (
-                            <a href={`/projects/${project_content.next.slug}`} className="flex items-center flex-row-reverse gap-3 flex-1 text-right group">
-                                <span className="text-[20px] text-sah-dark-2 group-hover:translate-x-1 group-hover:text-sah-red transition-transform">
+                            <a href={`/projects/${project_content.next.slug}`} className="flex items-center flex-row-reverse rtl:flex-row gap-3 flex-1 text-end group">
+                                <span className="text-[20px] text-sah-dark-2 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 group-hover:text-sah-red transition-transform">
                                     <ProjectArrowRight />
                                 </span>
                                 <div>
@@ -179,7 +179,7 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                     <button
                         aria-label="Close"
                         onClick={closeImage}
-                        className="fixed top-5 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/70 text-lg hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
+                        className="fixed top-5 end-6 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/70 text-lg hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
                     >
                         ✕
                     </button>
@@ -191,7 +191,7 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                             <button
                                 aria-label="Previous image"
                                 onClick={() => navigate(-1)}
-                                className="absolute left-15 xl:-left-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-[24px] hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
+                                className="absolute start-15 xl:-start-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-[24px] hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
                             >
                                 ←
                             </button>
@@ -202,7 +202,7 @@ export default function ProjectDetailsPage({ project_content }: { project_conten
                             <button
                                 aria-label="Next image"
                                 onClick={() => navigate(1)}
-                                className="absolute right-15 xl:-right-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-[24px] hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
+                                className="absolute end-15 xl:-end-14 max-[1024px]:hidden z-10 w-11 h-11 flex items-center justify-center rounded-full border border-white/20 text-white/60 text-[24px] hover:text-white hover:bg-sah-red hover:border-sah-red transition-all duration-200 cursor-pointer"
                             >
                                 →
                             </button>

@@ -91,7 +91,7 @@ export default function JobCareers({ job_section_title, job_section_description,
                 </div>
 
                 {/* Decorative diamond pattern - bottom left */}
-                <div className="absolute bottom-0 left-0 pointer-events-none opacity-20">
+                <div className="absolute bottom-0 start-0 pointer-events-none opacity-20">
                     <svg width="220" height="160" viewBox="0 0 220 160" fill="none">
                         {[0, 1, 2, 3, 4].map((col) =>
                             [0, 1, 2].map((row) => {

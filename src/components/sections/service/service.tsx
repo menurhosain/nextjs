@@ -17,7 +17,7 @@ export default function Service({ section_title, cards }: Props) {
         <section className="section-padding relative pt-[73px] lg:pt-[143px] lg:pb-[140px] pb-[80px] bg-[var(--color-sah-light-4)] bg-[url('/page_service_bg.jpg')] bg-contain bg-bottom bg-no-repeat">
             <div className="container max-[1536px]:!px-0">
                 <div className="sm:grid grid-cols-1 xl:grid-cols-7 gap-5 lg:gap-10 items-start">
-                    <div className="col-span-3 xl:sticky xl:top-[30px] left-0 max-[640px]:mb-6">
+                    <div className="col-span-3 xl:sticky xl:top-[30px] start-0 max-[640px]:mb-6">
                         <Section_Title
                             subtitle={section_title?.sub_title || "Our Culture"}
                             title={section_title?.title || "What we offer"}

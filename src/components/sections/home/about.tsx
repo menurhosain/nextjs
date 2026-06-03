@@ -21,7 +21,7 @@ export default function About({subTitle, titleNormal, titleAnimated, imageUrl, i
                         <div className="text-white text-[16px] tracking-normal font-medium uppercase mb-9">[ {subTitle || "About SAH"} ] ↓</div>
                         <div className="relative rounded-[12px] overflow-hidden">
                             <img src={imageUrl || "/about/intro-desk.jpg"} alt="About" />
-                            <div className="absolute bottom-[12px] left-[12px] sm:w-[242px] w-[230px] rounded-[9px] p-2.5 text-[20px] sm:text-[24px] bg-sah-dark-1 text-white font-medium">{imageTopText || "From 1994-2026 we’re growing fast"}</div>
+                            <div className="absolute bottom-[12px] start-[12px] sm:w-[242px] w-[230px] rounded-[9px] p-2.5 text-[20px] sm:text-[24px] bg-sah-dark-1 text-white font-medium">{imageTopText || "From 1994-2026 we’re growing fast"}</div>
                         </div>
                     </div>
 

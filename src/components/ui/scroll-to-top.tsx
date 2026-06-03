@@ -34,14 +34,14 @@ export default function ScrollToTop() {
             aria-label="Back to top"
             tabIndex={0}
             onKeyDown={(e) => e.key === "Enter" && handleClick()}
-            className={`fixed bottom-[20px] right-[20px] z-[999] w-[40px] h-[40px] rounded-full bg-sah-red cursor-pointer transition-all duration-300 ${
+            className={`fixed bottom-[20px] end-[20px] z-[999] w-[40px] h-[40px] rounded-full bg-sah-red cursor-pointer transition-all duration-300 ${
                 visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
             }`}
         >
             <svg className="absolute inset-0 m-auto z-10" viewBox="0 0 24 24" width="18" height="18">
                 <path d="M13 7.828V20h-2V7.828l-5.364 5.364-1.414-1.414L12 4l7.778 7.778-1.414 1.414L13 7.828z" fill="#fff" />
             </svg>
-            <svg className="absolute top-0 left-0 -rotate-90 !w-[40px] !h-[40px]">
+            <svg className="absolute top-0 start-0 -rotate-90 !w-[40px] !h-[40px]">
                 <circle cx="20" cy="20" r={radius} strokeWidth="2" fill="none" stroke="transparent" />
                 <circle
                     ref={arcRef}

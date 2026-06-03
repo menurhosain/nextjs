@@ -33,10 +33,10 @@
   bottom: 0;
 }
 .sah-btn-underline span:first-child:after {
-  left: 0;
+  inset-inline-start: 0;
 }
 .sah-btn-underline span:first-child:before {
-  left: -1rem;
+  inset-inline-start: -1rem;
   transform: translateX(-100%);
 }
 .sah-btn-underline:hover span:first-child:before {

@@ -41,7 +41,7 @@ export default function NewsCard({ className, contentClass, titleParam, metaPara
                     <div className={cn("absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent", overlayParam?.className)} />
                 )}
 
-                <div className={cn("absolute bottom-0 left-0 right-0 z-10 !p-5 xl:p-8 ", contentClass)}>
+                <div className={cn("absolute bottom-0 start-0 end-0 z-10 !p-5 xl:p-8 ", contentClass)}>
                     {metaParam && (
                         <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1">
                             {metaParam.author && (

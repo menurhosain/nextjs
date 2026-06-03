@@ -20,11 +20,11 @@ export default  function ChooseCard({ icon, title, desc, accent, dark,
         >
             {/* Glow spot */}
             <div
-                className={`absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[#c0392b]/10 blur-3xl transition-opacity duration-700 ${hovered ? "opacity-100" : "opacity-0" }`}
+                className={`absolute -top-10 -end-10 w-40 h-40 rounded-full bg-[#c0392b]/10 blur-3xl transition-opacity duration-700 ${hovered ? "opacity-100" : "opacity-0" }`}
             />
             {/* Top rule */}
             <div
-                className={`absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-[#c0392b]/60 to-transparent transition-opacity duration-500 ${hovered ? "opacity-100" : "opacity-0"
+                className={`absolute top-0 start-6 end-6 h-px bg-gradient-to-r from-transparent via-[#c0392b]/60 to-transparent transition-opacity duration-500 ${hovered ? "opacity-100" : "opacity-0"
                     }`}
             />
             <div className="flex items-center gap-[20px] max-[1280px]:flex-col max-[1280px]:items-start">
