@@ -7,7 +7,9 @@ import { get_global_settings } from "@/services/global.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 export default async function Header() {
-    const locale = (await headers()).get("x-locale") ?? "en";
+    const headersList = await headers();
+    const locale = headersList.get("x-locale") ?? "en";
+    const isLoggedIn = !!headersList.get("x-user");
     const [menus, offcanvas, global] = await Promise.all([get_mega_menu(locale), get_offcanvas_content(locale), get_global_settings(locale)]);
     const light_logo_url = getStrapiMediaUrl(global?.light_logo) || "/logo-white.png";
     const recaptcha_site_key = global?.recaptcha_site_key ?? process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
@@ -21,7 +23,7 @@ export default async function Header() {
                         <NavLinks menus={menus} />
                     </div>
                     <div className="w-[100%] xl:w-[40%]">
-                        <NavActions locale={locale} menus={menus} offcanvas={offcanvas} light_logo_url={light_logo_url} recaptcha_site_key={recaptcha_site_key} />
+                        <NavActions locale={locale} menus={menus} offcanvas={offcanvas} light_logo_url={light_logo_url} recaptcha_site_key={recaptcha_site_key} isLoggedIn={isLoggedIn} />
                     </div>
                 </div>
             </div>

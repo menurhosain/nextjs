@@ -345,12 +345,14 @@ export function NavActions({
     offcanvas,
     light_logo_url,
     recaptcha_site_key,
+    isLoggedIn = false,
 }: {
     locale: string;
     menus: Menu[];
     offcanvas?: OffcanvasContent | null;
     light_logo_url?: string;
     recaptcha_site_key?: string;
+    isLoggedIn?: boolean;
 }) {
     const navLinks = transformMenus(menus);
     const router = useRouter();
@@ -401,10 +403,10 @@ export function NavActions({
 
                 {/* CTA button */}
                 <a
-                    href={offcanvas?.menu_button?.button_link || "/become-a-subcontractor"}
+                    href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/become-a-subcontractor")}
                     className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
                 >
-                    {offcanvas?.menu_button?.button_label || "Become a Subcontractor"}
+                    {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "Become a Subcontractor")}
                     <AngleArrow class_name="!w-[10px] !h-[10px]" />
                 </a>
 
@@ -529,10 +531,10 @@ export function NavActions({
 
                                 <div className="py-8">
                                     <a
-                                        href={offcanvas?.menu_button?.button_link || "/become-a-subcontractor"}
+                                        href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/become-a-subcontractor")}
                                         className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px] max-[640px]:text-[14px] max-[380px]:text-[12px] max-[640px]:px-[10px]"
                                     >
-                                        {offcanvas?.menu_button?.button_label || "Become a Subcontractor"}
+                                        {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "Become a Subcontractor")}
                                         <AngleArrow class_name="!w-[10px] !h-[10px]" />
                                     </a>
                                 </div>

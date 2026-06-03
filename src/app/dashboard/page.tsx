@@ -7,6 +7,7 @@ import { get_user_subcontractor_applications } from "@/services/subcontractor.se
 import { CONTRACTOR } from "@/lib/constant";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
+import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
@@ -49,8 +50,9 @@ export default async function DashboardPage() {
                     <div></div>
                 </Right>
             </Banner>
-            <div className="min-h-screen bg-gray-50 mt-[100px]">
+            <div className="min-h-screen bg-gray-50">
                 <div className="max-w-4xl mx-auto px-6 py-10 space-y-8">
+                    <Navbar />
                     {/* Welcome */}
                     <div>
                         <h2 className="text-2xl font-bold text-gray-900">Welcome back, {displayName}!</h2>

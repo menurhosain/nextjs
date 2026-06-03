@@ -60,14 +60,16 @@ export default function ProfileMenu({ displayName, pictureUrl }: ProfileMenuProp
             Reset password
           </a>
           <div className="my-1 border-t" />
-          <form action={logout}>
-            <button
-              type="submit"
-              className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-50 cursor-pointer"
-            >
-              Logout
-            </button>
-          </form>
+          <button
+            type="button"
+            onClick={async () => {
+              await logout();
+              window.location.href = "/";
+            }}
+            className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-50 cursor-pointer"
+          >
+            Logout
+          </button>
         </div>
       )}
     </div>
