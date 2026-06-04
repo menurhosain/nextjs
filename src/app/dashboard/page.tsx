@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { get_user_applications } from "@/services/applicant.service";
 import { get_user_subcontractor_applications } from "@/services/subcontractor.service";
+import { get_dashboard_page_content } from "@/services/page_content.service";
 import { CONTRACTOR } from "@/lib/constant";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
@@ -27,22 +28,42 @@ export default async function DashboardPage() {
     const displayName = firstName ?? username ?? "there";
     const isContractor = type === CONTRACTOR;
 
+    const locale = headersList.get("x-locale") ?? "en";
+
     const cookieStore = await cookies();
     const jwt = cookieStore.get("jwt")!.value;
 
-    const applications = isContractor ? await get_user_subcontractor_applications(jwt) : await get_user_applications(userId, jwt);
+    const [applications, cms] = await Promise.all([isContractor ? get_user_subcontractor_applications(jwt) : get_user_applications(userId, jwt), get_dashboard_page_content(locale)]);
 
     const applyHref = isContractor ? "/apply-for-contractor" : "/apply-for-recrutement";
-    const applyLabel = isContractor ? "Apply as Contractor" : "Apply for a position";
-    const applyDescription = isContractor ? "Submit your company details and documents" : "Submit your CV and skills";
-    const sectionLabel = isContractor ? "Contractor" : "Recruitment";
+
+    const bannerLabel = cms?.banner?.banner_label ?? "";
+    const bannerTitle = cms?.banner?.banner_title ?? "Dashboard";
+    const welcomeGreeting = cms?.welcome_greeting ?? "Welcome back,";
+    const accountSummaryText = cms?.account_summary_text ?? "Here's a summary of your account.";
+    const profileCardLabel = cms?.profile_card_label ?? "Profile";
+    const profileCardTitle = cms?.profile_card_title ?? "View & edit your info";
+    const profileCardDescription = cms?.profile_card_description ?? "Name, phone, location, profile picture";
+    const sectionLabel = isContractor ? (cms?.contractor_section_label ?? "Contractor") : (cms?.applicant_section_label ?? "Recruitment");
+    const applyLabel = isContractor ? (cms?.contractor_apply_label ?? "Apply as Contractor") : (cms?.applicant_apply_label ?? "Apply for a position");
+    const applyDescription = isContractor ? (cms?.contractor_apply_description ?? "Submit your company details and documents") : (cms?.applicant_apply_description ?? "Submit your CV and skills");
+    const accountDetailsHeading = cms?.account_details_heading ?? "Account details";
+    const emailFieldLabel = cms?.email_field_label ?? "Email";
+    const usernameFieldLabel = cms?.username_field_label ?? "Username";
+    const accountTypeLabel = cms?.account_type_label ?? "Account type";
+    const applicationsHeading = cms?.applications_heading ?? "My Applications";
+    const newApplicationLabel = cms?.new_application_label ?? "+ New application";
+    const emptyStateText = cms?.empty_state_text ?? "You haven't submitted any applications yet.";
+    const emptyStateLinkLabel = cms?.empty_state_link_label ?? "Submit your first application";
+    const locationLabel = cms?.location_label ?? "Location";
+    const experienceLabel = cms?.experience_label ?? "Experience";
 
     return (
         <>
             <Banner bg="/home-hero.mp4" class_name="lg:min-h-[auto] xl:min-h-[auto] md:min-h-[auto] 2xl:h-[100vh] py-18 2xl:py-0 max-[640px]:pb-[65px]">
                 <Left class_name="max-[640px]:pt-[70px]">
                     <div className="flex flex-col justify-center">
-                        <Banner_Title subtitle="" title="Dashboard" />
+                        <Banner_Title subtitle={bannerLabel} title={bannerTitle} />
                     </div>
                 </Left>
 
@@ -55,16 +76,18 @@ export default async function DashboardPage() {
                     <Navbar />
                     {/* Welcome */}
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Welcome back, {displayName}!</h2>
-                        <p className="text-sm text-gray-500 mt-1">Here's a summary of your account.</p>
+                        <h2 className="text-2xl font-bold text-gray-900">
+                            {welcomeGreeting} {displayName}!
+                        </h2>
+                        <p className="text-sm text-gray-500 mt-1">{accountSummaryText}</p>
                     </div>
 
                     {/* Quick links */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <a href="/profile" className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Profile</p>
-                            <p className="mt-2 text-base font-semibold text-gray-900">View & edit your info</p>
-                            <p className="text-sm text-gray-500 mt-1">Name, phone, location, profile picture</p>
+                            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">{profileCardLabel}</p>
+                            <p className="mt-2 text-base font-semibold text-gray-900">{profileCardTitle}</p>
+                            <p className="text-sm text-gray-500 mt-1">{profileCardDescription}</p>
                         </a>
 
                         <a href={applyHref} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
@@ -76,23 +99,23 @@ export default async function DashboardPage() {
 
                     {/* Account details */}
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-3">
-                        <h3 className="text-sm font-semibold text-gray-700">Account details</h3>
+                        <h3 className="text-sm font-semibold text-gray-700">{accountDetailsHeading}</h3>
                         <div className="divide-y divide-gray-100 text-sm">
                             {email && (
                                 <div className="py-2.5 flex justify-between">
-                                    <span className="text-gray-500">Email</span>
+                                    <span className="text-gray-500">{emailFieldLabel}</span>
                                     <span className="font-medium text-gray-900">{email}</span>
                                 </div>
                             )}
                             {username && (
                                 <div className="py-2.5 flex justify-between">
-                                    <span className="text-gray-500">Username</span>
+                                    <span className="text-gray-500">{usernameFieldLabel}</span>
                                     <span className="font-medium text-gray-900">{username}</span>
                                 </div>
                             )}
                             {type && (
                                 <div className="py-2.5 flex justify-between">
-                                    <span className="text-gray-500">Account type</span>
+                                    <span className="text-gray-500">{accountTypeLabel}</span>
                                     <span className="font-medium text-gray-900 capitalize">{type}</span>
                                 </div>
                             )}
@@ -102,17 +125,17 @@ export default async function DashboardPage() {
                     {/* Applications */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <h3 className="text-sm font-semibold text-gray-700">My Applications</h3>
+                            <h3 className="text-sm font-semibold text-gray-700">{applicationsHeading}</h3>
                             <a href={applyHref} className="text-xs text-gray-500 hover:text-gray-900 underline underline-offset-2">
-                                + New application
+                                {newApplicationLabel}
                             </a>
                         </div>
 
                         {applications.length === 0 ? (
                             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
-                                <p className="text-sm text-gray-500">You haven't submitted any applications yet.</p>
+                                <p className="text-sm text-gray-500">{emptyStateText}</p>
                                 <a href={applyHref} className="inline-block mt-3 text-sm font-medium text-gray-900 underline underline-offset-2">
-                                    Submit your first application
+                                    {emptyStateLinkLabel}
                                 </a>
                             </div>
                         ) : (
@@ -127,8 +150,16 @@ export default async function DashboardPage() {
                                               <div className="space-y-1">
                                                   <p className="text-sm font-semibold text-gray-900">{app.companyName}</p>
                                                   <p className="text-xs text-gray-500">{app.email}</p>
-                                                  {app.location && <p className="text-xs text-gray-400">Location: {app.location}</p>}
-                                                  {app.experienceYears != null && <p className="text-xs text-gray-400">Experience: {app.experienceYears} yrs</p>}
+                                                  {app.location && (
+                                                      <p className="text-xs text-gray-400">
+                                                          {locationLabel}: {app.location}
+                                                      </p>
+                                                  )}
+                                                  {app.experienceYears != null && (
+                                                      <p className="text-xs text-gray-400">
+                                                          {experienceLabel}: {app.experienceYears} yrs
+                                                      </p>
+                                                  )}
                                               </div>
                                               <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
                                                   {app.label && <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">{app.label}</span>}
@@ -154,17 +185,15 @@ export default async function DashboardPage() {
                                                   </p>
                                                   <p className="text-xs text-gray-500">{app.email}</p>
                                                   {app.skills && <p className="text-xs text-gray-400">Skills: {app.skills}</p>}
-                                                  {app.location && <p className="text-xs text-gray-400">Location: {app.location}</p>}
+                                                  {app.location && (
+                                                      <p className="text-xs text-gray-400">
+                                                          {locationLabel}: {app.location}
+                                                      </p>
+                                                  )}
                                               </div>
                                               <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
                                                   {app.label && <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">{app.label}</span>}
-                                                  <p className="text-xs text-gray-400">
-                                                      {new Date(app.appliedAt).toLocaleDateString("en-US", {
-                                                          year: "numeric",
-                                                          month: "short",
-                                                          day: "numeric",
-                                                      })}
-                                                  </p>
+                                                  <p className="text-xs text-gray-400">{new Date(app.appliedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</p>
                                               </div>
                                           </Link>
                                       ))}

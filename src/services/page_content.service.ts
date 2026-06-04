@@ -760,6 +760,43 @@ export async function get_forget_password_page_content(locale = "en"): Promise<F
     }
 }
 
+// Dashboard Page
+export type DashboardPageContent = {
+    banner: { banner_label: string | null; banner_title: string | null; banner_bg: StrapiMedia | null } | null;
+    welcome_greeting: string | null;
+    account_summary_text: string | null;
+    profile_card_label: string | null;
+    profile_card_title: string | null;
+    profile_card_description: string | null;
+    applicant_section_label: string | null;
+    applicant_apply_label: string | null;
+    applicant_apply_description: string | null;
+    contractor_section_label: string | null;
+    contractor_apply_label: string | null;
+    contractor_apply_description: string | null;
+    account_details_heading: string | null;
+    email_field_label: string | null;
+    username_field_label: string | null;
+    account_type_label: string | null;
+    applications_heading: string | null;
+    new_application_label: string | null;
+    empty_state_text: string | null;
+    empty_state_link_label: string | null;
+    location_label: string | null;
+    experience_label: string | null;
+};
+
+export async function get_dashboard_page_content(locale = "en"): Promise<DashboardPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/dashboard-page?locale=${locale}&populate[banner][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Register Contractor Page
 export type RegisterContractorPageContent = {
     banner: { banner_label: string; banner_title: string; banner_bg: StrapiMedia | null } | null;

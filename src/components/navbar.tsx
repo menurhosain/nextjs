@@ -24,8 +24,8 @@ export default async function Navbar() {
     const pictureUrl = rawUrl ? `${BASE_URL}${rawUrl}` : null;
 
     return (
-        <nav className="w-full border-b bg-background">
-            <div className="mx-auto flex w-full max-w-[1600px] items-center gap-6 px-6 py-3">
+        <nav className="w-full border-b border-gray-200 bg-background">
+            <div className="mx-auto flex w-full max-w-[1600px] items-center gap-6 py-3">
                 {links.map(({ href, label }) => (
                     <NavLink key={href} href={href} label={label} />
                 ))}
