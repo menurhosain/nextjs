@@ -29,9 +29,24 @@ export async function submit_contractor_apply(
   const documents = formData.getAll("documents").filter((v): v is File => v instanceof File && v.size > 0);
   const jobSlug = (formData.get("jobSlug") as string)?.trim() || undefined;
 
+  const ALLOWED_DOC_TYPES = [
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ];
+
   const errors: ApplyContractorFormState["errors"] = {};
 
   if (!companyName) errors.companyName = "Company name is required.";
+
+  if (documents.length === 0) {
+    errors.documents = "At least one document is required.";
+  } else {
+    const invalidDoc = documents.find(
+      (f) => !ALLOWED_DOC_TYPES.includes(f.type) && !f.type.startsWith("image/"),
+    );
+    if (invalidDoc) errors.documents = "Only PDF, Word documents, and images are allowed.";
+  }
 
   if (!email) {
     errors.email = "Email is required.";

@@ -82,6 +82,7 @@ export default function ApplyForm({ content: c, jobSlug }: Props) {
                     type="file"
                     accept=".pdf,.doc,.docx,image/*"
                     multiple
+                    required
                     className="w-full border border-sah-gray-4 rounded-[5px] px-0 py-0 h-auto text-[13px] text-sah-gray-2 cursor-pointer file:cursor-pointer file:h-full file:py-3 file:px-4 file:me-3 file:rounded-s-[4px] file:border-0 file:text-[13px] file:font-medium file:bg-sah-dark-2 file:text-white hover:file:bg-sah-red file:transition-colors file:duration-300"
                 />
                 <p className="text-[12px] text-sah-gray-2 mt-1">

@@ -30,11 +30,21 @@ export async function submit_apply(
   const location = (formData.get("location") as string)?.trim() || undefined;
   const jobSlug = (formData.get("jobSlug") as string)?.trim() || undefined;
 
+  const ALLOWED_CV_TYPES = [
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ];
+
   const errors: ApplyFormState["errors"] = {};
   if (!firstName) errors.firstName = "First name is required.";
   if (!lastName) errors.lastName = "Last name is required.";
   if (!email) errors.email = "Email is required.";
-  if (!cvFile || cvFile.size === 0) errors.cvFile = "CV file is required.";
+  if (!cvFile || cvFile.size === 0) {
+    errors.cvFile = "CV file is required.";
+  } else if (!ALLOWED_CV_TYPES.includes(cvFile.type) && !cvFile.type.startsWith("image/")) {
+    errors.cvFile = "Only PDF, Word documents, and images are allowed.";
+  }
 
   if (Object.keys(errors).length > 0) return { errors };
 
