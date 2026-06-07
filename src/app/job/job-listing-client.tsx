@@ -30,8 +30,16 @@ function CalendarIcon() {
 function SearchIcon() {
     return (
         <svg viewBox="0 0 19 19" fill="none" className="w-[16px] h-[16px] shrink-0 fill-current">
-            <path fillRule="evenodd" clipRule="evenodd" d="M7.04167 0C3.15575 0 0 3.15575 0 7.04167C0 10.9276 3.15575 14.0833 7.04167 14.0833C10.9276 14.0833 14.0833 10.9276 14.0833 7.04167C14.0833 3.15575 10.9276 0 7.04167 0ZM7.04167 1.08333C10.3307 1.08333 13 3.75267 13 7.04167C13 10.3307 10.3307 13 7.04167 13C3.75267 13 1.08333 10.3307 1.08333 7.04167C1.08333 3.75267 3.75267 1.08333 7.04167 1.08333Z" />
-            <path fillRule="evenodd" clipRule="evenodd" d="M18.2585 17.4915L12.0196 11.2537C11.9174 11.155 11.7806 11.1004 11.6386 11.1016C11.4965 11.1029 11.3607 11.1598 11.2603 11.2603C11.1598 11.3607 11.1029 11.4965 11.1016 11.6386C11.1004 11.7806 11.155 11.9174 11.2537 12.0196L17.4915 18.2585C17.5955 18.3481 17.7295 18.3952 17.8667 18.3901C18.0039 18.385 18.1341 18.3282 18.2312 18.2312C18.3282 18.1341 18.385 18.0039 18.3901 17.8667C18.3952 17.7295 18.3481 17.5955 18.2585 17.4915Z" />
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M7.04167 0C3.15575 0 0 3.15575 0 7.04167C0 10.9276 3.15575 14.0833 7.04167 14.0833C10.9276 14.0833 14.0833 10.9276 14.0833 7.04167C14.0833 3.15575 10.9276 0 7.04167 0ZM7.04167 1.08333C10.3307 1.08333 13 3.75267 13 7.04167C13 10.3307 10.3307 13 7.04167 13C3.75267 13 1.08333 10.3307 1.08333 7.04167C1.08333 3.75267 3.75267 1.08333 7.04167 1.08333Z"
+            />
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M18.2585 17.4915L12.0196 11.2537C11.9174 11.155 11.7806 11.1004 11.6386 11.1016C11.4965 11.1029 11.3607 11.1598 11.2603 11.2603C11.1598 11.3607 11.1029 11.4965 11.1016 11.6386C11.1004 11.7806 11.155 11.9174 11.2537 12.0196L17.4915 18.2585C17.5955 18.3481 17.7295 18.3952 17.8667 18.3901C18.0039 18.385 18.1341 18.3282 18.2312 18.2312C18.3282 18.1341 18.385 18.0039 18.3901 17.8667C18.3952 17.7295 18.3481 17.5955 18.2585 17.4915Z"
+            />
         </svg>
     );
 }
@@ -59,9 +67,7 @@ export default function JobListingClient({ jobs, locations }: Props) {
     const filtered = useMemo(() => {
         return jobs.filter((job) => {
             const matchesTitle = query === "" || job.title.toLowerCase().includes(query.toLowerCase());
-            const matchesLocation =
-                locationFilter === "" ||
-                (job.locations ?? []).some((l) => l.slug === locationFilter);
+            const matchesLocation = locationFilter === "" || (job.locations ?? []).some((l) => l.slug === locationFilter);
             const matchesType = typeFilter === "all" || job.job_for === typeFilter;
             return matchesTitle && matchesLocation && matchesType;
         });
@@ -111,23 +117,6 @@ export default function JobListingClient({ jobs, locations }: Props) {
                         </svg>
                     </span>
                 </div>
-
-                {/* Type toggle */}
-                <div className="flex rounded-[8px] border border-sah-light-3 overflow-hidden bg-white shrink-0">
-                    {typeButtons.map((btn) => (
-                        <button
-                            key={btn.value}
-                            onClick={() => setTypeFilter(btn.value)}
-                            className={`px-4 h-[48px] text-[14px] font-medium transition-colors duration-200 border-r border-sah-light-3 last:border-r-0 ${
-                                typeFilter === btn.value
-                                    ? "bg-sah-red text-white"
-                                    : "text-sah-gray-2 hover:text-sah-dark-2"
-                            }`}
-                        >
-                            {btn.label}
-                        </button>
-                    ))}
-                </div>
             </div>
 
             {/* Results count */}
@@ -151,14 +140,12 @@ export default function JobListingClient({ jobs, locations }: Props) {
                             {/* Title + badge */}
                             <div className="flex items-start justify-between gap-3">
                                 <div>
-                                    <h3 className="text-[18px] font-semibold text-sah-red leading-snug group-hover:underline">
-                                        {job.title}
-                                    </h3>
-                                    {job.employment_status && (
-                                        <p className="text-[14px] font-medium text-sah-dark-2 mt-1">{job.employment_status}</p>
-                                    )}
+                                    <h3 className="text-[18px] font-semibold text-sah-red leading-snug group-hover:underline">{job.title}</h3>
+                                    {job.employment_status && <p className="text-[14px] font-medium text-sah-dark-2 mt-1">{job.employment_status}</p>}
                                 </div>
-                                <span className={`shrink-0 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full ${job.job_for === "applicant" ? "bg-blue-50 text-blue-600" : "bg-orange-50 text-orange-600"}`}>
+                                <span
+                                    className={`shrink-0 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full ${job.job_for === "applicant" ? "bg-blue-50 text-blue-600" : "bg-orange-50 text-orange-600"}`}
+                                >
                                     {job.job_for === "applicant" ? "Applicant" : "Subcontractor"}
                                 </span>
                             </div>
@@ -167,9 +154,7 @@ export default function JobListingClient({ jobs, locations }: Props) {
                             {job.locations && job.locations.length > 0 && (
                                 <div className="flex items-center gap-2 text-sah-gray-2">
                                     <MapPinIcon />
-                                    <span className="text-[14px] font-medium">
-                                        {job.locations.map((l) => l.name).join(", ")}
-                                    </span>
+                                    <span className="text-[14px] font-medium">{job.locations.map((l) => l.name).join(", ")}</span>
                                 </div>
                             )}
 
@@ -186,9 +171,7 @@ export default function JobListingClient({ jobs, locations }: Props) {
                                 {job.deadline && (
                                     <div className="flex items-center gap-2 text-sah-gray-2">
                                         <CalendarIcon />
-                                        <span className="text-[13px] font-medium">
-                                            {new Date(job.deadline).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}
-                                        </span>
+                                        <span className="text-[13px] font-medium">{new Date(job.deadline).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}</span>
                                     </div>
                                 )}
                             </div>
