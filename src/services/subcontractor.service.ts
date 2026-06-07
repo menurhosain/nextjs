@@ -60,6 +60,7 @@ type SubcontractorPayload = {
   location?: string;
   experienceYears?: number;
   documents: File[];
+  jobSlug?: string;
 };
 
 export async function submit_contractor_application(
@@ -82,6 +83,7 @@ export async function submit_contractor_application(
         location: payload.location ?? null,
         experienceYears: payload.experienceYears ?? null,
         documents: documentIds,
+        ...(payload.jobSlug && { jobSlug: payload.jobSlug }),
       },
     }),
   });

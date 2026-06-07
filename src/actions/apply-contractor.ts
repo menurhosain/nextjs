@@ -26,9 +26,8 @@ export async function submit_contractor_apply(
   const location = (formData.get("location") as string)?.trim() || undefined;
   const experienceYearsRaw = (formData.get("experienceYears") as string)?.trim();
   const experienceYears = experienceYearsRaw ? Number(experienceYearsRaw) : undefined;
-  const documents = formData
-    .getAll("documents")
-    .filter((v): v is File => v instanceof File && v.size > 0);
+  const documents = formData.getAll("documents").filter((v): v is File => v instanceof File && v.size > 0);
+  const jobSlug = (formData.get("jobSlug") as string)?.trim() || undefined;
 
   const errors: ApplyContractorFormState["errors"] = {};
 
@@ -52,7 +51,7 @@ export async function submit_contractor_apply(
 
   try {
     await submit_contractor_application(
-      { companyName, email, phone, location, experienceYears, documents },
+      { companyName, email, phone, location, experienceYears, documents, jobSlug },
       jwt,
     );
   } catch (err) {

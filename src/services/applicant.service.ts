@@ -10,6 +10,7 @@ type ApplicantPayload = {
   skills?: string;
   experienceYears?: number;
   location?: string;
+  jobSlug?: string;
 };
 
 export type StrapiFile = {
@@ -58,6 +59,7 @@ export async function submit_application(
         experienceYears: payload.experienceYears ?? null,
         location: payload.location ?? null,
         appliedAt: new Date().toISOString(),
+        ...(payload.jobSlug && { jobSlug: payload.jobSlug }),
       },
     }),
   });

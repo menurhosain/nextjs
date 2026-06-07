@@ -26,10 +26,9 @@ export async function submit_apply(
   const cvFile = formData.get("cvFile") as File | null;
   const skills = (formData.get("skills") as string)?.trim() || undefined;
   const experienceYearsRaw = formData.get("experienceYears") as string;
-  const experienceYears = experienceYearsRaw
-    ? Number(experienceYearsRaw)
-    : undefined;
+  const experienceYears = experienceYearsRaw ? Number(experienceYearsRaw) : undefined;
   const location = (formData.get("location") as string)?.trim() || undefined;
+  const jobSlug = (formData.get("jobSlug") as string)?.trim() || undefined;
 
   const errors: ApplyFormState["errors"] = {};
   if (!firstName) errors.firstName = "First name is required.";
@@ -59,6 +58,7 @@ export async function submit_apply(
         skills,
         experienceYears,
         location,
+        jobSlug,
       },
       jwt,
     );
