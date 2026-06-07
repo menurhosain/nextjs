@@ -11,9 +11,9 @@ const inputClass = "w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text
 const labelClass = "block text-[13px] font-medium text-sah-dark-2 mb-1";
 const errorClass = "text-red-500 text-[12px] mt-1";
 
-type Props = { content: ApplyContractorContent | null };
+type Props = { content: ApplyContractorContent | null; jobSlug?: string };
 
-export default function ApplyForm({ content: c }: Props) {
+export default function ApplyForm({ content: c, jobSlug }: Props) {
     const router = useRouter();
     const [state, formAction, pending] = useActionState(submit_contractor_apply, initialState);
 
@@ -25,6 +25,7 @@ export default function ApplyForm({ content: c }: Props) {
 
     return (
         <form action={formAction} className="flex flex-col gap-4">
+            {jobSlug && <input type="hidden" name="jobSlug" value={jobSlug} />}
             {/* Company name */}
             <div>
                 <label htmlFor="companyName" className={labelClass}>

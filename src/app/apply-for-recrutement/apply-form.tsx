@@ -15,14 +15,15 @@ const inputClass =
 const labelClass = "text-[13px] font-medium text-sah-dark-2 mb-1";
 const errorClass = "text-red-500 text-[12px] mt-1";
 
-type Props = { content: ApplyPageContent | null };
+type Props = { content: ApplyPageContent | null; jobSlug?: string };
 
-export default function ApplyForm({ content: c }: Props) {
+export default function ApplyForm({ content: c, jobSlug }: Props) {
     const [state, formAction, pending] = useActionState(submit_apply, initialState);
     const e = state.errors;
 
     return (
         <form action={formAction} className="flex flex-col gap-4">
+            {jobSlug && <input type="hidden" name="jobSlug" value={jobSlug} />}
             {/* First / Last name */}
             <div className="flex max-[640px]:flex-col gap-4">
                 <div className="sm:w-1/2">

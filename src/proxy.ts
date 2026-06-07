@@ -6,21 +6,25 @@ const AUTH_ROUTES = ["/login", "/register-applicant", "/register-contractor"];
 const PROTECTED_ROUTES = [
   "/dashboard",
   "/profile",
-  "/apply-for-recrutement",
-  "/apply-for-contractor",
   "/applications",
   "/protected",
 ];
 
-const APPLICANT_ONLY_ROUTES = ["/apply-for-recrutement"];
-const CONTRACTOR_ONLY_ROUTES = ["/apply-for-contractor"];
+// Match only slug-based apply routes, e.g. /apply-for-recrutement/some-job
+const APPLICANT_ONLY_PATTERN = /^\/apply-for-recrutement\/.+/;
+const CONTRACTOR_ONLY_PATTERN = /^\/apply-for-contractor\/.+/;
 
 export async function proxy(request: NextRequest) {
   const jwt = request.cookies.get("jwt")?.value;
   const { pathname } = request.nextUrl;
 
   const isAuthRoute = AUTH_ROUTES.includes(pathname);
-  const isProtected = PROTECTED_ROUTES.some((r) => pathname.startsWith(r));
+  const isApplicantOnly = APPLICANT_ONLY_PATTERN.test(pathname);
+  const isContractorOnly = CONTRACTOR_ONLY_PATTERN.test(pathname);
+  const isProtected =
+    PROTECTED_ROUTES.some((r) => pathname.startsWith(r)) ||
+    isApplicantOnly ||
+    isContractorOnly;
 
   const user = jwt ? await verify_jwt(jwt) : null;
 
@@ -41,19 +45,6 @@ export async function proxy(request: NextRequest) {
 
   const userType = (user as Record<string, unknown>).type;
 
-  const isApplicantOnly = APPLICANT_ONLY_ROUTES.some((r) =>
-    pathname.startsWith(r),
-  );
-  if (isApplicantOnly && userType === "contractor") {
-    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
-  }
-
-  const isContractorOnly = CONTRACTOR_ONLY_ROUTES.some((r) =>
-    pathname.startsWith(r),
-  );
-  if (isContractorOnly && userType !== "contractor") {
-    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
-  }
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-user", JSON.stringify(user));
