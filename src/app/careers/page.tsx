@@ -5,7 +5,6 @@ import Testimonial from "@/components/sections/careers/testimonial";
 import Careers from "@/components/sections/careers/careers";
 import JobCareers from "@/components/sections/careers/jobcareers";
 import { get_voices_of_experience_content, get_career_page_content } from "@/services/page_content.service";
-import { get_jobs } from "@/services/job.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { headers } from "next/headers";
 
@@ -13,15 +12,14 @@ export const metadata: Metadata = { title: "Careers" };
 
 export default async function CareersPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const [content, voices, jobs] = await Promise.all([
-        get_career_page_content(),
-        get_voices_of_experience_content(),
-        get_jobs(locale),
-    ]);
+    const [content, voices] = await Promise.all([get_career_page_content(locale), get_voices_of_experience_content(locale)]);
 
     return (
         <>
-            <Banner bg={getStrapiMediaUrl(content?.banner?.banner_bg) || "/home-hero.mp4"} class_name="lg:min-h-[auto] xl:min-h-[auto] md:min-h-[auto] 2xl:h-[100vh] py-18 2xl:py-0 max-[640px]:pb-[65px]">
+            <Banner
+                bg={getStrapiMediaUrl(content?.banner?.banner_bg) || "/home-hero.mp4"}
+                class_name="lg:min-h-[auto] xl:min-h-[auto] md:min-h-[auto] 2xl:h-[100vh] py-18 2xl:py-0 max-[640px]:pb-[65px]"
+            >
                 <Left class_name="max-[640px]:pt-[70px]">
                     <div className="flex flex-col justify-center">
                         <Banner_Title
@@ -50,14 +48,9 @@ export default async function CareersPage() {
                 job_section_title={content?.job_section_title}
                 job_section_description={content?.job_section_description}
                 job_board_image={getStrapiMediaUrl(content?.job_board_image)}
-                jobs={jobs}
+                jobs={content?.jobs ?? []}
             />
-            <Testimonial
-                bg={getStrapiMediaUrl(voices?.background)}
-                quote={voices?.quote}
-                author_name={voices?.name}
-                author_role={voices?.role}
-            />
+            <Testimonial bg={getStrapiMediaUrl(voices?.background)} quote={voices?.quote} author_name={voices?.name} author_role={voices?.role} />
         </>
     );
 }

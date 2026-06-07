@@ -2,6 +2,7 @@ import { BASE_URL } from "@/lib/constant";
 import { Service } from "./service.service";
 import { type Project, mapProject } from "./project.service";
 import { type NewsItem, map_news_item } from "./news.service";
+import { type Job } from "./job.service";
 
 export type StrapiMediaFormat = {
     ext: string;
@@ -305,11 +306,12 @@ export type CareerPageContent = {
     job_section_title: string;
     job_section_description: string;
     job_board_image: StrapiMedia | null;
+    jobs: Job[];
 };
 export async function get_career_page_content(locale = "en"): Promise<CareerPageContent | null> {
     try {
         const res = await fetch(
-            `${BASE_URL}/api/career-page?populate[banner][populate]=*&populate[image_1][populate]=*&populate[image_2][populate]=*&populate[map_image][populate]=*&populate[job_board_image][populate]=*&locale=${locale}`,
+            `${BASE_URL}/api/career-page?populate[banner][populate]=*&populate[image_1][populate]=*&populate[image_2][populate]=*&populate[map_image][populate]=*&populate[job_board_image][populate]=*&populate[jobs][fields][0]=title&populate[jobs][fields][1]=slug&populate[jobs][fields][2]=deadline&populate[jobs][fields][3]=experience&populate[jobs][fields][4]=job_for&populate[jobs][fields][5]=employment_status&locale=${locale}`,
         );
         if (!res.ok) return null;
         const json = await res.json();
