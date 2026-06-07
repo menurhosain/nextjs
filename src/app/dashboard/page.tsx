@@ -35,7 +35,7 @@ export default async function DashboardPage() {
 
     const [applications, cms] = await Promise.all([isContractor ? get_user_subcontractor_applications(jwt) : get_user_applications(userId, jwt), get_dashboard_page_content(locale)]);
 
-    const applyHref = isContractor ? "/apply-for-contractor" : "/apply-for-recrutement";
+    const applyHref = "/job";
 
     const bannerLabel = cms?.banner?.banner_label ?? "";
     const bannerTitle = cms?.banner?.banner_title ?? "Dashboard";
