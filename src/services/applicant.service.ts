@@ -61,7 +61,6 @@ export async function submit_application(payload: ApplicantPayload, jwt: string)
             },
         }),
     });
-    console.log(res);
 
     if (!res.ok) {
         const err = await res.json();

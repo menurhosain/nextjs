@@ -17,7 +17,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function DynamicPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    console.log(slug);
     const locale = (await headers()).get("x-locale") ?? "en";
     const page = await get_page_by_slug(slug, locale);
 
