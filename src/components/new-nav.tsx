@@ -3,8 +3,28 @@
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useOutsideClick } from "@/hook/use-outside-click";
-import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
-import NewsCard from "./ui/news-card";
+function DownArrow({ class_name }: { class_name?: string }) {
+    return (
+        <svg className={class_name} viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L6 7L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    );
+}
+function AngleArrow({ class_name }: { class_name?: string }) {
+    return (
+        <svg className={class_name} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 13L13 1M13 1H1M13 1V13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    );
+}
+function SearchIcon({ class_name }: { class_name?: string }) {
+    return (
+        <svg className={class_name} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" />
+            <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+    );
+}
 import { type Menu } from "@/services/mega_menu.service";
 import { type OffcanvasContent } from "@/services/offcanvas.service";
 import { BASE_URL } from "@/lib/constant";
@@ -190,7 +210,7 @@ function transformMenus(menus: Menu[]) {
         label: menu.nav_label,
         parent: menu.is_parent,
         link: menu.root_link,
-        id: menu.featured_news?.length > 0 ? "news" : "",
+        id: "",
         card: {
             title: menu.mega_menu_left_info?.label ?? "",
             description: menu.mega_menu_left_info?.excerpt ?? "",
@@ -214,11 +234,7 @@ function transformMenus(menus: Menu[]) {
                   links: (g.links ?? []).map((l) => ({ label: l.button_label, href: l.button_link })),
               }))
             : ([] as SubmenuGroup[]),
-        latest_news: (menu.featured_news ?? []).map((n) => ({
-            title: n.title,
-            href: n.link_href,
-            image: n.thumbnail ? `${BASE_URL}${n.thumbnail.url}` : "",
-        })),
+        latest_news: [],
     }));
 }
 
@@ -248,35 +264,7 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
                                 {/* Red bg bleeds from screen left edge to end of 30% column */}
                                 <div className="absolute inset-y-0 bg-sah-red" style={{ insetInlineStart: "calc((100% - 100vw) / 2)", width: "calc(30% + (100vw - 100%) / 2)" }} />
 
-                                {link.id === "news" ? (
-                                    /* 2-column layout for news & career */
-                                    <div className="flex h-full relative">
-                                        <div className="w-[30%] flex flex-col justify-start gap-[20px] px-10 py-6 z-10 max-[1536px]:pl-0">
-                                            <div className="flex flex-col gap-4">
-                                                <h3 className="text-sah-white font-geist text-[22px] font-semibold leading-snug">{link.card?.title}</h3>
-                                                <p className="text-sah-white font-inter text-[16px] leading-[1.6]">{link.card?.description}</p>
-                                            </div>
-                                            <a href={link.card?.cta.href} className="flex items-center gap-3 text-white font-inter text-[13px] font-semibold tracking-widest uppercase">
-                                                {link.card?.cta.label}
-                                                <AngleArrow class_name="!w-[14px] !h-[14px]" />
-                                            </a>
-                                        </div>
-
-                                        <div className={`w-[70%] grid gap-4 py-[20px] grid-cols-3`}>
-                                            {link.id === "news" &&
-                                                link.latest_news?.map((item, i) => (
-                                                    <NewsCard
-                                                        key={i}
-                                                        href={item.href}
-                                                        imageParam={{ src: item.image, className: "w-full" }}
-                                                        titleParam={{ title: item.title, className: "!text-[22px] leading-[28px] md:mb-1 pr-0 font-medium !pr-0" }}
-                                                    />
-                                                ))}
-                                        </div>
-                                    </div>
-                                ) : (
-                                    /* 3-column layout for standard menus */
-                                    <>
+                                <>
                                         {/* Image bg bleeds from right column to right screen edge */}
                                         <div
                                             className="absolute inset-y-0 bg-cover bg-top"
@@ -322,7 +310,6 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
                                             </div>
                                         </div>
                                     </>
-                                )}
                             </div>
                         </div>
                     )}
