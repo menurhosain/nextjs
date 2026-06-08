@@ -17,7 +17,7 @@ interface BannerProps {
 
 const FALLBACK_TYPEWRITER_TEXTS = ["& Build Contractor", "& Expert Renovation", "& Quality Finishes"];
 
-export default function Hero({background, titleNormal, typewriterTexts, scrollLabel, counterLabel, counterNumber, buttonLabel, buttonLink}: BannerProps) {
+export default function Hero({ background, titleNormal, typewriterTexts, scrollLabel, counterLabel, counterNumber, buttonLabel, buttonLink }: BannerProps) {
     const texts = typewriterTexts && typewriterTexts.length > 0 ? typewriterTexts : FALLBACK_TYPEWRITER_TEXTS;
     return (
         <Banner bg="/home-hero.mp4">
@@ -35,7 +35,7 @@ export default function Hero({background, titleNormal, typewriterTexts, scrollLa
                     </div>
 
                     <Link
-                        href="/register"
+                        href="/contact"
                         className="inline-flex items-center gap-[10px] group bg-sah-red hover:bg-sah-white text-white hover:text-sah-red   text-[16px] font-bold px-[30px] py-[14px] rounded-[8px] w-fit transition duration-300"
                     >
                         You Like to Build?
