@@ -21,9 +21,6 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
 
     if (!job) notFound();
 
-    const applyLink = job.job_for === "applicant"
-        ? `/apply-for-recrutement/${job.slug}`
-        : `/apply-for-contractor/${job.slug}`;
 
     return (
         <>
@@ -64,13 +61,6 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                                         </p>
                                     </div>
                                 )}
-                                <div className="flex flex-col gap-2">
-                                    <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">For</span>
-                                    <span className={`self-start text-[13px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full ${job.job_for === "applicant" ? "bg-blue-50 text-blue-600" : "bg-orange-50 text-orange-600"}`}>
-                                        {job.job_for === "applicant" ? "Applicant" : "Subcontractor"}
-                                    </span>
-                                </div>
-
                                 {job.locations && job.locations.length > 0 && (
                                     <div>
                                         <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">Location</span>
@@ -85,7 +75,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                                 )}
 
                                 <a
-                                    href={applyLink}
+                                    href={`/apply-for-recrutement/${job.slug}`}
                                     className="inline-flex items-center justify-center gap-2 bg-sah-dark-2 text-white text-[16px] font-medium px-8 py-4 rounded-full hover:bg-sah-red transition-colors duration-300 mt-4"
                                 >
                                     Apply Now

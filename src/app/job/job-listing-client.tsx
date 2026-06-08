@@ -44,8 +44,6 @@ function SearchIcon() {
     );
 }
 
-type JobFor = "all" | "applicant" | "subcontractor";
-
 type Props = {
     jobs: Job[];
     locations: JobLocation[];
@@ -55,7 +53,6 @@ export default function JobListingClient({ jobs, locations }: Props) {
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState("");
     const [locationFilter, setLocationFilter] = useState("");
-    const [typeFilter, setTypeFilter] = useState<JobFor>("all");
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     function handleSearch(value: string) {
@@ -68,16 +65,9 @@ export default function JobListingClient({ jobs, locations }: Props) {
         return jobs.filter((job) => {
             const matchesTitle = query === "" || job.title.toLowerCase().includes(query.toLowerCase());
             const matchesLocation = locationFilter === "" || (job.locations ?? []).some((l) => l.slug === locationFilter);
-            const matchesType = typeFilter === "all" || job.job_for === typeFilter;
-            return matchesTitle && matchesLocation && matchesType;
+            return matchesTitle && matchesLocation;
         });
-    }, [jobs, query, locationFilter, typeFilter]);
-
-    const typeButtons: { value: JobFor; label: string }[] = [
-        { value: "all", label: "All" },
-        { value: "applicant", label: "Applicant" },
-        { value: "subcontractor", label: "Subcontractor" },
-    ];
+    }, [jobs, query, locationFilter]);
 
     return (
         <div>
@@ -137,17 +127,10 @@ export default function JobListingClient({ jobs, locations }: Props) {
                             href={`/job/${job.slug}`}
                             className="group flex flex-col gap-4 bg-white border border-sah-light-3 hover:border-sah-red rounded-[10px] p-6 transition-all duration-300 hover:shadow-md"
                         >
-                            {/* Title + badge */}
-                            <div className="flex items-start justify-between gap-3">
-                                <div>
-                                    <h3 className="text-[18px] font-semibold text-sah-red leading-snug group-hover:underline">{job.title}</h3>
-                                    {job.employment_status && <p className="text-[14px] font-medium text-sah-dark-2 mt-1">{job.employment_status}</p>}
-                                </div>
-                                <span
-                                    className={`shrink-0 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full ${job.job_for === "applicant" ? "bg-blue-50 text-blue-600" : "bg-orange-50 text-orange-600"}`}
-                                >
-                                    {job.job_for === "applicant" ? "Applicant" : "Subcontractor"}
-                                </span>
+                            {/* Title */}
+                            <div>
+                                <h3 className="text-[18px] font-semibold text-sah-red leading-snug group-hover:underline">{job.title}</h3>
+                                {job.employment_status && <p className="text-[14px] font-medium text-sah-dark-2 mt-1">{job.employment_status}</p>}
                             </div>
 
                             {/* Location */}

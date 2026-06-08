@@ -17,7 +17,6 @@ export type Job = {
     locations?: JobLocation[];
     deadline: string | null;
     experience: string | null;
-    job_for: "applicant" | "subcontractor";
     employment_status: string | null;
     details?: BlocksContent | null;
 };
@@ -30,7 +29,6 @@ type StrapiJobItem = {
     locations?: JobLocation[];
     deadline?: string | null;
     experience?: string | null;
-    job_for?: "applicant" | "subcontractor";
     employment_status?: string | null;
     details?: BlocksContent | null;
 };
@@ -51,7 +49,6 @@ export async function get_jobs(locale = "en"): Promise<Job[]> {
             locations: item.locations ?? [],
             deadline: item.deadline ?? null,
             experience: item.experience ?? null,
-            job_for: item.job_for ?? "subcontractor",
             employment_status: item.employment_status ?? null,
         }));
     } catch {
@@ -77,7 +74,6 @@ export async function get_job_by_slug(slug: string, locale = "en"): Promise<Job 
             locations: item.locations ?? [],
             deadline: item.deadline ?? null,
             experience: item.experience ?? null,
-            job_for: item.job_for ?? "subcontractor",
             employment_status: item.employment_status ?? null,
             details: item.details ?? null,
         };

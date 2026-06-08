@@ -20,10 +20,6 @@ export default async function ApplyForContractorJobPage({ params }: { params: Pr
     const { slug } = await params;
     const headersList = await headers();
     const locale = headersList.get("x-locale") ?? "en";
-    const raw = headersList.get("x-user");
-    const user = raw ? JSON.parse(raw) : null;
-    const isApplicant = user?.type === "applicant";
-
     const [job, content] = await Promise.all([
         get_job_by_slug(slug, locale),
         get_apply_contractor_content(locale),
@@ -62,19 +58,7 @@ export default async function ApplyForContractorJobPage({ params }: { params: Pr
                             </p>
                         </div>
 
-                        {isApplicant ? (
-                            <div className="flex flex-col items-center text-center gap-4 py-6">
-                                <p className="text-[18px] font-semibold text-sah-dark-2">This position is for subcontractors only.</p>
-                                <p className="text-[15px] text-sah-gray-2">
-                                    You are registered as an <strong>applicant</strong>. To apply for this position, you need a subcontractor account.
-                                </p>
-                                <a href="/register-contractor" className="mt-2 inline-flex items-center gap-2 bg-sah-red text-white text-[14px] font-medium px-6 py-3 rounded-full hover:bg-sah-dark-2 transition-colors duration-300">
-                                    Register as Subcontractor
-                                </a>
-                            </div>
-                        ) : (
-                            <ApplyForm content={content} jobSlug={job.slug} />
-                        )}
+                        <ApplyForm content={content} jobSlug={job.slug} />
                     </div>
                 </div>
             </section>
