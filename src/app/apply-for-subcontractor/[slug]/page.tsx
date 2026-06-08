@@ -5,27 +5,27 @@ import ApplyForm from "../apply-form";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { get_apply_contractor_content } from "@/services/apply_contractor.service";
-import { get_job_by_slug } from "@/services/job.service";
+import { get_subcontracted_by_slug } from "@/services/subcontracted.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
     const locale = (await headers()).get("x-locale") ?? "en";
-    const job = await get_job_by_slug(slug, locale);
-    if (!job) return {};
-    return { title: `Apply for ${job.title}` };
+    const item = await get_subcontracted_by_slug(slug, locale);
+    if (!item) return {};
+    return { title: `Apply for ${item.title}` };
 }
 
-export default async function ApplyForContractorJobPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ApplyForSubcontractedPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const headersList = await headers();
     const locale = headersList.get("x-locale") ?? "en";
-    const [job, content] = await Promise.all([
-        get_job_by_slug(slug, locale),
+    const [item, content] = await Promise.all([
+        get_subcontracted_by_slug(slug, locale),
         get_apply_contractor_content(locale),
     ]);
 
-    if (!job) notFound();
+    if (!item) notFound();
 
     return (
         <>
@@ -33,8 +33,8 @@ export default async function ApplyForContractorJobPage({ params }: { params: Pr
                 <Left class_name="max-[640px]:pt-[70px]">
                     <div className="flex flex-col justify-center">
                         <Banner_Title
-                            subtitle={content?.banner?.banner_label || "Career Opportunity"}
-                            title={content?.banner?.banner_title || "Apply for Contractor"}
+                            subtitle={content?.banner?.banner_label || "Subcontracted Project"}
+                            title={content?.banner?.banner_title || "Apply for Subcontracted Project"}
                         />
                     </div>
                 </Left>
@@ -51,14 +51,14 @@ export default async function ApplyForContractorJobPage({ params }: { params: Pr
                                 Applying for
                             </p>
                             <h2 className="text-[26px] sm:text-[36px] font-medium text-white leading-[36px] sm:leading-[46px]">
-                                {job.title}
+                                {item.title}
                             </h2>
                             <p className="text-red-100 text-[17px] mt-2">
                                 {content?.form_subtitle || "Submit your company details and supporting documents."}
                             </p>
                         </div>
 
-                        <ApplyForm content={content} />
+                        <ApplyForm content={content} subcontractedSlug={item.slug} />
                     </div>
                 </div>
             </section>

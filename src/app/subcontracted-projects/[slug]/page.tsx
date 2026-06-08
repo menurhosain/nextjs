@@ -68,7 +68,7 @@ export default async function SubcontractedDetailPage({ params }: { params: Prom
                                 )}
 
                                 <a
-                                    href={`/apply-contractor/${item.slug}`}
+                                    href={`/apply-for-subcontractor/${item.slug}`}
                                     className="inline-flex items-center justify-center gap-2 bg-sah-dark-2 text-white text-[16px] font-medium px-8 py-4 rounded-full hover:bg-sah-red transition-colors duration-300 mt-4"
                                 >
                                     Apply Now

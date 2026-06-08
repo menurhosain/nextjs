@@ -7,12 +7,14 @@ const PROTECTED_ROUTES = [
   "/dashboard",
   "/profile",
   "/applications",
+  "/contractor-applications",
   "/protected",
 ];
 
 // Match only slug-based apply routes, e.g. /apply-for-recrutement/some-job
 const APPLICANT_ONLY_PATTERN = /^\/apply-for-recrutement\/.+/;
 const CONTRACTOR_ONLY_PATTERN = /^\/apply-for-contractor\/.+/;
+const SUBCONTRACTED_APPLY_PATTERN = /^\/apply-for-subcontractor\/.+/;
 
 export async function proxy(request: NextRequest) {
   const jwt = request.cookies.get("jwt")?.value;
@@ -21,10 +23,12 @@ export async function proxy(request: NextRequest) {
   const isAuthRoute = AUTH_ROUTES.includes(pathname);
   const isApplicantOnly = APPLICANT_ONLY_PATTERN.test(pathname);
   const isContractorOnly = CONTRACTOR_ONLY_PATTERN.test(pathname);
+  const isSubcontractedApply = SUBCONTRACTED_APPLY_PATTERN.test(pathname);
   const isProtected =
     PROTECTED_ROUTES.some((r) => pathname.startsWith(r)) ||
     isApplicantOnly ||
-    isContractorOnly;
+    isContractorOnly ||
+    isSubcontractedApply;
 
   const user = jwt ? await verify_jwt(jwt) : null;
 

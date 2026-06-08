@@ -2,20 +2,20 @@
 
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { submit_contractor_apply, type ApplyContractorFormState } from "@/actions/apply-contractor";
+import { submit_subcontracted_apply, type ApplySubcontractedFormState } from "@/actions/apply-subcontracted";
 import type { ApplyContractorContent } from "@/services/apply_contractor.service";
 
-const initialState: ApplyContractorFormState = { errors: {} };
+const initialState: ApplySubcontractedFormState = { errors: {} };
 
 const inputClass = "w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-gray-700 placeholder-sah-gray-1 focus:outline-none focus:border-red-500 transition";
 const labelClass = "block text-[13px] font-medium text-sah-dark-2 mb-1";
 const errorClass = "text-red-500 text-[12px] mt-1";
 
-type Props = { content: ApplyContractorContent | null };
+type Props = { content: ApplyContractorContent | null; subcontractedSlug: string };
 
-export default function ApplyForm({ content: c }: Props) {
+export default function ApplyForm({ content: c, subcontractedSlug }: Props) {
     const router = useRouter();
-    const [state, formAction, pending] = useActionState(submit_contractor_apply, initialState);
+    const [state, formAction, pending] = useActionState(submit_subcontracted_apply, initialState);
 
     useEffect(() => {
         if (state.success) router.push("/dashboard");
@@ -25,6 +25,8 @@ export default function ApplyForm({ content: c }: Props) {
 
     return (
         <form action={formAction} className="flex flex-col gap-4">
+            <input type="hidden" name="subcontractedSlug" value={subcontractedSlug} />
+
             {/* Company name */}
             <div>
                 <label htmlFor="companyName" className={labelClass}>
