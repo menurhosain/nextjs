@@ -12,10 +12,10 @@ type Props = {
 };
 
 const fallbackJobs: Job[] = [
-    { id: 1, documentId: "1", title: "Project Manager Consulting", slug: "#", locations: [], deadline: null, experience: null, job_for: "applicant", employment_status: "Full Time" },
-    { id: 2, documentId: "2", title: "Project Manager Consulting", slug: "#", locations: [], deadline: null, experience: null, job_for: "applicant", employment_status: "Full Time" },
-    { id: 3, documentId: "3", title: "Project Manager Consulting", slug: "#", locations: [], deadline: null, experience: null, job_for: "applicant", employment_status: "Full Time" },
-    { id: 4, documentId: "4", title: "Project Manager Consulting", slug: "#", locations: [], deadline: null, experience: null, job_for: "applicant", employment_status: "Full Time" },
+    { id: 1, documentId: "1", title: "Project Manager Consulting", slug: "#", locations: [], deadline: null, experience: null, employment_status: "Full Time" },
+    { id: 2, documentId: "2", title: "Project Manager Consulting", slug: "#", locations: [], deadline: null, experience: null, employment_status: "Full Time" },
+    { id: 3, documentId: "3", title: "Project Manager Consulting", slug: "#", locations: [], deadline: null, experience: null, employment_status: "Full Time" },
+    { id: 4, documentId: "4", title: "Project Manager Consulting", slug: "#", locations: [], deadline: null, experience: null, employment_status: "Full Time" },
 ];
 
 export default function JobCareers({ job_section_title, job_section_description, job_board_image, jobs }: Props) {
