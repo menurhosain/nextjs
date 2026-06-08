@@ -58,7 +58,7 @@ export default async function ApplyForContractorJobPage({ params }: { params: Pr
                             </p>
                         </div>
 
-                        <ApplyForm content={content} jobSlug={job.slug} />
+                        <ApplyForm content={content} />
                     </div>
                 </div>
             </section>

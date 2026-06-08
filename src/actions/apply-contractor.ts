@@ -27,7 +27,6 @@ export async function submit_contractor_apply(
   const experienceYearsRaw = (formData.get("experienceYears") as string)?.trim();
   const experienceYears = experienceYearsRaw ? Number(experienceYearsRaw) : undefined;
   const documents = formData.getAll("documents").filter((v): v is File => v instanceof File && v.size > 0);
-  const jobSlug = (formData.get("jobSlug") as string)?.trim() || undefined;
 
   const ALLOWED_DOC_TYPES = [
     "application/pdf",
@@ -66,7 +65,7 @@ export async function submit_contractor_apply(
 
   try {
     await submit_contractor_application(
-      { companyName, email, phone, location, experienceYears, documents, jobSlug },
+      { companyName, email, phone, location, experienceYears, documents },
       jwt,
     );
   } catch (err) {

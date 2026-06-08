@@ -1,9 +1,8 @@
 import { cookies, headers } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { BASE_URL, CONTRACTOR, APPLICANT } from "@/lib/constant";
+import { BASE_URL } from "@/lib/constant";
 import { get_application_by_document_id } from "@/services/applicant.service";
-import { get_subcontractor_by_document_id } from "@/services/subcontractor.service";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 
@@ -28,13 +27,11 @@ export default async function ApplicationDetailPage({ params }: { params: Promis
     const headersList = await headers();
     const raw = headersList.get("x-user");
     if (!raw) redirect("/login");
-    const user = JSON.parse(raw) as Record<string, unknown>;
-    const isContractor = user.type === CONTRACTOR;
 
     const cookieStore = await cookies();
     const jwt = cookieStore.get("jwt")?.value ?? "";
 
-    const app = isContractor ? await get_subcontractor_by_document_id(documentId, jwt) : await get_application_by_document_id(documentId, jwt);
+    const app = await get_application_by_document_id(documentId, jwt);
 
     if (!app) redirect("/dashboard");
 
@@ -49,7 +46,7 @@ export default async function ApplicationDetailPage({ params }: { params: Promis
             <Banner bg="/home-hero.mp4" class_name="lg:min-h-[auto] xl:min-h-[auto] md:min-h-[auto] 2xl:h-[100vh] py-18 2xl:py-0 max-[640px]:pb-[65px]">
                 <Left class_name="max-[640px]:pt-[70px]">
                     <div className="flex flex-col justify-center">
-                        <Banner_Title subtitle="" title={user.type === CONTRACTOR ? "Subcontractor Application" : user.type == APPLICANT ? "Recruitment Application" : ""} />
+                        <Banner_Title subtitle="" title="Recruitment Application" />
                     </div>
                 </Left>
 
@@ -69,69 +66,31 @@ export default async function ApplicationDetailPage({ params }: { params: Promis
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 space-y-6">
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                             <div>
-                                <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-1">{isContractor ? "Contractor Application" : "Recruitment Application"}</p>
-                                <h1 className="text-xl font-semibold text-gray-900">
-                                    {isContractor
-                                        ? (app as Awaited<ReturnType<typeof get_subcontractor_by_document_id>>)?.companyName
-                                        : (() => {
-                                              const a = app as Awaited<ReturnType<typeof get_application_by_document_id>>;
-                                              return `${a?.firstName ?? ""} ${a?.lastName ?? ""}`.trim();
-                                          })()}
-                                </h1>
+                                <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-1">Recruitment Application</p>
+                                <h1 className="text-xl font-semibold text-gray-900">{app.applied_job?.title ?? "—"}</h1>
+                                <p className="text-sm text-gray-500 mt-1">{`${app.firstName ?? ""} ${app.lastName ?? ""}`.trim()}</p>
                             </div>
                             <StatusBadge label={app.label} />
                         </div>
 
                         <div className="divide-y divide-gray-100">
+                            <Field label="Job" value={app.applied_job?.title} />
                             <Field label="Email" value={app.email} />
                             <Field label="Phone" value={app.phone} />
                             <Field label="Location" value={app.location} />
                             <Field label="Experience" value={app.experienceYears != null ? `${app.experienceYears} years` : null} />
-
-                            {!isContractor &&
-                                (() => {
-                                    const a = app as Awaited<ReturnType<typeof get_application_by_document_id>>;
-                                    return <Field label="Skills" value={a?.skills} />;
-                                })()}
-
+                            <Field label="Skills" value={app.skills} />
                             <Field label="Applied on" value={appliedDate} />
                         </div>
 
-                        {isContractor &&
-                            (() => {
-                                const a = app as Awaited<ReturnType<typeof get_subcontractor_by_document_id>>;
-                                const docs = a?.documents;
-                                if (!docs || docs.length === 0) return null;
-                                return (
-                                    <div className="space-y-2">
-                                        <p className="text-sm font-medium text-gray-700">Documents</p>
-                                        <ul className="space-y-1.5">
-                                            {docs.map((doc) => (
-                                                <li key={doc.id}>
-                                                    <a href={`${BASE_URL}${doc.url}`} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline break-all">
-                                                        {doc.name}
-                                                    </a>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                );
-                            })()}
-
-                        {!isContractor &&
-                            (() => {
-                                const a = app as Awaited<ReturnType<typeof get_application_by_document_id>>;
-                                const cv = a?.cvFile;
-                                if (!cv) return null;
-                                return (
-                                    <div className="space-y-2">
-                                        <p className="text-sm font-medium text-gray-700">CV / Resume</p>
-                                        <a href={`${BASE_URL}${cv.url}`} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline break-all">
-                                            {cv.name}
-                                        </a>
-                                    </div>
-                                );
-                            })()}
+                        {app.cvFile && (
+                            <div className="space-y-2">
+                                <p className="text-sm font-medium text-gray-700">CV / Resume</p>
+                                <a href={`${BASE_URL}${app.cvFile.url}`} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline break-all">
+                                    {app.cvFile.name}
+                                </a>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

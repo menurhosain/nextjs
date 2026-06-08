@@ -3,9 +3,7 @@ import { headers, cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { get_user_applications } from "@/services/applicant.service";
-import { get_user_subcontractor_applications } from "@/services/subcontractor.service";
 import { get_dashboard_page_content } from "@/services/page_content.service";
-import { CONTRACTOR } from "@/lib/constant";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import Navbar from "@/components/navbar";
@@ -26,14 +24,13 @@ export default async function DashboardPage() {
     const email = user.email as string | undefined;
     const type = user.type as string | undefined;
     const displayName = firstName ?? username ?? "there";
-    const isContractor = type === CONTRACTOR;
 
     const locale = headersList.get("x-locale") ?? "en";
 
     const cookieStore = await cookies();
     const jwt = cookieStore.get("jwt")!.value;
 
-    const [applications, cms] = await Promise.all([isContractor ? get_user_subcontractor_applications(jwt) : get_user_applications(userId, jwt), get_dashboard_page_content(locale)]);
+    const [applications, cms] = await Promise.all([get_user_applications(userId, jwt), get_dashboard_page_content(locale)]);
 
     const applyHref = "/job";
 
@@ -44,9 +41,9 @@ export default async function DashboardPage() {
     const profileCardLabel = cms?.profile_card_label ?? "Profile";
     const profileCardTitle = cms?.profile_card_title ?? "View & edit your info";
     const profileCardDescription = cms?.profile_card_description ?? "Name, phone, location, profile picture";
-    const sectionLabel = isContractor ? (cms?.contractor_section_label ?? "Contractor") : (cms?.applicant_section_label ?? "Recruitment");
-    const applyLabel = isContractor ? (cms?.contractor_apply_label ?? "Apply as Contractor") : (cms?.applicant_apply_label ?? "Apply for a position");
-    const applyDescription = isContractor ? (cms?.contractor_apply_description ?? "Submit your company details and documents") : (cms?.applicant_apply_description ?? "Submit your CV and skills");
+    const sectionLabel = cms?.applicant_section_label ?? "Recruitment";
+    const applyLabel = cms?.applicant_apply_label ?? "Apply for a position";
+    const applyDescription = cms?.applicant_apply_description ?? "Submit your CV and skills";
     const accountDetailsHeading = cms?.account_details_heading ?? "Account details";
     const emailFieldLabel = cms?.email_field_label ?? "Email";
     const usernameFieldLabel = cms?.username_field_label ?? "Username";
@@ -140,63 +137,27 @@ export default async function DashboardPage() {
                             </div>
                         ) : (
                             <div className="space-y-3">
-                                {isContractor
-                                    ? (applications as Awaited<ReturnType<typeof get_user_subcontractor_applications>>).map((app) => (
-                                          <Link
-                                              key={app.documentId}
-                                              href={`/applications/${app.documentId}`}
-                                              className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-md transition-shadow"
-                                          >
-                                              <div className="space-y-1">
-                                                  <p className="text-sm font-semibold text-gray-900">{app.companyName}</p>
-                                                  <p className="text-xs text-gray-500">{app.email}</p>
-                                                  {app.location && (
-                                                      <p className="text-xs text-gray-400">
-                                                          {locationLabel}: {app.location}
-                                                      </p>
-                                                  )}
-                                                  {app.experienceYears != null && (
-                                                      <p className="text-xs text-gray-400">
-                                                          {experienceLabel}: {app.experienceYears} yrs
-                                                      </p>
-                                                  )}
-                                              </div>
-                                              <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
-                                                  {app.label && <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">{app.label}</span>}
-                                                  <p className="text-xs text-gray-400">
-                                                      {new Date(app.appliedAt).toLocaleDateString("en-US", {
-                                                          year: "numeric",
-                                                          month: "short",
-                                                          day: "numeric",
-                                                      })}
-                                                  </p>
-                                              </div>
-                                          </Link>
-                                      ))
-                                    : (applications as Awaited<ReturnType<typeof get_user_applications>>).map((app) => (
-                                          <Link
-                                              key={app.documentId}
-                                              href={`/applications/${app.documentId}`}
-                                              className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-md transition-shadow"
-                                          >
-                                              <div className="space-y-1">
-                                                  <p className="text-sm font-semibold text-gray-900">
-                                                      {app.firstName} {app.lastName}
-                                                  </p>
-                                                  <p className="text-xs text-gray-500">{app.email}</p>
-                                                  {app.skills && <p className="text-xs text-gray-400">Skills: {app.skills}</p>}
-                                                  {app.location && (
-                                                      <p className="text-xs text-gray-400">
-                                                          {locationLabel}: {app.location}
-                                                      </p>
-                                                  )}
-                                              </div>
-                                              <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
-                                                  {app.label && <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">{app.label}</span>}
-                                                  <p className="text-xs text-gray-400">{new Date(app.appliedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</p>
-                                              </div>
-                                          </Link>
-                                      ))}
+                                {applications.map((app) => (
+                                    <Link
+                                        key={app.documentId}
+                                        href={`/applications/${app.documentId}`}
+                                        className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-md transition-shadow"
+                                    >
+                                        <div className="space-y-1">
+                                            <p className="text-sm font-semibold text-gray-900">{app.applied_job?.title ?? "—"}</p>
+                                            <p className="text-xs text-gray-500">{app.firstName} {app.lastName} · {app.email}</p>
+                                            {app.location && (
+                                                <p className="text-xs text-gray-400">
+                                                    {locationLabel}: {app.location}
+                                                </p>
+                                            )}
+                                        </div>
+                                        <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
+                                            {app.label && <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">{app.label}</span>}
+                                            <p className="text-xs text-gray-400">{new Date(app.appliedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</p>
+                                        </div>
+                                    </Link>
+                                ))}
                             </div>
                         )}
                     </div>
