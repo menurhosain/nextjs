@@ -4,7 +4,6 @@ import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useOutsideClick } from "@/hook/use-outside-click";
 import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
-import NewsCard from "./ui/news-card";
 import { type Menu } from "@/services/mega_menu.service";
 import { type OffcanvasContent } from "@/services/offcanvas.service";
 import { BASE_URL } from "@/lib/constant";
@@ -262,15 +261,6 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
                                         </div>
 
                                         <div className={`w-[70%] grid gap-4 py-[20px] grid-cols-3`}>
-                                            {link.id === "news" &&
-                                                link.latest_news?.map((item, i) => (
-                                                    <NewsCard
-                                                        key={i}
-                                                        href={item.href}
-                                                        imageParam={{ src: item.image, className: "w-full" }}
-                                                        titleParam={{ title: item.title, className: "!text-[22px] leading-[28px] md:mb-1 pr-0 font-medium !pr-0" }}
-                                                    />
-                                                ))}
                                         </div>
                                     </div>
                                 ) : (

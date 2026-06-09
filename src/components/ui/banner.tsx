@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { BrandShape } from "./svgs";
 
 const IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg"];
 
@@ -46,11 +45,10 @@ function Banner({ bg, children, class_name, style, bgDirection = "right", contai
     );
 }
 
-function Left({ children, style, class_name, has_brand_shape = false }: { children: React.ReactNode; style?: React.CSSProperties; class_name?: string; has_brand_shape?: Boolean }) {
+function Left({ children, style, class_name }: { children: React.ReactNode; style?: React.CSSProperties; class_name?: string }) {
     return (
         <div className={cn("w-[100%] md:w-[60%]  pt-[100px] flex items-center", class_name)} style={{ ...style }}>
             {children}
-            {has_brand_shape && <BrandShape class_name="absolute bottom-0 !fill-transparent !w-[100%] md:!w-[70%] !h-[400px] z-[-1]" />}
         </div>
     );
 }
