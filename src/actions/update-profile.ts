@@ -4,7 +4,20 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { api_client } from "@/lib/api-client";
 import { verify_jwt } from "@/services/auth.service";
-import { upload_file } from "@/services/upload.service";
+import { BASE_URL } from "@/lib/constant";
+
+async function upload_file(file: File, jwt: string): Promise<number> {
+  const form = new FormData();
+  form.append("files", file);
+  const res = await fetch(`${BASE_URL}/api/upload`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${jwt}` },
+    body: form,
+  });
+  if (!res.ok) throw new Error("File upload failed.");
+  const [uploaded] = await res.json();
+  return uploaded.id as number;
+}
 
 export type UpdateProfileFormState = {
   errors: {

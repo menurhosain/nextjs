@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import ApplyForm from "../apply-form";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
-import { get_apply_contractor_content } from "@/services/apply_contractor.service";
+import { get_apply_contractor_content } from "@/services/subcontractor_apply.service";
 import { get_subcontracted_by_slug } from "@/services/subcontracted.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 

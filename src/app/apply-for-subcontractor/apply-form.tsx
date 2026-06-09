@@ -2,8 +2,8 @@
 
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { submit_subcontracted_apply, type ApplySubcontractedFormState } from "@/actions/apply-subcontracted";
-import type { ApplyContractorContent } from "@/services/apply_contractor.service";
+import { submit_subcontracted_apply, type ApplySubcontractedFormState } from "@/actions/subcontractor-apply";
+import type { ApplyContractorContent } from "@/services/subcontractor_apply.service";
 
 const initialState: ApplySubcontractedFormState = { errors: {} };
 
