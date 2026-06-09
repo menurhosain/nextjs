@@ -5,7 +5,6 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { get_subcontracted_by_slug } from "@/services/subcontracted.service";
-import { get_subcontracted_projects_page_content } from "@/services/page_content.service";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
@@ -19,20 +18,17 @@ export default async function SubcontractedDetailPage({ params }: { params: Prom
     const { slug } = await params;
     const locale = (await headers()).get("x-locale") ?? "en";
 
-    const [item, cms] = await Promise.all([
-        get_subcontracted_by_slug(slug, locale),
-        get_subcontracted_projects_page_content(locale),
-    ]);
+    const item = await get_subcontracted_by_slug(slug, locale);
 
     if (!item) notFound();
 
     const content = {
-        detail_banner_subtitle: cms?.detail_banner?.banner_label ?? "Subcontracted Project",
-        experience_label: cms?.experience_label ?? "Experience",
-        deadline_label: cms?.deadline_label ?? "Deadline",
-        location_label: cms?.location_label ?? "Location",
-        apply_button_label: cms?.apply_button_label ?? "Apply Now",
-        no_details_text: cms?.no_details_text ?? "No details available for this project.",
+        detail_banner_subtitle: "Project",
+        experience_label: "Experience",
+        deadline_label: "Deadline",
+        location_label: "Location",
+        apply_button_label: "Apply Now",
+        no_details_text: "No details available for this project.",
     };
 
     return (

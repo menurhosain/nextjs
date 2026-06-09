@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { get_subcontracteds } from "@/services/subcontracted.service";
-import { get_subcontracted_projects_page_content } from "@/services/page_content.service";
+import { get_projects_page_content } from "@/services/page_content.service";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import SubcontractedListingClient from "./subcontracted-listing-client";
@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: "Subcontracted Projects" };
 export default async function SubcontractedProjectsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
 
-    const [items, cms] = await Promise.all([get_subcontracteds(locale), get_subcontracted_projects_page_content(locale)]);
+    const [items, cms] = await Promise.all([get_subcontracteds(locale), get_projects_page_content(locale)]);
 
     const locationMap = new Map<string, SubcontractedLocation>();
     for (const item of items) {
@@ -24,13 +24,14 @@ export default async function SubcontractedProjectsPage() {
 
     const content = {
         banner_subtitle: cms?.banner?.banner_label ?? "Explore Opportunities",
-        banner_title: cms?.banner?.banner_title ?? "Subcontracted Projects",
+        banner_title: cms?.banner?.banner_title ?? "Projects",
         search_placeholder: cms?.search_placeholder ?? "Search by title...",
         all_locations_label: cms?.all_locations_label ?? "All Locations",
         result_singular_label: cms?.result_singular_label ?? "project",
         result_plural_label: cms?.result_plural_label ?? "projects",
+        result_found_label: cms?.result_found_label ?? "found",
         no_results_text: cms?.no_results_text ?? "No projects match your search.",
-        empty_state_text: cms?.empty_state_text ?? "No subcontracted projects at the moment. Please check back later.",
+        empty_state_text: cms?.empty_state_text ?? "No projects at the moment. Please check back later.",
     };
 
     return (
@@ -60,6 +61,7 @@ export default async function SubcontractedProjectsPage() {
                             allLocationsLabel={content.all_locations_label}
                             resultSingularLabel={content.result_singular_label}
                             resultPluralLabel={content.result_plural_label}
+                            resultFoundLabel={content.result_found_label}
                             noResultsText={content.no_results_text}
                         />
                     )}

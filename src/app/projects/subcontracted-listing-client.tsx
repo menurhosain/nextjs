@@ -51,10 +51,11 @@ type Props = {
     allLocationsLabel: string;
     resultSingularLabel: string;
     resultPluralLabel: string;
+    resultFoundLabel: string;
     noResultsText: string;
 };
 
-export default function SubcontractedListingClient({ items, locations, searchPlaceholder, allLocationsLabel, resultSingularLabel, resultPluralLabel, noResultsText }: Props) {
+export default function SubcontractedListingClient({ items, locations, searchPlaceholder, allLocationsLabel, resultSingularLabel, resultPluralLabel, resultFoundLabel, noResultsText }: Props) {
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState("");
     const [locationFilter, setLocationFilter] = useState("");
@@ -116,7 +117,7 @@ export default function SubcontractedListingClient({ items, locations, searchPla
 
             {/* Results count */}
             <p className="text-[14px] text-sah-gray-2 font-medium mb-5">
-                {filtered.length} {filtered.length === 1 ? resultSingularLabel : resultPluralLabel} found
+                {filtered.length} {filtered.length === 1 ? resultSingularLabel : resultPluralLabel} {resultFoundLabel}
             </p>
 
             {/* Cards */}
