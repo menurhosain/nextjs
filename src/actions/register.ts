@@ -61,7 +61,7 @@ export async function register_user(_prevState: FormState, formData: FormData): 
 
     if (!phone) errors.phone = "Phone number is required.";
 
-    if (!register_as || !["applicant", "contractor"].includes(register_as)) {
+    if (!register_as || !["applicant", "subcontractor"].includes(register_as)) {
         errors.register_as = "Please select a role.";
     }
 

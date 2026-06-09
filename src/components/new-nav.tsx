@@ -8,7 +8,6 @@ import NewsCard from "./ui/news-card";
 import { type Menu } from "@/services/mega_menu.service";
 import { type OffcanvasContent } from "@/services/offcanvas.service";
 import { BASE_URL } from "@/lib/constant";
-import { OffcanvasContactForm } from "./ui/contact-form";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
@@ -32,7 +31,7 @@ const STATIC_NAV_LINKS = [
             title: "Become a Subcontractor",
             excerpt: "With expertise spanning planning, execution, and project delivery, we provide market needs.",
             image: "/menu/1.jpg",
-            cta: { label: "Learn How", href: "/become-a-subcontractor" },
+            cta: { label: "Learn How", href: "/register-subcontractor" },
         },
         submenus: [
             {
@@ -403,7 +402,7 @@ export function NavActions({
 
                 {/* CTA button */}
                 <a
-                    href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/become-a-subcontractor")}
+                    href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/register-subcontractor")}
                     className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
                 >
                     {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "Become a Subcontractor")}
@@ -531,7 +530,7 @@ export function NavActions({
 
                                 <div className="py-8">
                                     <a
-                                        href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/become-a-subcontractor")}
+                                        href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/register-subcontractor")}
                                         className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px] max-[640px]:text-[14px] max-[380px]:text-[12px] max-[640px]:px-[10px]"
                                     >
                                         {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "Become a Subcontractor")}
@@ -553,16 +552,6 @@ export function NavActions({
 
                         {/* Featured project */}
 
-                        <OffcanvasContactForm
-                            title={offcanvas?.form_title || "Start the Conversation"}
-                            placeholderFirstName={offcanvas?.placeholder_first_name || "First Name*"}
-                            placeholderLastName={offcanvas?.placeholder_last_name || "Last Name*"}
-                            placeholderEmail={offcanvas?.placeholder_email || "Email Address"}
-                            placeholderPhone={offcanvas?.placeholder_phone || "Phone"}
-                            placeholderMessage={offcanvas?.placeholder_message || "Write Message*"}
-                            submitLabel={offcanvas?.form_submit_label || "Message Now"}
-                            recaptchaSiteKey={recaptcha_site_key ?? ""}
-                        />
                     </div>
                 </div>
 
