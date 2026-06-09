@@ -5,6 +5,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { get_subcontracted_by_slug } from "@/services/subcontracted.service";
+import { get_project_single_page_content } from "@/services/page_content.service";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
@@ -18,25 +19,16 @@ export default async function SubcontractedDetailPage({ params }: { params: Prom
     const { slug } = await params;
     const locale = (await headers()).get("x-locale") ?? "en";
 
-    const item = await get_subcontracted_by_slug(slug, locale);
+    const [item, content] = await Promise.all([get_subcontracted_by_slug(slug, locale), get_project_single_page_content(locale)]);
 
     if (!item) notFound();
 
-    const content = {
-        detail_banner_subtitle: "Project",
-        experience_label: "Experience",
-        deadline_label: "Deadline",
-        location_label: "Location",
-        apply_button_label: "Apply Now",
-        no_details_text: "No details available for this project.",
-    };
-
     return (
         <>
-            <Banner bg="/home-hero.mp4" class_name="lg:min-h-[auto] xl:min-h-[auto] md:min-h-[auto] 2xl:h-[100vh] py-18 2xl:py-0 max-[640px]:pb-[65px]">
+            <Banner bg={content?.banner_bg?.url ?? "/home-hero.mp4"} class_name="lg:min-h-[auto] xl:min-h-[auto] md:min-h-[auto] 2xl:h-[100vh] py-18 2xl:py-0 max-[640px]:pb-[65px]">
                 <Left class_name="max-[640px]:pt-[70px]">
                     <div className="flex flex-col justify-center">
-                        <Banner_Title subtitle={content.detail_banner_subtitle} title={item.title} />
+                        <Banner_Title subtitle={content?.detail_banner_subtitle ?? "Project"} title={item.title} />
                     </div>
                 </Left>
                 <Right>
@@ -52,13 +44,13 @@ export default async function SubcontractedDetailPage({ params }: { params: Prom
                             <div className="flex flex-col gap-6">
                                 {item.experience && (
                                     <div>
-                                        <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content.experience_label}</span>
+                                        <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.experience_label ?? "Experience"}</span>
                                         <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{item.experience}</p>
                                     </div>
                                 )}
                                 {item.deadline && (
                                     <div>
-                                        <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content.deadline_label}</span>
+                                        <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.deadline_label ?? "Deadline"}</span>
                                         <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">
                                             {new Date(item.deadline).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
                                         </p>
@@ -66,7 +58,7 @@ export default async function SubcontractedDetailPage({ params }: { params: Prom
                                 )}
                                 {item.locations && item.locations.length > 0 && (
                                     <div>
-                                        <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content.location_label}</span>
+                                        <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.location_label ?? "Location"}</span>
                                         <div className="flex flex-wrap gap-2 mt-2">
                                             {item.locations.map((loc) => (
                                                 <span key={loc.id} className="text-[14px] font-medium text-sah-dark-2 px-3 py-1 rounded-full bg-sah-light-4">
@@ -80,7 +72,7 @@ export default async function SubcontractedDetailPage({ params }: { params: Prom
                                     href={`/apply-for-subcontractor/${item.slug}`}
                                     className="inline-flex items-center justify-center gap-2 bg-sah-dark-2 text-white text-[16px] font-medium px-8 py-4 rounded-full hover:bg-sah-red transition-colors duration-300 mt-4"
                                 >
-                                    {content.apply_button_label}
+                                    {content?.apply_button_label ?? "Apply Now"}
                                 </a>
                             </div>
                         </aside>
@@ -92,7 +84,7 @@ export default async function SubcontractedDetailPage({ params }: { params: Prom
                                     <BlocksRenderer content={item.details} />
                                 </div>
                             ) : (
-                                <p className="text-sah-gray-2 text-[16px] leading-[28px]">{content.no_details_text}</p>
+                                <p className="text-sah-gray-2 text-[16px] leading-[28px]">{content?.no_details_text ?? "No details available for this project."}</p>
                             )}
                         </div>
                     </div>

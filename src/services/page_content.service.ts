@@ -229,3 +229,25 @@ export async function get_register_contractor_page_content(locale = "en"): Promi
         return null;
     }
 }
+
+// Project Single Page (/projects/[slug])
+export type ProjectSinglePageContent = {
+    banner_bg: StrapiMedia | null;
+    detail_banner_subtitle: string | null;
+    experience_label: string | null;
+    deadline_label: string | null;
+    location_label: string | null;
+    apply_button_label: string | null;
+    no_details_text: string | null;
+};
+
+export async function get_project_single_page_content(locale = "en"): Promise<ProjectSinglePageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/project-single-page?locale=${locale}&populate[banner_bg][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
