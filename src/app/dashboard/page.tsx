@@ -80,7 +80,7 @@ export default async function DashboardPage() {
                             <p className="text-sm text-gray-500 mt-1">{profileCardDescription}</p>
                         </a>
 
-                        <a href="/subcontracted-projects" className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+                        <a href="/projects" className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
                             <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Subcontracted</p>
                             <p className="mt-2 text-base font-semibold text-gray-900">Browse subcontracted projects</p>
                             <p className="text-sm text-gray-500 mt-1">Submit your company profile and documents</p>
@@ -116,7 +116,7 @@ export default async function DashboardPage() {
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
                             <h3 className="text-sm font-semibold text-gray-700">My Applications</h3>
-                            <a href="/subcontracted-projects" className="text-xs text-gray-500 hover:text-gray-900 underline underline-offset-2">
+                            <a href="/projects" className="text-xs text-gray-500 hover:text-gray-900 underline underline-offset-2">
                                 + New application
                             </a>
                         </div>
@@ -124,7 +124,7 @@ export default async function DashboardPage() {
                         {contractorApplications.length === 0 ? (
                             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
                                 <p className="text-sm text-gray-500">You haven&apos;t submitted any applications yet.</p>
-                                <a href="/subcontracted-projects" className="inline-block mt-3 text-sm font-medium text-gray-900 underline underline-offset-2">
+                                <a href="/projects" className="inline-block mt-3 text-sm font-medium text-gray-900 underline underline-offset-2">
                                     Browse subcontracted projects
                                 </a>
                             </div>

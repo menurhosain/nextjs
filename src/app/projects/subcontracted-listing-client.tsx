@@ -129,7 +129,7 @@ export default function SubcontractedListingClient({ items, locations, searchPla
                     {filtered.map((item) => (
                         <a
                             key={item.id}
-                            href={`/subcontracted-projects/${item.slug}`}
+                            href={`/projects/${item.slug}`}
                             className="group flex flex-col gap-4 bg-white border border-sah-light-3 hover:border-sah-red rounded-[10px] p-6 transition-all duration-300 hover:shadow-md"
                         >
                             {/* Title */}
@@ -158,9 +158,7 @@ export default function SubcontractedListingClient({ items, locations, searchPla
                                 {item.deadline && (
                                     <div className="flex items-center gap-2 text-sah-gray-2">
                                         <CalendarIcon />
-                                        <span className="text-[13px] font-medium">
-                                            {new Date(item.deadline).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}
-                                        </span>
+                                        <span className="text-[13px] font-medium">{new Date(item.deadline).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}</span>
                                     </div>
                                 )}
                             </div>

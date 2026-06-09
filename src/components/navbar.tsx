@@ -5,7 +5,7 @@ import { BASE_URL } from "@/lib/constant";
 
 const authLinks = [
     { href: "/dashboard", label: "Dashboard" },
-    { href: "/subcontracted-projects", label: "Apply for project" },
+    { href: "/projects", label: "Apply for project" },
 ];
 
 export default async function Navbar() {
