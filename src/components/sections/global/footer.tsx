@@ -1,4 +1,3 @@
-import { NewsletterForm } from "@/components/ui/newsletter-form";
 import { get_footer_content, type FooterContent, type FooterNavLink, type FooterSocialLink } from "@/services/page_content.service";
 import { get_global_settings } from "@/services/global.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
@@ -118,7 +117,6 @@ export default async function Footer() {
                 {/* Row 1: logo + nav | newsletter */}
                 <div className="flex flex-col 2xl:flex-row items-center 2xl:items-end xl:justify-between gap-6 py-10 px-[15px] sm:px-[40px] border-b border-sah-overlay-white-15">
                     <Links nav_links={content.nav_links} logo={content.logo} light_logo_url={light_logo_url} />
-                    <NewsletterForm placeholder={content.newsletter_placeholder} button_label={content.newsletter_button_label} />
                 </div>
 
                 {/* Row 2: tagline | social */}
