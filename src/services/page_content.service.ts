@@ -166,9 +166,6 @@ export type DashboardPageContent = {
     applicant_section_label: string | null;
     applicant_apply_label: string | null;
     applicant_apply_description: string | null;
-    contractor_section_label: string | null;
-    contractor_apply_label: string | null;
-    contractor_apply_description: string | null;
     account_details_heading: string | null;
     email_field_label: string | null;
     username_field_label: string | null;

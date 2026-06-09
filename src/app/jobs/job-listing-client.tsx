@@ -124,7 +124,7 @@ export default function JobListingClient({ jobs, locations }: Props) {
                     {filtered.map((job) => (
                         <a
                             key={job.id}
-                            href={`/job/${job.slug}`}
+                            href={`/jobs/${job.slug}`}
                             className="group flex flex-col gap-4 bg-white border border-sah-light-3 hover:border-sah-red rounded-[10px] p-6 transition-all duration-300 hover:shadow-md"
                         >
                             {/* Title */}

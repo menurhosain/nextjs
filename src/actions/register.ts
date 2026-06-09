@@ -12,7 +12,6 @@ export type FormState = {
         confirmPassword?: string;
         firstName?: string;
         phone?: string;
-        register_as?: string;
     };
     serverError?: string;
     success?: boolean;
@@ -33,8 +32,6 @@ export async function register_user(_prevState: FormState, formData: FormData): 
     const password = formData.get("password") as string;
     const confirmPassword = formData.get("confirmPassword") as string;
     const phone = (formData.get("phone") as string)?.trim();
-    const register_as = (formData.get("register_as") as string)?.trim();
-
     const errors: FormState["errors"] = {};
 
     if (!firstName) errors.firstName = "First name is required.";
@@ -61,10 +58,6 @@ export async function register_user(_prevState: FormState, formData: FormData): 
 
     if (!phone) errors.phone = "Phone number is required.";
 
-    if (!register_as || !["applicant", "contractor"].includes(register_as)) {
-        errors.register_as = "Please select a role.";
-    }
-
     if (Object.keys(errors).length > 0) {
         return { errors };
     }
@@ -77,7 +70,7 @@ export async function register_user(_prevState: FormState, formData: FormData): 
         password,
         phone,
         location: (formData.get("location") as string)?.trim() || undefined,
-        type: register_as,
+        type: "applicant",
     });
 
     if (!res.ok) {

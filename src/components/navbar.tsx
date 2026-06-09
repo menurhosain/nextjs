@@ -5,7 +5,7 @@ import { BASE_URL } from "@/lib/constant";
 
 const authLinks = [
     { href: "/dashboard", label: "Dashboard" },
-    { href: "/job", label: "Apply for Recruitment" },
+    { href: "/jobs", label: "Apply for Recruitment" },
 ];
 
 export default async function Navbar() {
@@ -14,8 +14,7 @@ export default async function Navbar() {
     const user: Record<string, unknown> | null = raw ? (JSON.parse(raw) as Record<string, unknown>) : null;
     const isLoggedIn = !!user;
 
-    const visibleAuthLinks = user?.type === "contractor" ? [...authLinks.filter((l) => l.href !== "/job"), { href: "/job", label: "Apply for Contractor" }] : authLinks;
-    const links = isLoggedIn ? visibleAuthLinks : [];
+    const links = isLoggedIn ? authLinks : [];
 
     const displayName = (user?.first_name as string | undefined) ?? (user?.username as string | undefined) ?? null;
     const profilePicture = user?.profile_picture as { url: string; formats?: { thumbnail?: { url: string } } } | null | undefined;

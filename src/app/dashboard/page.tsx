@@ -88,7 +88,7 @@ export default async function DashboardPage() {
                             <p className="text-sm text-gray-500 mt-1">{profileCardDescription}</p>
                         </a>
 
-                        <a href="/job" className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+                        <a href="/jobs" className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
                             <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">{sectionLabel}</p>
                             <p className="mt-2 text-base font-semibold text-gray-900">{applyLabel}</p>
                             <p className="text-sm text-gray-500 mt-1">{applyDescription}</p>
@@ -125,7 +125,7 @@ export default async function DashboardPage() {
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
                             <h3 className="text-sm font-semibold text-gray-700">{applicationsHeading}</h3>
-                            <a href="/job" className="text-xs text-gray-500 hover:text-gray-900 underline underline-offset-2">
+                            <a href="/jobs" className="text-xs text-gray-500 hover:text-gray-900 underline underline-offset-2">
                                 {newApplicationLabel}
                             </a>
                         </div>
@@ -133,7 +133,7 @@ export default async function DashboardPage() {
                         {applications.length === 0 ? (
                             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
                                 <p className="text-sm text-gray-500">{emptyStateText}</p>
-                                <a href="/job" className="inline-block mt-3 text-sm font-medium text-gray-900 underline underline-offset-2">
+                                <a href="/jobs" className="inline-block mt-3 text-sm font-medium text-gray-900 underline underline-offset-2">
                                     {emptyStateLinkLabel}
                                 </a>
                             </div>

@@ -28,10 +28,10 @@ const STATIC_NAV_LINKS = [
             cta: { label: "GET TO KNOW US", href: "/about-us" },
         },
         promo: {
-            title: "Become a Subcontractor",
+            title: "View Jobs",
             excerpt: "With expertise spanning planning, execution, and project delivery, we provide market needs.",
             image: "/menu/1.jpg",
-            cta: { label: "Learn How", href: "/become-a-subcontractor" },
+            cta: { label: "Learn How", href: "/jobs" },
         },
         submenus: [
             {
@@ -369,10 +369,10 @@ export function NavActions({
 
                 {/* CTA button */}
                 <a
-                    href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/become-a-subcontractor")}
+                    href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/jobs")}
                     className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
                 >
-                    {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "Become a Subcontractor")}
+                    {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "View Jobs")}
                     <AngleArrow class_name="!w-[10px] !h-[10px]" />
                 </a>
 
@@ -497,10 +497,10 @@ export function NavActions({
 
                                 <div className="py-8">
                                     <a
-                                        href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/become-a-subcontractor")}
+                                        href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/jobs")}
                                         className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px] max-[640px]:text-[14px] max-[380px]:text-[12px] max-[640px]:px-[10px]"
                                     >
-                                        {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "Become a Subcontractor")}
+                                        {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "View Jobs")}
                                         <AngleArrow class_name="!w-[10px] !h-[10px]" />
                                     </a>
                                 </div>
