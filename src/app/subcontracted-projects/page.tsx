@@ -12,10 +12,7 @@ export const metadata: Metadata = { title: "Subcontracted Projects" };
 export default async function SubcontractedProjectsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
 
-    const [items, cms] = await Promise.all([
-        get_subcontracteds(locale),
-        get_subcontracted_projects_page_content(locale),
-    ]);
+    const [items, cms] = await Promise.all([get_subcontracteds(locale), get_subcontracted_projects_page_content(locale)]);
 
     const locationMap = new Map<string, SubcontractedLocation>();
     for (const item of items) {

@@ -138,7 +138,7 @@ export default async function DashboardPage() {
                                     >
                                         <div className="space-y-1">
                                             <p className="text-sm font-semibold text-gray-900">
-                                                {app.applied_subcontracted?.title ?? app.companyName}
+                                                {app.applied_on_project?.title ?? app.companyName}
                                             </p>
                                             <p className="text-xs text-gray-500">{app.companyName} · {app.email}</p>
                                             {app.location && (

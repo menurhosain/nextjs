@@ -66,14 +66,14 @@ export default async function ContractorApplicationDetailPage({ params }: { para
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                             <div>
                                 <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-1">Contractor Application</p>
-                                <h1 className="text-xl font-semibold text-gray-900">{app.applied_subcontracted?.title ?? app.companyName}</h1>
+                                <h1 className="text-xl font-semibold text-gray-900">{app.applied_on_project?.title ?? app.companyName}</h1>
                                 <p className="text-sm text-gray-500 mt-1">{app.companyName}</p>
                             </div>
                             <StatusBadge label={app.label} />
                         </div>
 
                         <div className="divide-y divide-gray-100">
-                            {app.applied_subcontracted && <Field label="Project" value={app.applied_subcontracted.title} />}
+                            {app.applied_on_project && <Field label="Project" value={app.applied_on_project.title} />}
                             <Field label="Company" value={app.companyName} />
                             <Field label="Email" value={app.email} />
                             <Field label="Phone" value={app.phone} />
