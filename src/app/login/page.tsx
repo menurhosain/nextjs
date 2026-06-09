@@ -12,9 +12,9 @@ export default async function LoginPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
     const page = await get_login_page_content(locale);
 
-    const bg       = getStrapiMediaUrl(page?.banner?.banner_bg) || "/home-hero.mp4";
+    const bg = getStrapiMediaUrl(page?.banner?.banner_bg) || "/home-hero.mp4";
     const subtitle = page?.banner?.banner_label || "Building Trust And Excellence";
-    const title    = page?.banner?.banner_title  || "Building Trust Through Quality Construction";
+    const title = page?.banner?.banner_title || "Building Trust Through Quality Construction";
 
     return (
         <>
@@ -31,9 +31,7 @@ export default async function LoginPage() {
 
             <div className="py-[80px] lg:py-[150px] flex items-center justify-center bg-gray-50 px-4">
                 <div className="w-full max-w-sm bg-white rounded-2xl shadow-md p-6 sm:p-8">
-                    <h1 className="text-[24px] sm:text-2xl font-bold text-gray-900 mb-6">
-                        {page?.form_title || "Sign in"}
-                    </h1>
+                    <h1 className="text-[24px] sm:text-2xl font-bold text-gray-900 mb-6">{page?.form_title || "Sign in"}</h1>
                     <LoginForm
                         email_label={page?.email_label}
                         email_placeholder={page?.email_placeholder}
