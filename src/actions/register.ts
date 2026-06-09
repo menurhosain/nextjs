@@ -73,7 +73,6 @@ export async function register_user(_prevState: FormState, formData: FormData): 
         location: (formData.get("location") as string)?.trim() || undefined,
         type: "subcontractor",
     });
-    console.log(res);
 
     if (!res.ok) {
         const body = await res.json().catch(() => null);

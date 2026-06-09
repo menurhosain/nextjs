@@ -21,6 +21,10 @@ export async function proxy(request: NextRequest) {
     PROTECTED_ROUTES.some((r) => pathname.startsWith(r)) ||
     isSubcontractedApply;
 
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL("/subcontracted-projects", request.nextUrl));
+  }
+
   const user = jwt ? await verify_jwt(jwt) : null;
 
   const locale = request.cookies.get("locale")?.value ?? "en";
