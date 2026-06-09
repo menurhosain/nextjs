@@ -1,5 +1,35 @@
 import { BASE_URL } from "@/lib/constant";
 
+export type StrapiMedia = { url: string; alternativeText?: string | null };
+
+// Subcontracted Projects Page
+export type SubcontractedProjectsPageContent = {
+    banner: { banner_label: string | null; banner_title: string | null; banner_bg: StrapiMedia | null } | null;
+    search_placeholder: string | null;
+    all_locations_label: string | null;
+    result_singular_label: string | null;
+    result_plural_label: string | null;
+    no_results_text: string | null;
+    empty_state_text: string | null;
+    detail_banner: { banner_label: string | null; banner_title: string | null; banner_bg: StrapiMedia | null } | null;
+    experience_label: string | null;
+    deadline_label: string | null;
+    location_label: string | null;
+    apply_button_label: string | null;
+    no_details_text: string | null;
+};
+
+export async function get_subcontracted_projects_page_content(locale = "en"): Promise<SubcontractedProjectsPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/subcontracted-projects-page?locale=${locale}&populate[banner][populate]=*&populate[detail_banner][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 export type StrapiMediaFormat = {
     ext: string;
     url: string;

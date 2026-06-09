@@ -47,9 +47,14 @@ function SearchIcon() {
 type Props = {
     items: Subcontracted[];
     locations: SubcontractedLocation[];
+    searchPlaceholder: string;
+    allLocationsLabel: string;
+    resultSingularLabel: string;
+    resultPluralLabel: string;
+    noResultsText: string;
 };
 
-export default function SubcontractedListingClient({ items, locations }: Props) {
+export default function SubcontractedListingClient({ items, locations, searchPlaceholder, allLocationsLabel, resultSingularLabel, resultPluralLabel, noResultsText }: Props) {
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState("");
     const [locationFilter, setLocationFilter] = useState("");
@@ -82,7 +87,7 @@ export default function SubcontractedListingClient({ items, locations }: Props) 
                         type="text"
                         value={search}
                         onChange={(e) => handleSearch(e.target.value)}
-                        placeholder="Search by title..."
+                        placeholder={searchPlaceholder}
                         className="w-full h-[48px] pl-10 pr-4 rounded-[8px] border border-sah-light-3 bg-white text-[15px] text-sah-dark-2 placeholder:text-sah-gray-2 outline-none focus:border-sah-red transition-colors duration-200"
                     />
                 </div>
@@ -94,7 +99,7 @@ export default function SubcontractedListingClient({ items, locations }: Props) 
                         onChange={(e) => setLocationFilter(e.target.value)}
                         className="w-full h-[48px] pl-4 pr-8 rounded-[8px] border border-sah-light-3 bg-white text-[15px] text-sah-dark-2 outline-none focus:border-sah-red appearance-none cursor-pointer transition-colors duration-200"
                     >
-                        <option value="">All Locations</option>
+                        <option value="">{allLocationsLabel}</option>
                         {locations.map((loc) => (
                             <option key={loc.id} value={loc.slug}>
                                 {loc.name}
@@ -111,13 +116,13 @@ export default function SubcontractedListingClient({ items, locations }: Props) 
 
             {/* Results count */}
             <p className="text-[14px] text-sah-gray-2 font-medium mb-5">
-                {filtered.length} {filtered.length === 1 ? "project" : "projects"} found
+                {filtered.length} {filtered.length === 1 ? resultSingularLabel : resultPluralLabel} found
             </p>
 
             {/* Cards */}
             {filtered.length === 0 ? (
                 <div className="text-center py-20">
-                    <p className="text-[18px] font-medium text-sah-gray-2">No projects match your search.</p>
+                    <p className="text-[18px] font-medium text-sah-gray-2">{noResultsText}</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
