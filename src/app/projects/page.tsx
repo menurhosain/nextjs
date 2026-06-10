@@ -5,36 +5,26 @@ import Banner_Title from "@/components/ui/banner-title";
 import { get_auto_search_suggestions } from "@/services/auto_search_suggestion.service";
 import { get_locations } from "@/services/location.service";
 import { get_projects_page_content } from "@/services/page_content.service";
-import type { SubcontractedLocation } from "@/services/subcontracted.service";
 import { get_subcontracteds } from "@/services/subcontracted.service";
 import JobSearchBar from "./job-search-bar";
 import SubcontractedListingClient from "./subcontracted-listing-client";
 
 export const metadata: Metadata = { title: "Subcontracted Projects" };
 
-export default async function SubcontractedProjectsPage() {
+export default async function SubcontractedProjectsPage({ searchParams }: { searchParams: Promise<{ q?: string; location?: string }> }) {
     const locale = (await headers()).get("x-locale") ?? "en";
+    const { q, location } = await searchParams;
 
     const [items, cms, all_locations, auto_suggestions] = await Promise.all([
-        get_subcontracteds(locale),
+        get_subcontracteds(locale, { q, location }),
         get_projects_page_content(locale),
         get_locations(locale),
         get_auto_search_suggestions(locale),
     ]);
 
-    const locationMap = new Map<string, SubcontractedLocation>();
-    for (const item of items) {
-        for (const loc of item.locations ?? []) {
-            if (!locationMap.has(loc.slug)) locationMap.set(loc.slug, loc);
-        }
-    }
-    const locations = Array.from(locationMap.values());
-
     const content = {
         banner_subtitle: cms?.banner?.banner_label ?? "Explore Opportunities",
         banner_title: cms?.banner?.banner_title ?? "Projects",
-        search_placeholder: cms?.search_placeholder ?? "Search by title...",
-        all_locations_label: cms?.all_locations_label ?? "All Locations",
         result_singular_label: cms?.result_singular_label ?? "project",
         result_plural_label: cms?.result_plural_label ?? "projects",
         result_found_label: cms?.result_found_label ?? "found",
@@ -65,18 +55,14 @@ export default async function SubcontractedProjectsPage() {
                 <div className="container !px-[50px] max-[1024px]:!px-4 pt-[80px] lg:pt-[120px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
                     {items.length === 0 ? (
                         <div className="text-center py-20">
-                            <p className="text-[20px] font-medium text-sah-gray-2">{content.empty_state_text}</p>
+                            <p className="text-[20px] font-medium text-sah-gray-2">{q || location ? content.no_results_text : content.empty_state_text}</p>
                         </div>
                     ) : (
                         <SubcontractedListingClient
                             items={items}
-                            locations={locations}
-                            searchPlaceholder={content.search_placeholder}
-                            allLocationsLabel={content.all_locations_label}
                             resultSingularLabel={content.result_singular_label}
                             resultPluralLabel={content.result_plural_label}
                             resultFoundLabel={content.result_found_label}
-                            noResultsText={content.no_results_text}
                         />
                     )}
                 </div>

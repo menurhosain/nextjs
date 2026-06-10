@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
-import type { Subcontracted, SubcontractedLocation } from "@/services/subcontracted.service";
+import type { Subcontracted } from "@/services/subcontracted.service";
 
 export function MapPinIcon() {
     return (
@@ -46,88 +45,22 @@ export function SearchIcon() {
 
 type Props = {
     items: Subcontracted[];
-    locations: SubcontractedLocation[];
-    searchPlaceholder: string;
-    allLocationsLabel: string;
     resultSingularLabel: string;
     resultPluralLabel: string;
     resultFoundLabel: string;
-    noResultsText: string;
 };
 
-export default function SubcontractedListingClient({ items, locations, searchPlaceholder, allLocationsLabel, resultSingularLabel, resultPluralLabel, resultFoundLabel, noResultsText }: Props) {
-    const [search, setSearch] = useState("");
-    const [query, setQuery] = useState("");
-    const [locationFilter, setLocationFilter] = useState("");
-    const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-    function handleSearch(value: string) {
-        setSearch(value);
-        if (debounceRef.current) clearTimeout(debounceRef.current);
-        debounceRef.current = setTimeout(() => setQuery(value), 300);
-    }
-
-    const filtered = useMemo(() => {
-        return items.filter((item) => {
-            const matchesTitle = query === "" || item.title.toLowerCase().includes(query.toLowerCase());
-            const matchesLocation = locationFilter === "" || (item.locations ?? []).some((l) => l.slug === locationFilter);
-            return matchesTitle && matchesLocation;
-        });
-    }, [items, query, locationFilter]);
-
+export default function SubcontractedListingClient({ items, resultSingularLabel, resultPluralLabel, resultFoundLabel }: Props) {
     return (
         <div>
-            {/* Filters */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                {/* Search */}
-                <div className="relative flex-1">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sah-gray-2 pointer-events-none">
-                        <SearchIcon />
-                    </span>
-                    <input
-                        type="text"
-                        value={search}
-                        onChange={(e) => handleSearch(e.target.value)}
-                        placeholder={searchPlaceholder}
-                        className="w-full h-[48px] pl-10 pr-4 rounded-[8px] border border-sah-light-3 bg-white text-[15px] text-sah-dark-2 placeholder:text-sah-gray-2 outline-none focus:border-sah-red transition-colors duration-200"
-                    />
-                </div>
-
-                {/* Location select */}
-                <div className="relative sm:w-[220px]">
-                    <select
-                        value={locationFilter}
-                        onChange={(e) => setLocationFilter(e.target.value)}
-                        className="w-full h-[48px] pl-4 pr-8 rounded-[8px] border border-sah-light-3 bg-white text-[15px] text-sah-dark-2 outline-none focus:border-sah-red appearance-none cursor-pointer transition-colors duration-200"
-                    >
-                        <option value="">{allLocationsLabel}</option>
-                        {locations.map((loc) => (
-                            <option key={loc.id} value={loc.slug}>
-                                {loc.name}
-                            </option>
-                        ))}
-                    </select>
-                    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sah-gray-2">
-                        <svg viewBox="0 0 11 6" className="w-[10px] fill-current">
-                            <path d="M9.21967 0.21967C9.51256 -0.0732233 9.98732 -0.0732233 10.2802 0.21967C10.5731 0.512563 10.5731 0.987324 10.2802 1.28022L5.78022 5.78022C5.48732 6.07311 5.01256 6.07311 4.71967 5.78022L0.21967 1.28022C-0.0732233 0.987324 -0.0732233 0.512563 0.21967 0.21967C0.512563 -0.0732233 0.987324 -0.0732233 1.28022 0.21967L5.24994 4.1894L9.21967 0.21967Z" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-
             {/* Results count */}
             <p className="text-[14px] text-sah-gray-2 font-medium mb-5">
-                {filtered.length} {filtered.length === 1 ? resultSingularLabel : resultPluralLabel} {resultFoundLabel}
+                {items.length} {items.length === 1 ? resultSingularLabel : resultPluralLabel} {resultFoundLabel}
             </p>
 
             {/* Cards */}
-            {filtered.length === 0 ? (
-                <div className="text-center py-20">
-                    <p className="text-[18px] font-medium text-sah-gray-2">{noResultsText}</p>
-                </div>
-            ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-                    {filtered.map((item) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                {items.map((item) => (
                         <a
                             key={item.id}
                             href={`/projects/${item.slug}`}
@@ -163,10 +96,9 @@ export default function SubcontractedListingClient({ items, locations, searchPla
                                     </div>
                                 )}
                             </div>
-                        </a>
-                    ))}
-                </div>
-            )}
+                    </a>
+                ))}
+            </div>
         </div>
     );
 }

@@ -22,6 +22,16 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
     const [location_query, set_location_query] = useState(search_params.get("location") ?? "");
     const [show_location_suggestions, set_show_location_suggestions] = useState(false);
 
+    const matches_word_start = (suggestion: string, query: string) => {
+        const q = query.trim().toLowerCase();
+        if (!q) return true;
+        const text = suggestion.toLowerCase();
+        return text.startsWith(q) || text.split(/[\s,]+/).some((word) => word.startsWith(q));
+    };
+
+    const filtered_search_suggestions = searchSuggestions.filter((s) => matches_word_start(s, job_query));
+    const filtered_location_suggestions = locationSuggestions.filter((s) => matches_word_start(s, location_query));
+
     const update_url = (q: string, location: string) => {
         const params = new URLSearchParams(search_params.toString());
         if (q.trim()) params.set("q", q.trim());
@@ -46,11 +56,11 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                     className="w-full bg-transparent text-[16px] text-sah-dark-2 placeholder:text-sah-gray-2 outline-none"
                 />
 
-                {show_suggestions && searchSuggestions.length > 0 && (
+                {show_suggestions && filtered_search_suggestions.length > 0 && (
                     <div className="absolute start-0 top-full z-50 mt-4 w-full rounded-[12px] border border-sah-light-3 bg-sah-white py-4 shadow-[0_8px_24px_rgba(0,0,0,0.15)]">
                         <p className="px-5 pb-3 text-[14px] font-bold text-sah-dark-2">Search suggestions</p>
                         <ul className="max-h-[320px] overflow-y-auto no-scrollbar">
-                            {searchSuggestions.map((suggestion) => (
+                            {filtered_search_suggestions.map((suggestion) => (
                                 <li key={suggestion}>
                                     <button
                                         type="button"
@@ -89,11 +99,11 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                     className="w-full bg-transparent text-[16px] text-sah-dark-2 placeholder:text-sah-gray-2 outline-none"
                 />
 
-                {show_location_suggestions && locationSuggestions.length > 0 && (
+                {show_location_suggestions && filtered_location_suggestions.length > 0 && (
                     <div className="absolute start-0 top-full z-50 mt-4 w-full rounded-[12px] border border-sah-light-3 bg-sah-white py-4 shadow-[0_8px_24px_rgba(0,0,0,0.15)]">
                         <p className="px-5 pb-3 text-[14px] font-bold text-sah-dark-2">Location suggestions</p>
                         <ul className="max-h-[320px] overflow-y-auto no-scrollbar">
-                            {locationSuggestions.map((suggestion) => (
+                            {filtered_location_suggestions.map((suggestion) => (
                                 <li key={suggestion}>
                                     <button
                                         type="button"
