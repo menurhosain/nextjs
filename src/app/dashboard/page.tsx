@@ -140,10 +140,9 @@ export default async function DashboardPage() {
                                             <p className="text-sm font-semibold text-gray-900">
                                                 {app.applied_on_project?.title ?? app.companyName}
                                             </p>
-                                            <p className="text-xs text-gray-500">{app.companyName} · {app.email}</p>
-                                            {app.location && (
-                                                <p className="text-xs text-gray-400">{locationLabel}: {app.location}</p>
-                                            )}
+                                            <p className="text-xs text-gray-500">{app.fullName} · {app.title}</p>
+                                            <p className="text-xs text-gray-400">{app.companyName} · {app.city}, {app.country}</p>
+                                            {app.mainTrades && <p className="text-xs text-gray-400">{app.mainTrades}</p>}
                                         </div>
                                         <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
                                             {app.label && <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">{app.label}</span>}

@@ -74,11 +74,23 @@ export default async function ContractorApplicationDetailPage({ params }: { para
 
                         <div className="divide-y divide-gray-100">
                             {app.applied_on_project && <Field label="Project" value={app.applied_on_project.title} />}
-                            <Field label="Company" value={app.companyName} />
+                            <Field label="Full Name" value={app.fullName} />
+                            <Field label="Title" value={app.title} />
+                            <Field label="Phone Number" value={app.phone} />
                             <Field label="Email" value={app.email} />
-                            <Field label="Phone" value={app.phone} />
-                            <Field label="Location" value={app.location} />
-                            <Field label="Experience" value={app.experienceYears != null ? `${app.experienceYears} years` : null} />
+                            <Field label="Legal Name of Company" value={app.companyName} />
+                            <Field label="Registration Number (CR)" value={app.registrationNumber} />
+                            <Field label="Founding Year" value={app.foundingYear} />
+                            <Field label="Main Trades / Activities" value={app.mainTrades} />
+                            <Field label="Country" value={app.country} />
+                            <Field label="State / Province" value={app.state} />
+                            <Field label="City" value={app.city} />
+                            <Field label="Address" value={app.address} />
+                            <Field label="Postal Code" value={app.postalCode} />
+                            <Field label="Company Phone Number" value={app.companyPhone} />
+                            {app.ext && <Field label="Ext" value={app.ext} />}
+                            <Field label="Tax ID" value={app.taxId} />
+                            <Field label="Description" value={app.description} />
                             <Field label="Applied on" value={appliedDate} />
                         </div>
 
