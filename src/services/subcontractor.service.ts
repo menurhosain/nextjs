@@ -25,11 +25,23 @@ async function upload_files(files: File[], jwt: string): Promise<number[]> {
 export type Subcontractor = {
     id: number;
     documentId: string;
-    companyName: string;
+    fullName: string;
+    title: string;
+    phone: string;
     email: string;
-    phone?: string;
-    location?: string;
-    experienceYears?: number;
+    companyName: string;
+    registrationNumber: string;
+    foundingYear: number;
+    mainTrades: string;
+    country: string;
+    state: string;
+    city: string;
+    address: string;
+    postalCode: string;
+    companyPhone: string;
+    ext?: string;
+    taxId: string;
+    description: string;
     label?: string;
     appliedAt: string;
     documents?: StrapiFile[];
@@ -77,12 +89,24 @@ export async function get_subcontractor_by_document_id(documentId: string, jwt: 
 }
 
 type SubcontractorPayload = {
-    companyName: string;
+    fullName: string;
+    title: string;
+    phone: string;
     email: string;
-    phone?: string;
-    location?: string;
-    experienceYears?: number;
+    companyName: string;
+    registrationNumber: string;
+    foundingYear: number;
+    mainTrades: string;
+    country: string;
+    state: string;
+    city: string;
+    address: string;
+    postalCode: string;
+    companyPhone: string;
+    ext?: string;
+    taxId: string;
     documents: File[];
+    description: string;
     subcontractedSlug?: string;
 };
 
@@ -97,12 +121,24 @@ export async function submit_contractor_application(payload: SubcontractorPayloa
         },
         body: JSON.stringify({
             data: {
-                companyName: payload.companyName,
+                fullName: payload.fullName,
+                title: payload.title,
+                phone: payload.phone,
                 email: payload.email,
-                phone: payload.phone ?? null,
-                location: payload.location ?? null,
-                experienceYears: payload.experienceYears ?? null,
+                companyName: payload.companyName,
+                registrationNumber: payload.registrationNumber,
+                foundingYear: payload.foundingYear,
+                mainTrades: payload.mainTrades,
+                country: payload.country,
+                state: payload.state,
+                city: payload.city,
+                address: payload.address,
+                postalCode: payload.postalCode,
+                companyPhone: payload.companyPhone,
+                ext: payload.ext ?? null,
+                taxId: payload.taxId,
                 documents: documentIds,
+                description: payload.description,
                 ...(payload.subcontractedSlug && { subcontractedSlug: payload.subcontractedSlug }),
             },
         }),

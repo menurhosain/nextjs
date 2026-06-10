@@ -6,6 +6,7 @@ import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { get_apply_contractor_content } from "@/services/subcontractor_apply.service";
 import { get_subcontracted_by_slug } from "@/services/subcontracted.service";
+import { get_global_settings } from "@/services/global.service";
 import { getStrapiMediaUrl } from "@/lib/utils";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -20,7 +21,7 @@ export default async function ApplyForSubcontractedPage({ params }: { params: Pr
     const { slug } = await params;
     const headersList = await headers();
     const locale = headersList.get("x-locale") ?? "en";
-    const [item, content] = await Promise.all([get_subcontracted_by_slug(slug, locale), get_apply_contractor_content(locale)]);
+    const [item, content, global] = await Promise.all([get_subcontracted_by_slug(slug, locale), get_apply_contractor_content(locale), get_global_settings()]);
 
     if (!item) notFound();
 
@@ -49,7 +50,7 @@ export default async function ApplyForSubcontractedPage({ params }: { params: Pr
                             <p className="text-red-100 text-[17px] mt-2">{content?.form_subtitle || "Submit your company details and supporting documents."}</p>
                         </div>
 
-                        <ApplyForm content={content} subcontractedSlug={item.slug} />
+                        <ApplyForm content={content} subcontractedSlug={item.slug} recaptcha_site_key={global?.recaptcha_site_key ?? ""} />
                     </div>
                 </div>
             </section>
