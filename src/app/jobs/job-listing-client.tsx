@@ -29,9 +29,31 @@ function CalendarIcon() {
     );
 }
 
-type Props = { jobs: Job[] };
+type Props = {
+    jobs: Job[];
+    result_singular_label?: string | null;
+    result_plural_label?: string | null;
+    result_found_label?: string | null;
+    employment_type_label?: string | null;
+    experience_label?: string | null;
+    deadline_label?: string | null;
+    location_label?: string | null;
+    apply_button_label?: string | null;
+    no_details_text?: string | null;
+};
 
-export default function JobListingClient({ jobs }: Props) {
+export default function JobListingClient({
+    jobs,
+    result_singular_label,
+    result_plural_label,
+    result_found_label,
+    employment_type_label,
+    experience_label,
+    deadline_label,
+    location_label,
+    apply_button_label,
+    no_details_text,
+}: Props) {
     const [cur_job, set_cur_job] = useState(jobs[0]);
 
     useEffect(() => {
@@ -43,7 +65,7 @@ export default function JobListingClient({ jobs }: Props) {
             {/* Left column — 30% listing */}
             <div className="w-[30%] shrink-0">
                 <p className="text-[14px] text-sah-gray-2 font-medium mb-5">
-                    {jobs.length} {jobs.length === 1 ? "position" : "positions"} found
+                    {jobs.length} {jobs.length === 1 ? (result_singular_label ?? "position") : (result_plural_label ?? "positions")} {result_found_label ?? "found"}
                 </p>
 
                 <div className="grid grid-cols-1 gap-5">
@@ -106,19 +128,19 @@ export default function JobListingClient({ jobs }: Props) {
                                 <div className="flex flex-wrap gap-x-[50px]">
                                     {cur_job?.employment_status && (
                                         <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">Employment Type</span>
+                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{employment_type_label ?? "Employment Type"}</span>
                                             <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{cur_job.employment_status}</p>
                                         </div>
                                     )}
                                     {cur_job?.experience && (
                                         <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">Experience</span>
+                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{experience_label ?? "Experience"}</span>
                                             <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{cur_job.experience}</p>
                                         </div>
                                     )}
                                     {cur_job?.deadline && (
                                         <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">Application Deadline</span>
+                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{deadline_label ?? "Application Deadline"}</span>
                                             <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">
                                                 {new Date(cur_job.deadline).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
                                             </p>
@@ -126,7 +148,7 @@ export default function JobListingClient({ jobs }: Props) {
                                     )}
                                     {cur_job?.locations && cur_job.locations.length > 0 && (
                                         <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">Location</span>
+                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{location_label ?? "Location"}</span>
                                             <div className="flex flex-wrap gap-2">
                                                 {cur_job.locations.map((loc) => (
                                                     <p key={loc.id} className="text-[18px] font-semibold text-sah-dark-2 mt-1">{loc.name}</p>
@@ -139,7 +161,7 @@ export default function JobListingClient({ jobs }: Props) {
                                         href={`/apply-for-recrutement/${cur_job?.slug}`}
                                         className="inline-flex w-[200px] items-center justify-center gap-2 bg-sah-dark-2 text-white text-[16px] font-medium px-8 py-2 rounded-[8px] hover:bg-sah-red transition-colors duration-300 my-4"
                                     >
-                                        Apply Now
+                                        {apply_button_label ?? "Apply Now"}
                                     </a>
                                 </div>
                             </aside>
@@ -150,7 +172,7 @@ export default function JobListingClient({ jobs }: Props) {
                                         <BlocksRenderer content={cur_job.details} />
                                     </div>
                                 ) : (
-                                    <p className="text-sah-gray-2 text-[16px] leading-[28px]">No details available for this position.</p>
+                                    <p className="text-sah-gray-2 text-[16px] leading-[28px]">{no_details_text ?? "No details available for this position."}</p>
                                 )}
                             </div>
                         </div>

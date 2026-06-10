@@ -20,9 +20,25 @@ function PinIcon() {
     );
 }
 
-type Props = { searchSuggestions: string[]; locationSuggestions: string[] };
+type Props = {
+    searchSuggestions: string[];
+    locationSuggestions: string[];
+    search_placeholder?: string | null;
+    search_suggestions_label?: string | null;
+    location_placeholder?: string | null;
+    location_suggestions_label?: string | null;
+    search_button_label?: string | null;
+};
 
-export default function JobSearchBar({ searchSuggestions, locationSuggestions }: Props) {
+export default function JobSearchBar({
+    searchSuggestions,
+    locationSuggestions,
+    search_placeholder,
+    search_suggestions_label,
+    location_placeholder,
+    location_suggestions_label,
+    search_button_label,
+}: Props) {
     const router = useRouter();
     const pathname = usePathname();
     const search_params = useSearchParams();
@@ -62,13 +78,13 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                     onChange={(e) => set_job_query(e.target.value)}
                     onFocus={() => set_show_suggestions(true)}
                     onBlur={() => set_show_suggestions(false)}
-                    placeholder="Job title, keywords, or company"
+                    placeholder={search_placeholder ?? "Job title, keywords, or company"}
                     className="w-full bg-transparent text-[16px] text-sah-dark-2 placeholder:text-sah-gray-2 outline-none"
                 />
 
                 {show_suggestions && filtered_search_suggestions.length > 0 && (
                     <div className="absolute start-0 top-full z-50 mt-4 w-full rounded-[12px] border border-sah-light-3 bg-sah-white py-4 shadow-[0_8px_24px_rgba(0,0,0,0.15)]">
-                        <p className="px-5 pb-3 text-[14px] font-bold text-sah-dark-2">Search suggestions</p>
+                        <p className="px-5 pb-3 text-[14px] font-bold text-sah-dark-2">{search_suggestions_label ?? "Search suggestions"}</p>
                         <ul className="max-h-[320px] overflow-y-auto no-scrollbar">
                             {filtered_search_suggestions.map((suggestion) => (
                                 <li key={suggestion}>
@@ -102,13 +118,13 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                     onChange={(e) => set_location_query(e.target.value)}
                     onFocus={() => set_show_location_suggestions(true)}
                     onBlur={() => set_show_location_suggestions(false)}
-                    placeholder='City, state, zip code, or "remote"'
+                    placeholder={location_placeholder ?? 'City, state, zip code, or "remote"'}
                     className="w-full bg-transparent text-[16px] text-sah-dark-2 placeholder:text-sah-gray-2 outline-none"
                 />
 
                 {show_location_suggestions && filtered_location_suggestions.length > 0 && (
                     <div className="absolute start-0 top-full z-50 mt-4 w-full rounded-[12px] border border-sah-light-3 bg-sah-white py-4 shadow-[0_8px_24px_rgba(0,0,0,0.15)]">
-                        <p className="px-5 pb-3 text-[14px] font-bold text-sah-dark-2">Location suggestions</p>
+                        <p className="px-5 pb-3 text-[14px] font-bold text-sah-dark-2">{location_suggestions_label ?? "Location suggestions"}</p>
                         <ul className="max-h-[320px] overflow-y-auto no-scrollbar">
                             {filtered_location_suggestions.map((suggestion) => (
                                 <li key={suggestion}>
@@ -136,7 +152,7 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                 onClick={() => update_url(job_query, location_query)}
                 className="shrink-0 rounded-full bg-sah-red px-8 py-2.5 text-[16px] font-semibold text-sah-white sah-transition hover:bg-sah-coral md:ms-4"
             >
-                Search
+                {search_button_label ?? "Search"}
             </button>
         </div>
     );

@@ -155,6 +155,37 @@ export async function get_forget_password_page_content(locale = "en"): Promise<F
     }
 }
 
+// Jobs Page
+export type JobsPageContent = {
+    banner: { banner_label: string | null; banner_title: string | null; banner_bg: StrapiMedia | null } | null;
+    search_placeholder: string | null;
+    search_suggestions_label: string | null;
+    location_placeholder: string | null;
+    location_suggestions_label: string | null;
+    search_button_label: string | null;
+    result_singular_label: string | null;
+    result_plural_label: string | null;
+    result_found_label: string | null;
+    employment_type_label: string | null;
+    experience_label: string | null;
+    deadline_label: string | null;
+    location_label: string | null;
+    apply_button_label: string | null;
+    no_details_text: string | null;
+    no_results_text: string | null;
+    empty_state_text: string | null;
+};
+export async function get_jobs_page_content(locale = "en"): Promise<JobsPageContent | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/api/jobs-page?locale=${locale}&populate[banner][populate]=*`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // Dashboard Page
 export type DashboardPageContent = {
     banner: { banner_label: string | null; banner_title: string | null; banner_bg: StrapiMedia | null } | null;
