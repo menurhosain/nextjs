@@ -51,6 +51,7 @@ export async function get_jobs(locale = "en", search?: { q?: string; location?: 
             deadline: item.deadline ?? null,
             experience: item.experience ?? null,
             employment_status: item.employment_status ?? null,
+            details: item.details ?? null,
         }));
     } catch {
         return [];
