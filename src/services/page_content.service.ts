@@ -10,6 +10,11 @@ export type ProjectsPageContent = {
     result_found_label: string | null;
     no_results_text: string | null;
     empty_state_text: string | null;
+    experience_label: string | null;
+    deadline_label: string | null;
+    location_label: string | null;
+    apply_button_label: string | null;
+    no_details_text: string | null;
 };
 
 export async function get_projects_page_content(locale = "en"): Promise<ProjectsPageContent | null> {

@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { SearchIcon } from "./subcontracted-listing-client";
+import { ProjectsPageContent } from "@/services/page_content.service";
 
 function PinIcon() {
     return (
@@ -12,7 +13,7 @@ function PinIcon() {
     );
 }
 
-export default function JobSearchBar({ searchSuggestions, locationSuggestions }: { searchSuggestions: string[]; locationSuggestions: string[] }) {
+export default function JobSearchBar({ searchSuggestions, locationSuggestions, content }: { searchSuggestions: string[]; locationSuggestions: string[]; content: ProjectsPageContent }) {
     const router = useRouter();
     const pathname = usePathname();
     const search_params = useSearchParams();
@@ -52,7 +53,7 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                     onChange={(e) => set_job_query(e.target.value)}
                     onFocus={() => set_show_suggestions(true)}
                     onBlur={() => set_show_suggestions(false)}
-                    placeholder="Job title, keywords, or company"
+                    placeholder={content.search_placeholder ?? "Job title, keywords, or company"}
                     className="w-full bg-transparent text-[16px] text-sah-dark-2 placeholder:text-sah-gray-2 outline-none"
                 />
 
@@ -68,7 +69,7 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                                         onClick={() => {
                                             set_job_query(suggestion);
                                             set_show_suggestions(false);
-                                            update_url(suggestion, location_query);
+                                            // update_url(suggestion, location_query);
                                         }}
                                         className="flex w-full items-center gap-4 px-5 py-2.5 text-start text-[15px] text-sah-dark-2 hover:bg-sah-light-4 sah-transition"
                                     >
@@ -95,7 +96,7 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                     onChange={(e) => set_location_query(e.target.value)}
                     onFocus={() => set_show_location_suggestions(true)}
                     onBlur={() => set_show_location_suggestions(false)}
-                    placeholder={'City, state, zip code, or "remote"'}
+                    placeholder={content.all_locations_label ?? 'City, state, zip code, or "remote"'}
                     className="w-full bg-transparent text-[16px] text-sah-dark-2 placeholder:text-sah-gray-2 outline-none"
                 />
 
@@ -111,7 +112,7 @@ export default function JobSearchBar({ searchSuggestions, locationSuggestions }:
                                         onClick={() => {
                                             set_location_query(suggestion);
                                             set_show_location_suggestions(false);
-                                            update_url(job_query, suggestion);
+                                            // update_url(job_query, suggestion);
                                         }}
                                         className="flex w-full items-center gap-4 px-5 py-2.5 text-start text-[15px] text-sah-dark-2 hover:bg-sah-light-4 sah-transition"
                                     >

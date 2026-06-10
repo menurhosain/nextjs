@@ -48,6 +48,7 @@ export async function get_subcontracteds(locale = "en", search?: { q?: string; l
             locations: item.locations ?? [],
             deadline: item.deadline ?? null,
             experience: item.experience ?? null,
+            details: item.details,
         }));
     } catch {
         return [];
