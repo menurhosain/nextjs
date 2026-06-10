@@ -2,14 +2,16 @@ import { BASE_URL } from "@/lib/constant";
 import { upload_file } from "@/services/upload.service";
 
 type ApplicantPayload = {
-    firstName: string;
-    lastName: string;
+    fullName: string;
+    currentLocation: string;
+    gccExperience: "yes" | "no";
     email: string;
-    phone?: string;
-    cvFile: File;
-    skills?: string;
-    experienceYears?: number;
-    location?: string;
+    phone: string;
+    experienceYears: number;
+    nationality: string;
+    photo: File;
+    cv: File;
+    coverLetter?: File | null;
     jobSlug?: string;
 };
 
@@ -24,21 +26,30 @@ export type StrapiFile = {
 export type Application = {
     id: number;
     documentId: string;
-    firstName: string;
-    lastName: string;
+    fullName: string;
+    currentLocation: string;
+    gccExperience: "yes" | "no";
     email: string;
-    phone?: string;
-    skills?: string;
-    experienceYears?: number;
-    location?: string;
+    phone: string;
+    experienceYears: number;
+    nationality: string;
     label?: string;
     appliedAt: string;
-    cvFile?: StrapiFile | null;
-    applied_job?: { id: number; title: string } | null;
+    photo?: StrapiFile | null;
+    cv?: StrapiFile | null;
+    coverLetter?: StrapiFile | null;
+    applied_job?: { id: number; title: string; slug: string } | null;
 };
 
 export async function submit_application(payload: ApplicantPayload, jwt: string) {
-    const cvFileId = await upload_file(payload.cvFile, jwt);
+    const [photoId, cvId] = await Promise.all([
+        upload_file(payload.photo, jwt),
+        upload_file(payload.cv, jwt),
+    ]);
+
+    const coverLetterId = payload.coverLetter && payload.coverLetter.size > 0
+        ? await upload_file(payload.coverLetter, jwt)
+        : null;
 
     const res = await fetch(`${BASE_URL}/api/applicants`, {
         method: "POST",
@@ -48,14 +59,16 @@ export async function submit_application(payload: ApplicantPayload, jwt: string)
         },
         body: JSON.stringify({
             data: {
-                firstName: payload.firstName,
-                lastName: payload.lastName,
+                fullName: payload.fullName,
+                currentLocation: payload.currentLocation,
+                gccExperience: payload.gccExperience,
                 email: payload.email,
-                phone: payload.phone ?? null,
-                cvFile: cvFileId,
-                skills: payload.skills ?? null,
-                experienceYears: payload.experienceYears ?? null,
-                location: payload.location ?? null,
+                phone: payload.phone,
+                experienceYears: payload.experienceYears,
+                nationality: payload.nationality,
+                photo: photoId,
+                cv: cvId,
+                coverLetter: coverLetterId ?? null,
                 appliedAt: new Date().toISOString(),
                 ...(payload.jobSlug && { jobSlug: payload.jobSlug }),
             },
@@ -72,10 +85,8 @@ export async function submit_application(payload: ApplicantPayload, jwt: string)
 
 export async function get_user_applications(_userId: number, jwt: string): Promise<Application[]> {
     const res = await fetch(
-        `${BASE_URL}/api/applicants?sort=appliedAt:desc&populate[cvFile][fields][0]=url&populate[cvFile][fields][1]=name&populate[cvFile][fields][2]=size&populate[cvFile][fields][3]=mime&populate[applied_job][fields][0]=title&populate[applied_job][fields][1]=slug`,
-        {
-            headers: { Authorization: `Bearer ${jwt}` },
-        },
+        `${BASE_URL}/api/applicants?sort=appliedAt:desc&populate[cv][fields][0]=url&populate[cv][fields][1]=name&populate[cv][fields][2]=size&populate[cv][fields][3]=mime&populate[applied_job][fields][0]=title&populate[applied_job][fields][1]=slug`,
+        { headers: { Authorization: `Bearer ${jwt}` } },
     );
 
     if (!res.ok) return [];
@@ -90,10 +101,8 @@ export async function get_user_applications(_userId: number, jwt: string): Promi
 
 export async function get_application_by_document_id(documentId: string, jwt: string): Promise<Application | null> {
     const res = await fetch(
-        `${BASE_URL}/api/applicants/${documentId}?populate[cvFile][fields][0]=url&populate[cvFile][fields][1]=name&populate[cvFile][fields][2]=size&populate[cvFile][fields][3]=mime&populate[applied_job][fields][0]=title&populate[applied_job][fields][1]=slug`,
-        {
-            headers: { Authorization: `Bearer ${jwt}` },
-        },
+        `${BASE_URL}/api/applicants/${documentId}?populate[photo][fields][0]=url&populate[photo][fields][1]=name&populate[cv][fields][0]=url&populate[cv][fields][1]=name&populate[cv][fields][2]=size&populate[coverLetter][fields][0]=url&populate[coverLetter][fields][1]=name&populate[applied_job][fields][0]=title&populate[applied_job][fields][1]=slug`,
+        { headers: { Authorization: `Bearer ${jwt}` } },
     );
     if (!res.ok) return null;
     const json = await res.json();

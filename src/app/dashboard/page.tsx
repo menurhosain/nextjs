@@ -10,6 +10,14 @@ import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
+const STATUS_STYLES: Record<string, string> = {
+    new: "bg-blue-50 text-blue-600",
+    shortlisted: "bg-yellow-50 text-yellow-600",
+    interview: "bg-purple-50 text-purple-600",
+    hired: "bg-green-50 text-green-600",
+    rejected: "bg-red-50 text-red-500",
+};
+
 export default async function DashboardPage() {
     const headersList = await headers();
     const raw = headersList.get("x-user");
@@ -45,7 +53,6 @@ export default async function DashboardPage() {
     const sectionLabel = cms?.applicant_section_label ?? "Recruitment";
     const applyLabel = cms?.applicant_apply_label ?? "Apply for a position";
     const applyDescription = cms?.applicant_apply_description ?? "Submit your CV and skills";
-
     const accountDetailsHeading = cms?.account_details_heading ?? "Account details";
     const emailFieldLabel = cms?.email_field_label ?? "Email";
     const usernameFieldLabel = cms?.username_field_label ?? "Username";
@@ -54,7 +61,6 @@ export default async function DashboardPage() {
     const newApplicationLabel = cms?.new_application_label ?? "+ New application";
     const emptyStateText = cms?.empty_state_text ?? "You haven't submitted any applications yet.";
     const emptyStateLinkLabel = cms?.empty_state_link_label ?? "Submit your first application";
-    const locationLabel = cms?.location_label ?? "Location";
 
     return (
         <>
@@ -64,14 +70,15 @@ export default async function DashboardPage() {
                         <Banner_Title subtitle={bannerLabel} title={bannerTitle} />
                     </div>
                 </Left>
-
                 <Right>
                     <div></div>
                 </Right>
             </Banner>
+
             <div className="min-h-screen bg-gray-50">
                 <div className="max-w-4xl mx-auto px-6 py-10 space-y-8">
                     <Navbar />
+
                     {/* Welcome */}
                     <div>
                         <h2 className="text-2xl font-bold text-gray-900">
@@ -87,13 +94,11 @@ export default async function DashboardPage() {
                             <p className="mt-2 text-base font-semibold text-gray-900">{profileCardTitle}</p>
                             <p className="text-sm text-gray-500 mt-1">{profileCardDescription}</p>
                         </a>
-
                         <a href="/jobs" className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
                             <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">{sectionLabel}</p>
                             <p className="mt-2 text-base font-semibold text-gray-900">{applyLabel}</p>
                             <p className="text-sm text-gray-500 mt-1">{applyDescription}</p>
                         </a>
-
                     </div>
 
                     {/* Account details */}
@@ -143,25 +148,63 @@ export default async function DashboardPage() {
                                     <Link
                                         key={app.documentId}
                                         href={`/applications/${app.documentId}`}
-                                        className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-md transition-shadow"
+                                        className="group bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 hover:shadow-md hover:border-gray-200 transition-all duration-200"
                                     >
-                                        <div className="space-y-1">
-                                            <p className="text-sm font-semibold text-gray-900">{app.applied_job?.title ?? "—"}</p>
-                                            <p className="text-xs text-gray-500">{app.firstName} {app.lastName} · {app.email}</p>
-                                            {app.location && (
-                                                <p className="text-xs text-gray-400">{locationLabel}: {app.location}</p>
-                                            )}
+                                        {/* Left */}
+                                        <div className="flex items-start gap-4 min-w-0">
+                                            {/* Avatar initials */}
+                                            <div className="shrink-0 w-10 h-10 rounded-full bg-sah-red/10 text-sah-red flex items-center justify-center text-sm font-bold uppercase select-none">
+                                                {app.fullName?.charAt(0) ?? "?"}
+                                            </div>
+
+                                            <div className="min-w-0 space-y-1">
+                                                {/* Job title */}
+                                                <p className="text-sm font-semibold text-gray-900 group-hover:text-sah-red transition-colors truncate">
+                                                    {app.applied_job?.title ?? "—"}
+                                                </p>
+                                                {/* Applicant name + nationality */}
+                                                <p className="text-sm text-gray-600 truncate">
+                                                    {app.fullName}
+                                                    {app.nationality && <span className="text-gray-400"> · {app.nationality}</span>}
+                                                </p>
+                                                {/* Location + GCC */}
+                                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400">
+                                                    {app.currentLocation && (
+                                                        <span className="flex items-center gap-1">
+                                                            <svg className="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                                            </svg>
+                                                            {app.currentLocation}
+                                                        </span>
+                                                    )}
+                                                    {app.experienceYears !== undefined && app.experienceYears !== null && (
+                                                        <span>{app.experienceYears} yr{app.experienceYears !== 1 ? "s" : ""} exp</span>
+                                                    )}
+                                                    {app.gccExperience && (
+                                                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase ${app.gccExperience === "yes" ? "bg-green-50 text-green-600" : "bg-gray-100 text-gray-500"}`}>
+                                                            GCC {app.gccExperience === "yes" ? "✓" : "✗"}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
-                                            {app.label && <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">{app.label}</span>}
-                                            <p className="text-xs text-gray-400">{new Date(app.appliedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</p>
+
+                                        {/* Right */}
+                                        <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2 shrink-0">
+                                            {app.label && (
+                                                <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full capitalize ${STATUS_STYLES[app.label] ?? "bg-gray-100 text-gray-500"}`}>
+                                                    {app.label}
+                                                </span>
+                                            )}
+                                            <p className="text-xs text-gray-400">
+                                                {new Date(app.appliedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                                            </p>
                                         </div>
                                     </Link>
                                 ))}
                             </div>
                         )}
                     </div>
-
                 </div>
             </div>
         </>
