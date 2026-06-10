@@ -48,7 +48,7 @@ export default async function ApplyForRecrutementJobPage({ params }: { params: P
                     <div className="w-full bg-white lg:max-w-[750px] max-[640px]:px-4 p-10 flex flex-col rounded-[6px] overflow-hidden mx-auto">
                         <div className="bg-sah-red max-[640px]:-mx-4 -mx-10 -mt-10 px-4 xl:px-10 pt-[30px] xl:pt-[50px] pb-[30px] xl:pb-[50px] mb-8">
                             <p className="text-red-200 text-[13px] font-medium uppercase tracking-widest mb-1">
-                                Applying for
+                                {content?.applying_for_label || "Applying for"}
                             </p>
                             <h2 className="text-[26px] sm:text-[36px] font-medium text-white leading-[36px] sm:leading-[46px]">
                                 {job.title}

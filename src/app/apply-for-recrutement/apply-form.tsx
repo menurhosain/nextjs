@@ -33,25 +33,25 @@ export default function ApplyForm({ content: c, jobSlug }: Props) {
             {/* Full Name */}
             <div>
                 <Label htmlFor="fullName" className={labelClass}>
-                    Full Name <span className="text-red-500">*</span>
+                    {c?.label_full_name || "Full Name"} <span className="text-red-500">*</span>
                 </Label>
-                <Input id="fullName" name="fullName" placeholder="e.g. John Smith" className={inputClass} />
+                <Input id="fullName" name="fullName" placeholder={c?.placeholder_full_name || "e.g. John Smith"} className={inputClass} />
                 {e.fullName && <p className={errorClass}>{e.fullName}</p>}
             </div>
 
             {/* Current Location */}
             <div>
                 <Label htmlFor="currentLocation" className={labelClass}>
-                    Current Location <span className="text-red-500">*</span>
+                    {c?.label_current_location || "Current Location"} <span className="text-red-500">*</span>
                 </Label>
-                <Input id="currentLocation" name="currentLocation" placeholder="e.g. Muscat, Oman" className={inputClass} />
+                <Input id="currentLocation" name="currentLocation" placeholder={c?.placeholder_current_location || "e.g. Muscat, Oman"} className={inputClass} />
                 {e.currentLocation && <p className={errorClass}>{e.currentLocation}</p>}
             </div>
 
             {/* Experience in GCC */}
             <div>
                 <Label htmlFor="gccExperience" className={labelClass}>
-                    Experience in GCC <span className="text-red-500">*</span>
+                    {c?.label_gcc_experience || "Experience in GCC"} <span className="text-red-500">*</span>
                 </Label>
                 <select
                     id="gccExperience"
@@ -59,9 +59,9 @@ export default function ApplyForm({ content: c, jobSlug }: Props) {
                     defaultValue=""
                     className="w-full border border-sah-gray-4 rounded-[5px] px-4 py-3 text-[14px] text-sah-dark-2 focus:outline-none focus:border-red-500 transition bg-white appearance-none"
                 >
-                    <option value="" disabled className="text-gray-400">Select an option</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                    <option value="" disabled className="text-gray-400">{c?.gcc_select_default || "Select an option"}</option>
+                    <option value="yes">{c?.gcc_option_yes || "Yes"}</option>
+                    <option value="no">{c?.gcc_option_no || "No"}</option>
                 </select>
                 {e.gccExperience && <p className={errorClass}>{e.gccExperience}</p>}
             </div>
@@ -96,19 +96,19 @@ export default function ApplyForm({ content: c, jobSlug }: Props) {
             {/* Nationality */}
             <div>
                 <Label htmlFor="nationality" className={labelClass}>
-                    Nationality <span className="text-red-500">*</span>
+                    {c?.label_nationality || "Nationality"} <span className="text-red-500">*</span>
                 </Label>
-                <Input id="nationality" name="nationality" placeholder="e.g. Omani" className={inputClass} />
+                <Input id="nationality" name="nationality" placeholder={c?.placeholder_nationality || "e.g. Omani"} className={inputClass} />
                 {e.nationality && <p className={errorClass}>{e.nationality}</p>}
             </div>
 
             {/* Photo */}
             <div>
                 <Label htmlFor="photo" className={labelClass}>
-                    Photo <span className="text-red-500">*</span>
+                    {c?.label_photo || "Photo"} <span className="text-red-500">*</span>
                 </Label>
                 <Input id="photo" name="photo" type="file" accept=".jpg,.jpeg,.png" className={fileInputClass} />
-                <p className={hintClass}>Max 10 MB &middot; Allowed: .jpg, .jpeg, .png</p>
+                <p className={hintClass}>{c?.hint_photo || "Max 10 MB · Allowed: .jpg, .jpeg, .png"}</p>
                 {e.photo && <p className={errorClass}>{e.photo}</p>}
             </div>
 
@@ -118,17 +118,17 @@ export default function ApplyForm({ content: c, jobSlug }: Props) {
                     {c?.label_cv || "CV"} <span className="text-red-500">*</span>
                 </Label>
                 <Input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" className={fileInputClass} />
-                <p className={hintClass}>Max 25 MB &middot; Allowed: .pdf, .doc, .docx</p>
+                <p className={hintClass}>{c?.hint_cv || "Max 25 MB · Allowed: .pdf, .doc, .docx"}</p>
                 {e.cv && <p className={errorClass}>{e.cv}</p>}
             </div>
 
             {/* Cover Letter */}
             <div>
                 <Label htmlFor="coverLetter" className={labelClass}>
-                    Cover Letter
+                    {c?.label_cover_letter || "Cover Letter"}
                 </Label>
                 <Input id="coverLetter" name="coverLetter" type="file" accept=".pdf,.doc,.docx" className={fileInputClass} />
-                <p className={hintClass}>Optional &middot; Max 25 MB &middot; Allowed: .pdf, .doc, .docx</p>
+                <p className={hintClass}>{c?.hint_cover_letter || "Optional · Max 25 MB · Allowed: .pdf, .doc, .docx"}</p>
                 {e.coverLetter && <p className={errorClass}>{e.coverLetter}</p>}
             </div>
 
