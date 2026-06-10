@@ -1,18 +1,26 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { get_subcontracteds } from "@/services/subcontracted.service";
-import { get_projects_page_content } from "@/services/page_content.service";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
-import SubcontractedListingClient from "./subcontracted-listing-client";
+import { get_auto_search_suggestions } from "@/services/auto_search_suggestion.service";
+import { get_locations } from "@/services/location.service";
+import { get_projects_page_content } from "@/services/page_content.service";
 import type { SubcontractedLocation } from "@/services/subcontracted.service";
+import { get_subcontracteds } from "@/services/subcontracted.service";
+import JobSearchBar from "./job-search-bar";
+import SubcontractedListingClient from "./subcontracted-listing-client";
 
 export const metadata: Metadata = { title: "Subcontracted Projects" };
 
 export default async function SubcontractedProjectsPage() {
     const locale = (await headers()).get("x-locale") ?? "en";
 
-    const [items, cms] = await Promise.all([get_subcontracteds(locale), get_projects_page_content(locale)]);
+    const [items, cms, all_locations, auto_suggestions] = await Promise.all([
+        get_subcontracteds(locale),
+        get_projects_page_content(locale),
+        get_locations(locale),
+        get_auto_search_suggestions(locale),
+    ]);
 
     const locationMap = new Map<string, SubcontractedLocation>();
     for (const item of items) {
@@ -46,6 +54,12 @@ export default async function SubcontractedProjectsPage() {
                     <div></div>
                 </Right>
             </Banner>
+
+            <section className="section-padding bg-sah-white py-[40px]">
+                <div className="container !px-[50px] max-[1024px]:!px-4">
+                    <JobSearchBar searchSuggestions={auto_suggestions.map((s) => s.search_query)} locationSuggestions={all_locations.map((loc) => loc.name)} />
+                </div>
+            </section>
 
             <section className="section-padding bg-sah-light-4">
                 <div className="container !px-[50px] max-[1024px]:!px-4 pt-[80px] lg:pt-[120px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
