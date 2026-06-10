@@ -33,11 +33,12 @@ type StrapiJobItem = {
     details?: BlocksContent | null;
 };
 
-export async function get_jobs(locale = "en"): Promise<Job[]> {
+export async function get_jobs(locale = "en", search?: { q?: string; location?: string }): Promise<Job[]> {
     try {
-        const res = await fetch(`${BASE_URL}/api/jobs?locale=${locale}&populate[locations][fields][0]=name&populate[locations][fields][1]=slug&populate[locations][fields][2]=description`, {
-            next: { revalidate: 60 },
-        });
+        let url = `${BASE_URL}/api/jobs?locale=${locale}&populate[locations][fields][0]=name&populate[locations][fields][1]=slug&populate[locations][fields][2]=description`;
+        if (search?.q) url += `&filters[search_keywords][$containsi]=${encodeURIComponent(search.q)}`;
+        if (search?.location) url += `&filters[locations][name][$eq]=${encodeURIComponent(search.location)}`;
+        const res = await fetch(url, { next: { revalidate: 60 } });
         if (!res.ok) return [];
         const json = await res.json();
         const items: StrapiJobItem[] = json?.data ?? [];

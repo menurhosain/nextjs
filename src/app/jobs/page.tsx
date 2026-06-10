@@ -1,25 +1,24 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { get_jobs } from "@/services/job.service";
+import { get_locations } from "@/services/location.service";
+import { get_auto_search_suggestions } from "@/services/auto_search_suggestion.service";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import JobListingClient from "./job-listing-client";
-import type { JobLocation } from "@/services/job.service";
+import JobSearchBar from "./job-search-bar";
 
 export const metadata: Metadata = { title: "Job Openings" };
 
-export default async function JobListingPage() {
+export default async function JobListingPage({ searchParams }: { searchParams: Promise<{ q?: string; location?: string }> }) {
     const locale = (await headers()).get("x-locale") ?? "en";
-    const jobs = await get_jobs(locale);
+    const { q, location } = await searchParams;
 
-    // Collect unique locations across all jobs
-    const locationMap = new Map<string, JobLocation>();
-    for (const job of jobs) {
-        for (const loc of job.locations ?? []) {
-            if (!locationMap.has(loc.slug)) locationMap.set(loc.slug, loc);
-        }
-    }
-    const locations = Array.from(locationMap.values());
+    const [jobs, all_locations, auto_suggestions] = await Promise.all([
+        get_jobs(locale, { q, location }),
+        get_locations(locale),
+        get_auto_search_suggestions(locale),
+    ]);
 
     return (
         <>
@@ -34,14 +33,25 @@ export default async function JobListingPage() {
                 </Right>
             </Banner>
 
+            <section className="section-padding bg-sah-white py-[40px]">
+                <div className="container !px-[50px] max-[1024px]:!px-4">
+                    <JobSearchBar
+                        searchSuggestions={auto_suggestions.map((s) => s.search_query)}
+                        locationSuggestions={all_locations.map((loc) => loc.name)}
+                    />
+                </div>
+            </section>
+
             <section className="section-padding bg-sah-light-4">
                 <div className="container !px-[50px] max-[1024px]:!px-4 pt-[80px] lg:pt-[120px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
                     {jobs.length === 0 ? (
                         <div className="text-center py-20">
-                            <p className="text-[20px] font-medium text-sah-gray-2">No open positions at the moment. Please check back later.</p>
+                            <p className="text-[20px] font-medium text-sah-gray-2">
+                                {q || location ? "No positions match your search." : "No open positions at the moment. Please check back later."}
+                            </p>
                         </div>
                     ) : (
-                        <JobListingClient jobs={jobs} locations={locations} />
+                        <JobListingClient jobs={jobs} />
                     )}
                 </div>
             </section>
