@@ -29,7 +29,7 @@ function Banner({ bg, children, class_name, style, bgDirection = "right", contai
     const outClass = bgDirection === "right" ? "bg-slide-out-left" : "bg-slide-out-right";
 
     return (
-        <section className={cn("2xl:h-[85vh] md:min-h-[780px] lg:min-h-[855px] xl:min-h-[955px] max-[768px]:py-18 relative w-full flex banner-overlay section-padding overflow-hidden  max-[1280px]:!px-4", class_name)} style={{ ...style }}>
+        <section className={cn("h-[50vh] relative w-full flex banner-overlay section-padding overflow-hidden max-[1280px]:!px-4", class_name)} style={{ ...style }}>
             {isImage ? (
                 <>
                     {outgoingBg && <img key={`out-${animKey}`} src={outgoingBg} alt="" className={`absolute inset-0 h-full w-full object-cover z-[-2] ${outClass}`} />}
