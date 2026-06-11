@@ -55,15 +55,23 @@ export default function JobListingClient({
     no_details_text,
 }: Props) {
     const [cur_job, set_cur_job] = useState(jobs[0]);
+    const [is_narrow, set_is_narrow] = useState(false);
 
     useEffect(() => {
         set_cur_job(jobs[0]);
     }, [jobs]);
 
+    useEffect(() => {
+        const check = () => set_is_narrow(window.innerWidth <= 1020);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+
     return (
         <div className="flex gap-6">
-            {/* Left column — 30% listing */}
-            <div className="w-[30%] shrink-0">
+            {/* Left column — full width on narrow, 30% on wide */}
+            <div className={is_narrow ? "w-full" : "w-[30%] shrink-0"}>
                 <p className="text-[14px] text-sah-gray-2 font-medium mb-5">
                     {jobs.length} {jobs.length === 1 ? (result_singular_label ?? "position") : (result_plural_label ?? "positions")} {result_found_label ?? "found"}
                 </p>
@@ -78,6 +86,7 @@ export default function JobListingClient({
                                 job.id === cur_job?.id ? "border-sah-red" : "",
                             )}
                             onClick={(e) => {
+                                if (is_narrow) return;
                                 e.preventDefault();
                                 set_cur_job(job);
                             }}
@@ -117,68 +126,70 @@ export default function JobListingClient({
                 </div>
             </div>
 
-            {/* Right column — 70% detail */}
-            <div className="flex-1 xl:sticky xl:top-[30px]">
-                <section className="section-padding">
-                    <div className="container !px-[50px] max-[1024px]:!px-4 pt-[30px] lg:pt-[30px] pb-[30px] lg:pb-[30px] border rounded-lg border-sah-red">
-                        <div className="grid grid-cols-1 xl:grid-cols-7 gap-y-5 items-start">
-                            <h3 className="col-span-full font-semibold text-[24px]">{cur_job?.title}</h3>
+            {/* Right column — hidden on narrow screens */}
+            {!is_narrow && (
+                <div className="flex-1 xl:sticky xl:top-[30px]">
+                    <section className="section-padding">
+                        <div className="container !px-[50px] max-[1024px]:!px-4 pt-[30px] lg:pt-[30px] pb-[30px] lg:pb-[30px] border rounded-lg border-sah-red">
+                            <div className="grid grid-cols-1 xl:grid-cols-7 gap-y-5 items-start">
+                                <h3 className="col-span-full font-semibold text-[24px]">{cur_job?.title}</h3>
 
-                            <aside className="xl:col-span-full">
-                                <div className="flex flex-wrap gap-x-[50px]">
-                                    {cur_job?.employment_status && (
-                                        <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{employment_type_label ?? "Employment Type"}</span>
-                                            <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{cur_job.employment_status}</p>
-                                        </div>
-                                    )}
-                                    {cur_job?.experience && (
-                                        <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{experience_label ?? "Experience"}</span>
-                                            <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{cur_job.experience}</p>
-                                        </div>
-                                    )}
-                                    {cur_job?.deadline && (
-                                        <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{deadline_label ?? "Application Deadline"}</span>
-                                            <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">
-                                                {new Date(cur_job.deadline).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-                                            </p>
-                                        </div>
-                                    )}
-                                    {cur_job?.locations && cur_job.locations.length > 0 && (
-                                        <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{location_label ?? "Location"}</span>
-                                            <div className="flex flex-wrap gap-2">
-                                                {cur_job.locations.map((loc) => (
-                                                    <p key={loc.id} className="text-[18px] font-semibold text-sah-dark-2 mt-1">{loc.name}</p>
-                                                ))}
+                                <aside className="xl:col-span-full">
+                                    <div className="flex flex-wrap gap-x-[50px]">
+                                        {cur_job?.employment_status && (
+                                            <div>
+                                                <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{employment_type_label ?? "Employment Type"}</span>
+                                                <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{cur_job.employment_status}</p>
                                             </div>
-                                        </div>
-                                    )}
-                                    <div className="w-full" />
-                                    <a
-                                        href={`/apply-for-recrutement/${cur_job?.slug}`}
-                                        className="inline-flex w-[200px] items-center justify-center gap-2 bg-sah-dark-2 text-white text-[16px] font-medium px-8 py-2 rounded-[8px] hover:bg-sah-red transition-colors duration-300 my-4"
-                                    >
-                                        {apply_button_label ?? "Apply Now"}
-                                    </a>
-                                </div>
-                            </aside>
-
-                            <div className="xl:col-span-full">
-                                {cur_job?.details && cur_job.details.length > 0 ? (
-                                    <div className="rich-content prose prose-lg max-w-none text-sah-gray-2 text-[16px] leading-[28px] font-medium">
-                                        <BlocksRenderer content={cur_job.details} />
+                                        )}
+                                        {cur_job?.experience && (
+                                            <div>
+                                                <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{experience_label ?? "Experience"}</span>
+                                                <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{cur_job.experience}</p>
+                                            </div>
+                                        )}
+                                        {cur_job?.deadline && (
+                                            <div>
+                                                <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{deadline_label ?? "Application Deadline"}</span>
+                                                <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">
+                                                    {new Date(cur_job.deadline).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                                                </p>
+                                            </div>
+                                        )}
+                                        {cur_job?.locations && cur_job.locations.length > 0 && (
+                                            <div>
+                                                <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{location_label ?? "Location"}</span>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {cur_job.locations.map((loc) => (
+                                                        <p key={loc.id} className="text-[18px] font-semibold text-sah-dark-2 mt-1">{loc.name}</p>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="w-full" />
+                                        <a
+                                            href={`/apply-for-recrutement/${cur_job?.slug}`}
+                                            className="inline-flex w-[200px] items-center justify-center gap-2 bg-sah-dark-2 text-white text-[16px] font-medium px-8 py-2 rounded-[8px] hover:bg-sah-red transition-colors duration-300 my-4"
+                                        >
+                                            {apply_button_label ?? "Apply Now"}
+                                        </a>
                                     </div>
-                                ) : (
-                                    <p className="text-sah-gray-2 text-[16px] leading-[28px]">{no_details_text ?? "No details available for this position."}</p>
-                                )}
+                                </aside>
+
+                                <div className="xl:col-span-full">
+                                    {cur_job?.details && cur_job.details.length > 0 ? (
+                                        <div className="rich-content prose prose-lg max-w-none text-sah-gray-2 text-[16px] leading-[28px] font-medium">
+                                            <BlocksRenderer content={cur_job.details} />
+                                        </div>
+                                    ) : (
+                                        <p className="text-sah-gray-2 text-[16px] leading-[28px]">{no_details_text ?? "No details available for this position."}</p>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </div>
+                    </section>
+                </div>
+            )}
         </div>
     );
 }
