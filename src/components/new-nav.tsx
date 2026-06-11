@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { useOutsideClick } from "@/hook/use-outside-click";
-import { AngleArrow, DownArrow } from "./ui/svgs";
+import { DownArrow } from "./ui/svgs";
 import { type Menu } from "@/services/mega_menu.service";
 import { type OffcanvasContent } from "@/services/offcanvas.service";
 import { BASE_URL } from "@/lib/constant";
@@ -283,14 +283,6 @@ export function NavActions({
                     )}
                 </div>
 
-                {/* CTA button */}
-                <a
-                    href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/jobs")}
-                    className="sm:flex hidden items-center gap-[14px] bg-sah-black text-sah-white text-[15px] xl:text-[16px] font-inter font-medium px-[24px] py-[12px] rounded-[8px]"
-                >
-                    {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "View Jobs")}
-                    <AngleArrow class_name="!w-[10px] !h-[10px]" />
-                </a>
 
             </div>
         </>
