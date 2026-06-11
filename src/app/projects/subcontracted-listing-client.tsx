@@ -57,6 +57,7 @@ type Props = {
 
 export default function SubcontractedListingClient({ items, resultSingularLabel, resultPluralLabel, resultFoundLabel, content }: Props) {
     const [cur_item, set_cur_item] = useState(items[0]);
+    const [is_narrow, set_is_narrow] = useState(false);
 
     function handle_project_card_click(item: Subcontracted) {
         set_cur_item(item);
@@ -66,10 +67,17 @@ export default function SubcontractedListingClient({ items, resultSingularLabel,
         set_cur_item(items[0]);
     }, [items]);
 
+    useEffect(() => {
+        const check = () => set_is_narrow(window.innerWidth <= 1020);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+
     return (
         <div className="flex gap-6">
-            {/* Left column — 30% listing */}
-            <div className="w-[30%] shrink-0">
+            {/* Left column — full width on narrow, 30% on wide */}
+            <div className={is_narrow ? "w-full" : "w-[30%] shrink-0"}>
                 {/* Results count */}
                 <p className="text-[14px] text-sah-gray-2 font-medium mb-5">
                     {items.length} {items.length === 1 ? resultSingularLabel : resultPluralLabel} {resultFoundLabel}
@@ -86,6 +94,7 @@ export default function SubcontractedListingClient({ items, resultSingularLabel,
                                 item.id == cur_item.id ? "border-sah-red" : "",
                             )}
                             onClick={(e) => {
+                                if (is_narrow) return;
                                 e.preventDefault();
                                 handle_project_card_click(item);
                             }}
@@ -125,65 +134,67 @@ export default function SubcontractedListingClient({ items, resultSingularLabel,
                 </div>
             </div>
 
-            {/* Right column — 70% content */}
-            <div className="flex-1 xl:sticky xl:top-[30px]">
-                <section className="section-padding">
-                    <div className="container !px-[50px] max-[1024px]:!px-4 pt-[30px] lg:pt-[30px] pb-[30px] lg:pb-[30px] border rounded-lg border-sah-red">
-                        <div className="grid grid-cols-1 xl:grid-cols-7 gap-y-5 items-start">
-                            {/* Sidebar meta */}
-                            <h3 className="col-span-full font-semibold text-[24px]">{cur_item.title}</h3>
-                            <aside className="xl:col-span-full">
-                                <div className="flex flex-wrap gap-x-[50px]">
-                                    {cur_item.experience && (
-                                        <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.experience_label ?? "Experience"}</span>
-                                            <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{cur_item.experience}</p>
-                                        </div>
-                                    )}
-                                    {cur_item.deadline && (
-                                        <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.deadline_label ?? "Deadline"}</span>
-                                            <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">
-                                                {new Date(cur_item.deadline).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-                                            </p>
-                                        </div>
-                                    )}
-                                    {cur_item.locations && cur_item.locations.length > 0 && (
-                                        <div>
-                                            <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.location_label ?? "Location"}</span>
-                                            <div className="flex flex-wrap gap-2">
-                                                {cur_item.locations.map((loc) => (
-                                                    <p key={loc.id} className="text-[18px] font-semibold text-sah-dark-2 mt-1">
-                                                        {loc.name}
-                                                    </p>
-                                                ))}
+            {/* Right column — hidden on narrow screens */}
+            {!is_narrow && (
+                <div className="flex-1 xl:sticky xl:top-[30px]">
+                    <section className="section-padding">
+                        <div className="container !px-[50px] max-[1024px]:!px-4 pt-[30px] lg:pt-[30px] pb-[30px] lg:pb-[30px] border rounded-lg border-sah-red">
+                            <div className="grid grid-cols-1 xl:grid-cols-7 gap-y-5 items-start">
+                                {/* Sidebar meta */}
+                                <h3 className="col-span-full font-semibold text-[24px]">{cur_item.title}</h3>
+                                <aside className="xl:col-span-full">
+                                    <div className="flex flex-wrap gap-x-[50px]">
+                                        {cur_item.experience && (
+                                            <div>
+                                                <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.experience_label ?? "Experience"}</span>
+                                                <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">{cur_item.experience}</p>
                                             </div>
-                                        </div>
-                                    )}
-                                    <div className="w-full"></div>
-                                    <a
-                                        href={`/apply-for-subcontractor/${cur_item.slug}`}
-                                        className="inline-flex w-[200px] items-center justify-center gap-2 bg-sah-dark-2 text-white text-[16px] font-medium px-8 py-2 rounded-[8px] hover:bg-sah-red transition-colors duration-300 my-4"
-                                    >
-                                        {content?.apply_button_label ?? "Apply Now"}
-                                    </a>
-                                </div>
-                            </aside>
-
-                            {/* Project details */}
-                            <div className="xl:col-span-full">
-                                {cur_item.details && cur_item.details.length > 0 ? (
-                                    <div className="rich-content prose prose-lg max-w-none text-sah-gray-2 text-[16px] leading-[28px] font-medium">
-                                        <BlocksRenderer content={cur_item.details} />
+                                        )}
+                                        {cur_item.deadline && (
+                                            <div>
+                                                <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.deadline_label ?? "Deadline"}</span>
+                                                <p className="text-[18px] font-semibold text-sah-dark-2 mt-1">
+                                                    {new Date(cur_item.deadline).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                                                </p>
+                                            </div>
+                                        )}
+                                        {cur_item.locations && cur_item.locations.length > 0 && (
+                                            <div>
+                                                <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{content?.location_label ?? "Location"}</span>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {cur_item.locations.map((loc) => (
+                                                        <p key={loc.id} className="text-[18px] font-semibold text-sah-dark-2 mt-1">
+                                                            {loc.name}
+                                                        </p>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="w-full"></div>
+                                        <a
+                                            href={`/apply-for-subcontractor/${cur_item.slug}`}
+                                            className="inline-flex w-[200px] items-center justify-center gap-2 bg-sah-dark-2 text-white text-[16px] font-medium px-8 py-2 rounded-[8px] hover:bg-sah-red transition-colors duration-300 my-4"
+                                        >
+                                            {content?.apply_button_label ?? "Apply Now"}
+                                        </a>
                                     </div>
-                                ) : (
-                                    <p className="text-sah-gray-2 text-[16px] leading-[28px]">{content?.no_details_text ?? "No details available for this project."}</p>
-                                )}
+                                </aside>
+
+                                {/* Project details */}
+                                <div className="xl:col-span-full">
+                                    {cur_item.details && cur_item.details.length > 0 ? (
+                                        <div className="rich-content prose prose-lg max-w-none text-sah-gray-2 text-[16px] leading-[28px] font-medium">
+                                            <BlocksRenderer content={cur_item.details} />
+                                        </div>
+                                    ) : (
+                                        <p className="text-sah-gray-2 text-[16px] leading-[28px]">{content?.no_details_text ?? "No details available for this project."}</p>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </div>
+                    </section>
+                </div>
+            )}
         </div>
     );
 }
