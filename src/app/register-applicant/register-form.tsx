@@ -1,7 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, startTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useActionState, startTransition } from "react";
 
 declare global {
     interface Window {
@@ -62,14 +61,7 @@ export default function RegisterApplicantForm({
     submit_button_label,
     submitting_label,
 }: Props) {
-    const router = useRouter();
     const [state, formAction, pending] = useActionState(register_user, initialState);
-
-    useEffect(() => {
-        if (state.success) {
-            router.push("/login");
-        }
-    }, [state.success, router]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -86,6 +78,21 @@ export default function RegisterApplicantForm({
     };
 
     const e = state.errors;
+
+    if (state.success) {
+        return (
+            <div className="text-center space-y-4 py-4">
+                <p className="text-2xl">📧</p>
+                <p className="font-semibold text-gray-900">Check your email</p>
+                <p className="text-sm text-gray-600">
+                    A confirmation link has been sent to{" "}
+                    <span className="font-medium">{state.email}</span>.
+                    Click it to activate your account, then{" "}
+                    <a href="/login" className="text-sah-red underline">sign in</a>.
+                </p>
+            </div>
+        );
+    }
 
     return (
         <form onSubmit={handleSubmit} className="space-y-5">

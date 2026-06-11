@@ -15,6 +15,7 @@ export type FormState = {
     };
     serverError?: string;
     success?: boolean;
+    email?: string;
 };
 
 export async function register_user(_prevState: FormState, formData: FormData): Promise<FormState> {
@@ -79,5 +80,5 @@ export async function register_user(_prevState: FormState, formData: FormData): 
         return { errors: {}, serverError: message };
     }
 
-    return { errors: {}, success: true };
+    return { errors: {}, success: true, email };
 }

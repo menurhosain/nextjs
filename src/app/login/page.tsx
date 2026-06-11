@@ -8,9 +8,14 @@ import { headers } from "next/headers";
 
 export const metadata: Metadata = { title: "Login" };
 
-export default async function LoginPage() {
+export default async function LoginPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ confirmed?: string; error?: string }>;
+}) {
     const locale = (await headers()).get("x-locale") ?? "en";
     const page = await get_login_page_content(locale);
+    const { confirmed } = await searchParams;
 
     const bg = getStrapiMediaUrl(page?.banner?.banner_bg) || "/home-hero.mp4";
     const subtitle = page?.banner?.banner_label || "Building Trust And Excellence";
@@ -40,6 +45,7 @@ export default async function LoginPage() {
                         forgot_password_link={page?.forgot_password_link}
                         submit_button_label={page?.submit_button_label}
                         submitting_label={page?.submitting_label}
+                        confirmed={confirmed === "true"}
                     />
                 </div>
             </div>
