@@ -101,7 +101,9 @@ export default function SubcontractedListingClient({ items, resultSingularLabel,
                         >
                             {/* Title */}
                             <div>
-                                <h3 className="text-[18px] font-semibold text-sah-red leading-snug group-hover:underline">{item.title}</h3>
+                                <h3 className={`text-[18px] font-semibold leading-snug group-hover:underline group-hover:text-sah-red ${item.id === cur_item?.id ? "text-sah-red" : "text-sah-black"}`}>
+                                    {item.title}
+                                </h3>
                             </div>
 
                             {/* Location */}
@@ -137,7 +139,7 @@ export default function SubcontractedListingClient({ items, resultSingularLabel,
             {/* Right column — hidden on narrow screens */}
             {!is_narrow && (
                 <div className="flex-1 xl:sticky xl:top-[30px]">
-                    <section className="section-padding">
+                    <section className="section-padding mt-[44px]">
                         <div className="container !px-[50px] max-[1024px]:!px-4 pt-[30px] lg:pt-[30px] pb-[30px] lg:pb-[30px] border rounded-lg border-sah-red">
                             <div className="grid grid-cols-1 xl:grid-cols-7 gap-y-5 items-start">
                                 {/* Sidebar meta */}

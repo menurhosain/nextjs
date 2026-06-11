@@ -58,7 +58,7 @@ export default async function SubcontractedProjectsPage({ searchParams }: { sear
             </section>
 
             <section className="section-padding bg-sah-light-4">
-                <div className="container !px-[50px] max-[1024px]:!px-4 pt-[80px] lg:pt-[120px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
+                <div className="container !px-[50px] max-[1024px]:!px-4 pt-[50px] lg:pt-[50px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
                     {items.length === 0 ? (
                         <div className="text-center py-20">
                             <p className="text-[20px] font-medium text-sah-gray-2">{q || location ? content.no_results_text : content.empty_state_text}</p>
