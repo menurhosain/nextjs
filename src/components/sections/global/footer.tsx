@@ -7,7 +7,7 @@ const DEFAULTS: FooterContent = {
     nav_links: [
         { id: 1, button_label: "Our Company", button_link: "/about-us" },
         { id: 2, button_label: "Our Services", button_link: "/services" },
-        { id: 3, button_label: "Our Projects", button_link: "/projects" },
+        { id: 3, button_label: "Our Projects", button_link: "/subcontractors" },
         { id: 4, button_label: "News", button_link: "/news" },
         { id: 5, button_label: "Careers", button_link: "/careers" },
         { id: 6, button_label: "Contact", button_link: "/contact" },

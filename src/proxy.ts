@@ -22,7 +22,7 @@ export async function proxy(request: NextRequest) {
     isSubcontractedApply;
 
   if (pathname === "/") {
-    return NextResponse.redirect(new URL("/projects", request.nextUrl));
+    return NextResponse.redirect(new URL("/subcontractors", request.nextUrl));
   }
 
   const user = jwt ? await verify_jwt(jwt) : null;

@@ -88,7 +88,7 @@ export default function SubcontractedListingClient({ items, resultSingularLabel,
                     {items.map((item) => (
                         <a
                             key={item.id}
-                            href={`/projects/${item.slug}`}
+                            href={`/subcontractors/${item.slug}`}
                             className={cn(
                                 "group flex flex-col gap-4 bg-white border border-sah-light-3 hover:border-sah-red rounded-[10px] p-6 transition-all duration-300 hover:shadow-md",
                                 item.id == cur_item.id ? "border-sah-red" : "",
