@@ -306,12 +306,12 @@ export type CareerPageContent = {
     job_section_title: string;
     job_section_description: string;
     job_board_image: StrapiMedia | null;
-    jobs: Job[];
+    job_listings: { job_status: string; job_title: string; btn_label: string; btn_link: string }[];
 };
 export async function get_career_page_content(locale = "en"): Promise<CareerPageContent | null> {
     try {
         const res = await fetch(
-            `${BASE_URL}/api/career-page?populate[banner][populate]=*&populate[image_1][populate]=*&populate[image_2][populate]=*&populate[map_image][populate]=*&populate[job_board_image][populate]=*&populate[jobs][fields][0]=title&populate[jobs][fields][1]=slug&populate[jobs][fields][2]=deadline&populate[jobs][fields][3]=experience&populate[jobs][fields][4]=employment_status&locale=${locale}`,
+            `${BASE_URL}/api/career-page?populate[banner][populate]=*&populate[image_1][populate]=*&populate[image_2][populate]=*&populate[map_image][populate]=*&populate[job_board_image][populate]=*&populate[job_listings][fields][0]=job_status&populate[job_listings][fields][1]=job_title&populate[job_listings][fields][2]=btn_label&populate[job_listings][fields][3]=btn_link&locale=${locale}`,
         );
         if (!res.ok) return null;
         const json = await res.json();

@@ -48,7 +48,7 @@ export default async function CareersPage() {
                 job_section_title={content?.job_section_title}
                 job_section_description={content?.job_section_description}
                 job_board_image={getStrapiMediaUrl(content?.job_board_image)}
-                jobs={content?.jobs ?? []}
+                job_listings={content?.job_listings ?? []}
             />
             <Testimonial bg={getStrapiMediaUrl(voices?.background)} quote={voices?.quote} author_name={voices?.name} author_role={voices?.role} />
         </>
