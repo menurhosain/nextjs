@@ -32,12 +32,12 @@ export default function ProfileMenu({ displayName, pictureUrl }: ProfileMenuProp
             className="w-8 h-8 rounded-full object-cover"
           />
         ) : (
-          <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-sm font-bold text-gray-500">
+          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold text-white">
             {displayName?.[0]?.toUpperCase() ?? "?"}
           </div>
         )}
         {displayName && (
-          <p className="hidden sm:block text-sm font-medium text-gray-900">
+          <p className="hidden sm:block text-sm font-medium text-white">
             {displayName}
           </p>
         )}
@@ -45,6 +45,13 @@ export default function ProfileMenu({ displayName, pictureUrl }: ProfileMenuProp
 
       {open && (
         <div className="absolute end-0 mt-2 w-44 rounded-lg border bg-white shadow-md z-50 py-1">
+          <a
+            href="/dashboard"
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+            onClick={() => setOpen(false)}
+          >
+            Dashboard
+          </a>
           <a
             href="/profile"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
