@@ -6,6 +6,7 @@ import { DownArrow } from "./ui/svgs";
 import { type Menu } from "@/services/mega_menu.service";
 import { type OffcanvasContent } from "@/services/offcanvas.service";
 import { BASE_URL } from "@/lib/constant";
+import ProfileMenu from "@/components/profile-menu";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
@@ -233,6 +234,8 @@ export function NavActions({
     light_logo_url,
     recaptcha_site_key,
     isLoggedIn = false,
+    displayName = null,
+    pictureUrl = null,
 }: {
     locale: string;
     menus: Menu[];
@@ -240,6 +243,8 @@ export function NavActions({
     light_logo_url?: string;
     recaptcha_site_key?: string;
     isLoggedIn?: boolean;
+    displayName?: string | null;
+    pictureUrl?: string | null;
 }) {
     const [selectedLang, setSelectedLang] = useState(() => {
         return languages.find((l) => l.code === locale) ?? languages[0];
@@ -283,6 +288,19 @@ export function NavActions({
                     )}
                 </div>
 
+                {/* Auth */}
+                {isLoggedIn ? (
+                    <ProfileMenu displayName={displayName} pictureUrl={pictureUrl} />
+                ) : (
+                    <>
+                        <a href="/login" className="font-inter text-[16px] font-semibold text-sah-white hover:text-sah-white/70 transition-colors duration-200">
+                            Login
+                        </a>
+                        <a href="/register-applicant" className="font-inter text-[16px] font-semibold text-sah-white hover:text-sah-white/70 transition-colors duration-200">
+                            Signup
+                        </a>
+                    </>
+                )}
 
             </div>
         </>

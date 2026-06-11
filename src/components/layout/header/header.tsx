@@ -9,10 +9,17 @@ import { getStrapiMediaUrl } from "@/lib/utils";
 export default async function Header() {
     const headersList = await headers();
     const locale = headersList.get("x-locale") ?? "en";
-    const isLoggedIn = !!headersList.get("x-user");
+    const raw = headersList.get("x-user");
+    const user: Record<string, unknown> | null = raw ? (JSON.parse(raw) as Record<string, unknown>) : null;
+    const isLoggedIn = !!user;
+    const displayName = (user?.first_name as string | undefined) ?? (user?.username as string | undefined) ?? null;
+    const profilePicture = user?.profile_picture as { url: string; formats?: { thumbnail?: { url: string } } } | null | undefined;
     const [menus, offcanvas, global] = await Promise.all([get_mega_menu(locale), get_offcanvas_content(locale), get_global_settings(locale)]);
     const light_logo_url = getStrapiMediaUrl(global?.light_logo) || "/logo-white.png";
     const recaptcha_site_key = global?.recaptcha_site_key ?? process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
+    const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
+    const rawUrl = profilePicture?.formats?.thumbnail?.url ?? profilePicture?.url;
+    const pictureUrl = rawUrl ? `${BASE_URL}${rawUrl}` : null;
 
     return (
         <>
@@ -23,7 +30,7 @@ export default async function Header() {
                         <NavLinks menus={menus} />
                     </div>
                     <div className="w-[100%] xl:w-[40%]">
-                        <NavActions locale={locale} menus={menus} offcanvas={offcanvas} light_logo_url={light_logo_url} recaptcha_site_key={recaptcha_site_key} isLoggedIn={isLoggedIn} />
+                        <NavActions locale={locale} menus={menus} offcanvas={offcanvas} light_logo_url={light_logo_url} recaptcha_site_key={recaptcha_site_key} isLoggedIn={isLoggedIn} displayName={displayName} pictureUrl={pictureUrl} />
                     </div>
                 </div>
             </div>
