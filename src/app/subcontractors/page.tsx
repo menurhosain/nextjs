@@ -23,7 +23,7 @@ export default async function SubcontractedProjectsPage({ searchParams }: { sear
     ]);
 
     const content: ProjectsPageContent = {
-        banner: cms?.banner ?? { banner_label: "Explore Opportunities", banner_title: "Projects", banner_bg: null },
+        banner: cms?.banner ?? { banner_label: "Explore Projects", banner_title: "Become a Subcontractor", banner_bg: null },
         search_placeholder: cms?.search_placeholder ?? null,
         all_locations_label: cms?.all_locations_label ?? null,
         result_singular_label: cms?.result_singular_label ?? "project",
@@ -40,7 +40,7 @@ export default async function SubcontractedProjectsPage({ searchParams }: { sear
 
     return (
         <>
-            <Banner bg="/home-hero.mp4" >
+            <Banner bg="/home-hero.mp4">
                 <Left class_name="max-[640px]:pt-[70px]">
                     <div className="flex flex-col justify-center">
                         <Banner_Title subtitle={content.banner?.banner_label ?? "Explore Opportunities"} title={content.banner?.banner_title ?? "Projects"} />
