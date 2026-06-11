@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import { useOutsideClick } from "@/hook/use-outside-click";
-import { AngleArrow, DownArrow, SearchIcon } from "./ui/svgs";
+import { AngleArrow, DownArrow } from "./ui/svgs";
 import { type Menu } from "@/services/mega_menu.service";
 import { type OffcanvasContent } from "@/services/offcanvas.service";
 import { BASE_URL } from "@/lib/constant";
-import { OffcanvasContactForm } from "./ui/contact-form";
 
 const languages = [
     { code: "en", label: "English", flag: "/uk-flag.svg" },
@@ -228,13 +226,6 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
     );
 }
 
-const DEFAULT_SOCIAL_LINKS = [
-    { button_label: "Facebook", button_link: "#" },
-    { button_label: "Instagram", button_link: "#" },
-    { button_label: "LinkedIn", button_link: "#" },
-    { button_label: "YouTube", button_link: "#" },
-];
-
 export function NavActions({
     locale,
     menus,
@@ -250,15 +241,10 @@ export function NavActions({
     recaptcha_site_key?: string;
     isLoggedIn?: boolean;
 }) {
-    const navLinks = transformMenus(menus);
-    const router = useRouter();
     const [selectedLang, setSelectedLang] = useState(() => {
         return languages.find((l) => l.code === locale) ?? languages[0];
     });
     const [langOpen, setLangOpen] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
-    const [searchQuery, setSearchQuery] = useState("");
     const langRef = useOutsideClick<HTMLDivElement>(useCallback(() => setLangOpen(false), []));
 
     return (
@@ -306,185 +292,6 @@ export function NavActions({
                     <AngleArrow class_name="!w-[10px] !h-[10px]" />
                 </a>
 
-                {/* Hamburger */}
-                <button onClick={() => setMenuOpen(true)} className="group flex flex-col justify-center items-center gap-[5px] text-white cursor-pointer" aria-label="Open menu">
-                    <span className="block w-6 h-[2px] bg-sah-white origin-right transition-transform duration-300 group-hover:scale-x-[0.7]" />
-                    <span className="block w-6 h-[2px] bg-sah-white origin-right transition-transform duration-300 group-hover:scale-x-[0.8]" />
-                    <span className="block w-6 h-[2px] bg-sah-white" />
-                </button>
-            </div>
-
-            {/* Backdrop */}
-            <div
-                onClick={() => setMenuOpen(false)}
-                className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-            />
-
-            {/* Drawer */}
-            <div className={`fixed top-0 end-0 z-50 h-full w-full bg-sah-white transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
-                <div className="flex flex-1 h-full overflow-hidden relative">
-                    <div className="absolute top-[100px] end-0 h-[1px] bg-sah-light-3 z-10 w-[80%]  max-[1024]:w-[87.5%] max-[640px]:w-[81%]" />
-                    <div className="absolute top-[100px] start-0 h-[1px] bg-sah-white/15 z-10 w-[20%] max-[640px]:w-[22%] max-[640px]:min-w-[70px]" />
-                    {/* Column 1 — 20% */}
-                    <div className="w-[20%] max-[1024]:w-[12.5%] max-[640px]:w-[17%] max-[640px]:min-w-[70px] h-full bg-sah-red relative overflow-hidden">
-                        {/* Scrolling text — spans full column height including behind logo */}
-                        <div className="absolute inset-0 overflow-hidden flex justify-center">
-                            <div className="nav-scroll-up flex flex-col items-center">
-                                {[...Array(2)].map((_, copy) =>
-                                    [...Array(8)].map((_, i) => (
-                                        <span
-                                            key={`${copy}-${i}`}
-                                            className="text-white font-bold select-none px-10 text-[250px] max-[1024px]:text-[90px] max-[768px]:text-[70px]"
-                                            style={{ writingMode: "vertical-rl", opacity: 0.2 }}
-                                        >
-                                            {offcanvas?.vertical_text || "SAH"}
-                                        </span>
-                                    )),
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Logo — sits on top of scrolling text */}
-                        <div className="relative z-10 flex items-center h-[100px] pl-[60px] max-[1280]:pl-[10px] max-[640px]:pl-0 max-[640px]:justify-center bg-sah-red">
-                            <a href="/">
-                                <img src={light_logo_url || "/logo-white.png"} alt="SAH logo" className="size-[70px] object-contain" />
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Column 2 — 60% (main content) */}
-                    <div className="w-[50%] 2xl:w-[50%]  max-[1024]:w-[88%] max-[640px]:w-[81%] h-full flex flex flex-col border-x border-sah-light-3">
-                        <div className="flex items-center justify-between h-[100px]">
-                            {/* Search bar */}
-                            <div className="flex items-center gap-3 px-2 sm:px-6 py-3 group">
-                                <SearchIcon class_name="!size-[24px] shrink-0 text-sah-dark !fill-sah-black group-hover:rotate-90 transition-rotate duration-500" />
-                                <input
-                                    type="text"
-                                    placeholder={offcanvas?.search_placeholder || "Search your query"}
-                                    className="flex-1 max-[640px]:w-[8%] min-w-[8%] sm:min-w-0 outline-none font-inter text-[16px] text-sah-dark placeholder:text-sah-dark/50"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter" && searchQuery.trim()) {
-                                            window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
-                                        }
-                                    }}
-                                />
-                            </div>
-
-                            {/* Close button */}
-                            <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="cursor-pointer h-full w-[100px] flex items-center justify-center border-l border-sah-light-3">
-                                <svg viewBox="0 0 24 24" className="!w-6 !h-6 fill-none stroke-sah-red stroke-2">
-                                    <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div className="pt-5 pb-[90px] flex-col justify-between overflow-y-scroll no-scrollbar flex-1" data-lenis-prevent>
-                            <div className="flex flex-col px-[30px] 2xl:px-[60px] max-[640px]:px-[15px]">
-                                {navLinks.map((link) => (
-                                    <div key={link.label} className="border-b border-sah-light-3">
-                                        {link.parent && link.id !== "news" ? (
-                                            <>
-                                                <button
-                                                    onClick={() =>
-                                                        setOpenMenus((prev) => {
-                                                            const next = new Set(prev);
-                                                            next.has(link.label) ? next.delete(link.label) : next.add(link.label);
-                                                            return next;
-                                                        })
-                                                    }
-                                                    className="w-full flex text-[40px] max-[1280px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[18px] items-center justify-between py-4 text-sah-black font-inter font-normal capitalize cursor-pointer transition-colors duration-500 hover:text-sah-red"
-                                                >
-                                                    {link.label}
-                                                    <DownArrow class_name={`!w-[14px] !h-[10px] transition-transform duration-300 !fill-sah-black ${openMenus.has(link.label) ? "rotate-180" : ""}`} />
-                                                </button>
-                                                <div
-                                                    className={`flex gap-8 overflow-hidden transition-all duration-300 max-[650px]:flex-col  ${openMenus.has(link.label) ? "max-h-[800px] pb-3 max-[650px]:max-h-none" : "max-h-0"}`}
-                                                >
-                                                    {link.submenus?.map((group) => (
-                                                        <div key={group.label} className="flex flex-col gap-1">
-                                                            {group.label && <p className="py-1 pl-4 font-inter text-[16px] font-semibold uppercase text-sah-black">{group.label}</p>}
-                                                            {group.links.map((sub) => (
-                                                                <a key={sub.label} href={sub.href} className="py-2 pl-4 text-sah-black font-inter text-[14px] hover:text-sah-red">
-                                                                    {sub.label}
-                                                                </a>
-                                                            ))}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </>
-                                        ) : (
-                                            <a
-                                                href={link.link}
-                                                className="flex text-[40px] max-[1280px]:text-[30px] max-[768px]:text-[24px] max-[640px]:text-[18px] items-center py-4 text-sah-black font-inter font-normal capitalize transition-colors duration-500 hover:text-sah-red"
-                                            >
-                                                {link.label}
-                                            </a>
-                                        )}
-                                    </div>
-                                ))}
-
-                                <div className="py-8">
-                                    <a
-                                        href={isLoggedIn ? "/dashboard" : (offcanvas?.menu_button?.button_link || "/jobs")}
-                                        className="flex items-center justify-center gap-[14px] bg-sah-black text-sah-white font-inter font-medium px-[24px] py-[14px] rounded-[8px] max-[640px]:text-[14px] max-[380px]:text-[12px] max-[640px]:px-[10px]"
-                                    >
-                                        {isLoggedIn ? "Dashboard" : (offcanvas?.menu_button?.button_label || "View Jobs")}
-                                        <AngleArrow class_name="!w-[10px] !h-[10px]" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Column 3 — 20% */}
-                    <div className="w-[30%]  2xl:w-[30%] h-full flex flex-col overflow-hidden overflow-y-scroll no-scrollbar flex-1 max-[1024]:hidden" data-lenis-prevent>
-                        {/* Header row — matches other columns */}
-                        <div className="flex items-center justify-end h-[100px] pr-[60px] shrink-0">
-                            <a href={offcanvas?.contact_us_link || "/contact"} className="py-2 pl-4 text-sah-black font-inter text-[20px] hover:text-sah-red transition-colors duration-500 uppercase">
-                                {offcanvas?.contact_us_label || "Contact Us"}
-                            </a>
-                        </div>
-
-                        {/* Featured project */}
-
-                        <OffcanvasContactForm
-                            title={offcanvas?.form_title || "Start the Conversation"}
-                            placeholderFirstName={offcanvas?.placeholder_first_name || "First Name*"}
-                            placeholderLastName={offcanvas?.placeholder_last_name || "Last Name*"}
-                            placeholderEmail={offcanvas?.placeholder_email || "Email Address"}
-                            placeholderPhone={offcanvas?.placeholder_phone || "Phone"}
-                            placeholderMessage={offcanvas?.placeholder_message || "Write Message*"}
-                            submitLabel={offcanvas?.form_submit_label || "Message Now"}
-                            recaptchaSiteKey={recaptcha_site_key ?? ""}
-                        />
-                    </div>
-                </div>
-
-                {/* Footer — absolute bottom, same 3-col layout */}
-                <div className="absolute bottom-0 start-0 end-0 flex h-[80px] max-[640px]:h-[60px]">
-                    <div className="w-[20%] max-[1024]:w-[12.5%] flex items-center bg-sah-red pl-[72px] max-[1280px]:pl-[20px]  border-t border-sah-white/15 max-[640px]:hidden">
-                        <a
-                            href={`mailto:${offcanvas?.email || "info@sah.om"}`}
-                            className="font-inter text-[16px] font-medium text-sah-white hover:text-sah-white/60 transition-colors duration-300 max-[1024]:hidden"
-                        >
-                            {offcanvas?.email || "info@sah.om"}
-                        </a>
-                    </div>
-                    <div className="w-[50%] 2xl:w-[50%] max-[1024]:w-[58%] bg-sah-white flex items-center gap-8 px-[60px] max-[1024]:px-[20px] border-t border-x border-sah-light-3 max-[768]:hidden">
-                        {(offcanvas?.social_links?.length ? offcanvas.social_links : DEFAULT_SOCIAL_LINKS).map((link) => (
-                            <a key={link.button_label} href={link.button_link} className="font-inter text-[16px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
-                                {link.button_label}
-                            </a>
-                        ))}
-                    </div>
-                    <div className="w-[30%] 2xl:w-[30%] max-[768]:w-[87.5%] max-[640px]:w-full bg-sah-white flex items-center justify-start px-[60px] max-[1024]:px-[20px] max-[1024]:justify-center border-t border-sah-light-3">
-                        <a href={offcanvas?.view_all_projects_link || "/projects"} className="font-inter text-[16px] font-medium text-sah-black hover:text-sah-red transition-colors duration-300">
-                            {offcanvas?.view_all_projects_label || "View all projects"}
-                        </a>
-                    </div>
-                </div>
             </div>
         </>
     );
