@@ -2,7 +2,6 @@ import { BASE_URL } from "@/lib/constant";
 import { Service } from "./service.service";
 import { type Project, mapProject } from "./project.service";
 import { type NewsItem, map_news_item } from "./news.service";
-import { type Job } from "./job.service";
 
 export type StrapiMediaFormat = {
     ext: string;
