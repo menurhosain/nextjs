@@ -15,6 +15,7 @@ type Props = {
     forgot_password_link?: string | null;
     submit_button_label?: string | null;
     submitting_label?: string | null;
+    confirmed?: boolean;
 };
 
 const initialState: LoginFormState = { errors: {} };
@@ -29,12 +30,19 @@ export default function LoginForm({
     forgot_password_link,
     submit_button_label,
     submitting_label,
+    confirmed,
 }: Props) {
     const [state, formAction, pending] = useActionState(login_user, initialState);
     const e = state.errors;
 
     return (
         <form action={formAction} className="space-y-5">
+
+            {confirmed && (
+                <p className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-md px-3 py-2 text-center">
+                    Email confirmed! You can now sign in.
+                </p>
+            )}
 
             {/* Email */}
             <div className="space-y-1.5">
