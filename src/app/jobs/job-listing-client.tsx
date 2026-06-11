@@ -92,7 +92,9 @@ export default function JobListingClient({
                             }}
                         >
                             <div>
-                                <h3 className="text-[18px] font-semibold text-sah-red leading-snug group-hover:underline">{job.title}</h3>
+                                <h3 className={`text-[18px] font-semibold leading-snug group-hover:underline group-hover:text-sah-red ${job.id === cur_job?.id ? "text-sah-red" : "text-sah-black"}`}>
+                                    {job.title}
+                                </h3>
                                 {job.employment_status && <p className="text-[14px] font-medium text-sah-dark-2 mt-1">{job.employment_status}</p>}
                             </div>
 
@@ -115,9 +117,7 @@ export default function JobListingClient({
                                 {job.deadline && (
                                     <div className="flex items-center gap-2 text-sah-gray-2">
                                         <CalendarIcon />
-                                        <span className="text-[13px] font-medium">
-                                            {new Date(job.deadline).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}
-                                        </span>
+                                        <span className="text-[13px] font-medium">{new Date(job.deadline).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}</span>
                                     </div>
                                 )}
                             </div>
@@ -129,7 +129,7 @@ export default function JobListingClient({
             {/* Right column — hidden on narrow screens */}
             {!is_narrow && (
                 <div className="flex-1 xl:sticky xl:top-[30px]">
-                    <section className="section-padding">
+                    <section className="section-padding mt-[44px]">
                         <div className="container !px-[50px] max-[1024px]:!px-4 pt-[30px] lg:pt-[30px] pb-[30px] lg:pb-[30px] border rounded-lg border-sah-red">
                             <div className="grid grid-cols-1 xl:grid-cols-7 gap-y-5 items-start">
                                 <h3 className="col-span-full font-semibold text-[24px]">{cur_job?.title}</h3>
@@ -161,7 +161,9 @@ export default function JobListingClient({
                                                 <span className="text-[12px] uppercase tracking-widest text-sah-gray-2 font-medium">{location_label ?? "Location"}</span>
                                                 <div className="flex flex-wrap gap-2">
                                                     {cur_job.locations.map((loc) => (
-                                                        <p key={loc.id} className="text-[18px] font-semibold text-sah-dark-2 mt-1">{loc.name}</p>
+                                                        <p key={loc.id} className="text-[18px] font-semibold text-sah-dark-2 mt-1">
+                                                            {loc.name}
+                                                        </p>
                                                     ))}
                                                 </div>
                                             </div>

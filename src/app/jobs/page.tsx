@@ -54,12 +54,10 @@ export default async function JobListingPage({ searchParams }: { searchParams: P
             </section>
 
             <section className="section-padding bg-sah-light-4">
-                <div className="container !px-[50px] max-[1024px]:!px-4 pt-[80px] lg:pt-[120px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
+                <div className="container !px-[50px] max-[1024px]:!px-4 pt-[50x] lg:pt-[50px] pb-[80px] lg:pb-[150px] border-x border-sah-light-3">
                     {jobs.length === 0 ? (
                         <div className="text-center py-20">
-                            <p className="text-[20px] font-medium text-sah-gray-2">
-                                {q || location ? no_results_text : empty_state_text}
-                            </p>
+                            <p className="text-[20px] font-medium text-sah-gray-2">{q || location ? no_results_text : empty_state_text}</p>
                         </div>
                     ) : (
                         <JobListingClient
