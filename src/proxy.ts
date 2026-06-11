@@ -6,12 +6,8 @@ const AUTH_ROUTES = ["/login", "/register-contractor"];
 const PROTECTED_ROUTES = [
   "/dashboard",
   "/profile",
-  "/apply-for-contractor",
-  "/applications",
   "/protected",
 ];
-
-const CONTRACTOR_ONLY_ROUTES = ["/apply-for-contractor"];
 
 export async function proxy(request: NextRequest) {
   const jwt = request.cookies.get("jwt")?.value;
@@ -30,15 +26,6 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isAuthRoute) {
-    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
-  }
-
-  const userType = (user as Record<string, unknown>).type;
-
-  const isContractorOnly = CONTRACTOR_ONLY_ROUTES.some((r) =>
-    pathname.startsWith(r),
-  );
-  if (isContractorOnly && userType !== "contractor") {
     return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
   }
 
