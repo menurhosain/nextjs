@@ -1,18 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verify_jwt } from "@/services/auth.service";
 
-const AUTH_ROUTES = ["/login", "/register-applicant", "/register-contractor"];
+const AUTH_ROUTES = ["/login", "/register-contractor"];
 
 const PROTECTED_ROUTES = [
   "/dashboard",
   "/profile",
-  "/apply-for-recrutement",
   "/apply-for-contractor",
   "/applications",
   "/protected",
 ];
 
-const APPLICANT_ONLY_ROUTES = ["/apply-for-recrutement"];
 const CONTRACTOR_ONLY_ROUTES = ["/apply-for-contractor"];
 
 export async function proxy(request: NextRequest) {
@@ -36,13 +34,6 @@ export async function proxy(request: NextRequest) {
   }
 
   const userType = (user as Record<string, unknown>).type;
-
-  const isApplicantOnly = APPLICANT_ONLY_ROUTES.some((r) =>
-    pathname.startsWith(r),
-  );
-  if (isApplicantOnly && userType === "contractor") {
-    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
-  }
 
   const isContractorOnly = CONTRACTOR_ONLY_ROUTES.some((r) =>
     pathname.startsWith(r),

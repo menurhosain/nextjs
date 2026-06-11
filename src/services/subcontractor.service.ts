@@ -1,6 +1,13 @@
 import { BASE_URL } from "@/lib/constant";
-import type { StrapiFile } from "@/services/applicant.service";
 import { upload_files } from "@/services/upload.service";
+
+export type StrapiFile = {
+  id: number;
+  url: string;
+  name: string;
+  size: number;
+  mime: string;
+};
 
 export type Subcontractor = {
   id: number;

@@ -7,12 +7,7 @@ import { BASE_URL } from "@/lib/constant";
 
 const guestLinks = [
   { href: "/login", label: "Login" },
-  { href: "/register", label: "Register" },
-];
-
-const authLinks = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/apply-for-recrutement", label: "Apply for Recruitment" },
+  { href: "/register-contractor", label: "Register" },
 ];
 
 export default async function Navbar() {
@@ -23,22 +18,14 @@ export default async function Navbar() {
     : null;
   const isLoggedIn = !!user;
 
-  const visibleAuthLinks =
-    user?.type === "contractor"
-      ? [
-          ...authLinks.filter((l) => l.href !== "/apply-for-recrutement"),
-          { href: "/apply-for-contractor", label: "Apply for Contractor" },
-        ]
-      : authLinks;
+  const authLinks = [
+    { href: "/dashboard", label: "Dashboard" },
+    ...(user?.type === "contractor"
+      ? [{ href: "/apply-for-contractor", label: "Apply for Contractor" }]
+      : []),
+  ];
 
-  const contractorLink = {
-    href: "/apply-for-contractor",
-    label: "Apply for Contractor",
-  };
-
-  const links = isLoggedIn
-    ? visibleAuthLinks
-    : [...guestLinks, ...authLinks, contractorLink];
+  const links = isLoggedIn ? authLinks : guestLinks;
 
   const displayName =
     (user?.first_name as string | undefined) ??

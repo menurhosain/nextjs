@@ -60,7 +60,7 @@ export default function Subcontractor() {
         </div>
         <div className="relative z-10 flex max-[1024px]:flex-wrap gap-3 xl:gap-5 justify-center max-[640px]:mt-[40px] mt-[-65px] max-[1280px]:px-3 max-[640px]:px-0">
           <a
-            href="/register-applicant"
+            href="/register-contractor"
             className="px-4 h-[130px] w-full sm:w-[168px] text-center flex flex-col gap-[8px] items-center justify-center rounded-[10px] text-[16px] xl:text-[18px] font-medium  tracking-wide rounded transition-all duration-200 bg-sah-white hover:bg-sah-red hover:text-sah-white"
           >
             <div className="text-[35px]">
