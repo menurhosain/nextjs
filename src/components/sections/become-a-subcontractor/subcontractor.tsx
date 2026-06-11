@@ -34,9 +34,9 @@ const ICON_COMPONENTS = [
 ];
 
 const DEFAULT_LINKS: IconBoxItem[] = [
-    { Icon: "", Title: "New User Registration",           Link: "/register-applicant" },
-    { Icon: "", Title: "Returning Users",                 Link: "login" },
-    { Icon: "", Title: "Subcontractor Quick Start Guide", Link: "/register-contractor" },
+    { Icon: "", Title: "New User Registration",           Link: "#" },
+    { Icon: "", Title: "Returning Users",                 Link: "#" },
+    { Icon: "", Title: "Subcontractor Quick Start Guide", Link: "#" },
     { Icon: "", Title: "Subcontractor Navigation Guide",  Link: "#" },
     { Icon: "", Title: "Email Help Desk",                 Link: "contact" },
 ];
