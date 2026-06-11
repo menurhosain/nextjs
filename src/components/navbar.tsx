@@ -18,12 +18,7 @@ export default async function Navbar() {
     : null;
   const isLoggedIn = !!user;
 
-  const authLinks = [
-    { href: "/dashboard", label: "Dashboard" },
-    ...(user?.type === "contractor"
-      ? [{ href: "/apply-for-contractor", label: "Apply for Contractor" }]
-      : []),
-  ];
+  const authLinks = [{ href: "/dashboard", label: "Dashboard" }];
 
   const links = isLoggedIn ? authLinks : guestLinks;
 

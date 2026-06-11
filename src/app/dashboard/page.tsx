@@ -1,7 +1,5 @@
-import { headers, cookies } from "next/headers";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import Link from "next/link";
-import { get_user_subcontractor_applications } from "@/services/subcontractor.service";
 
 export default async function DashboardPage() {
   const headersList = await headers();
@@ -17,11 +15,6 @@ export default async function DashboardPage() {
   const type = user.type as string | undefined;
   const displayName = firstName ?? username ?? "there";
 
-  const cookieStore = await cookies();
-  const jwt = cookieStore.get("jwt")!.value;
-
-  const applications = await get_user_subcontractor_applications(jwt);
-
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto px-6 py-10 space-y-8">
@@ -30,25 +23,14 @@ export default async function DashboardPage() {
           <p className="text-sm text-gray-500 mt-1">Here's a summary of your account.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <a
-            href="/profile"
-            className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow"
-          >
-            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Profile</p>
-            <p className="mt-2 text-base font-semibold text-gray-900">View & edit your info</p>
-            <p className="text-sm text-gray-500 mt-1">Name, phone, location, profile picture</p>
-          </a>
-
-          <a
-            href="/apply-for-contractor"
-            className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow"
-          >
-            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Contractor</p>
-            <p className="mt-2 text-base font-semibold text-gray-900">Apply as Contractor</p>
-            <p className="text-sm text-gray-500 mt-1">Submit your company details and documents</p>
-          </a>
-        </div>
+        <a
+          href="/profile"
+          className="block bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow"
+        >
+          <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Profile</p>
+          <p className="mt-2 text-base font-semibold text-gray-900">View & edit your info</p>
+          <p className="text-sm text-gray-500 mt-1">Name, phone, location, profile picture</p>
+        </a>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-3">
           <h3 className="text-sm font-semibold text-gray-700">Account details</h3>
@@ -72,62 +54,6 @@ export default async function DashboardPage() {
               </div>
             )}
           </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-gray-700">My Applications</h3>
-            <a href="/apply-for-contractor" className="text-xs text-gray-500 hover:text-gray-900 underline underline-offset-2">
-              + New application
-            </a>
-          </div>
-
-          {applications.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
-              <p className="text-sm text-gray-500">You haven't submitted any applications yet.</p>
-              <a
-                href="/apply-for-contractor"
-                className="inline-block mt-3 text-sm font-medium text-gray-900 underline underline-offset-2"
-              >
-                Submit your first application
-              </a>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {applications.map((app) => (
-                <Link
-                  key={app.documentId}
-                  href={`/applications/${app.documentId}`}
-                  className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-md transition-shadow"
-                >
-                  <div className="space-y-1">
-                    <p className="text-sm font-semibold text-gray-900">{app.companyName}</p>
-                    <p className="text-xs text-gray-500">{app.email}</p>
-                    {app.location && (
-                      <p className="text-xs text-gray-400">Location: {app.location}</p>
-                    )}
-                    {app.experienceYears != null && (
-                      <p className="text-xs text-gray-400">Experience: {app.experienceYears} yrs</p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
-                    {app.label && (
-                      <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full capitalize">
-                        {app.label}
-                      </span>
-                    )}
-                    <p className="text-xs text-gray-400">
-                      {new Date(app.appliedAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </main>
