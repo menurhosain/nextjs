@@ -3,9 +3,6 @@
 import { useState, useCallback } from "react";
 import { useOutsideClick } from "@/hook/use-outside-click";
 import { DownArrow } from "./ui/svgs";
-import { type Menu } from "@/services/mega_menu.service";
-import { type OffcanvasContent } from "@/services/offcanvas.service";
-import { BASE_URL } from "@/lib/constant";
 import ProfileMenu from "@/components/profile-menu";
 
 const languages = [
@@ -13,211 +10,7 @@ const languages = [
     { code: "ar-OM", label: "Arabic", flag: "/oman-flag.svg" },
 ];
 
-type SubmenuGroup = { label: string; links: { label: string; href: string }[] };
-
-const STATIC_NAV_LINKS = [
-    {
-        label: "Our Company",
-        parent: true,
-        link: "",
-        id: "",
-        card: {
-            title: "About Us",
-            description: "SAH is a Oman-based, international construction services company and is a leading builder in diverse market segments.",
-            cta: { label: "GET TO KNOW US", href: "/about-us" },
-        },
-        promo: {
-            title: "View Jobs",
-            excerpt: "With expertise spanning planning, execution, and project delivery, we provide market needs.",
-            image: "/menu/1.jpg",
-            cta: { label: "Learn How", href: "/jobs" },
-        },
-        submenus: [
-            {
-                label: "Who We Are",
-                links: [
-                    { label: "About Us", href: "/about-us" },
-                    { label: "Our Leadership", href: "/leadership" },
-                    { label: "Market Sectors", href: "/market-sectors" },
-                ],
-            },
-            {
-                label: "Our Culture",
-                links: [
-                    { label: "Our Values", href: "/our-values" },
-                    { label: "Health, Safety & Environment (HSE)", href: "/hse" },
-                    { label: "Innovation & Technology", href: "/innovation-technology" },
-                    { label: "Ethics & Compliance", href: "/ethics-compliance" },
-                    { label: "Community Engagement", href: "/community-engagement" },
-                    { label: "Training", href: "/training" },
-                    { label: "Sustainability", href: "/sustainability" },
-                ],
-            },
-            {
-                label: "Resources",
-                links: [{ label: "General Inquiries", href: "/contact" }],
-            },
-        ] as SubmenuGroup[],
-        latest_news: [] as { title: string; href: string; image: string }[],
-    },
-    {
-        label: "Our Services",
-        parent: true,
-        link: "",
-        id: "",
-        card: {
-            title: "Our Services",
-            description: "We deliver end-to-end construction and engineering solutions across a wide range of industries and sectors.",
-            cta: { label: "EXPLORE SERVICES", href: "/services" },
-        },
-        promo: {
-            title: "Our Market Value",
-            excerpt: "We provide comprehensive construction and engineering solutions for your need.",
-            image: "/menu/2.jpg",
-            cta: { href: "/services-details", label: "Join us" },
-        },
-        submenus: [
-            {
-                label: "Approach",
-                links: [
-                    { label: "Pre-construction", href: "/services/pre-construction" },
-                    { label: "Construction Management", href: "/services/construction-management" },
-                    { label: "Project Management", href: "/services/project-management" },
-                ],
-            },
-            {
-                label: "Areas of Expertise",
-                links: [
-                    { label: "Civil Construction", href: "/services/civil-construction" },
-                    { label: "MEP Engineering", href: "/services/mep-engineering" },
-                    { label: "Design & Build", href: "/services/design-build" },
-                    { label: "HVAC & FCU Systems", href: "/services/hvac-fcu-systems" },
-                    { label: "BIM & Virtual Construction", href: "/services/bim-virtual-construction" },
-                    { label: "Facility Management", href: "/services/facility-management" },
-                ],
-            },
-        ] as SubmenuGroup[],
-        latest_news: [] as { title: string; href: string; image: string }[],
-    },
-    {
-        label: "Careers",
-        parent: true,
-        link: "/careers",
-        id: "",
-        card: {
-            title: "Careers With Us",
-            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { label: "EXPLORE NEW OPPORTUNITY", href: "/careers" },
-        },
-        promo: {
-            title: "Your Career Starts Here",
-            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
-            image: "/team/2.jpg",
-            cta: { label: "Join with us", href: "/careers" },
-        },
-        submenus: [
-            {
-                label: "Join Us",
-                links: [
-                    { label: "Life at SAH", href: "/careers/life-at-sah" },
-                    { label: "Careers", href: "/careers" },
-                ],
-            },
-        ] as SubmenuGroup[],
-        latest_news: [] as { title: string; href: string; image: string }[],
-    },
-    {
-        label: "News",
-        parent: true,
-        link: "/news",
-        id: "news",
-        card: {
-            title: "Our Latest News",
-            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { href: "/news", label: "Explore our ideas" },
-        },
-        promo: { title: "", excerpt: "", image: "", cta: { label: "", href: "" } },
-        submenus: [] as SubmenuGroup[],
-        latest_news: [
-            { title: "Cost Effective Solutions for your dream", href: "#", image: "/menu/2.jpg" },
-            { title: "Solutions for Building Projects", href: "#", image: "/menu/1.jpg" },
-            { title: "Medical Pavilion at Institute Square", href: "#", image: "/menu/3.jpg" },
-        ],
-    },
-    {
-        label: "Projects",
-        parent: true,
-        link: "",
-        id: "",
-        card: {
-            title: "Our Projects",
-            description: "From iconic stadiums to large-scale infrastructure, explore the projects that define our legacy.",
-            cta: { label: "VIEW ALL PROJECTS", href: "/projects" },
-        },
-        promo: {
-            title: "Police College Package C SQAPS Nizwa",
-            excerpt: "SAH is a Oman-based, international construction, Oman-based international construction ",
-            image: "/project-1-small.jpg",
-            cta: { label: "View Project", href: "/projects" },
-        },
-        submenus: [
-            {
-                label: "Flagship Projects",
-                links: [
-                    { label: "Completed Projects", href: "/projects/completed" },
-                    { label: "On-Going Projects", href: "/projects/ongoing" },
-                ],
-            },
-            {
-                label: "Categories",
-                links: [
-                    { label: "Education", href: "/projects/education" },
-                    { label: "MOD", href: "/projects/mod" },
-                    { label: "MOI", href: "/projects/moi" },
-                    { label: "MOC", href: "/projects/moc" },
-                ],
-            },
-        ] as SubmenuGroup[],
-        latest_news: [] as { title: string; href: string; image: string }[],
-    },
-];
-
-function transformMenus(menus: Menu[]) {
-    if (menus.length === 0) return STATIC_NAV_LINKS;
-    return menus.map((menu) => ({
-        label: menu.nav_label,
-        parent: menu.is_parent,
-        link: menu.root_link,
-        id: "",
-        card: {
-            title: menu.mega_menu_left_info?.label ?? "",
-            description: menu.mega_menu_left_info?.excerpt ?? "",
-            cta: {
-                label: menu.mega_menu_left_info?.action_link_label ?? "",
-                href: menu.mega_menu_left_info?.action_link_href ?? "",
-            },
-        },
-        promo: {
-            title: menu.mega_menu_right_info?.label ?? "",
-            excerpt: menu.mega_menu_right_info?.excerpt ?? "",
-            image: menu.mega_menu_right_info?.bg_image ? `${BASE_URL}${menu.mega_menu_right_info.bg_image.url}` : "",
-            cta: {
-                label: menu.mega_menu_right_info?.action_link_label ?? "",
-                href: menu.mega_menu_right_info?.action_link_href ?? "",
-            },
-        },
-        submenus: menu.mega_menu_link_groups?.length
-            ? menu.mega_menu_link_groups.map((g) => ({
-                  label: g.group_label,
-                  links: (g.links ?? []).map((l) => ({ label: l.button_label, href: l.button_link })),
-              }))
-            : ([] as SubmenuGroup[]),
-        latest_news: [],
-    }));
-}
-
-export function NavLinks({ menus }: { menus: Menu[] }) {
-    const navLinks = transformMenus(menus);
+export function NavLinks() {
     return (
         <div className="xl:flex items-center gap-4 2xl:gap-6 py-4 justify-start h-[90px] hidden">
             <a href="/" className="text-white font-geist text-[36px] font-bold mr-[20px] 2xl:mr-[80px] uppercase">
@@ -229,19 +22,11 @@ export function NavLinks({ menus }: { menus: Menu[] }) {
 
 export function NavActions({
     locale,
-    menus,
-    offcanvas,
-    light_logo_url,
-    recaptcha_site_key,
     isLoggedIn = false,
     displayName = null,
     pictureUrl = null,
 }: {
     locale: string;
-    menus: Menu[];
-    offcanvas?: OffcanvasContent | null;
-    light_logo_url?: string;
-    recaptcha_site_key?: string;
     isLoggedIn?: boolean;
     displayName?: string | null;
     pictureUrl?: string | null;
@@ -293,15 +78,20 @@ export function NavActions({
                     <ProfileMenu displayName={displayName} pictureUrl={pictureUrl} />
                 ) : (
                     <>
-                        <a href="/login" className="font-inter text-[16px] font-semibold text-sah-white hover:text-sah-white/70 transition-colors duration-200">
+                        <a href="/login" className="flex items-center gap-[7px] font-inter text-[16px] font-semibold text-sah-white hover:text-sah-white/70 transition-colors duration-200">
+                            <svg viewBox="0 0 640 640" className="w-[18px] h-[18px] fill-current">
+                                <path d="M256 72C322.3 72 376 125.7 376 192C376 258.3 322.3 312 256 312C189.7 312 136 258.3 136 192C136 125.7 189.7 72 256 72zM226.3 368L285.7 368C289.6 368 293.6 368.1 297.5 368.4C281.3 396.6 272 429.2 272 464C272 505.8 285.4 544.5 308 576L77.7 576C61.3 576 48 562.7 48 546.3C48 447.8 127.8 368 226.3 368zM320 464C320 384.5 384.5 320 464 320C543.5 320 608 384.5 608 464C608 543.5 543.5 608 464 608C384.5 608 320 543.5 320 464zM464 384C455.2 384 448 391.2 448 400L448 464C448 472.8 455.2 480 464 480L512 480C520.8 480 528 472.8 528 464C528 455.2 520.8 448 512 448L480 448L480 400C480 391.2 472.8 384 464 384z" />
+                            </svg>
                             Login
                         </a>
-                        <a href="/register-applicant" className="font-inter text-[16px] font-semibold text-sah-white hover:text-sah-white/70 transition-colors duration-200">
+                        <a href="/register-applicant" className="flex items-center gap-[7px] font-inter text-[16px] font-semibold text-sah-white hover:text-sah-white/70 transition-colors duration-200">
+                            <svg viewBox="0 0 640 640" className="w-[18px] h-[18px] fill-current">
+                                <path d="M285.7 368C384.2 368 464 447.8 464 546.3C464 562.7 450.7 576 434.3 576L77.7 576C61.3 576 48 562.7 48 546.3C48 447.8 127.8 368 226.3 368L285.7 368zM528 144C541.3 144 552 154.7 552 168L552 216L600 216C613.3 216 624 226.7 624 240C624 253.3 613.3 264 600 264L552 264L552 312C552 325.3 541.3 336 528 336C514.7 336 504 325.3 504 312L504 264L456 264C442.7 264 432 253.3 432 240C432 226.7 442.7 216 456 216L504 216L504 168C504 154.7 514.7 144 528 144zM256 312C189.7 312 136 258.3 136 192C136 125.7 189.7 72 256 72C322.3 72 376 125.7 376 192C376 258.3 322.3 312 256 312z" />
+                            </svg>
                             Signup
                         </a>
                     </>
                 )}
-
             </div>
         </>
     );
