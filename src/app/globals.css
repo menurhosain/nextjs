@@ -110,7 +110,12 @@ svg {
         @apply font-sans;
         font-size: 20px;
     }
+
+    :root {
+        --color-sah-red: #d00435;
+    }
 }
+
 /* group-hover:bg-[var(--sah-red)] bg-[url('/project-card-bg.jpg')] */
 /* for project card section */
 .project-card-content {
