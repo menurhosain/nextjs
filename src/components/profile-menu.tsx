@@ -73,7 +73,7 @@ export default function ProfileMenu({ displayName, pictureUrl }: ProfileMenuProp
               await logout();
               window.location.href = "/";
             }}
-            className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-50 cursor-pointer"
+            className="w-full text-start px-4 py-2 text-sm text-red-500 hover:bg-gray-50 cursor-pointer"
           >
             Logout
           </button>
