@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import { Banner, Left, Right } from "@/components/ui/banner";
 import Banner_Title from "@/components/ui/banner-title";
 import { Cross, DownArrow, DownLongArrow, SearchIcon, SettingIcon } from "@/components/ui/svgs";
-import Link from "next/link";
 import { ProjectCardSmall } from "@/components/ui/project-card-small";
 import type { Project, ProjectTag } from "@/services/project.service";
 import type { ProjectPageContent } from "@/services/page_content.service";
@@ -182,12 +181,12 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
                         <div className="overflow-hidden">
                             <div key={sliderAnimKey} className={sliderDirection === "right" ? "slider-slide-right" : "slider-slide-left"}>
                                 <span className="mb-[24px] block text-sah-white font-bold text-[14px] sm:text-[16px] leading-[20px] uppercase tracking-wider">{projects[sliderIndex]?.scope[0]}</span>
-                                <Link
+                                <a
                                     href={projects[sliderIndex]?.link ?? "#"}
                                     className="font-geist font-normal text-[18px] sm:text-[24px] max-[640px]:block lg:text-[30px] leading-[38px] text-sah-white underline"
                                 >
                                     {projects[sliderIndex]?.title}
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -197,7 +196,9 @@ export default function ProjectsView({ projects, tags, content }: { projects: Pr
             {/* Drawer overlay */}
             <div className={`fixed inset-0 z-[9999] flex justify-end transition-all duration-300 ${drawerOpen ? "pointer-events-auto" : "pointer-events-none"}`}>
                 <div onClick={() => setDrawerOpen(false)} className={`flex-1 bg-black/40 transition-opacity duration-300 ${drawerOpen ? "opacity-100" : "opacity-0"}`} />
-                <div className={`w-[350px] h-full bg-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${drawerOpen ? "translate-x-0" : "ltr:translate-x-full rtl:-translate-x-full"}`}>
+                <div
+                    className={`w-[350px] h-full bg-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${drawerOpen ? "translate-x-0" : "ltr:translate-x-full rtl:-translate-x-full"}`}
+                >
                     {/* Close button row */}
                     <div className="flex justify-between items-center px-6 py-4 border-b border-sah-light-3">
                         <span className="text-[16px] font-inter font-medium">{content?.filter_offcanvas_label ?? "Refine your search"}</span>
